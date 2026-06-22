@@ -1,0 +1,50 @@
+name: Generate PDFs
+
+on:
+  push:
+    paths:
+      - 'pr/**.html'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        
+    - name: Install LaTeX
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-lang-cyrillic
+        
+    - name: Generate LaTeX files
+      run: |
+        mkdir -p pr/tex pr/pdf
+        python scripts/generate_pdf.py
+        
+    - name: Compile PDFs
+      run: |
+        cp umk-matematika.cls pr/tex/
+        cd pr/tex
+        for f in *.tex; do
+          pdflatex -interaction=nonstopmode "$f"
+          pdflatex -interaction=nonstopmode "$f"
+        done
+        mkdir -p ../pdf
+        mv *.pdf ../pdf/
+        
+    - name: Commit PDFs
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'actions@github.com'
+        git add pr/pdf/
+        git add pr/tex/
+        git commit -m 'Автоматическая генерация PDF' || echo "No changes"
+        git push
