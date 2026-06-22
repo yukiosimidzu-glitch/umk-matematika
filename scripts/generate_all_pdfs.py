@@ -29,6 +29,8 @@ def escape_latex(text):
     text = text.replace('÷', '$\\div$')
     text = text.replace('√', '$\\sqrt{}$')
     text = text.replace('π', r'$\pi$')
+    text = text.replace('∈', r'$\in$')
+    text = text.replace('α', r'$\alpha$')
     text = re.sub(r'<[^>]+>', ' ', text)
     text = re.sub(r'\s+', ' ', text).strip()
     
