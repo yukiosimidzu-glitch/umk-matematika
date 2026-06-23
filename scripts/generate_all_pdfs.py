@@ -12,11 +12,13 @@ TEX_DIR = os.path.join(ROOT_DIR, 'tex_all')
 
 
 def escape_latex(text):
+    """Надёжная обработка текста для LaTeX"""
     if not text or not isinstance(text, str):
         return ''
     
     text = str(text)
     
+    # Основные замены
     replacements = {
         '&': r'\&', '%': r'\%', '#': r'\#', '_': r'\_',
         '{': r'\{', '}': r'\}', '$': r'\$', '^': r'\^{}', '~': r'\~{}',
@@ -28,7 +30,7 @@ def escape_latex(text):
     for old, new in replacements.items():
         text = text.replace(old, new)
     
-    # Корни — исправленный вариант
+    # Корни (исправлено)
     text = re.sub(r'√(\d+)', r'$\sqrt{\1}$', text)
     text = re.sub(r'√', r'$\sqrt{}$', text)
     
@@ -43,8 +45,10 @@ def escape_latex(text):
 
 
 def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
-    title = escape_latex(title or "Без названия")
+    """Генерирует LaTeX-документ с защитой от пустых полей"""
+    title = escape_latex(title or "Практическая работа")
     subtitle = escape_latex(subtitle or "")
+    author = "Станулевич А.В."
     
     latex = rf'''\documentclass{{umk-matematika}}
 \begin{{document}}
@@ -52,7 +56,7 @@ def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
 \maketitlepage
     {{{title}}}
     {{{subtitle}}}
-    {{Станулевич А.В.}}
+    {{{author}}}
 '''
 
     if is_theory:
@@ -62,13 +66,14 @@ def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
 \texttt{https://umk-matematika.netlify.app}
 \end{center}
 '''
-    elif tasks:
+    elif tasks and len(tasks) > 0:
         latex += '\n\\section*{Задачи}\n\n'
         for i, t in enumerate(tasks, 1):
             cond = t.get('condition', '').strip()
             if cond:
                 latex += rf'\textbf{{Задача {i}.}} {cond}\par\vspace{{0.9em}}' + '\n'
         
+        # Ответы
         if any(t.get('answer') for t in tasks):
             latex += r'\newpage\section*{Ответы}' + '\n\n'
             latex += r'\begin{enumerate}' + '\n'
@@ -82,11 +87,12 @@ def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
 
 
 def main():
+    # Очистка и создание папки
     if os.path.exists(TEX_DIR):
         shutil.rmtree(TEX_DIR)
     os.makedirs(TEX_DIR, exist_ok=True)
 
-    # Копируем класс
+    # Копируем класс документа
     cls_src = os.path.join(ROOT_DIR, 'umk-matematika.cls')
     if os.path.exists(cls_src):
         shutil.copy(cls_src, os.path.join(TEX_DIR, 'umk-matematika.cls'))
@@ -96,20 +102,26 @@ def main():
     print('\n=== Практические работы ===')
     pr_dir = os.path.join(ROOT_DIR, 'pr')
     if os.path.exists(pr_dir):
+        count = 0
         for f in sorted(os.listdir(pr_dir)):
             if f.endswith('.html'):
                 filepath = os.path.join(pr_dir, f)
-                # Пока используем заглушку, чтобы проверить генерацию
                 name = f.replace('.html', '')
                 title = f'Практическая работа {name}'
+                
+                # Пока используем пустой список задач (для теста)
                 latex = generate_latex_document(title, '', [])
                 tex_file = os.path.join(TEX_DIR, f'pr_{name}.tex')
+                
                 with open(tex_file, 'w', encoding='utf-8') as fout:
                     fout.write(latex)
-                print(f'[OK] Создан pr_{name}.tex')
+                
+                print(f'[OK] pr_{name}.tex создан')
+                count += 1
+        print(f'Всего обработано практических работ: {count}')
 
-    print(f'\nГотово! .tex файлы сохранены в: {TEX_DIR}')
-    print(f'Всего файлов: {len(os.listdir(TEX_DIR)) if os.path.exists(TEX_DIR) else 0}')
+    print(f'\nГотово! Все .tex файлы сохранены в папке:\n{TEX_DIR}')
+    print(f'Количество файлов: {len(os.listdir(TEX_DIR))}')
 
 
 if __name__ == '__main__':
