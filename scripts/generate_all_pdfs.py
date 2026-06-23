@@ -30,9 +30,9 @@ def escape_latex(text):
     for old, new in replacements.items():
         text = text.replace(old, new)
     
-    # Корни (исправлено)
-    text = re.sub(r'√(\d+)', r'$\sqrt{\1}$', text)
-    text = re.sub(r'√', r'$\sqrt{}$', text)
+    # Корни — исправленный вариант (без проблемного \1)
+    text = re.sub(r'√(\d+)', lambda m: r'$\sqrt{' + m.group(1) + r'}$', text)
+    text = re.sub(r'√(?!\$)', r'$\sqrt{}$', text)
     
     # KaTeX → LaTeX
     text = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', text, flags=re.IGNORECASE)
@@ -45,10 +45,8 @@ def escape_latex(text):
 
 
 def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
-    """Генерирует LaTeX-документ с защитой от пустых полей"""
-    title = escape_latex(title or "Практическая работа")
+    title = escape_latex(title or "Без названия")
     subtitle = escape_latex(subtitle or "")
-    author = "Станулевич А.В."
     
     latex = rf'''\documentclass{{umk-matematika}}
 \begin{{document}}
@@ -56,7 +54,7 @@ def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
 \maketitlepage
     {{{title}}}
     {{{subtitle}}}
-    {{{author}}}
+    {{Станулевич А.В.}}
 '''
 
     if is_theory:
@@ -73,7 +71,6 @@ def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
             if cond:
                 latex += rf'\textbf{{Задача {i}.}} {cond}\par\vspace{{0.9em}}' + '\n'
         
-        # Ответы
         if any(t.get('answer') for t in tasks):
             latex += r'\newpage\section*{Ответы}' + '\n\n'
             latex += r'\begin{enumerate}' + '\n'
@@ -87,12 +84,11 @@ def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
 
 
 def main():
-    # Очистка и создание папки
     if os.path.exists(TEX_DIR):
         shutil.rmtree(TEX_DIR)
     os.makedirs(TEX_DIR, exist_ok=True)
 
-    # Копируем класс документа
+    # Копируем класс
     cls_src = os.path.join(ROOT_DIR, 'umk-matematika.cls')
     if os.path.exists(cls_src):
         shutil.copy(cls_src, os.path.join(TEX_DIR, 'umk-matematika.cls'))
@@ -105,23 +101,18 @@ def main():
         count = 0
         for f in sorted(os.listdir(pr_dir)):
             if f.endswith('.html'):
-                filepath = os.path.join(pr_dir, f)
                 name = f.replace('.html', '')
                 title = f'Практическая работа {name}'
-                
-                # Пока используем пустой список задач (для теста)
                 latex = generate_latex_document(title, '', [])
                 tex_file = os.path.join(TEX_DIR, f'pr_{name}.tex')
-                
                 with open(tex_file, 'w', encoding='utf-8') as fout:
                     fout.write(latex)
-                
                 print(f'[OK] pr_{name}.tex создан')
                 count += 1
-        print(f'Всего обработано практических работ: {count}')
+        print(f'Обработано практических работ: {count}')
 
-    print(f'\nГотово! Все .tex файлы сохранены в папке:\n{TEX_DIR}')
-    print(f'Количество файлов: {len(os.listdir(TEX_DIR))}')
+    print(f'\nГотово! .tex файлы сохранены в: {TEX_DIR}')
+    print(f'Всего файлов: {len(os.listdir(TEX_DIR))}')
 
 
 if __name__ == '__main__':
