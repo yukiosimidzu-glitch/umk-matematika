@@ -49,12 +49,33 @@ def extract_from_html(filepath, container_class='variant-card'):
     
     tasks = []
     
-    # Ищем все блоки с классом container_class
+    # Для практических работ (doc-card) — старая проверенная логика
+    if container_class == 'doc-card':
+        cards = re.findall(r'<div class="doc-card">(.*?)</div>\s*(?=<div class="doc-card">|<script|$)', content, re.DOTALL)
+        for card in cards:
+            cond_match = re.search(r'<p>(.*?)</p>', card, re.DOTALL)
+            if not cond_match:
+                continue
+            condition = cond_match.group(1)
+            condition = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', condition)
+            condition = escape_latex(condition)
+            
+            answer = ''
+            ans_match = re.search(r'<p class="answer">(.*?)</p>', card, re.DOTALL)
+            if ans_match:
+                answer = ans_match.group(1)
+                answer = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', answer)
+                answer = re.sub(r'<[^>]+>', '', answer).strip()
+                answer = escape_latex(answer)
+            
+            tasks.append({'condition': condition, 'answer': answer})
+        return tasks
+    
+    # Для variant-card — логика с подсчётом вложенности
     pattern = f'<div class="{container_class}">'
     start_positions = [m.start() for m in re.finditer(pattern, content)]
     
     for start in start_positions:
-        # Находим конец этого div (с учётом вложенности)
         depth = 0
         i = start
         while i < len(content):
@@ -72,86 +93,159 @@ def extract_from_html(filepath, container_class='variant-card'):
         else:
             continue
         
-        # Проверяем, есть ли внутри <div class="task">
-        has_task_divs = '<div class="task">' in card
+        task_starts = [m.start() for m in re.finditer(r'<div class="task">', card)]
         
-        if has_task_divs:
-            # Формат с task div (самостоятельные, контрольные, входной, экзамен)
-            task_starts = [m.start() for m in re.finditer(r'<div class="task">', card)]
-            
-            for t_start in task_starts:
-                depth = 0
-                i = t_start
-                while i < len(card):
-                    if card[i:i+4] == '<div':
-                        depth += 1
-                        i += 4
-                    elif card[i:i+6] == '</div>':
-                        depth -= 1
-                        if depth == 0:
-                            task = card[t_start:i+6]
-                            break
-                        i += 6
-                    else:
-                        i += 1
+        for t_start in task_starts:
+            depth = 0
+            i = t_start
+            while i < len(card):
+                if card[i:i+4] == '<div':
+                    depth += 1
+                    i += 4
+                elif card[i:i+6] == '</div>':
+                    depth -= 1
+                    if depth == 0:
+                        task = card[t_start:i+6]
+                        break
+                    i += 6
                 else:
-                    continue
-                
-                # Условие задачи
-                cond_match = re.search(r'<div class="task-condition">(.*?)</div>', task, re.DOTALL)
-                if not cond_match:
-                    cond_match = re.search(r'<p>(.*?)</p>', task, re.DOTALL)
-                if not cond_match:
-                    continue
-                
-                condition = cond_match.group(1)
-                condition = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', condition)
-                condition = escape_latex(condition)
-                
-                # Ответ
-                answer = ''
-                ans_match = re.search(r'<p class="answer-block">(.*?)</p>', task, re.DOTALL)
-                if not ans_match:
-                    ans_match = re.search(r'<p class="answer">(.*?)</p>', task, re.DOTALL)
-                if ans_match:
-                    answer = ans_match.group(1)
-                    answer = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', answer)
-                    answer = re.sub(r'<[^>]+>', '', answer).strip()
-                    answer = escape_latex(answer)
-                
-                tasks.append({'condition': condition, 'answer': answer})
-        else:
-            # Формат практических работ (doc-card с <p> напрямую)
-            # Ищем все <p> внутри карточки
-            paragraphs = re.findall(r'<p>(.*?)</p>', card, re.DOTALL)
-            # Ищем ответы отдельно
-            answers = re.findall(r'<p class="answer">(.*?)</p>', card, re.DOTALL)
+                    i += 1
+            else:
+                continue
             
-            for p in paragraphs:
-                # Пропускаем параграфы с кнопками
-                if '<button' in p:
-                    continue
-                # Убираем HTML-теги внутри (например, <span>)
-                condition = p
-                condition = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', condition)
-                condition = escape_latex(condition)
-                if condition.strip():
-                    tasks.append({'condition': condition, 'answer': ''})
+            cond_match = re.search(r'<div class="task-condition">(.*?)</div>', task, re.DOTALL)
+            if not cond_match:
+                cond_match = re.search(r'<p>(.*?)</p>', task, re.DOTALL)
+            if not cond_match:
+                continue
             
-            # Добавляем ответы (если есть) к последним задачам
-            if answers:
-                for idx, ans in enumerate(answers):
-                    ans_clean = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', ans)
-                    ans_clean = re.sub(r'<[^>]+>', '', ans_clean).strip()
-                    ans_clean = escape_latex(ans_clean)
-                    # Привязываем ответ к соответствующей задаче (с конца)
-                    task_idx = len(tasks) - len(answers) + idx
-                    if 0 <= task_idx < len(tasks):
-                        tasks[task_idx]['answer'] = ans_clean
+            condition = cond_match.group(1)
+            condition = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', condition)
+            condition = escape_latex(condition)
+            
+            answer = ''
+            ans_match = re.search(r'<p class="answer-block">(.*?)</p>', task, re.DOTALL)
+            if not ans_match:
+                ans_match = re.search(r'<p class="answer">(.*?)</p>', task, re.DOTALL)
+            if ans_match:
+                answer = ans_match.group(1)
+                answer = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', answer)
+                answer = re.sub(r'<[^>]+>', '', answer).strip()
+                answer = escape_latex(answer)
+            
+            tasks.append({'condition': condition, 'answer': answer})
     
     return tasks
 
-def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
+def extract_konspekt_text(html_content):
+    """Извлекает текст конспекта из HTML для вставки в LaTeX"""
+    cards = re.findall(
+        r'<div class="konspekt-card">(.*?)</div>\s*(?=<div class="konspekt-card">|<div class="prof-block">|<div class="nav-bottom">)',
+        html_content, re.DOTALL
+    )
+    
+    latex_blocks = []
+    
+    for card in cards:
+        # Заголовок конспекта
+        title_match = re.search(r'<div class="konspekt-title">(.*?)</div>', card, re.DOTALL)
+        if title_match:
+            title = title_match.group(1)
+            title = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', title)
+            title = re.sub(r'<span[^>]*>.*?</span>', '', title)
+            title = re.sub(r'<[^>]+>', '', title).strip()
+            title = escape_latex(title)
+            latex_blocks.append(r'\subsection*{' + title + '}')
+        
+        # Извлекаем все блоки
+        blocks = re.findall(r'<div class="block">(.*?)</div>', card, re.DOTALL)
+        for block in blocks:
+            # Подзаголовок блока
+            label_match = re.search(r'<span class="block-label">(.*?)</span>', block, re.DOTALL)
+            if label_match:
+                label = label_match.group(1)
+                label = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', label)
+                label = re.sub(r'<span[^>]*>.*?</span>', '', label)
+                label = re.sub(r'<[^>]+>', '', label).strip()
+                label = escape_latex(label)
+                latex_blocks.append(r'\textbf{' + label + r'}' + '\n')
+            
+            # Параграфы
+            paragraphs = re.findall(r'<p>(.*?)</p>', block, re.DOTALL)
+            for p in paragraphs:
+                p = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', p)
+                p = re.sub(r'<[^>]+>', ' ', p)
+                p = re.sub(r'\s+', ' ', p).strip()
+                p = escape_latex(p)
+                if p:
+                    latex_blocks.append(p + r'\par')
+            
+            # Списки
+            uls = re.findall(r'<ul>(.*?)</ul>', block, re.DOTALL)
+            for ul in uls:
+                items = re.findall(r'<li>(.*?)</li>', ul, re.DOTALL)
+                if items:
+                    latex_blocks.append(r'\begin{itemize}')
+                    for item in items:
+                        item = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', item)
+                        item = re.sub(r'<[^>]+>', ' ', item)
+                        item = re.sub(r'\s+', ' ', item).strip()
+                        item = escape_latex(item)
+                        if item:
+                            latex_blocks.append(r'  \item ' + item)
+                    latex_blocks.append(r'\end{itemize}')
+            
+            # Таблицы
+            tables = re.findall(r'<table class="formula-table">(.*?)</table>', block, re.DOTALL)
+            for table in tables:
+                rows = re.findall(r'<tr>(.*?)</tr>', table, re.DOTALL)
+                if rows:
+                    # Считаем количество ячеек в первой строке
+                    first_row_cells = re.findall(r'<td>(.*?)</td>', rows[0], re.DOTALL)
+                    num_cols = len(first_row_cells)
+                    if num_cols > 0:
+                        cols_str = '|' + 'l|' * num_cols
+                        latex_blocks.append(r'\begin{tabular}{' + cols_str + '}')
+                        latex_blocks.append(r'\hline')
+                        for row in rows:
+                            cells = re.findall(r'<td>(.*?)</td>', row, re.DOTALL)
+                            cells_clean = []
+                            for cell in cells:
+                                cell = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', cell)
+                                cell = re.sub(r'<[^>]+>', ' ', cell)
+                                cell = re.sub(r'\s+', ' ', cell).strip()
+                                cell = escape_latex(cell)
+                                cells_clean.append(cell)
+                            latex_blocks.append(r'\hline')
+                            latex_blocks.append(' & '.join(cells_clean) + r'\\')
+                        latex_blocks.append(r'\hline')
+                        latex_blocks.append(r'\end{tabular}')
+                        latex_blocks.append(r'\vspace{6pt}')
+        
+        # Примеры (example-box)
+        examples = re.findall(r'<div class="example-box">(.*?)</div>', card, re.DOTALL)
+        for example in examples:
+            label_match = re.search(r'<span class="example-label">(.*?)</span>', example, re.DOTALL)
+            if label_match:
+                label = label_match.group(1)
+                label = re.sub(r'<[^>]+>', '', label).strip()
+                label = escape_latex(label)
+                latex_blocks.append(r'\textbf{' + label + r'}')
+            
+            paragraphs = re.findall(r'<p>(.*?)</p>', example, re.DOTALL)
+            for p in paragraphs:
+                p = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', p)
+                p = re.sub(r'<[^>]+>', ' ', p)
+                p = re.sub(r'\s+', ' ', p).strip()
+                p = escape_latex(p)
+                if p:
+                    latex_blocks.append(p + r'\par')
+        
+        latex_blocks.append(r'\vspace{12pt}')
+    
+    return '\n'.join(latex_blocks)
+
+def generate_latex_document(title, subtitle='', tasks=None, is_theory=False, konspekt_text=''):
     title = escape_latex(title or "Без названия")
     subtitle = escape_latex(subtitle or "")
     
@@ -165,6 +259,8 @@ def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
     latex += r'\vspace{0.5cm}' + '\n\n'
 
     if is_theory:
+        if konspekt_text:
+            latex += konspekt_text + '\n\n'
         latex += r'\begin{center}' + '\n'
         latex += r'\textit{Полный конспект на сайте:}' + '\\' + '\n'
         latex += r'\texttt{https://umk-matematika.netlify.app}' + '\n'
@@ -233,8 +329,6 @@ def add_pdf_buttons_to_pr():
                     fh.write(content)
                 count += 1
                 print(f'[OK] Кнопка PDF добавлена в {f}')
-            else:
-                print(f'[!] Не найден </body> в {f}')
     
     print(f'[OK] Всего обновлено файлов: {count}')
 
@@ -282,8 +376,6 @@ def add_pdf_buttons_to_theory():
                         fh.write(content)
                     count += 1
                     print(f'[OK] Кнопка PDF добавлена в {f}')
-                else:
-                    print(f'[!] Не найден </body> в {f}')
     
     print(f'[OK] Всего обновлено файлов: {count}')
 
@@ -413,7 +505,7 @@ def main():
     add_pdf_buttons_to_theory()
     add_pdf_buttons_to_kontrol()
 
-    # Практические (используют doc-card)
+    # Практические
     print('\n=== Практические работы ===')
     pr_dir = os.path.join(ROOT_DIR, 'pr')
     if os.path.exists(pr_dir):
@@ -428,7 +520,7 @@ def main():
                         fout.write(latex)
                     print(f'[OK] pr_{name}.tex ({len(tasks)} задач)')
 
-    # Самостоятельные (используют variant-card)
+    # Самостоятельные
     print('\n=== Самостоятельные работы ===')
     sam_dir = os.path.join(ROOT_DIR, 'kontrol', 'current')
     if os.path.exists(sam_dir):
@@ -443,7 +535,7 @@ def main():
                         fout.write(latex)
                     print(f'[OK] sam_{name}.tex ({len(tasks)} задач)')
 
-    # Контрольные (используют variant-card)
+    # Контрольные
     print('\n=== Контрольные работы ===')
     kr_dir = os.path.join(ROOT_DIR, 'kontrol', 'thematic')
     if os.path.exists(kr_dir):
@@ -495,7 +587,10 @@ def main():
                 title_match = re.search(r'<title>(.*?)</title>', content)
                 title = title_match.group(1) if title_match else f.replace('.html', '')
                 title = title.replace(' — Опорный конспект', '').replace(' | УМК', '')
-                latex = generate_latex_document(title, 'Опорный конспект', is_theory=True)
+                
+                konspekt_text = extract_konspekt_text(content)
+                
+                latex = generate_latex_document(title, 'Опорный конспект', is_theory=True, konspekt_text=konspekt_text)
                 with open(os.path.join(TEX_DIR, f'theory_{f.replace(".html", "")}.tex'), 'w', encoding='utf-8') as fout:
                     fout.write(latex)
                 print(f'[OK] theory_{f}')
