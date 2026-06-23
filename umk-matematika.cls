@@ -49,7 +49,7 @@
         \vspace{1cm}
         {\Large\bfseries #1}\\[0.5cm]
         {\large #2}\\[1cm]
-        {\normalsize #3}
+        {\normalsize #3\vspace{1cm}}
         \vfill
         {\normalsize Гродно, 2026}
     \end{center}
