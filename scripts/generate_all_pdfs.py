@@ -57,6 +57,7 @@ def escape_latex(text):
     text = text.replace('₉', r'$_9$')
     text = text.replace('₀', r'$_0$')
     text = text.replace('⟂', r'$\perp$')
+    text = text.replace('⊂', r'$\subset$')
     text = re.sub(r'<[^>]+>', ' ', text)
     text = re.sub(r'\s+', ' ', text).strip()
     
