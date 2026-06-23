@@ -80,10 +80,12 @@ def generate_latex_document(title, subtitle='', tasks=None, is_theory=False):
     
     latex = r'\documentclass{umk-matematika}' + '\n'
     latex += r'\begin{document}' + '\n\n'
-    latex += r'\maketitlepage' + '\n'
-    latex += r'    {' + title + '}' + '\n'
-    latex += r'    {' + subtitle + '}' + '\n'
-    latex += r'    {Станулевич А.В.}' + '\n\n'
+    latex += r'\begin{center}' + '\n'
+    latex += r'{\Large\bfseries ' + title + '}' + '\n'
+    if subtitle:
+    latex += r'\\[0.3cm]{\large ' + subtitle + '}' + '\n'
+    latex += r'\end{center}' + '\n'
+    latex += r'\vspace{0.5cm}' + '\n\n'
 
     if is_theory:
         latex += r'\begin{center}' + '\n'
