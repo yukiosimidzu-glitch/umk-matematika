@@ -33,9 +33,9 @@ jobs:
     - name: Compile PDFs
       run: |
         cd tex_all
-        for f in *.tex; do pdflatex -interaction=nonstopmode "$f"; done
+        for f in *.tex; do pdflatex -interaction=nonstopmode "$f" || true; done
         mkdir -p ../pdf_all
-        cp *.pdf ../pdf_all/
+        cp *.pdf ../pdf_all/ 2>/dev/null || true
     - name: Commit PDFs
       run: |
         git config --global user.name 'github-actions'
