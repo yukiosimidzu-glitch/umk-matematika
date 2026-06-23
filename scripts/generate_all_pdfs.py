@@ -50,7 +50,6 @@ def extract_from_html(filepath, container_class='variant-card'):
     tasks = []
     
     # Ищем все блоки с классом container_class
-    # Используем подсчёт вложенности div для точного извлечения
     pattern = f'<div class="{container_class}">'
     start_positions = [m.start() for m in re.finditer(pattern, content)]
     
@@ -73,51 +72,82 @@ def extract_from_html(filepath, container_class='variant-card'):
         else:
             continue
         
-        # Ищем задания внутри карточки
-        task_starts = [m.start() for m in re.finditer(r'<div class="task">', card)]
+        # Проверяем, есть ли внутри <div class="task">
+        has_task_divs = '<div class="task">' in card
         
-        for t_start in task_starts:
-            # Находим конец task с учётом вложенности
-            depth = 0
-            i = t_start
-            while i < len(card):
-                if card[i:i+4] == '<div':
-                    depth += 1
-                    i += 4
-                elif card[i:i+6] == '</div>':
-                    depth -= 1
-                    if depth == 0:
-                        task = card[t_start:i+6]
-                        break
-                    i += 6
+        if has_task_divs:
+            # Формат с task div (самостоятельные, контрольные, входной, экзамен)
+            task_starts = [m.start() for m in re.finditer(r'<div class="task">', card)]
+            
+            for t_start in task_starts:
+                depth = 0
+                i = t_start
+                while i < len(card):
+                    if card[i:i+4] == '<div':
+                        depth += 1
+                        i += 4
+                    elif card[i:i+6] == '</div>':
+                        depth -= 1
+                        if depth == 0:
+                            task = card[t_start:i+6]
+                            break
+                        i += 6
+                    else:
+                        i += 1
                 else:
-                    i += 1
-            else:
-                continue
+                    continue
+                
+                # Условие задачи
+                cond_match = re.search(r'<div class="task-condition">(.*?)</div>', task, re.DOTALL)
+                if not cond_match:
+                    cond_match = re.search(r'<p>(.*?)</p>', task, re.DOTALL)
+                if not cond_match:
+                    continue
+                
+                condition = cond_match.group(1)
+                condition = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', condition)
+                condition = escape_latex(condition)
+                
+                # Ответ
+                answer = ''
+                ans_match = re.search(r'<p class="answer-block">(.*?)</p>', task, re.DOTALL)
+                if not ans_match:
+                    ans_match = re.search(r'<p class="answer">(.*?)</p>', task, re.DOTALL)
+                if ans_match:
+                    answer = ans_match.group(1)
+                    answer = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', answer)
+                    answer = re.sub(r'<[^>]+>', '', answer).strip()
+                    answer = escape_latex(answer)
+                
+                tasks.append({'condition': condition, 'answer': answer})
+        else:
+            # Формат практических работ (doc-card с <p> напрямую)
+            # Ищем все <p> внутри карточки
+            paragraphs = re.findall(r'<p>(.*?)</p>', card, re.DOTALL)
+            # Ищем ответы отдельно
+            answers = re.findall(r'<p class="answer">(.*?)</p>', card, re.DOTALL)
             
-            # Условие задачи — сначала ищем task-condition, потом <p>
-            cond_match = re.search(r'<div class="task-condition">(.*?)</div>', task, re.DOTALL)
-            if not cond_match:
-                cond_match = re.search(r'<p>(.*?)</p>', task, re.DOTALL)
-            if not cond_match:
-                continue
+            for p in paragraphs:
+                # Пропускаем параграфы с кнопками
+                if '<button' in p:
+                    continue
+                # Убираем HTML-теги внутри (например, <span>)
+                condition = p
+                condition = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', condition)
+                condition = escape_latex(condition)
+                if condition.strip():
+                    tasks.append({'condition': condition, 'answer': ''})
             
-            condition = cond_match.group(1)
-            condition = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', condition)
-            condition = escape_latex(condition)
-            
-            # Ответ — answer-block или answer
-            answer = ''
-            ans_match = re.search(r'<p class="answer-block">(.*?)</p>', task, re.DOTALL)
-            if not ans_match:
-                ans_match = re.search(r'<p class="answer">(.*?)</p>', task, re.DOTALL)
-            if ans_match:
-                answer = ans_match.group(1)
-                answer = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', answer)
-                answer = re.sub(r'<[^>]+>', '', answer).strip()
-                answer = escape_latex(answer)
-            
-            tasks.append({'condition': condition, 'answer': answer})
+            # Добавляем ответы (если есть) к последним задачам
+            if answers:
+                for idx, ans in enumerate(answers):
+                    ans_clean = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', ans)
+                    ans_clean = re.sub(r'<[^>]+>', '', ans_clean).strip()
+                    ans_clean = escape_latex(ans_clean)
+                    # Привязываем ответ к соответствующей задаче (с конца)
+                    task_idx = len(tasks) - len(answers) + idx
+                    if 0 <= task_idx < len(tasks):
+                        tasks[task_idx]['answer'] = ans_clean
     
     return tasks
 
@@ -167,7 +197,7 @@ def add_pdf_buttons_to_pr():
         print('[!] Папка pr/ не найдена')
         return
     
-    script = '''<script>
+    script = r'''<script>
 (function() {
     var path = window.location.pathname;
     var match = path.match(/\/(\d+)\.html$/);
@@ -215,26 +245,13 @@ def add_pdf_buttons_to_theory():
         print('[!] Папка theory/ не найдена')
         return
     
-    script = '''<script>
+    script = r'''<script>
 (function() {
     var path = window.location.pathname;
-    var match = path.match(/\/(ok-\\d+)\\.html$/);
-    if (!match) {
-        var parts = path.split('/');
-        var filename = parts[parts.length - 1].replace('.html', '');
-        if (filename) {
-            var pdfUrl = 'pdf/theory_' + filename + '.pdf';
-            var btn = document.createElement('a');
-            btn.href = pdfUrl;
-            btn.className = 'pdf-download-btn';
-            btn.innerHTML = '📥 Скачать конспект (PDF)';
-            btn.setAttribute('download', '');
-            btn.style.cssText = 'display:inline-block;padding:10px 20px;background:#2c3e50;color:white;text-decoration:none;border-radius:5px;margin:15px 0;font-size:14px;border:1px solid #D4A017;';
-            document.body.insertBefore(btn, document.body.firstChild);
-        }
-    } else {
-        var name = match[1];
-        var pdfUrl = 'pdf/theory_' + name + '.pdf';
+    var parts = path.split('/');
+    var filename = parts[parts.length - 1].replace('.html', '');
+    if (filename) {
+        var pdfUrl = 'pdf/theory_' + filename + '.pdf';
         var btn = document.createElement('a');
         btn.href = pdfUrl;
         btn.className = 'pdf-download-btn';
@@ -280,7 +297,7 @@ def add_pdf_buttons_to_kontrol():
     # Входной контроль
     vhod_path = os.path.join(kontrol_dir, 'vhodnoj.html')
     if os.path.exists(vhod_path):
-        script = '''<script>
+        script = r'''<script>
 (function() {
     var btn = document.createElement('a');
     btn.href = 'pdf/vhodnoj.pdf';
@@ -303,7 +320,7 @@ def add_pdf_buttons_to_kontrol():
     # Экзаменационные билеты
     exam_path = os.path.join(kontrol_dir, 'final', 'bilety.html')
     if os.path.exists(exam_path):
-        script = '''<script>
+        script = r'''<script>
 (function() {
     var btn = document.createElement('a');
     btn.href = '../pdf/exam_bilety.pdf';
