@@ -7,8 +7,11 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📚</text></svg>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; }
+        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --yellow: #fbbf24; --green: #4ade80; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; }
@@ -20,30 +23,59 @@
         .page-header p { color: var(--gold); margin-top: 10px; font-size: 1.1rem; }
 
         .content { padding: 60px 0; }
+
+        .formula-day { background: linear-gradient(135deg, rgba(212,160,23,0.12) 0%, rgba(212,160,23,0.04) 100%); border: 1px solid rgba(212,160,23,0.3); padding: 20px 28px; margin-bottom: 35px; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .formula-day:hover { border-color: var(--gold); box-shadow: 0 4px 20px rgba(212,160,23,0.15); }
+        .formula-day-label { color: var(--gold); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 600; }
+        .formula-day-text { color: #fff; font-size: 1.2rem; font-weight: 500; margin-bottom: 8px; }
+        .formula-day-hint { color: var(--text-muted); font-size: 13px; font-style: italic; }
+
+        .progress-bar-wrap { background: var(--bg-card); border: 1px solid var(--border); padding: 20px 28px; margin-bottom: 35px; border-radius: 10px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .progress-bar-wrap .label { color: #fff; font-size: 14px; white-space: nowrap; }
+        .progress-bar-outer { flex: 1; min-width: 200px; height: 12px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; }
+        .progress-bar-inner { height: 100%; background: var(--gold); border-radius: 6px; transition: width 0.5s; width: 0%; }
+        .progress-bar-wrap .percent { color: var(--gold); font-size: 14px; font-weight: 600; white-space: nowrap; }
+        .btn-reset-progress { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.3s; }
+        .btn-reset-progress:hover { border-color: var(--red); color: var(--red); }
+
         .section-card { background: var(--bg-card); border: 1px solid var(--border); padding: 35px; margin-bottom: 25px; border-radius: 8px; }
         .section-card h2 { color: #fff; margin-bottom: 8px; font-size: 1.5rem; }
         .section-desc { color: var(--text-muted); margin-bottom: 25px; font-size: 1rem; }
 
         .topics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        .topic-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 28px 22px; transition: all 0.3s; text-align: center; text-decoration: none; display: block; border-radius: 6px; }
+
+        .topic-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 28px 22px; transition: all 0.3s; text-decoration: none; display: block; border-radius: 6px; position: relative; }
         .topic-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: rgba(212,160,23,0.03); }
         .topic-icon { font-size: 40px; margin-bottom: 14px; display: block; }
         .topic-title { font-size: 17px; color: #fff; margin-bottom: 6px; font-weight: 600; }
-        .topic-count { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
-        .topic-prof { font-size: 12px; color: var(--gold); }
+        .topic-count { font-size: 13px; color: var(--text-muted); margin-bottom: 5px; }
+        .topic-keywords { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5; opacity: 0.8; }
+        .topic-prof { font-size: 12px; color: var(--gold); margin-bottom: 8px; }
+        .topic-status { display: inline-block; padding: 4px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; cursor: pointer; margin-right: 5px; transition: all 0.3s; border: 1px solid transparent; }
+        .topic-status.not-ready { background: rgba(255,107,107,0.1); color: var(--red); border-color: rgba(255,107,107,0.3); }
+        .topic-status.review { background: rgba(251,191,36,0.1); color: var(--yellow); border-color: rgba(251,191,36,0.3); }
+        .topic-status.ready { background: rgba(74,222,128,0.1); color: var(--green); border-color: rgba(74,222,128,0.3); }
+        .topic-qr { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; cursor: pointer; opacity: 0.4; transition: opacity 0.3s; }
+        .topic-qr:hover { opacity: 1; }
+        .topic-audio { position: absolute; bottom: 10px; right: 10px; font-size: 18px; cursor: pointer; opacity: 0.4; transition: opacity 0.3s; background: none; border: none; color: var(--gold); }
+        .topic-audio:hover { opacity: 1; }
+        .topic-audio.playing { opacity: 1; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
         .badge { display: inline-block; background: var(--gold); color: var(--bg); padding: 5px 14px; font-size: 13px; font-weight: 600; border-radius: 4px; }
-        .btn-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 12px 28px; text-decoration: none; font-weight: 600; transition: all 0.3s; border-radius: 6px; font-size: 15px; }
-        .btn-gold:hover { background: #e6b422; transform: translateY(-2px); color: var(--bg); }
-        .btn-outline { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 10px 24px; text-decoration: none; font-weight: 500; transition: all 0.3s; margin-left: 10px; border-radius: 6px; font-size: 15px; }
-        .btn-outline:hover { background: var(--gold); color: var(--bg); }
         .method-note { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 22px 24px; margin-top: 15px; border-radius: 6px; }
         .method-note ol { color: var(--text-muted); padding-left: 24px; line-height: 2.2; font-size: 15px; }
+
         #backToTop { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: var(--bg); border: none; font-size: 22px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
         #backToTop.show { opacity: 1; visibility: visible; }
         #backToTop:hover { background: #e6b422; }
         footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
         footer a { color: var(--gold); text-decoration: none; }
+
+        .qr-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; }
+        .qr-modal.open { display: flex; }
+        .qr-modal-content { background: #fff; padding: 30px; border-radius: 12px; text-align: center; position: relative; }
+        .qr-modal-close { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #333; background: none; border: none; }
 
         @media (max-width: 768px) { .topics-grid { grid-template-columns: 1fr 1fr; } .section-card { padding: 24px; } }
         @media (max-width: 480px) { .topics-grid { grid-template-columns: 1fr; } }
@@ -78,72 +110,29 @@
     <div class="content">
         <div class="container">
 
+            <div class="formula-day" id="formulaDayContainer" title="Нажмите, чтобы перейти к конспекту">
+                <div class="formula-day-label">📅 Формула дня</div>
+                <div class="formula-day-text" id="formulaDay"></div>
+                <div class="formula-day-hint">Повторите перед занятием — закрепите в памяти</div>
+            </div>
+
+            <div class="progress-bar-wrap">
+                <span class="label">📊 Готовность к экзамену:</span>
+                <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar"></div></div>
+                <span class="percent" id="progressPercent">0%</span>
+                <button class="btn-reset-progress" onclick="resetProgress()">Сбросить</button>
+            </div>
+
             <div class="section-card">
                 <h2>📖 Первый курс <span class="badge">5 тем</span></h2>
-                <p class="section-desc">Кликните на тему, чтобы открыть опорный конспект.</p>
-                <div class="topics-grid">
-                    <a href="theory/trigonometriya.html" class="topic-card">
-                        <span class="topic-icon">📐</span>
-                        <div class="topic-title">Тригонометрия</div>
-                        <div class="topic-count">9 разделов</div>
-                        <div class="topic-prof">🔧 Кровля, геодезия</div>
-                    </a>
-                    <a href="theory/stereometriya.html" class="topic-card">
-                        <span class="topic-icon">📦</span>
-                        <div class="topic-title">Стереометрия</div>
-                        <div class="topic-count">5 разделов</div>
-                        <div class="topic-prof">🔧 Чертежи, разметка</div>
-                    </a>
-                    <a href="theory/koren-n-stepeni.html" class="topic-card">
-                        <span class="topic-icon">√</span>
-                        <div class="topic-title">Корень n-й степени</div>
-                        <div class="topic-count">3 раздела</div>
-                        <div class="topic-prof">🔧 Расчёты, пропорции</div>
-                    </a>
-                    <a href="theory/parallel-perpend.html" class="topic-card">
-                        <span class="topic-icon">⟂</span>
-                        <div class="topic-title">Параллельность и перпендикулярность</div>
-                        <div class="topic-count">4 раздела</div>
-                        <div class="topic-prof">🔧 Вертикаль, геодезия</div>
-                    </a>
-                    <a href="theory/proizvodnaya.html" class="topic-card">
-                        <span class="topic-icon">∫</span>
-                        <div class="topic-title">Производная</div>
-                        <div class="topic-count">3 раздела</div>
-                        <div class="topic-prof">🔧 Оптимизация, прочность</div>
-                    </a>
-                </div>
+                <p class="section-desc">Кликните на тему, чтобы открыть опорный конспект. Отмечайте готовность кнопками под карточкой.</p>
+                <div class="topics-grid" id="course1"></div>
             </div>
 
             <div class="section-card">
                 <h2>📖 Второй курс <span class="badge">4 темы</span></h2>
-                <p class="section-desc">Кликните на тему, чтобы открыть опорный конспект.</p>
-                <div class="topics-grid">
-                    <a href="theory/stepeni-funktsii.html" class="topic-card">
-                        <span class="topic-icon">x²</span>
-                        <div class="topic-title">Степени и показательные функции</div>
-                        <div class="topic-count">3 раздела</div>
-                        <div class="topic-prof">🔧 Инженерные расчёты</div>
-                    </a>
-                    <a href="theory/mnogogranniki.html" class="topic-card">
-                        <span class="topic-icon">📦</span>
-                        <div class="topic-title">Многогранники</div>
-                        <div class="topic-count">2 раздела</div>
-                        <div class="topic-prof">🔧 Фундаменты, объёмы</div>
-                    </a>
-                    <a href="theory/logarifmy.html" class="topic-card">
-                        <span class="topic-icon">📊</span>
-                        <div class="topic-title">Логарифмы</div>
-                        <div class="topic-count">5 разделов</div>
-                        <div class="topic-prof">🔧 Звукоизоляция, шкалы</div>
-                    </a>
-                    <a href="theory/tela-vrashcheniya.html" class="topic-card">
-                        <span class="topic-icon">⚪</span>
-                        <div class="topic-title">Тела вращения</div>
-                        <div class="topic-count">3 раздела</div>
-                        <div class="topic-prof">🔧 Резервуары, купола</div>
-                    </a>
-                </div>
+                <p class="section-desc">Кликните на тему, чтобы открыть опорный конспект. Отмечайте готовность кнопками под карточкой.</p>
+                <div class="topics-grid" id="course2"></div>
             </div>
 
             <div class="section-card">
@@ -161,6 +150,14 @@
         </div>
     </div>
 
+    <div class="qr-modal" id="qrModal">
+        <div class="qr-modal-content">
+            <button class="qr-modal-close" onclick="closeQR()">&times;</button>
+            <div id="qrCode"></div>
+            <p style="margin-top:10px;color:#333;font-size:14px;">Наведите камеру телефона</p>
+        </div>
+    </div>
+
     <footer>
         <div class="container">© 2026 Станулевич А.В., Гродно, Беларусь · <a href="index.html">На главную</a></div>
     </footer>
@@ -172,6 +169,122 @@
         var backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', function() { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
         backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+        // ========== ФОРМУЛА ДНЯ ==========
+        const formulas = [
+            { text: 'sin²α + cos²α = 1', latex: '\\sin^{2}\\alpha + \\cos^{2}\\alpha = 1', topic: 'Тригонометрия', link: 'theory/trigonometriya.html#tozhd' },
+            { text: 'aᵐ · aⁿ = aᵐ⁺ⁿ', latex: 'a^{m} \\cdot a^{n} = a^{m+n}', topic: 'Степени', link: 'theory/stepeni-funktsii.html' },
+            { text: 'V призмы = Sₒₛₙ · H', latex: 'V = S_{\\text{осн}} \\cdot H', topic: 'Многогранники', link: 'theory/mnogogranniki.html' },
+            { text: 'f\'(x₀) = tg α', latex: 'f\'(x_{0}) = \\operatorname{tg}\\alpha', topic: 'Производная', link: 'theory/proizvodnaya.html' },
+            { text: 'logₐ(xy) = logₐx + logₐy', latex: '\\log_{a}(xy) = \\log_{a}x + \\log_{a}y', topic: 'Логарифмы', link: 'theory/logarifmy.html' },
+            { text: 'V шара = ⁴⁄₃πR³', latex: 'V = \\frac{4}{3}\\pi R^{3}', topic: 'Тела вращения', link: 'theory/tela-vrashcheniya.html' },
+            { text: '√(x²) = |x|', latex: '\\sqrt{x^{2}} = |x|', topic: 'Корни', link: 'theory/koren-n-stepeni.html' },
+            { text: 'Прямая ⊥ плоскости, если ⊥ двум прямым в ней', latex: '', topic: 'Параллельность и перпендикулярность', link: 'theory/parallel-perpend.html' },
+            { text: 'Через 3 точки → единственная плоскость', latex: '', topic: 'Стереометрия', link: 'theory/stereometriya.html' },
+        ];
+        const today = new Date();
+        const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+        const formula = formulas[dayOfYear % formulas.length];
+        const container = document.getElementById('formulaDay');
+        if (formula.latex) {
+            container.innerHTML = '<span data-katex="' + formula.latex + '"></span>';
+            katex.render(formula.latex, container.querySelector('[data-katex]'), { throwOnError: false });
+        } else {
+            container.textContent = formula.text;
+        }
+        document.getElementById('formulaDayContainer').addEventListener('click', function() { window.location.href = formula.link; });
+
+        // ========== ТЕМЫ ==========
+        const topics = [
+            { icon: '📐', title: 'Тригонометрия', count: '9 разделов', keywords: 'Окружность, sin/cos/tg/ctg, тождества, графики, уравнения, формулы приведения', prof: '🔧 Кровля, геодезия', link: 'theory/trigonometriya.html', course: 1, task: 'Уклон кровли 30°. На сколько метров поднимется крыша при длине ската 10 м?', taskLink: 'theory/trigonometriya.html#def', audio: 'Тригонометрия. Основные темы: единичная окружность, синус, косинус, тангенс, котангенс, тождества, графики, уравнения, формулы приведения.' },
+            { icon: '📦', title: 'Стереометрия', count: '5 разделов', keywords: 'Аксиомы, следствия, сечения многогранников, метод следов', prof: '🔧 Чертежи, разметка', link: 'theory/stereometriya.html', course: 1, task: 'Сколько плоскостей можно провести через три точки, не лежащие на одной прямой?', taskLink: 'theory/stereometriya.html#s2', audio: 'Стереометрия. Аксиомы стереометрии, следствия из аксиом, сечения многогранников, метод следов.' },
+            { icon: '√', title: 'Корень n-й степени', count: '3 раздела', keywords: 'Определение, свойства, иррациональные уравнения', prof: '🔧 Расчёты, пропорции', link: 'theory/koren-n-stepeni.html', course: 1, task: 'Площадь квадратного участка 144 м². Найдите сторону.', taskLink: 'theory/koren-n-stepeni.html#s3', audio: 'Корень энной степени. Определение корня, свойства корня, иррациональные уравнения.' },
+            { icon: '⟂', title: 'Параллельность и перпендикулярность', count: '4 раздела', keywords: 'Признаки ∥ и ⊥, теорема о трёх перпендикулярах, двугранный угол', prof: '🔧 Вертикаль, геодезия', link: 'theory/parallel-perpend.html', course: 1, task: 'Как проверить, что столб стоит вертикально?', taskLink: 'theory/parallel-perpend.html#s2', audio: 'Параллельность и перпендикулярность. Признаки параллельности, перпендикулярности, теорема о трёх перпендикулярах, двугранный угол.' },
+            { icon: '∫', title: 'Производная', count: '3 раздела', keywords: 'Таблица производных, касательная, экстремумы', prof: '🔧 Оптимизация, прочность', link: 'theory/proizvodnaya.html', course: 1, task: 'Огородить участок у стены. Есть 60 м забора. Как получить максимальную площадь?', taskLink: 'theory/proizvodnaya.html#s3', audio: 'Производная. Определение производной, таблица производных, геометрический смысл, уравнение касательной, экстремумы.' },
+            { icon: 'x²', title: 'Степени и показательные функции', count: '3 раздела', keywords: 'Свойства степеней, показательные уравнения и неравенства', prof: '🔧 Инженерные расчёты', link: 'theory/stepeni-funktsii.html', course: 2, task: 'Прочность бетона растёт по закону R(t)=100(1−2⁻⁰·²ᵗ). Через сколько суток прочность превысит 75%?', taskLink: 'theory/stepeni-funktsii.html#s3', audio: 'Степени и показательные функции. Степень с рациональным показателем, показательная функция, показательные уравнения и неравенства.' },
+            { icon: '📦', title: 'Многогранники', count: '2 раздела', keywords: 'Призма, параллелепипед, пирамида, усечённая пирамида, объёмы', prof: '🔧 Фундаменты, объёмы', link: 'theory/mnogogranniki.html', course: 2, task: 'Ленточный фундамент 30×0,6×1,2 м. Сколько кубов бетона?', taskLink: 'theory/mnogogranniki.html#s1', audio: 'Многогранники. Призма, параллелепипед, пирамида, усечённая пирамида. Формулы объёмов и площадей поверхностей.' },
+            { icon: '📊', title: 'Логарифмы', count: '5 разделов', keywords: 'Определение, свойства, функция, уравнения, неравенства', prof: '🔧 Звукоизоляция, шкалы', link: 'theory/logarifmy.html', course: 2, task: 'log₂8 = ? (в какую степень возвести 2, чтобы получить 8?)', taskLink: 'theory/logarifmy.html#s1', audio: 'Логарифмы. Определение логарифма, свойства логарифмов, логарифмическая функция, логарифмические уравнения и неравенства.' },
+            { icon: '⚪', title: 'Тела вращения', count: '3 раздела', keywords: 'Сфера, шар, цилиндр, конус, площади и объёмы', prof: '🔧 Резервуары, купола', link: 'theory/tela-vrashcheniya.html', course: 2, task: 'Колонна-цилиндр: диаметр 0,6 м, высота 6 м. Объём бетона?', taskLink: 'theory/tela-vrashcheniya.html#s2', audio: 'Тела вращения. Сфера и шар, цилиндр, конус. Формулы объёмов и площадей поверхностей.' },
+        ];
+
+        // ========== ОТОБРАЖЕНИЕ КАРТОЧЕК ==========
+        function renderTopics() {
+            const course1 = document.getElementById('course1');
+            const course2 = document.getElementById('course2');
+            course1.innerHTML = '';
+            course2.innerHTML = '';
+
+            topics.forEach((t, i) => {
+                const status = getStatus(i);
+                const card = document.createElement('a');
+                card.href = t.link;
+                card.className = 'topic-card';
+                card.style.position = 'relative';
+                card.innerHTML = `
+                    <span class="topic-icon">${t.icon}</span>
+                    <div class="topic-title">${t.title}</div>
+                    <div class="topic-count">${t.count}</div>
+                    <div class="topic-keywords">${t.keywords}</div>
+                    <div class="topic-prof">${t.prof}</div>
+                    <div style="margin-top:8px;">
+                        <span class="topic-status ${status}" onclick="event.preventDefault();event.stopPropagation();cycleStatus(${i})" title="Нажмите для смены статуса">${status === 'not-ready' ? '🔴 Не готов' : status === 'review' ? '🟡 Повторить' : '🟢 Сдам'}</span>
+                    </div>
+                    <div style="margin-top:8px;font-size:12px;color:var(--text-muted);font-style:italic;">💡 ${t.task}</div>
+                    <button class="topic-audio" onclick="event.preventDefault();event.stopPropagation();toggleAudio(${i}, this)" title="Прослушать">🎧</button>
+                `;
+                if (t.course === 1) course1.appendChild(card);
+                else course2.appendChild(card);
+            });
+            updateProgress();
+        }
+
+        // ========== СТАТУСЫ (localStorage) ==========
+        function getStatus(index) { return localStorage.getItem('topic_status_' + index) || 'not-ready'; }
+        function setStatus(index, status) { localStorage.setItem('topic_status_' + index, status); }
+        function cycleStatus(index) {
+            const current = getStatus(index);
+            const next = current === 'not-ready' ? 'review' : current === 'review' ? 'ready' : 'not-ready';
+            setStatus(index, next);
+            renderTopics();
+        }
+        function resetProgress() {
+            topics.forEach((_, i) => localStorage.removeItem('topic_status_' + i));
+            renderTopics();
+        }
+        function updateProgress() {
+            const ready = topics.filter((_, i) => getStatus(i) === 'ready').length;
+            const review = topics.filter((_, i) => getStatus(i) === 'review').length;
+            const total = topics.length;
+            const percent = Math.round((ready * 100 + review * 50) / total);
+            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('progressPercent').textContent = percent + '%';
+        }
+
+        // ========== АУДИО ==========
+        let currentAudio = null;
+        function toggleAudio(index, btn) {
+            if (currentAudio) { speechSynthesis.cancel(); currentAudio = null; }
+            if (btn.classList.contains('playing')) { btn.classList.remove('playing'); return; }
+            document.querySelectorAll('.topic-audio').forEach(b => b.classList.remove('playing'));
+            btn.classList.add('playing');
+            const utterance = new SpeechSynthesisUtterance(topics[index].audio);
+            utterance.lang = 'ru-RU';
+            utterance.rate = 0.9;
+            utterance.onend = function() { btn.classList.remove('playing'); currentAudio = null; };
+            currentAudio = utterance;
+            speechSynthesis.speak(utterance);
+        }
+
+        // ========== QR-КОД ==========
+        function showQR(link) {
+            document.getElementById('qrModal').classList.add('open');
+            document.getElementById('qrCode').innerHTML = '';
+            new QRCode(document.getElementById('qrCode'), { text: window.location.origin + '/' + link, width: 200, height: 200 });
+        }
+        function closeQR() { document.getElementById('qrModal').classList.remove('open'); }
+
+        // ========== ЗАПУСК ==========
+        renderTopics();
     </script>
 </body>
 </html>
