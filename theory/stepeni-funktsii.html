@@ -4,179 +4,337 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Степени и показательные функции — Опорный конспект | УМК</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>x²</text></svg>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; }
+        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --blue: #60a5fa; --green: #4ade80; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; }
-        .top-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        .breadcrumb { color: var(--text-muted); font-size: 14px; }
+        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); padding: 30px; line-height: 1.8; scroll-behavior: smooth; font-size: 16px; }
+        .container { max-width: 960px; margin: 0 auto; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+        .breadcrumb { color: var(--text-muted); font-size: 15px; }
         .breadcrumb a { color: var(--gold); text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
-        .btn-group { display: flex; gap: 8px; align-items: center; }
-        .btn-sm-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; padding: 6px 14px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; border-radius: 4px; line-height: 1.4; height: 32px; display: inline-flex; align-items: center; }
+        .btn-group { display: flex; gap: 10px; }
+        .btn-sm-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; border-radius: 6px; line-height: 1.4; height: 38px; display: inline-flex; align-items: center; }
         .btn-sm-gold:hover { background: var(--gold); color: var(--bg); }
-        .pdf-hint { font-size: 11px; color: var(--text-muted); }
-        .page-title { font-family: 'Playfair Display', serif; color: #fff; font-size: 2rem; margin-bottom: 5px; padding-bottom: 15px; border-bottom: 2px solid var(--gold); }
-        .page-subtitle { color: var(--gold); font-size: 0.95rem; margin-bottom: 10px; }
-        .page-info { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
+
+        .page-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 2.2rem; margin-bottom: 6px; padding-bottom: 16px; border-bottom: 2px solid var(--gold); }
+        .page-subtitle { color: var(--gold); font-size: 1.05rem; margin-bottom: 12px; }
+        .page-info { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
         .page-info a { color: var(--gold); text-decoration: none; }
-        .page-info a:hover { text-decoration: underline; }
-        .konspekt-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 25px; margin-bottom: 25px; page-break-inside: avoid; }
-        .konspekt-num { color: var(--gold); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .konspekt-title { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.3rem; margin-bottom: 15px; }
-        .block { margin-bottom: 18px; }
-        .block-label { color: var(--gold); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block; }
-        .block p, .block li { color: var(--text-muted); font-size: 14px; margin-bottom: 5px; }
-        .block ul, .block ol { padding-left: 22px; }
-        .formula-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-        .formula-table td { padding: 10px 14px; font-size: 14px; border: 1px solid var(--border); vertical-align: top; }
-        .formula-table td:first-child { color: #fff; text-align: center; width: 50%; background: rgba(255,255,255,0.02); font-weight: 500; }
+
+        .critical { background: rgba(212,160,23,0.08); border: 1.5px solid var(--gold); padding: 22px 28px; margin-bottom: 35px; border-radius: 10px; }
+        .critical h2 { color: var(--gold); font-size: 1.1rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .critical-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+        .critical-grid div { color: #fff; font-size: 1rem; }
+
+        .toc { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 20px 26px; margin-bottom: 35px; border-radius: 8px; }
+        .toc h2 { color: #fff; font-size: 1rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .toc ol { padding-left: 22px; color: var(--text-muted); font-size: 0.95rem; line-height: 2.2; }
+        .toc a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .toc a:hover { color: var(--gold); }
+
+        .konspekt-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--gold); padding: 28px; margin-bottom: 28px; page-break-inside: avoid; scroll-margin-top: 20px; border-radius: 4px; }
+        .konspekt-num { color: var(--gold); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .konspekt-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 1.4rem; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+        .konspekt-title .card-icon { font-size: 1.6rem; }
+        .block { margin-bottom: 20px; }
+        .block-label { color: var(--gold); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+        .block p, .block li { color: var(--text-muted); font-size: 15px; margin-bottom: 6px; }
+        .block ul, .block ol { padding-left: 24px; }
+        .block ul li, .block ol li { margin-bottom: 5px; }
+
+        .formula-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+        .formula-table td { padding: 11px 16px; font-size: 15px; border: 1px solid var(--border); vertical-align: top; }
+        .formula-table td:first-child { color: #fff; text-align: center; background: rgba(255,255,255,0.02); font-weight: 500; width: 45%; }
         .formula-table td:last-child { color: var(--text-muted); }
-        .example-box { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 15px 20px; margin: 12px 0; }
-        .example-label { color: var(--gold); font-size: 12px; font-weight: 600; display: block; margin-bottom: 6px; }
-        .important-badge { display: inline-block; background: #4c1a1a; color: #ff6b6b; font-size: 10px; font-weight: 700; padding: 2px 8px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .exam-badge { display: inline-block; background: #1e3a5f; color: #60a5fa; font-size: 10px; font-weight: 700; padding: 2px 8px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .prof-block { background: rgba(212,160,23,0.06); border: 1px solid rgba(212,160,23,0.25); padding: 18px 20px; margin-top: 30px; }
-        .prof-block strong { color: var(--gold); display: block; margin-bottom: 6px; }
-        .prof-block p { color: var(--text-muted); font-size: 14px; margin: 0; }
-        .img-placeholder { background: rgba(255,255,255,0.02); border: 1px dashed var(--border); padding: 30px; text-align: center; color: var(--text-muted); font-size: 13px; margin: 15px 0; }
-        .nav-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
-        @media (max-width: 600px) { body { padding: 10px; } .konspekt-card { padding: 18px; } .page-title { font-size: 1.5rem; } }
+
+        .example-box { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 16px 22px; margin: 14px 0; border-radius: 6px; }
+        .example-box p { font-size: 15px; margin-bottom: 6px; }
+        .example-label { color: var(--gold); font-size: 14px; font-weight: 600; display: block; margin-bottom: 8px; }
+
+        .mistake-box { background: rgba(255,107,107,0.06); border: 1px solid rgba(255,107,107,0.25); padding: 16px 20px; margin: 14px 0; border-radius: 6px; }
+        .mistake-box .example-label { color: var(--red); font-size: 14px; }
+        .mistake-box p { color: #fca5a5; font-size: 14px; }
+
+        .important-badge { display: inline-block; background: #4c1a1a; color: #ff6b6b; font-size: 12px; font-weight: 700; padding: 3px 10px; margin-left: 8px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 3px; }
+        .exam-badge { display: inline-block; background: #1e3a5f; color: #60a5fa; font-size: 12px; font-weight: 700; padding: 3px 10px; margin-left: 8px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 3px; }
+
+        .prof-block { background: rgba(212,160,23,0.06); border: 1px solid rgba(212,160,23,0.25); padding: 20px 24px; margin-top: 35px; border-radius: 6px; }
+        .prof-block strong { color: var(--gold); display: block; margin-bottom: 8px; font-size: 1.05rem; }
+        .prof-block p { color: var(--text-muted); font-size: 15px; margin: 0; }
+
+        .img-placeholder { background: rgba(255,255,255,0.02); border: 1px dashed var(--border); padding: 40px; text-align: center; color: var(--text-muted); font-size: 14px; margin: 20px 0; border-radius: 6px; }
+        .img-placeholder .fig-label { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+
+        .cheatsheet { background: rgba(255,255,255,0.02); border: 1px solid var(--gold); padding: 28px; margin-top: 40px; border-radius: 10px; }
+        .cheatsheet h2 { color: var(--gold); font-size: 1.2rem; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
+        .cheatsheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; }
+        .cheatsheet-grid .col-full { grid-column: 1 / -1; }
+        .cheatsheet h4 { color: #fff; font-size: 0.95rem; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+        .cheatsheet ul { padding-left: 18px; }
+        .cheatsheet li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; }
+
+        .nav-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 45px; padding-top: 22px; border-top: 1px solid var(--border); }
+
+        @media (max-width: 600px) { body { padding: 15px; font-size: 14px; } .konspekt-card { padding: 20px; } .page-title { font-size: 1.6rem; } .critical-grid { grid-template-columns: 1fr; } .cheatsheet-grid { grid-template-columns: 1fr; } }
         @media print {
             body { background: #fff; color: #000; padding: 0; font-size: 12px; }
             .top-bar, .no-print, .nav-bottom { display: none !important; }
-            .konspekt-card { background: #fff; border: 1px solid #ccc; border-left: 4px solid #000; box-shadow: none; margin-bottom: 15px; padding: 15px; }
+            .konspekt-card { background: #fff; border: 1px solid #ccc; border-left: 4px solid #000; box-shadow: none; margin-bottom: 15px; padding: 18px; }
             .konspekt-title, .page-title, .page-subtitle, .page-info { color: #000; }
             .block-label, .konspekt-num, .example-label, .prof-block strong { color: #000; }
             .block p, .block li, .formula-table td:last-child, .prof-block p { color: #333; }
             .formula-table td { border-color: #ccc; }
             .formula-table td:first-child { background: #f5f5f5; color: #000; }
             .example-box { background: #f9f9f9; border-color: #ddd; }
+            .mistake-box { background: #f9f9f9; border-color: #ddd; }
+            .mistake-box p { color: #600; }
             .prof-block { background: #f9f9f9; border-color: #ddd; }
             .img-placeholder { border-color: #ccc; color: #666; }
             .page-title { border-bottom-color: #000; }
             .important-badge, .exam-badge { border: 1px solid #000; color: #000; background: #eee; }
+            .critical { border-color: #000; background: #f9f9f9; }
+            .critical h2, .cheatsheet h2 { color: #000; }
+            .critical-grid div { color: #000; }
+            .cheatsheet, .toc { background: #f9f9f9; border-color: #000; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
-        <div class="top-bar">
-            <div class="breadcrumb"><a href="../teoreticheskij.html">← Теоретический раздел</a> / Степени и функции</div>
-            <div class="btn-group">
-                <span class="pdf-hint no-print">PDF: Печать → Сохранить</span>
-                <button onclick="downloadHTML()" class="btn-sm-gold no-print">📥 Скачать</button>
-                <a href="javascript:window.print()" class="btn-sm-gold no-print">🖨️ Печать</a>
-            </div>
-        </div>
+<div class="top-bar">
+    <div class="breadcrumb"><a href="../teoreticheskij.html">← Теоретический раздел</a> / Степени и показательные функции</div>
+    <div class="btn-group">
+        <button onclick="downloadHTML()" class="btn-sm-gold no-print">📥 Скачать</button>
+        <a href="javascript:window.print()" class="btn-sm-gold no-print">🖨️ Печать</a>
+    </div>
+</div>
 
-        <h1 class="page-title">x² Степени и показательные функции</h1>
-        <p class="page-subtitle">Опорный конспект для подготовки к занятиям, контрольным и экзамену</p>
-        <p class="page-info">Практические работы: <a href="../pr/16.html">№16 — Степень с рациональным показателем</a> · <a href="../pr/17.html">№17 — Показательные уравнения</a> · <a href="../pr/18.html">№18 — Показательные неравенства</a></p>
+<h1 class="page-title">x² Степени и показательные функции</h1>
+<p class="page-subtitle">Опорный конспект для подготовки к занятиям, контрольным и экзамену</p>
+<p class="page-info">Практические работы: <a href="../pr/16.html">№16 — Степень с рациональным показателем</a> · <a href="../pr/17.html">№17 — Показательные уравнения</a> · <a href="../pr/18.html">№18 — Показательные неравенства</a></p>
 
-        <!-- Конспект 1 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 1</div>
-            <div class="konspekt-title">Степень с рациональным показателем <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📖 Определение</span>
-                <p>Степень с дробным показателем — это корень: <span data-katex="a^{\frac{m}{n}} = \sqrt[n]{a^{m}}"></span>, где <span data-katex="a > 0"></span>.</p>
-            </div>
-            <div class="block">
-                <span class="block-label">📋 Свойства степеней <span class="important-badge">Выучить!</span></span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="a^{m} \cdot a^{n} = a^{m+n}"></span></td><td>Умножение — показатели складываются</td></tr>
-                    <tr><td><span data-katex="\frac{a^{m}}{a^{n}} = a^{m-n}"></span></td><td>Деление — показатели вычитаются</td></tr>
-                    <tr><td><span data-katex="(a^{m})^{n} = a^{mn}"></span></td><td>Степень степени — умножаются</td></tr>
-                    <tr><td><span data-katex="a^{0} = 1"></span></td><td>Нулевая степень</td></tr>
-                    <tr><td><span data-katex="a^{-n} = \frac{1}{a^{n}}"></span></td><td>Отрицательный показатель</td></tr>
-                </table>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Примеры</span>
-                <p><strong>1.</strong> <span data-katex="2^{3} \cdot 2^{4} = 2^{7} = 128"></span></p>
-                <p><strong>2.</strong> <span data-katex="\frac{5^{6}}{5^{2}} = 5^{4} = 625"></span></p>
-                <p><strong>3.</strong> <span data-katex="(3^{2})^{3} = 3^{6} = 729"></span></p>
-                <p><strong>4.</strong> <span data-katex="10^{-2} = \frac{1}{100} = 0{,}01"></span></p>
-                <p><strong>5.</strong> <span data-katex="8^{\frac{1}{3}} = \sqrt[3]{8} = 2"></span></p>
-            </div>
-        </div>
+<!-- КРИТИЧЕСКИЙ МИНИМУМ -->
+<div class="critical">
+    <h2>⚡ Критический минимум для экзамена</h2>
+    <div class="critical-grid">
+        <div>📌 <span data-katex="a^{m} \cdot a^{n} = a^{m+n}"></span> — умножение</div>
+        <div>📌 <span data-katex="(a^{m})^{n} = a^{mn}"></span> — степень степени</div>
+        <div>📌 <span data-katex="a^{\frac{m}{n}} = \sqrt[n]{a^{m}}"></span> — дробный показатель</div>
+        <div>📌 При a > 1 знак неравенства сохраняется, при 0 < a < 1 — меняется</div>
+    </div>
+</div>
 
-        <!-- Конспект 2 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 2</div>
-            <div class="konspekt-title">Показательная функция и уравнения <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📖 Показательная функция</span>
-                <p><span data-katex="y = a^{x}"></span>, где <span data-katex="a > 0,\ a \neq 1"></span>. При a > 1 — возрастает. При 0 < a < 1 — убывает. График всегда проходит через точку <span data-katex="(0; 1)"></span>.</p>
-            </div>
-            <div class="img-placeholder">[Рис. 1 — Графики показательной функции при a > 1 и 0 < a < 1]</div>
-            <div class="block">
-                <span class="block-label">🔢 Решение показательных уравнений</span>
-                <p><strong>Метод:</strong> Привести обе части к одному основанию и приравнять показатели.</p>
-                <table class="formula-table">
-                    <tr><td>Если <span data-katex="a^{x} = a^{n}"></span></td><td>то <span data-katex="x = n"></span> (a > 0, a ≠ 1)</td></tr>
-                </table>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Примеры</span>
-                <p><strong>1.</strong> <span data-katex="2^{x} = 8 \ \Rightarrow \ 2^{x} = 2^{3} \ \Rightarrow \ x = 3"></span></p>
-                <p><strong>2.</strong> <span data-katex="5^{2x-1} = 125 \ \Rightarrow \ 5^{2x-1} = 5^{3} \ \Rightarrow \ 2x-1 = 3 \ \Rightarrow \ x = 2"></span></p>
-                <p><strong>3.</strong> <span data-katex="3^{x+2} + 3^{x} = 90 \ \Rightarrow \ 9 \cdot 3^{x} + 3^{x} = 90 \ \Rightarrow \ 10 \cdot 3^{x} = 90 \ \Rightarrow \ 3^{x} = 9 \ \Rightarrow \ x = 2"></span></p>
-            </div>
-        </div>
+<!-- ОГЛАВЛЕНИЕ -->
+<div class="toc">
+    <h2>📑 Содержание</h2>
+    <ol>
+        <li><a href="#s1">🔢 Степень с рациональным показателем</a></li>
+        <li><a href="#s2">📈 Показательная функция и уравнения</a></li>
+        <li><a href="#s3">⚖️ Показательные неравенства</a></li>
+        <li><a href="#cheatsheet">📋 Шпаргалка</a></li>
+    </ol>
+</div>
 
-        <!-- Конспект 3 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 3</div>
-            <div class="konspekt-title">Показательные неравенства <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">🔢 Правило <span class="important-badge">Выучить!</span></span>
-                <ul>
-                    <li>Если основание <strong>a > 1</strong> — знак неравенства <strong>сохраняется</strong>.</li>
-                    <li>Если основание <strong>0 < a < 1</strong> — знак неравенства <strong>меняется</strong>.</li>
-                </ul>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Примеры</span>
-                <p><strong>1.</strong> <span data-katex="2^{x} > 16 \ \Rightarrow \ 2^{x} > 2^{4} \ \Rightarrow \ x > 4"></span> (основание 2 > 1).</p>
-                <p><strong>2.</strong> <span data-katex="\left(\frac{1}{2}\right)^{x} < \frac{1}{8} \ \Rightarrow \ \left(\frac{1}{2}\right)^{x} < \left(\frac{1}{2}\right)^{3} \ \Rightarrow \ x > 3"></span> (основание < 1, знак меняется).</p>
-            </div>
-            <div class="example-box">
-                <span class="example-label">🏗️ Пример из строительства</span>
-                <p>Прочность бетона нарастает по закону <span data-katex="R(t) = 100 \cdot (1 - 2^{-0{,}2t})"></span>. Через сколько суток прочность превысит 75?</p>
-                <p><span data-katex="100(1 - 2^{-0{,}2t}) > 75 \ \Rightarrow \ 2^{-0{,}2t} < 0{,}25 \ \Rightarrow \ 2^{-0{,}2t} < 2^{-2} \ \Rightarrow \ -0{,}2t < -2 \ \Rightarrow \ t > 10"></span> суток.</p>
-            </div>
-        </div>
+<!-- 1: СТЕПЕНЬ С РАЦИОНАЛЬНЫМ ПОКАЗАТЕЛЕМ -->
+<div class="konspekt-card" id="s1">
+    <div class="konspekt-num">Раздел 1</div>
+    <div class="konspekt-title"><span class="card-icon">🔢</span> Степень с рациональным показателем <span class="exam-badge">Экзамен</span></div>
 
-        <div class="prof-block">
-            <strong>🔧 Где пригодится строителю</strong>
-            <p>Моделирование роста прочности бетона, расчёт сложных процентов при кредитовании стройки, экспоненциальные процессы в материаловедении. См. практические работы №16–18.</p>
-        </div>
-
-        <div class="nav-bottom no-print">
-            <a href="../teoreticheskij.html" class="btn-sm-gold">← К списку конспектов</a>
-        </div>
-
+    <div class="block">
+        <span class="block-label">📖 Что такое степень с дробным показателем</span>
+        <p>Если показатель степени — дробь <span data-katex="\frac{m}{n}"></span>, то это равносильно корню n-й степени:</p>
+        <p style="text-align:center;"><strong><span data-katex="a^{\frac{m}{n}} = \sqrt[n]{a^{m}}"></span></strong>, где <span data-katex="a > 0"></span></p>
+        <p>Для положительного основания a степень с любым рациональным показателем определена. Для нуля — только положительные показатели. Для отрицательных чисел дробная степень не определена в действительных числах (кроме целых показателей).</p>
     </div>
 
-    <script>
-        document.querySelectorAll('[data-katex]').forEach(el => {
-            katex.render(el.dataset.katex, el, { throwOnError: false });
-        });
-        function downloadHTML() {
-            const html = document.documentElement.outerHTML;
-            const blob = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'stepeni-funktsii-konspekt.html';
-            a.click();
-            URL.revokeObjectURL(a.href);
-        }
-    </script>
+    <div class="block">
+        <span class="block-label">📋 Пять свойств степеней <span class="important-badge">Выучить!</span></span>
+        <p>Все свойства работают для любых показателей — целых, дробных, отрицательных.</p>
+        <table class="formula-table">
+            <tr><td><strong>1.</strong> <span data-katex="a^{m} \cdot a^{n} = a^{m+n}"></span></td><td>При умножении степеней с одинаковым основанием — показатели складываются</td></tr>
+            <tr><td><strong>2.</strong> <span data-katex="\frac{a^{m}}{a^{n}} = a^{m-n}"></span></td><td>При делении — показатели вычитаются (a ≠ 0)</td></tr>
+            <tr><td><strong>3.</strong> <span data-katex="(a^{m})^{n} = a^{m \cdot n}"></span></td><td>При возведении степени в степень — показатели перемножаются</td></tr>
+            <tr><td><strong>4.</strong> <span data-katex="a^{0} = 1"></span></td><td>Любое число (кроме нуля) в нулевой степени равно 1</td></tr>
+            <tr><td><strong>5.</strong> <span data-katex="a^{-n} = \frac{1}{a^{n}}"></span></td><td>Отрицательный показатель «переворачивает» число</td></tr>
+        </table>
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">💡 Примеры</span>
+        <p><strong>1.</strong> <span data-katex="2^{3} \cdot 2^{4} = 2^{3+4} = 2^{7} = 128"></span></p>
+        <p><strong>2.</strong> <span data-katex="\frac{5^{6}}{5^{2}} = 5^{6-2} = 5^{4} = 625"></span></p>
+        <p><strong>3.</strong> <span data-katex="(3^{2})^{3} = 3^{2 \cdot 3} = 3^{6} = 729"></span></p>
+        <p><strong>4.</strong> <span data-katex="10^{-2} = \frac{1}{10^{2}} = \frac{1}{100} = 0{,}01"></span></p>
+        <p><strong>5.</strong> <span data-katex="8^{\frac{1}{3}} = \sqrt[3]{8} = 2"></span> — кубический корень из 8</p>
+        <p><strong>6.</strong> <span data-katex="16^{\frac{3}{4}} = (\sqrt[4]{16})^{3} = 2^{3} = 8"></span> — извлекли корень 4-й степени, потом возвели в куб</p>
+    </div>
+
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p><span data-katex="2^{3} \cdot 2^{4} \neq 4^{7}</span>. Основания не перемножаются! Только показатели складываются. Правильно: <span data-katex="2^{3} \cdot 2^{4} = 2^{7} = 128"></span>.</p>
+    </div>
+</div>
+
+<!-- 2: ПОКАЗАТЕЛЬНАЯ ФУНКЦИЯ И УРАВНЕНИЯ -->
+<div class="konspekt-card" id="s2">
+    <div class="konspekt-num">Раздел 2</div>
+    <div class="konspekt-title"><span class="card-icon">📈</span> Показательная функция и уравнения <span class="exam-badge">Экзамен</span></div>
+
+    <div class="block">
+        <span class="block-label">📖 Показательная функция</span>
+        <p>Функция вида <span data-katex="y = a^{x}"></span>, где <span data-katex="a > 0,\ a \neq 1"></span>. Переменная x находится в показателе степени.</p>
+        <ul>
+            <li>Если <strong>a > 1</strong> — функция <strong>возрастает</strong>. Чем больше x, тем больше y.</li>
+            <li>Если <strong>0 < a < 1</strong> — функция <strong>убывает</strong>. Чем больше x, тем меньше y.</li>
+            <li>График <strong>всегда</strong> проходит через точку (0; 1), потому что <span data-katex="a^{0} = 1"></span>.</li>
+            <li>График никогда не пересекает ось x (y всегда > 0).</li>
+        </ul>
+    </div>
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 1 — Графики показательной функции</div>
+        [Два графика на одном рисунке: y = 2ˣ (возрастает) и y = (1/2)ˣ (убывает)]
+    </div>
+
+    <div class="block">
+        <span class="block-label">🔢 Решение показательных уравнений</span>
+        <p><strong>Главный метод:</strong> привести обе части уравнения к <strong>одному основанию</strong>. Если основания равны, то и показатели равны.</p>
+        <p style="text-align:center;"><strong>Если <span data-katex="a^{f(x)} = a^{g(x)}"></span>, то <span data-katex="f(x) = g(x)"></span></strong> (a > 0, a ≠ 1)</p>
+        <p>Алгоритм:</p>
+        <ol>
+            <li>Представить все числа в виде степеней одного основания</li>
+            <li>Применить свойства степеней, чтобы слева и справа было <span data-katex="a^{\text{что-то}}</span></li>
+            <li>Отбросить основание и приравнять показатели</li>
+            <li>Решить получившееся уравнение</li>
+        </ol>
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">💡 Примеры</span>
+        <p><strong>1. Простейшее:</strong> <span data-katex="2^{x} = 8 \ \Rightarrow \ 2^{x} = 2^{3} \ \Rightarrow \ x = 3"></span></p>
+        <p><strong>2. С линейным показателем:</strong> <span data-katex="5^{2x-1} = 125 \ \Rightarrow \ 5^{2x-1} = 5^{3} \ \Rightarrow \ 2x-1 = 3 \ \Rightarrow \ x = 2"></span></p>
+        <p><strong>3. С вынесением за скобки:</strong></p>
+        <p><span data-katex="3^{x+2} + 3^{x} = 90 \ \Rightarrow \ 3^{x} \cdot 3^{2} + 3^{x} = 90 \ \Rightarrow \ 9 \cdot 3^{x} + 3^{x} = 90 \ \Rightarrow \ 10 \cdot 3^{x} = 90 \ \Rightarrow \ 3^{x} = 9 \ \Rightarrow \ x = 2"></span></p>
+        <p><strong>4. С заменой переменной:</strong> <span data-katex="4^{x} - 6 \cdot 2^{x} + 8 = 0"></span>. Замена: <span data-katex="t = 2^{x}"></span>, тогда <span data-katex="4^{x} = (2^{2})^{x} = (2^{x})^{2} = t^{2}"></span>. Уравнение: <span data-katex="t^{2} - 6t + 8 = 0 \ \Rightarrow \ t = 2 \text{ или } t = 4 \ \Rightarrow \ x = 1 \text{ или } x = 2"></span></p>
+    </div>
+
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p>Нельзя приравнивать показатели, если основания разные. Пример: <span data-katex="2^{x} = 3^{x}"></span>. Здесь нельзя написать x = x и сократить. Нужно привести к одному основанию или использовать логарифмы.</p>
+    </div>
+</div>
+
+<!-- 3: ПОКАЗАТЕЛЬНЫЕ НЕРАВЕНСТВА -->
+<div class="konspekt-card" id="s3">
+    <div class="konspekt-num">Раздел 3</div>
+    <div class="konspekt-title"><span class="card-icon">⚖️</span> Показательные неравенства <span class="exam-badge">Экзамен</span></div>
+
+    <div class="block">
+        <span class="block-label">📖 Главное правило</span>
+        <p>При решении показательных неравенств поведение знака зависит от основания:</p>
+        <table class="formula-table">
+            <tr><td><strong>Основание a > 1</strong></td><td>Знак неравенства <strong>сохраняется</strong>. Пример: <span data-katex="2^{x} > 2^{3} \ \Rightarrow \ x > 3"></span></td></tr>
+            <tr><td><strong>Основание 0 < a < 1</strong></td><td>Знак неравенства <strong>меняется</strong> на противоположный. Пример: <span data-katex="(\frac{1}{2})^{x} < (\frac{1}{2})^{3} \ \Rightarrow \ x > 3"></span></td></tr>
+        </table>
+        <p><strong>Почему так?</strong> При основании меньше 1 функция убывает: чем больше x, тем меньше значение. Поэтому неравенство «переворачивается».</p>
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">💡 Примеры</span>
+        <p><strong>1. Основание > 1 (знак тот же):</strong></p>
+        <p><span data-katex="2^{x} > 16 \ \Rightarrow \ 2^{x} > 2^{4} \ \Rightarrow \ x > 4"></span></p>
+        <p><strong>2. Основание < 1 (знак меняется):</strong></p>
+        <p><span data-katex="\left(\frac{1}{2}\right)^{x} < \frac{1}{8} \ \Rightarrow \ \left(\frac{1}{2}\right)^{x} < \left(\frac{1}{2}\right)^{3} \ \Rightarrow \ x > 3"></span></p>
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">🏗️ Пример из строительства</span>
+        <p>Прочность бетона нарастает по закону: <span data-katex="R(t) = 100 \cdot (1 - 2^{-0{,}2t})"></span>, где t — время в сутках, R — прочность в процентах от максимальной.</p>
+        <p><strong>Вопрос:</strong> через сколько суток прочность превысит 75%?</p>
+        <p><strong>Решение:</strong></p>
+        <p><span data-katex="100(1 - 2^{-0{,}2t}) > 75 \ \Rightarrow \ 1 - 2^{-0{,}2t} > 0{,}75 \ \Rightarrow \ 2^{-0{,}2t} < 0{,}25"></span></p>
+        <p><span data-katex="2^{-0{,}2t} < 2^{-2} \ \Rightarrow \ -0{,}2t < -2 \ \Rightarrow \ t > 10"></span> суток.</p>
+        <p><strong>Ответ:</strong> более 10 суток.</p>
+    </div>
+
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p>Забывают менять знак неравенства при основании меньше 1. Всегда сначала смотрите на основание! Если a < 1 — разворачивайте знак.</p>
+    </div>
+</div>
+
+<!-- ПРОФБЛОК -->
+<div class="prof-block">
+    <strong>🔧 Где пригодится строителю</strong>
+    <p>Моделирование роста прочности бетона во времени, расчёт сложных процентов при кредитовании строительства, экспоненциальные процессы в материаловедении, расчёт периода полураспада материалов. См. практические работы №16–18.</p>
+</div>
+
+<!-- ШПАРГАЛКА -->
+<div class="cheatsheet" id="cheatsheet">
+    <h2>📋 Шпаргалка</h2>
+    <div class="cheatsheet-grid">
+        <div>
+            <h4>🔢 Свойства степеней</h4>
+            <ul>
+                <li><span data-katex="a^{m} \cdot a^{n} = a^{m+n}"></span></li>
+                <li><span data-katex="\frac{a^{m}}{a^{n}} = a^{m-n}"></span></li>
+                <li><span data-katex="(a^{m})^{n} = a^{mn}"></span></li>
+                <li><span data-katex="a^{0} = 1"></span></li>
+                <li><span data-katex="a^{-n} = \frac{1}{a^{n}}"></span></li>
+                <li><span data-katex="a^{\frac{m}{n}} = \sqrt[n]{a^{m}}"></span></li>
+            </ul>
+        </div>
+        <div>
+            <h4>📈 Функция y = aˣ</h4>
+            <ul>
+                <li>a > 1 → возрастает</li>
+                <li>0 < a < 1 → убывает</li>
+                <li>Всегда проходит через (0; 1)</li>
+                <li>y всегда > 0</li>
+            </ul>
+        </div>
+        <div>
+            <h4>⚖️ Неравенства</h4>
+            <ul>
+                <li>a > 1: знак тот же</li>
+                <li>0 < a < 1: знак меняется</li>
+                <li>Сначала приравнять основания</li>
+                <li>Потом сравнить показатели</li>
+            </ul>
+        </div>
+        <div>
+            <h4>⚠️ Важно</h4>
+            <ul>
+                <li>Не перемножать основания!</li>
+                <li>Не приравнивать показатели при разных основаниях</li>
+                <li>Не забывать менять знак при a < 1</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="nav-bottom no-print">
+    <a href="../teoreticheskij.html" class="btn-sm-gold">← К списку конспектов</a>
+</div>
+
+</div>
+
+<script>
+    document.querySelectorAll('[data-katex]').forEach(el => {
+        katex.render(el.dataset.katex, el, { throwOnError: false });
+    });
+    function downloadHTML() {
+        const html = document.documentElement.outerHTML;
+        const blob = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'stepeni-funktsii-konspekt.html';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
+</script>
 </body>
 </html>
