@@ -273,46 +273,57 @@
 </div>
 
 <!-- ШПАРГАЛКА -->
+<!-- ШПАРГАЛКА -->
 <div class="cheatsheet" id="cheatsheet">
-    <h2>📋 Шпаргалка</h2>
+    <h2>📋 Шпаргалка «За 5 минут до экзамена»</h2>
     <div class="cheatsheet-grid">
         <div>
             <h4>🔢 Свойства степеней</h4>
+            <div style="display:grid; grid-template-columns:auto 1fr; gap:4px 12px; font-size:0.9rem; color:var(--text-muted);">
+                <div><span data-katex="a^{m} \cdot a^{n} = a^{m+n}"></span></div>
+                <div>Умножение — показатели складываются</div>
+                <div><span data-katex="\frac{a^{m}}{a^{n}} = a^{m-n}"></span></div>
+                <div>Деление — показатели вычитаются</div>
+                <div><span data-katex="(a^{m})^{n} = a^{mn}"></span></div>
+                <div>Степень степени — показатели умножаются</div>
+                <div><span data-katex="a^{0} = 1"></span></div>
+                <div>Нулевая степень</div>
+                <div><span data-katex="a^{-n} = \frac{1}{a^{n}}"></span></div>
+                <div>Отрицательный показатель</div>
+                <div><span data-katex="a^{\frac{m}{n}} = \sqrt[n]{a^{m}}"></span></div>
+                <div>Дробный показатель → корень</div>
+            </div>
+        </div>
+        <div>
+            <h4>📈 Функция <span data-katex="y = a^{x}"></span></h4>
             <ul>
-                <li><span data-katex="a^{m} \cdot a^{n} = a^{m+n}"></span></li>
-                <li><span data-katex="\frac{a^{m}}{a^{n}} = a^{m-n}"></span></li>
-                <li><span data-katex="(a^{m})^{n} = a^{mn}"></span></li>
-                <li><span data-katex="a^{0} = 1"></span></li>
-                <li><span data-katex="a^{-n} = \frac{1}{a^{n}}"></span></li>
-                <li><span data-katex="a^{\frac{m}{n}} = \sqrt[n]{a^{m}}"></span></li>
+                <li><span data-katex="a > 1"></span> — функция <strong>растёт</strong></li>
+                <li><span data-katex="0 < a < 1"></span> — функция <strong>убывает</strong></li>
+                <li>График всегда проходит через (0; 1)</li>
+                <li>Значения всегда положительны</li>
             </ul>
         </div>
         <div>
-            <h4>📈 Функция y = aˣ</h4>
+            <h4>⚖️ Показательные неравенства</h4>
             <ul>
-                <li>a > 1 → возрастает</li>
-                <li>0 < a < 1 → убывает</li>
-                <li>Всегда проходит через (0; 1)</li>
-                <li>y всегда > 0</li>
+                <li><strong>a > 1:</strong> знак неравенства <strong>сохраняется</strong></li>
+                <li><strong>0 < a < 1:</strong> знак <strong>меняется</strong></li>
+                <li>Сначала привести к одному основанию</li>
+                <li>Затем сравнить показатели</li>
             </ul>
         </div>
         <div>
-            <h4>⚖️ Неравенства</h4>
+            <h4>⚠️ Важно не забыть</h4>
             <ul>
-                <li>a > 1: знак тот же</li>
-                <li>0 < a < 1: знак меняется</li>
-                <li>Сначала приравнять основания</li>
-                <li>Потом сравнить показатели</li>
+                <li>Основания не перемножаются</li>
+                <li>Показатели не приравнивать при разных основаниях</li>
+                <li>Менять знак неравенства при a < 1</li>
+                <li>Проверять корни в иррациональных уравнениях</li>
             </ul>
         </div>
-        <div>
-            <h4>⚠️ Важно</h4>
-            <ul>
-                <li>Не перемножать основания!</li>
-                <li>Не приравнивать показатели при разных основаниях</li>
-                <li>Не забывать менять знак при a < 1</li>
-            </ul>
-        </div>
+    </div>
+    <div style="text-align:center; margin-top:20px;">
+        <button onclick="downloadCheatsheet()" class="btn-sm-gold no-print">📥 Скачать шпаргалку</button>
     </div>
 </div>
 
