@@ -7,341 +7,549 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; }
+        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --blue: #60a5fa; --green: #4ade80; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; }
-
-        .top-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        .breadcrumb { color: var(--text-muted); font-size: 14px; }
+        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); padding: 30px; line-height: 1.8; scroll-behavior: smooth; font-size: 16px; }
+        .container { max-width: 960px; margin: 0 auto; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+        .breadcrumb { color: var(--text-muted); font-size: 15px; }
         .breadcrumb a { color: var(--gold); text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
-        .btn-group { display: flex; gap: 8px; }
-        .btn-sm-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; padding: 6px 14px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; border-radius: 4px; line-height: 1.4; height: 32px; }
+        .btn-group { display: flex; gap: 10px; }
+        .btn-sm-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; border-radius: 6px; line-height: 1.4; height: 38px; }
         .btn-sm-gold:hover { background: var(--gold); color: var(--bg); }
 
-        .page-title { font-family: 'Playfair Display', serif; color: #fff; font-size: 2rem; margin-bottom: 5px; padding-bottom: 15px; border-bottom: 2px solid var(--gold); }
-        .page-subtitle { color: var(--gold); font-size: 0.95rem; margin-bottom: 10px; }
-        .page-info { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
+        .page-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 2.2rem; margin-bottom: 6px; padding-bottom: 16px; border-bottom: 2px solid var(--gold); }
+        .page-subtitle { color: var(--gold); font-size: 1.05rem; margin-bottom: 12px; }
+        .page-info { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
         .page-info a { color: var(--gold); text-decoration: none; }
-        .page-info a:hover { text-decoration: underline; }
 
-        .konspekt-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 25px; margin-bottom: 25px; page-break-inside: avoid; }
-        .konspekt-num { color: var(--gold); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .konspekt-title { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.3rem; margin-bottom: 15px; }
+        .critical { background: rgba(212,160,23,0.08); border: 1.5px solid var(--gold); padding: 22px 28px; margin-bottom: 35px; border-radius: 10px; }
+        .critical h2 { color: var(--gold); font-size: 1.1rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .critical-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+        .critical-grid div { color: #fff; font-size: 1rem; }
 
-        .block { margin-bottom: 18px; }
-        .block-label { color: var(--gold); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block; }
-        .block p, .block li { color: var(--text-muted); font-size: 14px; margin-bottom: 5px; }
-        .block ul, .block ol { padding-left: 22px; }
-        .block ul li, .block ol li { margin-bottom: 4px; }
+        .toc { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 20px 26px; margin-bottom: 35px; border-radius: 8px; }
+        .toc h2 { color: #fff; font-size: 1rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .toc ol { padding-left: 22px; color: var(--text-muted); font-size: 0.95rem; line-height: 2.2; columns: 2; }
+        .toc a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .toc a:hover { color: var(--gold); }
 
-        .formula-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-        .formula-table td { padding: 10px 14px; font-size: 14px; border: 1px solid var(--border); }
-        .formula-table td:first-child { color: #fff; text-align: center; width: 50%; background: rgba(255,255,255,0.02); font-weight: 500; }
+        .konspekt-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--gold); padding: 28px; margin-bottom: 28px; page-break-inside: avoid; scroll-margin-top: 20px; border-radius: 4px; }
+        .konspekt-num { color: var(--gold); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .konspekt-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 1.4rem; margin-bottom: 18px; }
+        .block { margin-bottom: 20px; }
+        .block-label { color: var(--gold); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+        .block p, .block li { color: var(--text-muted); font-size: 15px; margin-bottom: 6px; }
+        .block ul, .block ol { padding-left: 24px; }
+        .block ul li, .block ol li { margin-bottom: 5px; }
+
+        .formula-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+        .formula-table td { padding: 11px 16px; font-size: 15px; border: 1px solid var(--border); }
+        .formula-table td:first-child { color: #fff; text-align: center; background: rgba(255,255,255,0.02); font-weight: 500; }
         .formula-table td:last-child { color: var(--text-muted); }
 
-        .example-box { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 15px 20px; margin: 12px 0; }
-        .example-label { color: var(--gold); font-size: 12px; font-weight: 600; display: block; margin-bottom: 6px; }
+        .example-box { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 16px 22px; margin: 14px 0; border-radius: 6px; }
+        .example-box p { font-size: 15px; margin-bottom: 6px; }
+        .example-label { color: var(--gold); font-size: 14px; font-weight: 600; display: block; margin-bottom: 8px; }
 
-        .important-badge { display: inline-block; background: #4c1a1a; color: #ff6b6b; font-size: 10px; font-weight: 700; padding: 2px 8px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .exam-badge { display: inline-block; background: #1e3a5f; color: #60a5fa; font-size: 10px; font-weight: 700; padding: 2px 8px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .mistake-box { background: rgba(255,107,107,0.06); border: 1px solid rgba(255,107,107,0.25); padding: 16px 20px; margin: 14px 0; border-radius: 6px; }
+        .mistake-box .example-label { color: var(--red); font-size: 14px; }
+        .mistake-box p { color: #fca5a5; font-size: 14px; }
 
-        .prof-block { background: rgba(212,160,23,0.06); border: 1px solid rgba(212,160,23,0.25); padding: 18px 20px; margin-top: 30px; }
-        .prof-block strong { color: var(--gold); display: block; margin-bottom: 6px; }
-        .prof-block p { color: var(--text-muted); font-size: 14px; margin: 0; }
+        .important-badge { display: inline-block; background: #4c1a1a; color: #ff6b6b; font-size: 12px; font-weight: 700; padding: 3px 10px; margin-left: 8px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 3px; }
+        .exam-badge { display: inline-block; background: #1e3a5f; color: #60a5fa; font-size: 12px; font-weight: 700; padding: 3px 10px; margin-left: 8px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 3px; }
 
-        .img-placeholder { background: rgba(255,255,255,0.02); border: 1px dashed var(--border); padding: 30px; text-align: center; color: var(--text-muted); font-size: 13px; margin: 15px 0; }
+        .prof-block { background: rgba(212,160,23,0.06); border: 1px solid rgba(212,160,23,0.25); padding: 20px 24px; margin-top: 35px; border-radius: 6px; }
+        .prof-block strong { color: var(--gold); display: block; margin-bottom: 8px; font-size: 1.05rem; }
+        .prof-block p { color: var(--text-muted); font-size: 15px; margin: 0; }
 
-        .nav-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .img-placeholder { background: rgba(255,255,255,0.02); border: 1px dashed var(--border); padding: 40px; text-align: center; color: var(--text-muted); font-size: 14px; margin: 20px 0; border-radius: 6px; }
 
-        @media (max-width: 600px) {
-            body { padding: 10px; }
-            .konspekt-card { padding: 18px; }
-            .page-title { font-size: 1.5rem; }
-        }
+        .cheatsheet { background: rgba(255,255,255,0.02); border: 1px solid var(--gold); padding: 28px; margin-top: 40px; border-radius: 10px; page-break-before: always; }
+        .cheatsheet h2 { color: var(--gold); font-size: 1.2rem; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
+        .cheatsheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; }
+        .cheatsheet-grid .col-full { grid-column: 1 / -1; }
+        .cheatsheet h4 { color: #fff; font-size: 0.95rem; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+        .cheatsheet ul { padding-left: 18px; }
+        .cheatsheet li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; }
 
+        .nav-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 45px; padding-top: 22px; border-top: 1px solid var(--border); }
+
+        @media (max-width: 600px) { body { padding: 15px; font-size: 14px; } .konspekt-card { padding: 20px; } .page-title { font-size: 1.6rem; } .toc ol { columns: 1; } .critical-grid { grid-template-columns: 1fr; } .cheatsheet-grid { grid-template-columns: 1fr; } }
         @media print {
             body { background: #fff; color: #000; padding: 0; font-size: 12px; }
             .top-bar, .no-print, .nav-bottom { display: none !important; }
-            .konspekt-card { background: #fff; border: 1px solid #ccc; border-left: 4px solid #000; box-shadow: none; margin-bottom: 15px; padding: 15px; }
+            .konspekt-card { background: #fff; border: 1px solid #ccc; border-left: 4px solid #000; box-shadow: none; margin-bottom: 15px; padding: 18px; }
             .konspekt-title, .page-title, .page-subtitle, .page-info { color: #000; }
             .block-label, .konspekt-num, .example-label, .prof-block strong { color: #000; }
             .block p, .block li, .formula-table td:last-child, .prof-block p { color: #333; }
             .formula-table td { border-color: #ccc; }
             .formula-table td:first-child { background: #f5f5f5; color: #000; }
             .example-box { background: #f9f9f9; border-color: #ddd; }
+            .mistake-box { background: #f9f9f9; border-color: #ddd; }
+            .mistake-box p { color: #600; }
             .prof-block { background: #f9f9f9; border-color: #ddd; }
             .img-placeholder { border-color: #ccc; color: #666; }
             .page-title { border-bottom-color: #000; }
             .important-badge, .exam-badge { border: 1px solid #000; color: #000; background: #eee; }
+            .critical { border-color: #000; background: #f9f9f9; }
+            .critical h2, .cheatsheet h2 { color: #000; }
+            .critical-grid div { color: #000; }
+            .cheatsheet, .toc { background: #f9f9f9; border-color: #000; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
-        <div class="top-bar">
-            <div class="breadcrumb">
-                <a href="../teoreticheskij.html">← Теоретический раздел</a> / Тригонометрия
-            </div>
-            <div class="btn-group">
-                <button onclick="downloadHTML()" class="btn-sm-gold no-print">📥 Скачать</button>
-                <a href="javascript:window.print()" class="btn-sm-gold no-print">🖨️ Печать</a>
-            </div>
-        </div>
-
-        <h1 class="page-title">📐 Тригонометрия</h1>
-        <p class="page-subtitle">Опорный конспект для подготовки к занятиям, контрольным и экзамену</p>
-        <p class="page-info">Практические работы: <a href="../pr/01.html">№1</a> · <a href="../pr/02.html">№2</a> · <a href="../pr/03.html">№3</a> · <a href="../pr/04.html">№4</a></p>
-
-        <!-- Конспект 1 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 1</div>
-            <div class="konspekt-title">Единичная окружность. Радианная мера углов <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📖 Что такое единичная окружность</span>
-                <p>Окружность с центром в начале координат и радиусом 1. Полный оборот = 360° = 2π рад.</p>
-            </div>
-            <div class="img-placeholder">[Рис. 1 — Единичная окружность с разметкой углов]</div>
-            <div class="block">
-                <span class="block-label">🔄 Правила перевода</span>
-                <ul>
-                    <li>Градусы → радианы: умножить на <span data-katex="\frac{\pi}{180}"></span></li>
-                    <li>Радианы → градусы: умножить на <span data-katex="\frac{180}{\pi}"></span></li>
-                </ul>
-            </div>
-            <div class="block">
-                <span class="block-label">📋 Таблица основных углов <span class="important-badge">Выучить!</span></span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="0^\circ = 0"></span></td><td>Начало отсчёта</td></tr>
-                    <tr><td><span data-katex="30^\circ = \frac{\pi}{6}"></span></td><td>Одна шестая развёрнутого угла</td></tr>
-                    <tr><td><span data-katex="45^\circ = \frac{\pi}{4}"></span></td><td>Половина прямого угла</td></tr>
-                    <tr><td><span data-katex="60^\circ = \frac{\pi}{3}"></span></td><td>Одна треть развёрнутого угла</td></tr>
-                    <tr><td><span data-katex="90^\circ = \frac{\pi}{2}"></span></td><td>Прямой угол</td></tr>
-                    <tr><td><span data-katex="180^\circ = \pi"></span></td><td>Развёрнутый угол</td></tr>
-                    <tr><td><span data-katex="270^\circ = \frac{3\pi}{2}"></span></td><td>Три прямых угла</td></tr>
-                    <tr><td><span data-katex="360^\circ = 2\pi"></span></td><td>Полный оборот</td></tr>
-                </table>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Примеры</span>
-                <p><strong>1.</strong> Перевести <span data-katex="120^\circ"></span> в радианы: <span data-katex="120 \cdot \frac{\pi}{180} = \frac{2\pi}{3}"></span></p>
-                <p><strong>2.</strong> Перевести <span data-katex="\frac{5\pi}{6}"></span> в градусы: <span data-katex="\frac{5\pi}{6} \cdot \frac{180}{\pi} = 150^\circ"></span></p>
-            </div>
-        </div>
-
-        <!-- Конспект 2 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 2</div>
-            <div class="konspekt-title">Синус, косинус, тангенс произвольного угла <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📖 Определения</span>
-                <p>Точка на единичной окружности: <span data-katex="(\cos\alpha;\ \sin\alpha)"></span></p>
-                <ul>
-                    <li><strong>sin α</strong> — ордината y</li>
-                    <li><strong>cos α</strong> — абсцисса x</li>
-                    <li><strong>tg α</strong> = <span data-katex="\frac{\sin\alpha}{\cos\alpha}"></span></li>
-                    <li><strong>ctg α</strong> = <span data-katex="\frac{\cos\alpha}{\sin\alpha}"></span></li>
-                </ul>
-            </div>
-            <div class="img-placeholder">[Рис. 2 — Координаты точки на окружности]</div>
-            <div class="block">
-                <span class="block-label">📐 Знаки по четвертям <span class="important-badge">Выучить!</span></span>
-                <table class="formula-table">
-                    <tr><td>I (0°–90°)</td><td>sin > 0, cos > 0, tg > 0</td></tr>
-                    <tr><td>II (90°–180°)</td><td>sin > 0, cos < 0, tg < 0</td></tr>
-                    <tr><td>III (180°–270°)</td><td>sin < 0, cos < 0, tg > 0</td></tr>
-                    <tr><td>IV (270°–360°)</td><td>sin < 0, cos > 0, tg < 0</td></tr>
-                </table>
-            </div>
-            <div class="img-placeholder">[Рис. 3 — Знаки по четвертям]</div>
-            <div class="example-box">
-                <span class="example-label">💡 Пример</span>
-                <p>Угол 210° в III четверти:</p>
-                <p><span data-katex="\sin 210^\circ = -\frac{1}{2}"></span>, <span data-katex="\cos 210^\circ = -\frac{\sqrt{3}}{2}"></span>, <span data-katex="\operatorname{tg} 210^\circ = \frac{\sqrt{3}}{3}"></span></p>
-            </div>
-        </div>
-
-        <!-- Конспект 3 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 3</div>
-            <div class="konspekt-title">Тригонометрические тождества <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📋 Основные тождества <span class="important-badge">Выучить!</span></span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="\sin^{2}\alpha + \cos^{2}\alpha = 1"></span></td><td>Основное тождество</td></tr>
-                    <tr><td><span data-katex="\operatorname{tg}\alpha = \frac{\sin\alpha}{\cos\alpha}"></span></td><td>Определение тангенса</td></tr>
-                    <tr><td><span data-katex="\operatorname{ctg}\alpha = \frac{\cos\alpha}{\sin\alpha}"></span></td><td>Определение котангенса</td></tr>
-                    <tr><td><span data-katex="\operatorname{tg}\alpha \cdot \operatorname{ctg}\alpha = 1"></span></td><td>Связь tg и ctg</td></tr>
-                    <tr><td><span data-katex="1 + \operatorname{tg}^{2}\alpha = \frac{1}{\cos^{2}\alpha}"></span></td><td>Следствие</td></tr>
-                </table>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Пример (будет в контрольной)</span>
-                <p>Дано: <span data-katex="\sin\alpha = 0{,}6"></span>, <span data-katex="0^\circ < \alpha < 90^\circ"></span>. Найти <span data-katex="\cos\alpha"></span>.</p>
-                <p><span data-katex="\cos^{2}\alpha = 1 - \sin^{2}\alpha = 1 - 0{,}36 = 0{,}64"></span></p>
-                <p><span data-katex="\cos\alpha = 0{,}8"></span> (I четверть, cos > 0)</p>
-            </div>
-        </div>
-
-        <!-- Конспект 4 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 4</div>
-            <div class="konspekt-title">Графики тригонометрических функций</div>
-            <div class="block">
-                <span class="block-label">📈 y = sin x</span>
-                <p>Область значений: [–1; 1]. Период: 2π. Нули: <span data-katex="x = \pi k"></span>. Максимумы: <span data-katex="x = \frac{\pi}{2} + 2\pi k,\ y = 1"></span>.</p>
-            </div>
-            <div class="img-placeholder">[Рис. 4 — График y = sin x]</div>
-            <div class="block">
-                <span class="block-label">📈 y = cos x</span>
-                <p>Синусоида, сдвинутая влево на <span data-katex="\frac{\pi}{2}"></span>. Чётная: <span data-katex="\cos(-x) = \cos x"></span>.</p>
-            </div>
-            <div class="img-placeholder">[Рис. 5 — График y = cos x]</div>
-            <div class="block">
-                <span class="block-label">📈 y = tg x</span>
-                <p>Период: π. Разрывы: <span data-katex="x = \frac{\pi}{2} + \pi k"></span>.</p>
-            </div>
-            <div class="img-placeholder">[Рис. 6 — График y = tg x]</div>
-        </div>
-
-        <!-- Конспект 5 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 5</div>
-            <div class="konspekt-title">Обратные тригонометрические функции</div>
-            <div class="block">
-                <span class="block-label">📖 Определения</span>
-                <ul>
-                    <li><strong>arcsin a</strong> — угол из <span data-katex="[-\frac{\pi}{2};\ \frac{\pi}{2}]"></span></li>
-                    <li><strong>arccos a</strong> — угол из <span data-katex="[0;\ \pi]"></span></li>
-                    <li><strong>arctg a</strong> — угол из <span data-katex="(-\frac{\pi}{2};\ \frac{\pi}{2})"></span></li>
-                </ul>
-            </div>
-            <div class="block">
-                <span class="block-label">📋 Таблица значений <span class="important-badge">Выучить!</span></span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="\arcsin 0 = 0"></span></td><td><span data-katex="\sin 0 = 0"></span></td></tr>
-                    <tr><td><span data-katex="\arcsin \frac{1}{2} = \frac{\pi}{6}"></span></td><td><span data-katex="\sin 30^\circ = \frac{1}{2}"></span></td></tr>
-                    <tr><td><span data-katex="\arcsin \frac{\sqrt{2}}{2} = \frac{\pi}{4}"></span></td><td><span data-katex="\sin 45^\circ = \frac{\sqrt{2}}{2}"></span></td></tr>
-                    <tr><td><span data-katex="\arcsin \frac{\sqrt{3}}{2} = \frac{\pi}{3}"></span></td><td><span data-katex="\sin 60^\circ = \frac{\sqrt{3}}{2}"></span></td></tr>
-                    <tr><td><span data-katex="\arcsin 1 = \frac{\pi}{2}"></span></td><td><span data-katex="\sin 90^\circ = 1"></span></td></tr>
-                    <tr><td><span data-katex="\arccos 1 = 0"></span></td><td><span data-katex="\cos 0^\circ = 1"></span></td></tr>
-                    <tr><td><span data-katex="\arccos 0 = \frac{\pi}{2}"></span></td><td><span data-katex="\cos 90^\circ = 0"></span></td></tr>
-                    <tr><td><span data-katex="\operatorname{arctg} 1 = \frac{\pi}{4}"></span></td><td><span data-katex="\operatorname{tg} 45^\circ = 1"></span></td></tr>
-                </table>
-            </div>
-        </div>
-
-        <!-- Конспект 6 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 6</div>
-            <div class="konspekt-title">Простейшие тригонометрические уравнения <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📋 Формулы корней <span class="important-badge">Выучить!</span></span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="\sin x = a"></span> (|a| ≤ 1)</td><td><span data-katex="x = (-1)^{n}\arcsin a + \pi n,\ n \in \mathbb{Z}"></span></td></tr>
-                    <tr><td><span data-katex="\cos x = a"></span> (|a| ≤ 1)</td><td><span data-katex="x = \pm\arccos a + 2\pi n,\ n \in \mathbb{Z}"></span></td></tr>
-                    <tr><td><span data-katex="\operatorname{tg} x = a"></span></td><td><span data-katex="x = \operatorname{arctg} a + \pi n,\ n \in \mathbb{Z}"></span></td></tr>
-                </table>
-            </div>
-            <div class="block">
-                <span class="block-label">✏️ Частные случаи</span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="\sin x = 0"></span></td><td><span data-katex="x = \pi n"></span></td></tr>
-                    <tr><td><span data-katex="\sin x = 1"></span></td><td><span data-katex="x = \frac{\pi}{2} + 2\pi n"></span></td></tr>
-                    <tr><td><span data-katex="\sin x = -1"></span></td><td><span data-katex="x = -\frac{\pi}{2} + 2\pi n"></span></td></tr>
-                    <tr><td><span data-katex="\cos x = 0"></span></td><td><span data-katex="x = \frac{\pi}{2} + \pi n"></span></td></tr>
-                    <tr><td><span data-katex="\cos x = 1"></span></td><td><span data-katex="x = 2\pi n"></span></td></tr>
-                    <tr><td><span data-katex="\cos x = -1"></span></td><td><span data-katex="x = \pi + 2\pi n"></span></td></tr>
-                </table>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Примеры</span>
-                <p><strong>1.</strong> <span data-katex="\sin x = \frac{1}{2}"></span> ⇒ <span data-katex="x = (-1)^{n}\frac{\pi}{6} + \pi n"></span></p>
-                <p><strong>2.</strong> <span data-katex="\cos x = 0"></span> ⇒ <span data-katex="x = \frac{\pi}{2} + \pi n"></span></p>
-            </div>
-        </div>
-
-        <!-- Конспект 7 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 7</div>
-            <div class="konspekt-title">Формулы приведения</div>
-            <div class="block">
-                <span class="block-label">🧠 Мнемоническое правило</span>
-                <p><strong>1.</strong> Определить знак по четверти.</p>
-                <p><strong>2.</strong> Вертикальная ось (<span data-katex="\frac{\pi}{2},\ \frac{3\pi}{2}"></span>) → функция <strong>меняется</strong>.</p>
-                <p><strong>3.</strong> Горизонтальная ось (π, 2π) → функция <strong>не меняется</strong>.</p>
-            </div>
-            <div class="block">
-                <span class="block-label">📋 Примеры</span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="\sin(\frac{\pi}{2} + \alpha) = \cos\alpha"></span></td></tr>
-                    <tr><td><span data-katex="\cos(\frac{\pi}{2} + \alpha) = -\sin\alpha"></span></td></tr>
-                    <tr><td><span data-katex="\sin(\pi - \alpha) = \sin\alpha"></span></td></tr>
-                    <tr><td><span data-katex="\cos(\pi - \alpha) = -\cos\alpha"></span></td></tr>
-                </table>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Пример</span>
-                <p><span data-katex="\sin 120^\circ = \sin(90^\circ + 30^\circ) = \cos 30^\circ = \frac{\sqrt{3}}{2}"></span></p>
-            </div>
-        </div>
-
-        <!-- Конспект 8 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 8</div>
-            <div class="konspekt-title">Формулы суммы, разности и двойного аргумента</div>
-            <div class="block">
-                <span class="block-label">📋 Сумма и разность</span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="\sin(\alpha + \beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta"></span></td></tr>
-                    <tr><td><span data-katex="\sin(\alpha - \beta) = \sin\alpha\cos\beta - \cos\alpha\sin\beta"></span></td></tr>
-                    <tr><td><span data-katex="\cos(\alpha + \beta) = \cos\alpha\cos\beta - \sin\alpha\sin\beta"></span></td></tr>
-                    <tr><td><span data-katex="\cos(\alpha - \beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta"></span></td></tr>
-                </table>
-            </div>
-            <div class="block">
-                <span class="block-label">📋 Двойной аргумент <span class="important-badge">Выучить!</span></span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="\sin 2\alpha = 2\sin\alpha\cos\alpha"></span></td></tr>
-                    <tr><td><span data-katex="\cos 2\alpha = \cos^{2}\alpha - \sin^{2}\alpha"></span></td></tr>
-                    <tr><td><span data-katex="\operatorname{tg} 2\alpha = \frac{2\operatorname{tg}\alpha}{1 - \operatorname{tg}^{2}\alpha}"></span></td></tr>
-                </table>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Пример</span>
-                <p>Найти <span data-katex="\sin 75^\circ"></span> (75° = 45° + 30°):</p>
-                <p><span data-katex="\sin 75^\circ = \sin 45^\circ\cos 30^\circ + \cos 45^\circ\sin 30^\circ"></span></p>
-                <p><span data-katex="= \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{1}{2} = \frac{\sqrt{6} + \sqrt{2}}{4}"></span></p>
-            </div>
-        </div>
-
-        <!-- Профблок -->
-        <div class="prof-block">
-            <strong>🔧 Где пригодится строителю</strong>
-            <p>Расчёт уклонов кровли через tg угла, геодезическая разбивка, высота недоступного объекта через sin/cos, длина стропил. См. практические работы №1–4.</p>
-        </div>
-
-        <div class="nav-bottom no-print">
-            <a href="../teoreticheskij.html" class="btn-sm-gold">← К списку конспектов</a>
-        </div>
-
+<div class="top-bar">
+    <div class="breadcrumb"><a href="../teoreticheskij.html">← Теоретический раздел</a> / Тригонометрия</div>
+    <div class="btn-group">
+        <button onclick="downloadHTML()" class="btn-sm-gold no-print">📥 Скачать</button>
+        <a href="javascript:window.print()" class="btn-sm-gold no-print">🖨️ Печать</a>
     </div>
+</div>
 
-    <script>
-        document.querySelectorAll('[data-katex]').forEach(el => {
-            katex.render(el.dataset.katex, el, { throwOnError: false });
-        });
-        function downloadHTML() {
-            const html = document.documentElement.outerHTML;
-            const blob = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'trigonometriya-konspekt.html';
-            a.click();
-            URL.revokeObjectURL(a.href);
-        }
-    </script>
+<h1 class="page-title">📐 Тригонометрия</h1>
+<p class="page-subtitle">Опорный конспект для подготовки к занятиям, контрольным и экзамену</p>
+<p class="page-info">Практические работы: <a href="../pr/01.html">№1</a> · <a href="../pr/02.html">№2</a> · <a href="../pr/03.html">№3</a> · <a href="../pr/04.html">№4</a></p>
+
+<!-- КРИТИЧЕСКИЙ МИНИМУМ -->
+<div class="critical">
+    <h2>⚡ Критический минимум для экзамена</h2>
+    <div class="critical-grid">
+        <div>📌 <span data-katex="\sin^{2}\alpha + \cos^{2}\alpha = 1"></span></div>
+        <div>📌 <span data-katex="\operatorname{tg}\alpha = \frac{\sin\alpha}{\cos\alpha}"></span></div>
+        <div>📌 <span data-katex="\sin x = a \Rightarrow x = (-1)^{k}\arcsin a + \pi k"></span></div>
+        <div>📌 <span data-katex="\cos x = a \Rightarrow x = \pm\arccos a + 2\pi k"></span></div>
+        <div>📌 <span data-katex="\sin 30^\circ = \frac{1}{2},\ \cos 60^\circ = \frac{1}{2},\ \operatorname{tg} 45^\circ = 1"></span></div>
+        <div>📌 <span data-katex="180^\circ = \pi"></span> рад</div>
+    </div>
+</div>
+
+<!-- ОГЛАВЛЕНИЕ -->
+<div class="toc">
+    <h2>📑 Содержание</h2>
+    <ol>
+        <li><a href="#okr">Единичная окружность</a></li>
+        <li><a href="#def">Определения sin, cos, tg, ctg</a></li>
+        <li><a href="#tozhd">Тождества</a></li>
+        <li><a href="#graf">Графики</a></li>
+        <li><a href="#obr">Обратные функции</a></li>
+        <li><a href="#ur">Уравнения</a></li>
+        <li><a href="#priv">Формулы приведения</a></li>
+        <li><a href="#summ">Сумма, разность, двойной аргумент</a></li>
+        <li><a href="#pol">Половинный угол, понижение степени</a></li>
+        <li><a href="#shp">Шпаргалка</a></li>
+    </ol>
+</div>
+
+<!-- 1 -->
+<div class="konspekt-card" id="okr">
+    <div class="konspekt-num">Конспект 1</div>
+    <div class="konspekt-title">Единичная окружность. Радианная мера углов <span class="exam-badge">Экзамен</span></div>
+    <div class="block">
+        <span class="block-label">📖 Что такое единичная окружность</span>
+        <p>Единичная окружность — это окружность с центром в точке (0; 0) и радиусом, равным <strong>1</strong>. Она нужна, чтобы определять тригонометрические функции для любых углов, а не только для острых в прямоугольном треугольнике.</p>
+        <p>Полный оборот вокруг окружности = <strong>360° = <span data-katex="2\pi"></span> радиан</strong>. Углы принято отсчитывать от правой точки окружности (точка (1; 0)) и двигаться <strong>против часовой стрелки</strong>.</p>
+    </div>
+    <div class="img-placeholder">[Рис. 1 — Единичная окружность с разметкой углов]</div>
+    <div class="block">
+        <span class="block-label">🔄 Радианы: почему именно π?</span>
+        <p><strong>1 радиан</strong> — это такой угол, при котором длина дуги окружности равна её радиусу. Так как длина всей окружности равна <span data-katex="2\pi R"></span>, а при <span data-katex="R = 1"></span> это <span data-katex="2\pi"></span>, то полный оборот составляет ровно <span data-katex="2\pi"></span> радиан.</p>
+        <p>Отсюда правила перевода:</p>
+        <ul>
+            <li>Градусы → радианы: <strong>умножить на <span data-katex="\frac{\pi}{180^\circ}"></span></strong></li>
+            <li>Радианы → градусы: <strong>умножить на <span data-katex="\frac{180^\circ}{\pi}"></span></strong></li>
+        </ul>
+    </div>
+    <div class="block">
+        <span class="block-label">📋 Таблица основных углов <span class="important-badge">Выучить!</span></span>
+        <p>Эти значения нужно знать наизусть — они используются во всех задачах.</p>
+        <table class="formula-table">
+            <tr><td><span data-katex="0^\circ = 0"></span></td><td>Начало отсчёта</td></tr>
+            <tr><td><span data-katex="30^\circ = \frac{\pi}{6}"></span></td><td>Одна шестая развёрнутого угла</td></tr>
+            <tr><td><span data-katex="45^\circ = \frac{\pi}{4}"></span></td><td>Половина прямого угла</td></tr>
+            <tr><td><span data-katex="60^\circ = \frac{\pi}{3}"></span></td><td>Одна треть развёрнутого угла</td></tr>
+            <tr><td><span data-katex="90^\circ = \frac{\pi}{2}"></span></td><td>Прямой угол</td></tr>
+            <tr><td><span data-katex="180^\circ = \pi"></span></td><td>Развёрнутый угол</td></tr>
+            <tr><td><span data-katex="270^\circ = \frac{3\pi}{2}"></span></td><td>Три прямых угла</td></tr>
+            <tr><td><span data-katex="360^\circ = 2\pi"></span></td><td>Полный оборот</td></tr>
+        </table>
+    </div>
+    <div class="example-box">
+        <span class="example-label">💡 Примеры</span>
+        <p><strong>1.</strong> Перевести 120° в радианы: <span data-katex="120^\circ \cdot \frac{\pi}{180^\circ} = \frac{2\pi}{3}"></span></p>
+        <p><strong>2.</strong> Перевести <span data-katex="\frac{5\pi}{6}"></span> в градусы: <span data-katex="\frac{5\pi}{6} \cdot \frac{180^\circ}{\pi} = 150^\circ"></span></p>
+    </div>
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p><strong><span data-katex="30^\circ = \frac{\pi}{6}"></span></strong>, а не <span data-katex="\frac{\pi}{3}"></span>. Проверка: 30° — это 1/3 от прямого угла, значит в радианах будет <span data-katex="\frac{\pi}{6}"></span>. Меньше градусов — меньше радиан.</p>
+    </div>
+</div>
+
+<!-- 2 -->
+<div class="konspekt-card" id="def">
+    <div class="konspekt-num">Конспект 2</div>
+    <div class="konspekt-title">Синус, косинус, тангенс и котангенс <span class="exam-badge">Экзамен</span></div>
+    <div class="block">
+        <span class="block-label">📖 Определения через окружность</span>
+        <p>Возьмём точку на единичной окружности под углом <span data-katex="\alpha"></span>. Её координаты по определению равны <span data-katex="(\cos\alpha;\ \sin\alpha)"></span>. Это работает для любого угла, а не только острого.</p>
+        <ul>
+            <li><strong>sin α</strong> — координата точки по оси <strong>y</strong> (вертикаль). Показывает, насколько высоко точка.</li>
+            <li><strong>cos α</strong> — координата точки по оси <strong>x</strong> (горизонталь). Показывает, насколько далеко вправо.</li>
+            <li><strong>tg α</strong> = <span data-katex="\frac{\sin\alpha}{\cos\alpha}\ (\cos\alpha \neq 0)"></span>. Геометрически — это длина отрезка по касательной к окружности.</li>
+            <li><strong>ctg α</strong> = <span data-katex="\frac{\cos\alpha}{\sin\alpha}\ (\sin\alpha \neq 0)"></span>. Это «перевёрнутый» тангенс.</li>
+        </ul>
+        <p>Поскольку точка лежит на окружности радиуса 1, координаты не могут выходить за пределы [−1; 1]. Поэтому <strong>−1 ≤ sin α ≤ 1</strong> и <strong>−1 ≤ cos α ≤ 1</strong>.</p>
+    </div>
+    <div class="img-placeholder">[Рис. 2 — Координаты точки на окружности: cos α по оси x, sin α по оси y]</div>
+    <div class="block">
+        <span class="block-label">📐 Знаки по четвертям <span class="important-badge">Выучить!</span></span>
+        <p>Окружность делится осями координат на 4 четверти. Знак функции зависит от того, положительны или отрицательны координаты x и y в данной четверти.</p>
+        <table class="formula-table">
+            <tr><td><strong>I</strong> (0°–90°)</td><td>x > 0, y > 0</td><td>sin +, cos +, tg +, ctg +</td></tr>
+            <tr><td><strong>II</strong> (90°–180°)</td><td>x < 0, y > 0</td><td>sin +, cos −, tg −, ctg −</td></tr>
+            <tr><td><strong>III</strong> (180°–270°)</td><td>x < 0, y < 0</td><td>sin −, cos −, tg +, ctg +</td></tr>
+            <tr><td><strong>IV</strong> (270°–360°)</td><td>x > 0, y < 0</td><td>sin −, cos +, tg −, ctg −</td></tr>
+        </table>
+        <p><strong>Логика:</strong> в III четверти sin < 0 и cos < 0. При делении «минус на минус даёт плюс», поэтому tg и ctg в III четверти положительны.</p>
+    </div>
+    <div class="img-placeholder">[Рис. 3 — Знаки по четвертям: цветная схема]</div>
+    <div class="example-box">
+        <span class="example-label">💡 Пример</span>
+        <p>Угол 210° лежит в III четверти (между 180° и 270°).</p>
+        <p><span data-katex="\sin 210^\circ = -\frac{1}{2}"></span>, <span data-katex="\cos 210^\circ = -\frac{\sqrt{3}}{2}"></span>, <span data-katex="\operatorname{tg} 210^\circ = \frac{-\frac{1}{2}}{-\frac{\sqrt{3}}{2}} = \frac{\sqrt{3}}{3}"></span></p>
+    </div>
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p>Знак функции зависит от четверти, а не от величины угла. Например, угол 330° — большой, но он в IV четверти, где синус отрицательный. Всегда сначала определяйте четверть.</p>
+    </div>
+</div>
+
+<!-- 3 -->
+<div class="konspekt-card" id="tozhd">
+    <div class="konspekt-num">Конспект 3</div>
+    <div class="konspekt-title">Тригонометрические тождества <span class="exam-badge">Экзамен</span></div>
+    <div class="block">
+        <span class="block-label">📖 Что такое тождество</span>
+        <p>Тождество — это равенство, которое верно при <strong>всех</strong> допустимых значениях переменной. Тригонометрические тождества связывают функции одного и того же угла и позволяют выражать одну функцию через другую.</p>
+    </div>
+    <div class="block">
+        <span class="block-label">📋 Основные тождества <span class="important-badge">Выучить!</span></span>
+        <table class="formula-table">
+            <tr><td><span data-katex="\sin^{2}\alpha + \cos^{2}\alpha = 1"></span></td><td>Основное. Следует из теоремы Пифагора (x² + y² = 1 на окружности)</td></tr>
+            <tr><td><span data-katex="\operatorname{tg}\alpha = \frac{\sin\alpha}{\cos\alpha}"></span></td><td>Определение тангенса</td></tr>
+            <tr><td><span data-katex="\operatorname{ctg}\alpha = \frac{\cos\alpha}{\sin\alpha}"></span></td><td>Определение котангенса</td></tr>
+            <tr><td><span data-katex="\operatorname{tg}\alpha \cdot \operatorname{ctg}\alpha = 1"></span></td><td>Связь tg и ctg (они взаимно обратны)</td></tr>
+            <tr><td><span data-katex="1 + \operatorname{tg}^{2}\alpha = \frac{1}{\cos^{2}\alpha}"></span></td><td>Следствие (разделили основное на cos²α)</td></tr>
+            <tr><td><span data-katex="1 + \operatorname{ctg}^{2}\alpha = \frac{1}{\sin^{2}\alpha}"></span></td><td>Следствие (разделили основное на sin²α)</td></tr>
+        </table>
+    </div>
+    <div class="example-box">
+        <span class="example-label">💡 Пример (будет в контрольной)</span>
+        <p>Дано: <span data-katex="\sin\alpha = 0{,}6"></span>, угол α лежит в I четверти (<span data-katex="0^\circ < \alpha < 90^\circ"></span>). Найти cos α.</p>
+        <p>Из основного тождества: <span data-katex="\cos^{2}\alpha = 1 - \sin^{2}\alpha = 1 - 0{,}36 = 0{,}64"></span></p>
+        <p>В I четверти cos > 0, поэтому <span data-katex="\cos\alpha = \sqrt{0{,}64} = 0{,}8"></span>.</p>
+    </div>
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p>При извлечении корня не забывайте про знак: <span data-katex="\cos\alpha = \pm\sqrt{1-\sin^{2}\alpha}"></span>. Выбор знака зависит от четверти, в которой лежит угол α.</p>
+    </div>
+</div>
+
+<!-- 4 -->
+<div class="konspekt-card" id="graf">
+    <div class="konspekt-num">Конспект 4</div>
+    <div class="konspekt-title">Графики тригонометрических функций</div>
+    <div class="block">
+        <span class="block-label">📖 Зачем нужны графики</span>
+        <p>График показывает поведение функции на всём протяжении: где она растёт, где убывает, где пересекает ось x, где максимальные и минимальные значения. Это ключ к решению уравнений и неравенств.</p>
+    </div>
+    <div class="block">
+        <span class="block-label">📈 y = sin x (синусоида)</span>
+        <p><strong>Область значений:</strong> [−1; 1]. <strong>Период:</strong> <span data-katex="2\pi"></span> — через каждые 2π график полностью повторяется. <strong>Нули функции:</strong> <span data-katex="x = \pi k"></span> (точки 0, π, 2π...). <strong>Максимумы:</strong> <span data-katex="y = 1"></span> при <span data-katex="x = \frac{\pi}{2} + 2\pi k"></span>. График начинается из начала координат и идёт вверх.</p>
+    </div>
+    <div class="img-placeholder">[Рис. 4 — График y = sin x]</div>
+    <div class="block">
+        <span class="block-label">📈 y = cos x (косинусоида)</span>
+        <p>Это та же синусоида, но сдвинутая влево на <span data-katex="\frac{\pi}{2}"></span>. <strong>Чётная функция:</strong> <span data-katex="\cos(-x) = \cos x"></span> — график симметричен относительно оси y. Начинается из точки (0; 1).</p>
+    </div>
+    <div class="img-placeholder">[Рис. 5 — График y = cos x]</div>
+    <div class="block">
+        <span class="block-label">📈 y = tg x (тангенсоида)</span>
+        <p><strong>Период:</strong> <span data-katex="\pi"></span>. <strong>Область определения:</strong> все x, кроме <span data-katex="x = \frac{\pi}{2} + \pi k"></span> — в этих точках cos x = 0, и график уходит в бесконечность (вертикальные асимптоты). Функция <strong>возрастает</strong> на каждом интервале.</p>
+    </div>
+    <div class="img-placeholder">[Рис. 6 — График y = tg x]</div>
+    <div class="block">
+        <span class="block-label">📈 y = ctg x (котангенсоида)</span>
+        <p><strong>Период:</strong> <span data-katex="\pi"></span>. <strong>Область определения:</strong> все x, кроме <span data-katex="x = \pi k"></span> — там sin x = 0. Функция <strong>убывает</strong> на каждом интервале.</p>
+    </div>
+    <div class="img-placeholder">[Рис. 7 — График y = ctg x]</div>
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p>Период tg x и ctg x — <strong><span data-katex="\pi"></span></strong>, а не <span data-katex="2\pi"></span>. Достаточно пройти пол-оборота, и значения тангенса и котангенса повторяются.</p>
+    </div>
+</div>
+
+<!-- 5 -->
+<div class="konspekt-card" id="obr">
+    <div class="konspekt-num">Конспект 5</div>
+    <div class="konspekt-title">Обратные тригонометрические функции</div>
+    <div class="block">
+        <span class="block-label">📖 Зачем они нужны</span>
+        <p>Обычная функция отвечает на вопрос: «какой y при заданном x?». Обратная — на вопрос: «при каком x получился такой y?». Например: мы знаем, что синус какого-то угла равен 0,5. Какой это угол? Ответ: <span data-katex="\arcsin 0{,}5 = \frac{\pi}{6}"></span>.</p>
+        <p>Так как тригонометрические функции периодичны и имеют бесконечно много углов с одинаковым значением, область значений обратных функций <strong>ограничивают</strong>, чтобы ответ был однозначным.</p>
+    </div>
+    <div class="block">
+        <span class="block-label">📋 Определения и области значений</span>
+        <ul>
+            <li><strong>arcsin a</strong> — угол из <span data-katex="\left[-\frac{\pi}{2};\ \frac{\pi}{2}\right]"></span>, синус которого равен a</li>
+            <li><strong>arccos a</strong> — угол из <span data-katex="[0;\ \pi]"></span>, косинус которого равен a</li>
+            <li><strong>arctg a</strong> — угол из <span data-katex="\left(-\frac{\pi}{2};\ \frac{\pi}{2}\right)"></span>, тангенс которого равен a</li>
+            <li><strong>arcctg a</strong> — угол из <span data-katex="(0;\ \pi)"></span>, котангенс которого равен a</li>
+        </ul>
+    </div>
+    <div class="block">
+        <span class="block-label">📋 Таблица значений <span class="important-badge">Выучить!</span></span>
+        <p>Полезное правило: <span data-katex="\arcsin a + \arccos a = \frac{\pi}{2}"></span> и <span data-katex="\operatorname{arctg} a + \operatorname{arcctg} a = \frac{\pi}{2}"></span>. Зная одно — легко найти другое.</p>
+        <table class="formula-table">
+            <tr><td><span data-katex="\arcsin 0 = 0"></span></td><td><span data-katex="\arccos 1 = 0"></span></td></tr>
+            <tr><td><span data-katex="\arcsin \frac{1}{2} = \frac{\pi}{6}"></span></td><td><span data-katex="\arccos \frac{\sqrt{3}}{2} = \frac{\pi}{6}"></span></td></tr>
+            <tr><td><span data-katex="\arcsin \frac{\sqrt{2}}{2} = \frac{\pi}{4}"></span></td><td><span data-katex="\arccos \frac{\sqrt{2}}{2} = \frac{\pi}{4}"></span></td></tr>
+            <tr><td><span data-katex="\arcsin \frac{\sqrt{3}}{2} = \frac{\pi}{3}"></span></td><td><span data-katex="\arccos \frac{1}{2} = \frac{\pi}{3}"></span></td></tr>
+            <tr><td><span data-katex="\arcsin 1 = \frac{\pi}{2}"></span></td><td><span data-katex="\arccos 0 = \frac{\pi}{2}"></span></td></tr>
+            <tr><td><span data-katex="\operatorname{arctg} 0 = 0"></span></td><td><span data-katex="\operatorname{arctg} 1 = \frac{\pi}{4}"></span></td></tr>
+            <tr><td><span data-katex="\operatorname{arcctg} 0 = \frac{\pi}{2}"></span></td><td><span data-katex="\operatorname{arcctg} 1 = \frac{\pi}{4}"></span></td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- 6 -->
+<div class="konspekt-card" id="ur">
+    <div class="konspekt-num">Конспект 6</div>
+    <div class="konspekt-title">Простейшие тригонометрические уравнения <span class="exam-badge">Экзамен</span></div>
+    <div class="block">
+        <span class="block-label">📖 Что значит «решить уравнение»</span>
+        <p>Так как тригонометрические функции периодичны, уравнение вида sin x = a имеет бесконечно много решений. Поэтому ответ записывается в виде <strong>серии корней</strong> с целочисленным параметром k (k ∈ ℤ). Подставляя k = 0, ±1, ±2..., получаем все конкретные углы.</p>
+    </div>
+    <div class="block">
+        <span class="block-label">📋 Общие формулы <span class="important-badge">Выучить!</span></span>
+        <table class="formula-table">
+            <tr><td><span data-katex="\sin x = a"></span> (|a| ≤ 1)</td><td><span data-katex="x = (-1)^{k}\arcsin a + \pi k,\ k \in \mathbb{Z}"></span></td></tr>
+            <tr><td><span data-katex="\cos x = a"></span> (|a| ≤ 1)</td><td><span data-katex="x = \pm\arccos a + 2\pi k,\ k \in \mathbb{Z}"></span></td></tr>
+            <tr><td><span data-katex="\operatorname{tg} x = a"></span></td><td><span data-katex="x = \operatorname{arctg} a + \pi k,\ k \in \mathbb{Z}"></span></td></tr>
+            <tr><td><span data-katex="\operatorname{ctg} x = a"></span></td><td><span data-katex="x = \operatorname{arcctg} a + \pi k,\ k \in \mathbb{Z}"></span></td></tr>
+        </table>
+        <p><strong>Почему у cos период 2πk, а у остальных πk?</strong> Значения sin, tg и ctg повторяются уже через пол-оборота (π), а cos — только через полный оборот (2π).</p>
+    </div>
+    <div class="block">
+        <span class="block-label">✏️ Частные случаи (без арк-функций)</span>
+        <table class="formula-table">
+            <tr><td><span data-katex="\sin x = 0"></span></td><td><span data-katex="x = \pi k"></span></td><td>Нули синуса: точки 0, π, 2π... на окружности</td></tr>
+            <tr><td><span data-katex="\sin x = 1"></span></td><td><span data-katex="x = \frac{\pi}{2} + 2\pi k"></span></td><td>Верхняя точка окружности (0; 1)</td></tr>
+            <tr><td><span data-katex="\sin x = -1"></span></td><td><span data-katex="x = -\frac{\pi}{2} + 2\pi k"></span></td><td>Нижняя точка окружности (0; −1)</td></tr>
+            <tr><td><span data-katex="\cos x = 0"></span></td><td><span data-katex="x = \frac{\pi}{2} + \pi k"></span></td><td>Нули косинуса: точки π/2, 3π/2...</td></tr>
+            <tr><td><span data-katex="\cos x = 1"></span></td><td><span data-katex="x = 2\pi k"></span></td><td>Крайняя правая точка (1; 0)</td></tr>
+            <tr><td><span data-katex="\cos x = -1"></span></td><td><span data-katex="x = \pi + 2\pi k"></span></td><td>Крайняя левая точка (−1; 0)</td></tr>
+        </table>
+    </div>
+    <div class="example-box">
+        <span class="example-label">💡 Примеры</span>
+        <p><strong>1.</strong> <span data-katex="\sin x = \frac{1}{2} \ \Rightarrow \ x = (-1)^{k}\frac{\pi}{6} + \pi k"></span>. При k = 0: x = π/6. При k = 1: x = π − π/6 = 5π/6. При k = 2: x = π + π/6 = 7π/6.</p>
+        <p><strong>2.</strong> <span data-katex="\cos x = 0 \ \Rightarrow \ x = \frac{\pi}{2} + \pi k"></span></p>
+        <p><strong>3.</strong> <span data-katex="\operatorname{tg} x = 1 \ \Rightarrow \ x = \frac{\pi}{4} + \pi k"></span></p>
+    </div>
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p>У cos x период <strong><span data-katex="2\pi k"></span></strong>, у sin, tg и ctg — <strong><span data-katex="\pi k"></span></strong>. Не перепутайте на экзамене.</p>
+    </div>
+</div>
+
+<!-- 7 -->
+<div class="konspekt-card" id="priv">
+    <div class="konspekt-num">Конспект 7</div>
+    <div class="konspekt-title">Формулы приведения</div>
+    <div class="block">
+        <span class="block-label">📖 Зачем они нужны</span>
+        <p>Формулы приведения позволяют свести любую тригонометрическую функцию от тупого или большого угла к функции <strong>острого</strong> угла (от 0° до 90°). Это нужно для вычислений без калькулятора.</p>
+    </div>
+    <div class="block">
+        <span class="block-label">🧠 Алгоритм из двух шагов</span>
+        <p><strong>Шаг 1.</strong> Определите знак результата. Посмотрите, в какую четверть попадает исходный угол (считая α острым), и поставьте знак исходной функции в этой четверти.</p>
+        <p><strong>Шаг 2.</strong> Определите, меняется ли функция:</p>
+        <ul>
+            <li>Угол откладывается от <strong>вертикальной</strong> оси (<span data-katex="\frac{\pi}{2}"></span> или <span data-katex="\frac{3\pi}{2}"></span>) → функция <strong>меняется</strong> (sin ↔ cos, tg ↔ ctg)</li>
+            <li>Угол откладывается от <strong>горизонтальной</strong> оси (π или 2π) → функция <strong>не меняется</strong></li>
+        </ul>
+    </div>
+    <div class="block">
+        <span class="block-label">📋 Таблица примеров</span>
+        <table class="formula-table">
+            <tr><td><span data-katex="\sin\left(\frac{\pi}{2} + \alpha\right) = \cos\alpha"></span></td><td>Вертикаль, II четв., sin + → cos α</td></tr>
+            <tr><td><span data-katex="\cos\left(\frac{\pi}{2} + \alpha\right) = -\sin\alpha"></span></td><td>Вертикаль, II четв., cos − → −sin α</td></tr>
+            <tr><td><span data-katex="\sin(\pi - \alpha) = \sin\alpha"></span></td><td>Горизонталь, II четв., sin + → sin α</td></tr>
+            <tr><td><span data-katex="\cos(\pi - \alpha) = -\cos\alpha"></span></td><td>Горизонталь, II четв., cos − → −cos α</td></tr>
+        </table>
+    </div>
+    <div class="example-box">
+        <span class="example-label">💡 Пример</span>
+        <p>Вычислим sin 120°. Заметим: 120° = 90° + 30°. Угол откладывается от 90° (вертикаль) → sin меняется на cos. 120° во II четверти, sin там положителен. Ответ: <span data-katex="\sin 120^\circ = \cos 30^\circ = \frac{\sqrt{3}}{2}"></span>.</p>
+    </div>
+</div>
+
+<!-- 8 -->
+<div class="konspekt-card" id="summ">
+    <div class="konspekt-num">Конспект 8</div>
+    <div class="konspekt-title">Формулы суммы, разности и двойного аргумента</div>
+    <div class="block">
+        <span class="block-label">📖 Зачем они нужны</span>
+        <p>Эти формулы позволяют находить синус и косинус суммы или разности углов, не вычисляя их по отдельности. А формулы двойного аргумента — упрощать выражения вроде sin 2α.</p>
+    </div>
+    <div class="block">
+        <span class="block-label">📋 Сумма и разность</span>
+        <p><strong>Как запомнить:</strong> у синуса знак сохраняется (плюс с плюсом, минус с минусом). У косинуса — знак наоборот (плюс суммы даёт минус, и наоборот).</p>
+        <table class="formula-table">
+            <tr><td><span data-katex="\sin(\alpha + \beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta"></span></td></tr>
+            <tr><td><span data-katex="\sin(\alpha - \beta) = \sin\alpha\cos\beta - \cos\alpha\sin\beta"></span></td></tr>
+            <tr><td><span data-katex="\cos(\alpha + \beta) = \cos\alpha\cos\beta - \sin\alpha\sin\beta"></span></td></tr>
+            <tr><td><span data-katex="\cos(\alpha - \beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta"></span></td></tr>
+        </table>
+    </div>
+    <div class="block">
+        <span class="block-label">📋 Двойной аргумент <span class="important-badge">Выучить!</span></span>
+        <table class="formula-table">
+            <tr><td><span data-katex="\sin 2\alpha = 2\sin\alpha\cos\alpha"></span></td></tr>
+            <tr><td><span data-katex="\cos 2\alpha = \cos^{2}\alpha - \sin^{2}\alpha = 2\cos^{2}\alpha - 1 = 1 - 2\sin^{2}\alpha"></span></td></tr>
+            <tr><td><span data-katex="\operatorname{tg} 2\alpha = \frac{2\operatorname{tg}\alpha}{1 - \operatorname{tg}^{2}\alpha}"></span></td></tr>
+            <tr><td><span data-katex="\operatorname{ctg} 2\alpha = \frac{\operatorname{ctg}^{2}\alpha - 1}{2\operatorname{ctg}\alpha}"></span></td></tr>
+        </table>
+    </div>
+    <div class="example-box">
+        <span class="example-label">💡 Пример</span>
+        <p>Найти sin 75°. Представим 75° = 45° + 30°:</p>
+        <p><span data-katex="\sin 75^\circ = \sin 45^\circ\cos 30^\circ + \cos 45^\circ\sin 30^\circ = \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{1}{2} = \frac{\sqrt{6} + \sqrt{2}}{4}"></span></p>
+    </div>
+</div>
+
+<!-- 9 -->
+<div class="konspekt-card" id="pol">
+    <div class="konspekt-num">Конспект 9</div>
+    <div class="konspekt-title">Формулы половинного угла и понижения степени <span class="exam-badge">Экзамен</span></div>
+    <div class="block">
+        <span class="block-label">📖 Зачем они нужны</span>
+        <p>Формулы половинного угла позволяют найти функцию от половины известного угла. Формулы понижения степени превращают квадрат синуса или косинуса в первую степень — это часто требуется при решении уравнений и преобразовании выражений.</p>
+    </div>
+    <div class="block">
+        <span class="block-label">📋 Половинный аргумент</span>
+        <table class="formula-table">
+            <tr><td><span data-katex="\sin\frac{\alpha}{2} = \pm\sqrt{\frac{1 - \cos\alpha}{2}}"></span></td></tr>
+            <tr><td><span data-katex="\cos\frac{\alpha}{2} = \pm\sqrt{\frac{1 + \cos\alpha}{2}}"></span></td></tr>
+            <tr><td><span data-katex="\operatorname{tg}\frac{\alpha}{2} = \frac{\sin\alpha}{1 + \cos\alpha} = \frac{1 - \cos\alpha}{\sin\alpha}"></span></td></tr>
+            <tr><td><span data-katex="\operatorname{ctg}\frac{\alpha}{2} = \frac{\sin\alpha}{1 - \cos\alpha} = \frac{1 + \cos\alpha}{\sin\alpha}"></span></td></tr>
+        </table>
+    </div>
+    <div class="block">
+        <span class="block-label">📋 Понижение степени <span class="important-badge">Выучить!</span></span>
+        <table class="formula-table">
+            <tr><td><span data-katex="\sin^{2}\alpha = \frac{1 - \cos 2\alpha}{2}"></span></td></tr>
+            <tr><td><span data-katex="\cos^{2}\alpha = \frac{1 + \cos 2\alpha}{2}"></span></td></tr>
+        </table>
+    </div>
+    <div class="example-box">
+        <span class="example-label">💡 Пример</span>
+        <p>Найти sin 15° через половинный угол (15° — это половина от 30°):</p>
+        <p><span data-katex="\sin 15^\circ = \sqrt{\frac{1 - \cos 30^\circ}{2}} = \sqrt{\frac{1 - \frac{\sqrt{3}}{2}}{2}} = \frac{\sqrt{2 - \sqrt{3}}}{2}"></span></p>
+        <p>Знак «+» перед корнем, потому что 15° лежит в I четверти (sin > 0).</p>
+    </div>
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p>Знак ± зависит от того, в какой четверти лежит угол <strong><span data-katex="\frac{\alpha}{2}"></span></strong>, а не сам угол α. Например, если α = 400° (больше 360°), то α/2 = 200° — это III четверть, sin отрицателен.</p>
+    </div>
+</div>
+
+<!-- ПРОФБЛОК -->
+<div class="prof-block">
+    <strong>🔧 Где пригодится строителю</strong>
+    <p>Расчёт уклонов кровли через tg угла, геодезическая разбивка участка (теодолит работает через sin/cos), определение высоты недоступного объекта методом триангуляции, расчёт длины стропильных ног. См. практические работы №1–4.</p>
+</div>
+
+<!-- ШПАРГАЛКА -->
+<div class="cheatsheet" id="shp">
+    <h2>📋 Шпаргалка «За 5 минут до экзамена»</h2>
+    <div class="cheatsheet-grid">
+        <div>
+            <h4>🔢 Основные углы</h4>
+            <ul>
+                <li><span data-katex="30^\circ = \frac{\pi}{6}"></span></li>
+                <li><span data-katex="45^\circ = \frac{\pi}{4}"></span></li>
+                <li><span data-katex="60^\circ = \frac{\pi}{3}"></span></li>
+                <li><span data-katex="90^\circ = \frac{\pi}{2}"></span></li>
+                <li><span data-katex="180^\circ = \pi"></span></li>
+                <li><span data-katex="360^\circ = 2\pi"></span></li>
+            </ul>
+        </div>
+        <div>
+            <h4>📐 Значения функций</h4>
+            <ul>
+                <li><span data-katex="\sin 30^\circ = \frac{1}{2}"></span></li>
+                <li><span data-katex="\sin 45^\circ = \frac{\sqrt{2}}{2}"></span></li>
+                <li><span data-katex="\sin 60^\circ = \frac{\sqrt{3}}{2}"></span></li>
+                <li><span data-katex="\cos 30^\circ = \frac{\sqrt{3}}{2}"></span></li>
+                <li><span data-katex="\cos 60^\circ = \frac{1}{2}"></span></li>
+                <li><span data-katex="\operatorname{tg} 45^\circ = 1"></span></li>
+            </ul>
+        </div>
+        <div>
+            <h4>⚡ Главные формулы</h4>
+            <ul>
+                <li><span data-katex="\sin^{2}\alpha + \cos^{2}\alpha = 1"></span></li>
+                <li><span data-katex="\sin 2\alpha = 2\sin\alpha\cos\alpha"></span></li>
+                <li><span data-katex="\cos 2\alpha = \cos^{2}\alpha - \sin^{2}\alpha"></span></li>
+                <li><span data-katex="\sin^{2}\alpha = \frac{1 - \cos 2\alpha}{2}"></span></li>
+                <li><span data-katex="\cos^{2}\alpha = \frac{1 + \cos 2\alpha}{2}"></span></li>
+            </ul>
+        </div>
+        <div>
+            <h4>📝 Уравнения</h4>
+            <ul>
+                <li><span data-katex="\sin x = a \Rightarrow (-1)^{k}\arcsin a + \pi k"></span></li>
+                <li><span data-katex="\cos x = a \Rightarrow \pm\arccos a + 2\pi k"></span></li>
+                <li><span data-katex="\operatorname{tg} x = a \Rightarrow \operatorname{arctg} a + \pi k"></span></li>
+                <li><span data-katex="\operatorname{ctg} x = a \Rightarrow \operatorname{arcctg} a + \pi k"></span></li>
+            </ul>
+        </div>
+        <div class="col-full">
+            <h4>🔄 Перевод и периоды</h4>
+            <ul>
+                <li>Градусы → радианы: <span data-katex="\times \frac{\pi}{180^\circ}"></span></li>
+                <li>Радианы → градусы: <span data-katex="\times \frac{180^\circ}{\pi}"></span></li>
+                <li>Период sin x, cos x: <span data-katex="2\pi"></span></li>
+                <li>Период tg x, ctg x: <span data-katex="\pi"></span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="nav-bottom no-print">
+    <a href="../teoreticheskij.html" class="btn-sm-gold">← К списку конспектов</a>
+</div>
+
+</div>
+
+<script>
+    document.querySelectorAll('[data-katex]').forEach(el => {
+        katex.render(el.dataset.katex, el, { throwOnError: false });
+    });
+    function downloadHTML() {
+        const html = document.documentElement.outerHTML;
+        const blob = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'trigonometriya-konspekt.html';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
+</script>
 </body>
 </html>
