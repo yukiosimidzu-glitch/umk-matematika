@@ -4,199 +4,352 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Производная — Опорный конспект | УМК</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>∫</text></svg>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; }
+        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --blue: #60a5fa; --green: #4ade80; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; }
-        .top-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        .breadcrumb { color: var(--text-muted); font-size: 14px; }
+        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); padding: 30px; line-height: 1.8; scroll-behavior: smooth; font-size: 16px; }
+        .container { max-width: 960px; margin: 0 auto; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+        .breadcrumb { color: var(--text-muted); font-size: 15px; }
         .breadcrumb a { color: var(--gold); text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
-        .btn-group { display: flex; gap: 8px; }
-        .btn-sm-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; padding: 6px 14px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; border-radius: 4px; line-height: 1.4; height: 32px; display: inline-flex; align-items: center; }
+        .btn-group { display: flex; gap: 10px; }
+        .btn-sm-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; border-radius: 6px; line-height: 1.4; height: 38px; display: inline-flex; align-items: center; }
         .btn-sm-gold:hover { background: var(--gold); color: var(--bg); }
-        .page-title { font-family: 'Playfair Display', serif; color: #fff; font-size: 2rem; margin-bottom: 5px; padding-bottom: 15px; border-bottom: 2px solid var(--gold); }
-        .page-subtitle { color: var(--gold); font-size: 0.95rem; margin-bottom: 10px; }
-        .page-info { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
+
+        .page-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 2.2rem; margin-bottom: 6px; padding-bottom: 16px; border-bottom: 2px solid var(--gold); }
+        .page-subtitle { color: var(--gold); font-size: 1.05rem; margin-bottom: 12px; }
+        .page-info { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
         .page-info a { color: var(--gold); text-decoration: none; }
-        .page-info a:hover { text-decoration: underline; }
-        .konspekt-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 25px; margin-bottom: 25px; page-break-inside: avoid; }
-        .konspekt-num { color: var(--gold); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .konspekt-title { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.3rem; margin-bottom: 15px; }
-        .block { margin-bottom: 18px; }
-        .block-label { color: var(--gold); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block; }
-        .block p, .block li { color: var(--text-muted); font-size: 14px; margin-bottom: 5px; }
-        .block ul, .block ol { padding-left: 22px; }
-        .formula-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-        .formula-table td { padding: 10px 14px; font-size: 14px; border: 1px solid var(--border); vertical-align: top; }
-        .formula-table td:first-child { color: #fff; text-align: center; width: 50%; background: rgba(255,255,255,0.02); font-weight: 500; }
+
+        .critical { background: rgba(212,160,23,0.08); border: 1.5px solid var(--gold); padding: 22px 28px; margin-bottom: 35px; border-radius: 10px; }
+        .critical h2 { color: var(--gold); font-size: 1.1rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .critical-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+        .critical-grid div { color: #fff; font-size: 1rem; }
+
+        .toc { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 20px 26px; margin-bottom: 35px; border-radius: 8px; }
+        .toc h2 { color: #fff; font-size: 1rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .toc ol { padding-left: 22px; color: var(--text-muted); font-size: 0.95rem; line-height: 2.2; }
+        .toc a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .toc a:hover { color: var(--gold); }
+
+        .konspekt-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--gold); padding: 28px; margin-bottom: 28px; page-break-inside: avoid; scroll-margin-top: 20px; border-radius: 4px; }
+        .konspekt-num { color: var(--gold); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .konspekt-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 1.4rem; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+        .konspekt-title .card-icon { font-size: 1.6rem; }
+        .block { margin-bottom: 20px; }
+        .block-label { color: var(--gold); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+        .block p, .block li { color: var(--text-muted); font-size: 15px; margin-bottom: 6px; }
+        .block ul, .block ol { padding-left: 24px; }
+        .block ul li, .block ol li { margin-bottom: 5px; }
+
+        .formula-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+        .formula-table td { padding: 11px 16px; font-size: 15px; border: 1px solid var(--border); vertical-align: top; }
+        .formula-table td:first-child { color: #fff; text-align: center; background: rgba(255,255,255,0.02); font-weight: 500; width: 45%; }
         .formula-table td:last-child { color: var(--text-muted); }
-        .example-box { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 15px 20px; margin: 12px 0; }
-        .example-label { color: var(--gold); font-size: 12px; font-weight: 600; display: block; margin-bottom: 6px; }
-        .important-badge { display: inline-block; background: #4c1a1a; color: #ff6b6b; font-size: 10px; font-weight: 700; padding: 2px 8px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .exam-badge { display: inline-block; background: #1e3a5f; color: #60a5fa; font-size: 10px; font-weight: 700; padding: 2px 8px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .prof-block { background: rgba(212,160,23,0.06); border: 1px solid rgba(212,160,23,0.25); padding: 18px 20px; margin-top: 30px; }
-        .prof-block strong { color: var(--gold); display: block; margin-bottom: 6px; }
-        .prof-block p { color: var(--text-muted); font-size: 14px; margin: 0; }
-        .img-placeholder { background: rgba(255,255,255,0.02); border: 1px dashed var(--border); padding: 30px; text-align: center; color: var(--text-muted); font-size: 13px; margin: 15px 0; }
-        .nav-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
-        @media (max-width: 600px) { body { padding: 10px; } .konspekt-card { padding: 18px; } .page-title { font-size: 1.5rem; } }
+
+        .example-box { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 16px 22px; margin: 14px 0; border-radius: 6px; }
+        .example-box p { font-size: 15px; margin-bottom: 6px; }
+        .example-label { color: var(--gold); font-size: 14px; font-weight: 600; display: block; margin-bottom: 8px; }
+
+        .mistake-box { background: rgba(255,107,107,0.06); border: 1px solid rgba(255,107,107,0.25); padding: 16px 20px; margin: 14px 0; border-radius: 6px; }
+        .mistake-box .example-label { color: var(--red); font-size: 14px; }
+        .mistake-box p { color: #fca5a5; font-size: 14px; }
+
+        .important-badge { display: inline-block; background: #4c1a1a; color: #ff6b6b; font-size: 12px; font-weight: 700; padding: 3px 10px; margin-left: 8px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 3px; }
+        .exam-badge { display: inline-block; background: #1e3a5f; color: #60a5fa; font-size: 12px; font-weight: 700; padding: 3px 10px; margin-left: 8px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 3px; }
+
+        .prof-block { background: rgba(212,160,23,0.06); border: 1px solid rgba(212,160,23,0.25); padding: 20px 24px; margin-top: 35px; border-radius: 6px; }
+        .prof-block strong { color: var(--gold); display: block; margin-bottom: 8px; font-size: 1.05rem; }
+        .prof-block p { color: var(--text-muted); font-size: 15px; margin: 0; }
+
+        .img-placeholder { background: rgba(255,255,255,0.02); border: 1px dashed var(--border); padding: 40px; text-align: center; color: var(--text-muted); font-size: 14px; margin: 20px 0; border-radius: 6px; }
+        .img-placeholder .fig-label { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+
+        .cheatsheet { background: rgba(255,255,255,0.02); border: 1px solid var(--gold); padding: 28px; margin-top: 40px; border-radius: 10px; }
+        .cheatsheet h2 { color: var(--gold); font-size: 1.2rem; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
+        .cheatsheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; }
+        .cheatsheet-grid .col-full { grid-column: 1 / -1; }
+        .cheatsheet h4 { color: #fff; font-size: 0.95rem; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+        .cheatsheet ul { padding-left: 18px; }
+        .cheatsheet li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; }
+
+        .nav-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 45px; padding-top: 22px; border-top: 1px solid var(--border); }
+
+        @media (max-width: 600px) { body { padding: 15px; font-size: 14px; } .konspekt-card { padding: 20px; } .page-title { font-size: 1.6rem; } .critical-grid { grid-template-columns: 1fr; } .cheatsheet-grid { grid-template-columns: 1fr; } }
         @media print {
             body { background: #fff; color: #000; padding: 0; font-size: 12px; }
             .top-bar, .no-print, .nav-bottom { display: none !important; }
-            .konspekt-card { background: #fff; border: 1px solid #ccc; border-left: 4px solid #000; box-shadow: none; margin-bottom: 15px; padding: 15px; }
+            .konspekt-card { background: #fff; border: 1px solid #ccc; border-left: 4px solid #000; box-shadow: none; margin-bottom: 15px; padding: 18px; }
             .konspekt-title, .page-title, .page-subtitle, .page-info { color: #000; }
             .block-label, .konspekt-num, .example-label, .prof-block strong { color: #000; }
             .block p, .block li, .formula-table td:last-child, .prof-block p { color: #333; }
             .formula-table td { border-color: #ccc; }
             .formula-table td:first-child { background: #f5f5f5; color: #000; }
             .example-box { background: #f9f9f9; border-color: #ddd; }
+            .mistake-box { background: #f9f9f9; border-color: #ddd; }
+            .mistake-box p { color: #600; }
             .prof-block { background: #f9f9f9; border-color: #ddd; }
             .img-placeholder { border-color: #ccc; color: #666; }
             .page-title { border-bottom-color: #000; }
             .important-badge, .exam-badge { border: 1px solid #000; color: #000; background: #eee; }
+            .critical { border-color: #000; background: #f9f9f9; }
+            .critical h2, .cheatsheet h2 { color: #000; }
+            .critical-grid div { color: #000; }
+            .cheatsheet, .toc { background: #f9f9f9; border-color: #000; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
-        <div class="top-bar">
-            <div class="breadcrumb"><a href="../teoreticheskij.html">← Теоретический раздел</a> / Производная</div>
-            <div class="btn-group">
-                <button onclick="downloadHTML()" class="btn-sm-gold no-print">📥 Скачать</button>
-                <a href="javascript:window.print()" class="btn-sm-gold no-print">🖨️ Печать</a>
-            </div>
-        </div>
+<div class="top-bar">
+    <div class="breadcrumb"><a href="../teoreticheskij.html">← Теоретический раздел</a> / Производная</div>
+    <div class="btn-group">
+        <button onclick="downloadHTML()" class="btn-sm-gold no-print">📥 Скачать</button>
+        <a href="javascript:window.print()" class="btn-sm-gold no-print">🖨️ Печать</a>
+    </div>
+</div>
 
-        <h1 class="page-title">∫ Производная</h1>
-        <p class="page-subtitle">Опорный конспект для подготовки к занятиям, контрольным и экзамену</p>
-        <p class="page-info">Практические работы: <a href="../pr/08.html">№8 — Вычисление</a> · <a href="../pr/09.html">№9 — Касательная</a> · <a href="../pr/10.html">№10 — Экстремумы</a></p>
+<h1 class="page-title">∫ Производная</h1>
+<p class="page-subtitle">Опорный конспект для подготовки к занятиям, контрольным и экзамену</p>
+<p class="page-info">Практические работы: <a href="../pr/08.html">№8 — Вычисление</a> · <a href="../pr/09.html">№9 — Касательная</a> · <a href="../pr/10.html">№10 — Экстремумы</a></p>
 
-        <!-- Конспект 1 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 1</div>
-            <div class="konspekt-title">Что такое производная и как её находить <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📖 Определение (простыми словами)</span>
-                <p>Производная — это <strong>скорость изменения</strong> функции. Она показывает, насколько быстро меняется y, когда меняется x. Обозначение: <span data-katex="f'(x)"></span> — «эф штрих».</p>
-            </div>
-            <div class="block">
-                <span class="block-label">📋 Основные формулы <span class="important-badge">Выучить!</span></span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="(C)' = 0"></span></td><td>Производная числа — ноль</td></tr>
-                    <tr><td><span data-katex="(x)' = 1"></span></td><td></td></tr>
-                    <tr><td><span data-katex="(x^{2})' = 2x"></span></td><td>Степень вперёд, степень –1</td></tr>
-                    <tr><td><span data-katex="(x^{3})' = 3x^{2}"></span></td><td></td></tr>
-                    <tr><td><span data-katex="(x^{n})' = n \cdot x^{n-1}"></span></td><td>Общее правило</td></tr>
-                </table>
-            </div>
-            <div class="block">
-                <span class="block-label">✏️ Правила дифференцирования</span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="(u + v)' = u' + v'"></span></td><td>Сумма</td></tr>
-                    <tr><td><span data-katex="(u - v)' = u' - v'"></span></td><td>Разность</td></tr>
-                    <tr><td><span data-katex="(C \cdot u)' = C \cdot u'"></span></td><td>Число выносится</td></tr>
-                    <tr><td><span data-katex="\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^{2}}"></span></td><td>Частное</td></tr>
-                </table>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Примеры</span>
-                <p><strong>1.</strong> <span data-katex="f(x) = 5x^{3}"></span> → <span data-katex="f'(x) = 5 \cdot 3x^{2} = 15x^{2}"></span></p>
-                <p><strong>2.</strong> <span data-katex="f(x) = x^{2} + 4x - 7"></span> → <span data-katex="f'(x) = 2x + 4"></span></p>
-                <p><strong>3.</strong> <span data-katex="f(x) = 10"></span> → <span data-katex="f'(x) = 0"></span></p>
-            </div>
-        </div>
+<!-- КРИТИЧЕСКИЙ МИНИМУМ -->
+<div class="critical">
+    <h2>⚡ Критический минимум для экзамена</h2>
+    <div class="critical-grid">
+        <div>📌 <span data-katex="(x^{n})' = n \cdot x^{n-1}"></span></div>
+        <div>📌 <span data-katex="f'(x_{0}) = \operatorname{tg}\alpha"></span> — тангенс угла наклона касательной</div>
+        <div>📌 Уравнение касательной: <span data-katex="y = f(x_{0}) + f'(x_{0})(x - x_{0})"></span></div>
+        <div>📌 <span data-katex="f'(x) = 0"></span> → критические точки → смена знака = экстремум</div>
+    </div>
+</div>
 
-        <!-- Конспект 2 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 2</div>
-            <div class="konspekt-title">Геометрический смысл производной. Уравнение касательной <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📐 Что показывает производная на графике</span>
-                <p>Значение производной в точке <span data-katex="x_{0}"></span> равно <strong>тангенсу угла наклона</strong> касательной: <span data-katex="f'(x_{0}) = \operatorname{tg}\alpha"></span>.</p>
-            </div>
-            <div class="img-placeholder">[Рис. 1 — Касательная к графику, угол наклона α]</div>
-            <div class="block">
-                <span class="block-label">✏️ Уравнение касательной <span class="important-badge">Выучить!</span></span>
-                <p><span data-katex="y = f(x_{0}) + f'(x_{0})(x - x_{0})"></span></p>
-            </div>
-            <div class="block">
-                <span class="block-label">🔢 Алгоритм (4 шага)</span>
-                <ol>
-                    <li>Найти <span data-katex="f(x_{0})"></span> — подставить x₀ в функцию.</li>
-                    <li>Найти <span data-katex="f'(x)"></span> — взять производную.</li>
-                    <li>Найти <span data-katex="f'(x_{0})"></span> — подставить x₀ в производную.</li>
-                    <li>Подставить всё в формулу <span data-katex="y = f(x_{0}) + f'(x_{0})(x - x_{0})"></span>.</li>
-                </ol>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Пример (будет в контрольной)</span>
-                <p>Составить уравнение касательной к <span data-katex="f(x) = x^{2}"></span> в точке <span data-katex="x_{0} = 3"></span>.</p>
-                <p><strong>1.</strong> <span data-katex="f(3) = 9"></span></p>
-                <p><strong>2.</strong> <span data-katex="f'(x) = 2x"></span></p>
-                <p><strong>3.</strong> <span data-katex="f'(3) = 6"></span></p>
-                <p><strong>4.</strong> <span data-katex="y = 9 + 6(x - 3) = 6x - 9"></span></p>
-            </div>
-        </div>
+<!-- ОГЛАВЛЕНИЕ -->
+<div class="toc">
+    <h2>📑 Содержание</h2>
+    <ol>
+        <li><a href="#s1">📐 Определение и правила дифференцирования</a></li>
+        <li><a href="#s2">📏 Геометрический смысл. Уравнение касательной</a></li>
+        <li><a href="#s3">📈 Экстремумы функции</a></li>
+        <li><a href="#cheatsheet">📋 Шпаргалка</a></li>
+    </ol>
+</div>
 
-        <!-- Конспект 3 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 3</div>
-            <div class="konspekt-title">Экстремумы функции (максимум и минимум) <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📖 Что такое экстремумы</span>
-                <p><strong>Максимум</strong> — точка, где функция перестаёт расти и начинает убывать. <strong>Минимум</strong> — где убывание сменяется ростом.</p>
-            </div>
-            <div class="img-placeholder">[Рис. 2 — График с максимумом и минимумом]</div>
-            <div class="block">
-                <span class="block-label">🔢 Алгоритм поиска <span class="important-badge">Выучить!</span></span>
-                <ol>
-                    <li>Найти производную <span data-katex="f'(x)"></span>.</li>
-                    <li>Решить уравнение <span data-katex="f'(x) = 0"></span> — получить <strong>критические точки</strong>.</li>
-                    <li>Отметить точки на прямой, разбить на интервалы.</li>
-                    <li>Взять число из каждого интервала, подставить в <span data-katex="f'(x)"></span>.</li>
-                    <li>Если <span data-katex="f'(x) > 0"></span> — растёт ↗, если <span data-katex="f'(x) < 0"></span> — убывает ↘.</li>
-                    <li>Смена ↗→↘ = максимум, ↘→↗ = минимум.</li>
-                </ol>
-            </div>
-            <div class="example-box">
-                <span class="example-label">🏗️ Пример из строительства (задача на оптимизацию)</span>
-                <p><strong>Задача:</strong> Огородить прямоугольную площадку у стены. Есть 60 м забора. Найти максимальную площадь.</p>
-                <p><strong>1.</strong> Ширина = x, длина = 60 – 2x. Площадь: <span data-katex="S(x) = x(60 - 2x) = 60x - 2x^{2}"></span>.</p>
-                <p><strong>2.</strong> <span data-katex="S'(x) = 60 - 4x = 0 \ \Rightarrow \ x = 15"></span>.</p>
-                <p><strong>3.</strong> При x < 15: S' > 0 ↗, при x > 15: S' < 0 ↘. x = 15 — максимум.</p>
-                <p><strong>4.</strong> Размеры: 15 × 30 м. Площадь: <strong>450 м²</strong>.</p>
-            </div>
-        </div>
+<!-- 1: ОПРЕДЕЛЕНИЕ И ПРАВИЛА -->
+<div class="konspekt-card" id="s1">
+    <div class="konspekt-num">Раздел 1</div>
+    <div class="konspekt-title"><span class="card-icon">📐</span> Определение и правила дифференцирования <span class="exam-badge">Экзамен</span></div>
 
-        <div class="prof-block">
-            <strong>🔧 Где пригодится строителю</strong>
-            <p>Оптимизация расхода материалов, расчёт максимальной прочности балок, определение оптимальных размеров площадок и сечений конструкций. См. практические работы №8–10.</p>
-        </div>
-
-        <div class="nav-bottom no-print">
-            <a href="../teoreticheskij.html" class="btn-sm-gold">← К списку конспектов</a>
-        </div>
-
+    <div class="block">
+        <span class="block-label">📖 Что такое производная (простыми словами)</span>
+        <p>Производная функции в точке — это <strong>скорость изменения</strong> функции в этой точке. Она отвечает на вопрос: «Насколько быстро меняется y, когда x чуть-чуть увеличивается?»</p>
+        <p>Обозначение: <span data-katex="f'(x)"></span> — «эф штрих от икс». Также используют <span data-katex="y'"></span>.</p>
+        <p><strong>Главное:</strong> производная постоянной равна нулю (величина не меняется). Производная x равна 1 (растёт равномерно). Производная x² равна 2x (растёт с ускорением).</p>
     </div>
 
-    <script>
-        document.querySelectorAll('[data-katex]').forEach(el => {
-            katex.render(el.dataset.katex, el, { throwOnError: false });
-        });
-        function downloadHTML() {
-            const html = document.documentElement.outerHTML;
-            const blob = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'proizvodnaya-konspekt.html';
-            a.click();
-            URL.revokeObjectURL(a.href);
-        }
-    </script>
+    <div class="block">
+        <span class="block-label">📋 Таблица производных <span class="important-badge">Выучить!</span></span>
+        <table class="formula-table">
+            <tr><td><span data-katex="(C)' = 0"></span></td><td>Производная любого числа — ноль</td></tr>
+            <tr><td><span data-katex="(x)' = 1"></span></td><td></td></tr>
+            <tr><td><span data-katex="(x^{2})' = 2x"></span></td><td>Степень выносится вперёд, а у x уменьшается на 1</td></tr>
+            <tr><td><span data-katex="(x^{3})' = 3x^{2}"></span></td><td></td></tr>
+            <tr><td><span data-katex="(x^{n})' = n \cdot x^{n-1}"></span></td><td>Общее правило: n «падает» вперёд, степень становится n−1</td></tr>
+        </table>
+    </div>
+
+    <div class="block">
+        <span class="block-label">✏️ Правила дифференцирования</span>
+        <p>Когда функция состоит из нескольких частей, работают правила:</p>
+        <table class="formula-table">
+            <tr><td><span data-katex="(u + v)' = u' + v'"></span></td><td>Производная суммы = сумме производных</td></tr>
+            <tr><td><span data-katex="(u - v)' = u' - v'"></span></td><td>Производная разности = разности производных</td></tr>
+            <tr><td><span data-katex="(C \cdot u)' = C \cdot u'"></span></td><td>Постоянный множитель выносится за знак производной</td></tr>
+            <tr><td><span data-katex="(u \cdot v)' = u'v + uv'"></span></td><td>Производная произведения (не произведение производных!)</td></tr>
+            <tr><td><span data-katex="\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^{2}}"></span></td><td>Производная частного (v ≠ 0)</td></tr>
+        </table>
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">💡 Примеры</span>
+        <p><strong>1.</strong> <span data-katex="f(x) = 5x^{3} \ \Rightarrow \ f'(x) = 5 \cdot 3x^{2} = 15x^{2}"></span> (число 5 вынесли, степень x³ стала 3x²)</p>
+        <p><strong>2.</strong> <span data-katex="f(x) = x^{2} + 4x - 7 \ \Rightarrow \ f'(x) = 2x + 4"></span> (производная от −7 равна 0)</p>
+        <p><strong>3.</strong> <span data-katex="f(x) = 10 \ \Rightarrow \ f'(x) = 0"></span> (константа не меняется)</p>
+    </div>
+
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p>Не путайте: <span data-katex="(x^{3})' = 3x^{2}"></span> (правильно), а не <span data-katex="3x^{3}"></span>. Степень уменьшается на единицу, а не остаётся прежней. И <span data-katex="(5x)' = 5"></span>, а не 0 — постоянный множитель сохраняется.</p>
+    </div>
+</div>
+
+<!-- 2: ГЕОМЕТРИЧЕСКИЙ СМЫСЛ -->
+<div class="konspekt-card" id="s2">
+    <div class="konspekt-num">Раздел 2</div>
+    <div class="konspekt-title"><span class="card-icon">📏</span> Геометрический смысл. Уравнение касательной <span class="exam-badge">Экзамен</span></div>
+
+    <div class="block">
+        <span class="block-label">📐 Что показывает производная на графике</span>
+        <p>Значение производной в точке <span data-katex="x_{0}"></span> численно равно <strong>тангенсу угла наклона</strong> касательной к графику в этой точке:</p>
+        <p style="text-align:center;"><span data-katex="f'(x_{0}) = \operatorname{tg}\alpha"></span></p>
+        <p>где α — угол между касательной и положительным направлением оси x. Если производная положительна — функция растёт. Отрицательна — убывает. Равна нулю — касательная горизонтальна.</p>
+    </div>
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 1 — Касательная к графику функции</div>
+        [График функции, точка x₀, касательная, угол наклона α]
+    </div>
+
+    <div class="block">
+        <span class="block-label">✏️ Уравнение касательной <span class="important-badge">Выучить!</span></span>
+        <p><span data-katex="y = f(x_{0}) + f'(x_{0})(x - x_{0})"></span></p>
+        <p>Это уравнение прямой, проходящей через точку <span data-katex="(x_{0}; f(x_{0}))"></span> с угловым коэффициентом <span data-katex="f'(x_{0})"></span>.</p>
+    </div>
+
+    <div class="block">
+        <span class="block-label">🔢 Алгоритм составления уравнения касательной</span>
+        <table class="formula-table">
+            <tr><td><strong>Шаг 1</strong></td><td>Найти <span data-katex="f(x_{0})"></span> — подставить x₀ в исходную функцию.</td></tr>
+            <tr><td><strong>Шаг 2</strong></td><td>Найти <span data-katex="f'(x)"></span> — продифференцировать функцию.</td></tr>
+            <tr><td><strong>Шаг 3</strong></td><td>Найти <span data-katex="f'(x_{0})"></span> — подставить x₀ в производную.</td></tr>
+            <tr><td><strong>Шаг 4</strong></td><td>Подставить все три числа в формулу: <span data-katex="y = f(x_{0}) + f'(x_{0})(x - x_{0})"></span> и упростить.</td></tr>
+        </table>
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">💡 Пример (будет в контрольной)</span>
+        <p>Составить уравнение касательной к графику <span data-katex="f(x) = x^{2}"></span> в точке <span data-katex="x_{0} = 3"></span>.</p>
+        <p><strong>Шаг 1.</strong> <span data-katex="f(3) = 3^{2} = 9"></span></p>
+        <p><strong>Шаг 2.</strong> <span data-katex="f'(x) = 2x"></span></p>
+        <p><strong>Шаг 3.</strong> <span data-katex="f'(3) = 2 \cdot 3 = 6"></span></p>
+        <p><strong>Шаг 4.</strong> <span data-katex="y = 9 + 6(x - 3) = 9 + 6x - 18 = 6x - 9"></span></p>
+        <p><strong>Ответ:</strong> <span data-katex="y = 6x - 9"></span></p>
+    </div>
+</div>
+
+<!-- 3: ЭКСТРЕМУМЫ -->
+<div class="konspekt-card" id="s3">
+    <div class="konspekt-num">Раздел 3</div>
+    <div class="konspekt-title"><span class="card-icon">📈</span> Экстремумы функции (максимум и минимум) <span class="exam-badge">Экзамен</span></div>
+
+    <div class="block">
+        <span class="block-label">📖 Что такое экстремумы</span>
+        <p><strong>Экстремумы</strong> — это точки, в которых функция меняет характер своего поведения:</p>
+        <ul>
+            <li><strong>Точка максимума</strong> — функция перестаёт расти и начинает убывать (↗ → ↘). В этой точке функция имеет наибольшее значение в окрестности.</li>
+            <li><strong>Точка минимума</strong> — функция перестаёт убывать и начинает расти (↘ → ↗). Наименьшее значение в окрестности.</li>
+        </ul>
+        <p>В точках экстремума производная либо равна нулю, либо не существует. Такие точки называются <strong>критическими</strong>.</p>
+    </div>
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 2 — График функции с максимумом и минимумом</div>
+        [График: подъём → вершина (max) → спуск → впадина (min) → подъём]
+    </div>
+
+    <div class="block">
+        <span class="block-label">🔢 Алгоритм поиска экстремумов <span class="important-badge">Выучить!</span></span>
+        <table class="formula-table">
+            <tr><td><strong>Шаг 1</strong></td><td>Найти производную <span data-katex="f'(x)"></span>.</td></tr>
+            <tr><td><strong>Шаг 2</strong></td><td>Решить уравнение <span data-katex="f'(x) = 0"></span>. Найденные корни — <strong>критические точки</strong>.</td></tr>
+            <tr><td><strong>Шаг 3</strong></td><td>Отметить критические точки на числовой прямой. Они разбивают прямую на интервалы.</td></tr>
+            <tr><td><strong>Шаг 4</strong></td><td>Взять по одному «пробному» числу из каждого интервала и подставить в <span data-katex="f'(x)"></span>.</td></tr>
+            <tr><td><strong>Шаг 5</strong></td><td>Если <span data-katex="f'(x) > 0"></span> — функция растёт ↗. Если <span data-katex="f'(x) < 0"></span> — убывает ↘.</td></tr>
+            <tr><td><strong>Шаг 6</strong></td><td>Смена знака с + на − (↗→↘) = <strong>максимум</strong>. Смена с − на + (↘→↗) = <strong>минимум</strong>. Если знак не меняется — экстремума нет.</td></tr>
+        </table>
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">🏗️ Пример из строительства (задача на оптимизацию)</span>
+        <p><strong>Задача.</strong> Нужно огородить прямоугольный участок, примыкающий к стене. В наличии 60 метров забора. Какими должны быть размеры участка, чтобы его площадь была максимальной?</p>
+        <p><strong>Решение.</strong></p>
+        <p>Пусть ширина участка (перпендикулярно стене) = x. Тогда на две ширины уходит 2x. На длину (параллельно стене) остаётся 60 − 2x.</p>
+        <p>Площадь: <span data-katex="S(x) = x(60 - 2x) = 60x - 2x^{2}"></span></p>
+        <p><strong>Шаг 1.</strong> <span data-katex="S'(x) = 60 - 4x"></span></p>
+        <p><strong>Шаг 2.</strong> <span data-katex="60 - 4x = 0 \ \Rightarrow \ x = 15"></span> — критическая точка.</p>
+        <p><strong>Шаг 3–5.</strong> При x < 15: S' > 0 ↗. При x > 15: S' < 0 ↘.</p>
+        <p><strong>Шаг 6.</strong> Смена ↗→↘ → x = 15 — <strong>максимум</strong>.</p>
+        <p><strong>Ответ:</strong> ширина 15 м, длина 30 м, площадь <strong>450 м²</strong>.</p>
+    </div>
+
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p>Не каждая точка, где производная равна нулю, является экстремумом. Пример: <span data-katex="f(x) = x^{3}"></span>. <span data-katex="f'(0) = 0"></span>, но в нуле функция не имеет ни максимума, ни минимума — она просто «замедляется». Нужна проверка смены знака!</p>
+    </div>
+</div>
+
+<!-- ПРОФБЛОК -->
+<div class="prof-block">
+    <strong>🔧 Где пригодится строителю</strong>
+    <p>Оптимизация расхода материалов, расчёт максимальной прочности балок и несущих конструкций, определение оптимальных размеров площадок и сечений, минимизация стоимости при заданных параметрах. См. практические работы №8–10.</p>
+</div>
+
+<!-- ШПАРГАЛКА -->
+<div class="cheatsheet" id="cheatsheet">
+    <h2>📋 Шпаргалка</h2>
+    <div class="cheatsheet-grid">
+        <div>
+            <h4>📐 Производные</h4>
+            <ul>
+                <li><span data-katex="(C)' = 0"></span></li>
+                <li><span data-katex="(x^{n})' = nx^{n-1}"></span></li>
+                <li><span data-katex="(u+v)' = u'+v'"></span></li>
+                <li><span data-katex="(Cu)' = C \cdot u'"></span></li>
+            </ul>
+        </div>
+        <div>
+            <h4>📏 Касательная</h4>
+            <ul>
+                <li><span data-katex="f'(x_{0}) = \operatorname{tg}\alpha"></span></li>
+                <li><span data-katex="y = f(x_{0}) + f'(x_{0})(x - x_{0})"></span></li>
+                <li>1. Найти f(x₀)</li>
+                <li>2. Найти f'(x)</li>
+                <li>3. Найти f'(x₀)</li>
+                <li>4. Подставить в формулу</li>
+            </ul>
+        </div>
+        <div>
+            <h4>📈 Экстремумы</h4>
+            <ul>
+                <li>f'(x) = 0 → критические точки</li>
+                <li>f'(x) > 0 → растёт ↗</li>
+                <li>f'(x) < 0 → убывает ↘</li>
+                <li>Смена +→− = максимум</li>
+                <li>Смена −→+ = минимум</li>
+            </ul>
+        </div>
+        <div>
+            <h4>⚠️ Важно</h4>
+            <ul>
+                <li>f'(x)=0 — не всегда экстремум</li>
+                <li>Нужна проверка смены знака</li>
+                <li>Пример: x³ — производная 0, но экстремума нет</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="nav-bottom no-print">
+    <a href="../teoreticheskij.html" class="btn-sm-gold">← К списку конспектов</a>
+</div>
+
+</div>
+
+<script>
+    document.querySelectorAll('[data-katex]').forEach(el => {
+        katex.render(el.dataset.katex, el, { throwOnError: false });
+    });
+    function downloadHTML() {
+        const html = document.documentElement.outerHTML;
+        const blob = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'proizvodnaya-konspekt.html';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
+</script>
 </body>
 </html>
