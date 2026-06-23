@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --yellow: #fbbf24; --green: #4ade80; --blue: #60a5fa; }
+        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --yellow: #fbbf24; --green: #4ade80; --blue: #60a5fa; --level-f: #4ade80; --level-w: #60a5fa; --level-r: #fbbf24; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; }
@@ -35,17 +35,25 @@
 
         .topics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 
-        .topic-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 20px 16px; transition: all 0.3s; cursor: pointer; text-align: center; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .topic-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 20px 16px; transition: all 0.3s; cursor: pointer; text-align: center; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
         .topic-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); background: rgba(212,160,23,0.03); }
+        .topic-card.level-f { border-left-color: var(--level-f); }
+        .topic-card.level-w { border-left-color: var(--level-w); }
+        .topic-card.level-r { border-left-color: var(--level-r); }
+        .topic-card.level-f:hover { border-color: var(--level-f); background: rgba(74,222,128,0.03); }
+        .topic-card.level-w:hover { border-color: var(--level-w); background: rgba(96,165,250,0.03); }
+        .topic-card.level-r:hover { border-color: var(--level-r); background: rgba(251,191,36,0.03); }
         .topic-num { font-size: 13px; color: var(--gold); margin-bottom: 6px; font-weight: 600; }
         .topic-title { font-size: 15px; color: #fff; margin-bottom: 8px; line-height: 1.3; }
+        .topic-link { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-decoration: none; }
+        .topic-link:hover { color: var(--gold); }
         .topic-status { display: inline-block; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid transparent; }
         .topic-status.not-done { background: rgba(255,107,107,0.1); color: var(--red); border-color: rgba(255,107,107,0.3); }
         .topic-status.done { background: rgba(74,222,128,0.1); color: var(--green); border-color: rgba(74,222,128,0.3); }
-        .level { display: inline-block; padding: 3px 10px; font-size: 11px; font-weight: 600; border-radius: 10px; margin-top: 6px; }
-        .level-f { background: #0e3a1f; color: #4ade80; }
-        .level-w { background: #1e3a5f; color: #60a5fa; }
-        .level-r { background: #4c3a1f; color: #fbbf24; }
+        .level-badge { display: inline-block; padding: 3px 10px; font-size: 11px; font-weight: 600; border-radius: 10px; margin-top: 6px; }
+        .level-badge-f { background: #0e3a1f; color: #4ade80; }
+        .level-badge-w { background: #1e3a5f; color: #60a5fa; }
+        .level-badge-r { background: #4c3a1f; color: #fbbf24; }
 
         .modal-content { background: var(--bg-card); border: 1px solid var(--border); }
         .modal-header { border-bottom: 1px solid var(--border); }
@@ -98,7 +106,7 @@
     <header class="page-header">
         <div class="container">
             <h1>🔧 Практический раздел</h1>
-            <p>Сборник практических работ · 28 работ</p>
+            <p>Сборник практических работ · 28 работ · 9 тем</p>
         </div>
     </header>
 
@@ -108,20 +116,71 @@
             <div class="progress-bar-wrap">
                 <span class="label">📊 Выполнено работ:</span>
                 <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar"></div></div>
-                <span class="percent" id="progressPercent">0%</span>
+                <span class="percent" id="progressPercent">0/28 (0%)</span>
                 <button class="btn-reset-progress" onclick="resetProgress()">Сбросить</button>
             </div>
 
+            <!-- Группа 1: Тригонометрия -->
             <div class="section-card">
-                <h2>📖 Первый курс <span class="badge">15 работ</span></h2>
-                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. Отмечайте выполнение нажатием на статус.</p>
-                <div class="topics-grid" id="course1"></div>
+                <h2>📐 Тригонометрия <span class="badge">4 работы</span></h2>
+                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. <a href="theory/trigonometriya.html" style="color:var(--gold);">📖 Конспект по теме</a></p>
+                <div class="topics-grid" id="group-trig"></div>
             </div>
 
+            <!-- Группа 2: Стереометрия -->
             <div class="section-card">
-                <h2>📖 Второй курс <span class="badge">13 работ</span></h2>
-                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. Отмечайте выполнение нажатием на статус.</p>
-                <div class="topics-grid" id="course2"></div>
+                <h2>📦 Стереометрия <span class="badge">1 работа</span></h2>
+                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. <a href="theory/stereometriya.html" style="color:var(--gold);">📖 Конспект по теме</a></p>
+                <div class="topics-grid" id="group-stereo"></div>
+            </div>
+
+            <!-- Группа 3: Корни -->
+            <div class="section-card">
+                <h2>√ Корень n-й степени <span class="badge">2 работы</span></h2>
+                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. <a href="theory/koren-n-stepeni.html" style="color:var(--gold);">📖 Конспект по теме</a></p>
+                <div class="topics-grid" id="group-roots"></div>
+            </div>
+
+            <!-- Группа 4: Производная -->
+            <div class="section-card">
+                <h2>∫ Производная <span class="badge">3 работы</span></h2>
+                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. <a href="theory/proizvodnaya.html" style="color:var(--gold);">📖 Конспект по теме</a></p>
+                <div class="topics-grid" id="group-deriv"></div>
+            </div>
+
+            <!-- Группа 5: Параллельность и перпендикулярность -->
+            <div class="section-card">
+                <h2>⟂ Параллельность и перпендикулярность <span class="badge">5 работ</span></h2>
+                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. <a href="theory/parallel-perpend.html" style="color:var(--gold);">📖 Конспект по теме</a></p>
+                <div class="topics-grid" id="group-parperp"></div>
+            </div>
+
+            <!-- Группа 6: Степени -->
+            <div class="section-card">
+                <h2>x² Степени и показательные функции <span class="badge">3 работы</span></h2>
+                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. <a href="theory/stepeni-funktsii.html" style="color:var(--gold);">📖 Конспект по теме</a></p>
+                <div class="topics-grid" id="group-powers"></div>
+            </div>
+
+            <!-- Группа 7: Многогранники -->
+            <div class="section-card">
+                <h2>📦 Многогранники <span class="badge">4 работы</span></h2>
+                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. <a href="theory/mnogogranniki.html" style="color:var(--gold);">📖 Конспект по теме</a></p>
+                <div class="topics-grid" id="group-poly"></div>
+            </div>
+
+            <!-- Группа 8: Логарифмы -->
+            <div class="section-card">
+                <h2>📊 Логарифмы <span class="badge">3 работы</span></h2>
+                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. <a href="theory/logarifmy.html" style="color:var(--gold);">📖 Конспект по теме</a></p>
+                <div class="topics-grid" id="group-logs"></div>
+            </div>
+
+            <!-- Группа 9: Тела вращения -->
+            <div class="section-card">
+                <h2>⚪ Тела вращения <span class="badge">3 работы</span></h2>
+                <p class="section-desc">Кликните на номер работы, чтобы открыть задания. <a href="theory/tela-vrashcheniya.html" style="color:var(--gold);">📖 Конспект по теме</a></p>
+                <div class="topics-grid" id="group-bodies"></div>
             </div>
 
             <div class="section-card">
@@ -180,95 +239,94 @@
         window.addEventListener('scroll', function() { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
         backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-        const works = [
-            { num: 1, title: 'Радианная мера углов', level: 'f', course: 1 },
-            { num: 2, title: 'Значения тригонометрических функций', level: 'f', course: 1 },
-            { num: 3, title: 'Тригонометрические тождества', level: 'w', course: 1 },
-            { num: 4, title: 'Решение тригонометрических уравнений', level: 'r', course: 1 },
-            { num: 5, title: 'Аксиомы стереометрии. Сечения', level: 'f', course: 1 },
-            { num: 6, title: 'Корень n-й степени. Свойства', level: 'f', course: 1 },
-            { num: 7, title: 'Иррациональные уравнения', level: 'w', course: 1 },
-            { num: 8, title: 'Вычисление производных', level: 'f', course: 1 },
-            { num: 9, title: 'Уравнение касательной', level: 'w', course: 1 },
-            { num: 10, title: 'Экстремумы функции', level: 'r', course: 1 },
-            { num: 11, title: 'Параллельность прямых и плоскостей', level: 'f', course: 1 },
-            { num: 12, title: 'Перпендикулярность прямой и плоскости', level: 'w', course: 1 },
-            { num: 13, title: 'Теорема о трёх перпендикулярах', level: 'r', course: 1 },
-            { num: 14, title: 'Двугранный угол', level: 'r', course: 1 },
-            { num: 15, title: 'Перпендикулярность плоскостей', level: 'w', course: 1 },
-            { num: 16, title: 'Степень с рациональным показателем', level: 'f', course: 2 },
-            { num: 17, title: 'Показательные уравнения', level: 'w', course: 2 },
-            { num: 18, title: 'Показательные неравенства', level: 'r', course: 2 },
-            { num: 19, title: 'Призма. Площадь поверхности и объём', level: 'f', course: 2 },
-            { num: 20, title: 'Параллелепипед. Объём', level: 'w', course: 2 },
-            { num: 21, title: 'Пирамида. Площадь поверхности и объём', level: 'w', course: 2 },
-            { num: 22, title: 'Усечённая пирамида. Объём', level: 'r', course: 2 },
-            { num: 23, title: 'Логарифмы. Свойства', level: 'f', course: 2 },
-            { num: 24, title: 'Логарифмические уравнения', level: 'w', course: 2 },
-            { num: 25, title: 'Логарифмические неравенства', level: 'r', course: 2 },
-            { num: 26, title: 'Сфера и шар', level: 'f', course: 2 },
-            { num: 27, title: 'Цилиндр. Площадь поверхности и объём', level: 'w', course: 2 },
-            { num: 28, title: 'Конус. Площадь поверхности и объём', level: 'r', course: 2 },
-        ];
+        const groups = {
+            'group-trig': [1,2,3,4],
+            'group-stereo': [5],
+            'group-roots': [6,7],
+            'group-deriv': [8,9,10],
+            'group-parperp': [11,12,13,14,15],
+            'group-powers': [16,17,18],
+            'group-poly': [19,20,21,22],
+            'group-logs': [23,24,25],
+            'group-bodies': [26,27,28],
+        };
+
+        const titles = {
+            1:'Радианная мера углов',2:'Значения тригонометрических функций',3:'Тригонометрические тождества',4:'Решение тригонометрических уравнений',
+            5:'Аксиомы стереометрии. Сечения',6:'Корень n-й степени. Свойства',7:'Иррациональные уравнения',
+            8:'Вычисление производных',9:'Уравнение касательной',10:'Экстремумы функции',
+            11:'Параллельность прямых и плоскостей',12:'Перпендикулярность прямой и плоскости',13:'Теорема о трёх перпендикулярах',14:'Двугранный угол',15:'Перпендикулярность плоскостей',
+            16:'Степень с рациональным показателем',17:'Показательные уравнения',18:'Показательные неравенства',
+            19:'Призма. Площадь поверхности и объём',20:'Параллелепипед. Объём',21:'Пирамида. Площадь поверхности и объём',22:'Усечённая пирамида. Объём',
+            23:'Логарифмы. Свойства',24:'Логарифмические уравнения',25:'Логарифмические неравенства',
+            26:'Сфера и шар',27:'Цилиндр. Площадь поверхности и объём',28:'Конус. Площадь поверхности и объём',
+        };
+
+        const levels = {
+            1:'f',2:'f',3:'w',4:'r',5:'f',6:'f',7:'w',8:'f',9:'w',10:'r',
+            11:'f',12:'w',13:'r',14:'r',15:'w',16:'f',17:'w',18:'r',
+            19:'f',20:'w',21:'w',22:'r',23:'f',24:'w',25:'r',26:'f',27:'w',28:'r',
+        };
 
         const levelNames = { f: 'Фундамент', w: 'Стены', r: 'Кровля' };
+        const levelBadgeClass = { f: 'level-badge-f', w: 'level-badge-w', r: 'level-badge-r' };
 
         function renderWorks() {
-            const course1 = document.getElementById('course1');
-            const course2 = document.getElementById('course2');
             const modalsContainer = document.getElementById('modalsContainer');
-            course1.innerHTML = '';
-            course2.innerHTML = '';
             modalsContainer.innerHTML = '';
 
-            works.forEach((w, i) => {
-                const status = getStatus(i);
-                const numStr = String(w.num).padStart(2, '0');
-                const card = document.createElement('div');
-                card.className = 'topic-card';
-                card.setAttribute('data-bs-toggle', 'modal');
-                card.setAttribute('data-bs-target', '#modal' + w.num);
-                card.innerHTML = `
-                    <div class="topic-num">ПР №${w.num}</div>
-                    <div class="topic-title">${w.title}</div>
-                    <span class="topic-status ${status}" onclick="event.stopPropagation();cycleStatus(${i})" title="Нажмите для смены статуса">${status === 'not-done' ? '⚪ Не сделано' : '🟢 Выполнено'}</span>
-                    <span class="level level-${w.level}">${levelNames[w.level]}</span>
-                `;
-                if (w.course === 1) course1.appendChild(card);
-                else course2.appendChild(card);
+            Object.entries(groups).forEach(([groupId, nums]) => {
+                const container = document.getElementById(groupId);
+                container.innerHTML = '';
+                nums.forEach(num => {
+                    const status = getStatus(num);
+                    const level = levels[num];
+                    const numStr = String(num).padStart(2, '0');
+                    const card = document.createElement('div');
+                    card.className = 'topic-card level-' + level;
+                    card.setAttribute('data-bs-toggle', 'modal');
+                    card.setAttribute('data-bs-target', '#modal' + num);
+                    card.innerHTML = `
+                        <div class="topic-num">ПР №${num}</div>
+                        <div class="topic-title">${titles[num]}</div>
+                        <span class="topic-status ${status}" onclick="event.stopPropagation();cycleStatus(${num})" title="Нажмите для смены статуса">${status === 'not-done' ? '⚪ Не сделано' : '🟢 Выполнено'}</span>
+                        <span class="level-badge ${levelBadgeClass[level]}">${levelNames[level]}</span>
+                    `;
+                    container.appendChild(card);
 
-                const modal = document.createElement('div');
-                modal.className = 'modal fade';
-                modal.id = 'modal' + w.num;
-                modal.tabIndex = -1;
-                modal.innerHTML = `
-                    <div class="modal-dialog modal-lg"><div class="modal-content">
-                        <div class="modal-header"><h3 class="modal-title">ПР №${w.num}: ${w.title}</h3><button class="btn-close" data-bs-dismiss="modal"></button></div>
-                        <div class="modal-body"><iframe src="pr/${numStr}.html"></iframe></div>
-                    </div></div>
-                `;
-                modalsContainer.appendChild(modal);
+                    const modal = document.createElement('div');
+                    modal.className = 'modal fade';
+                    modal.id = 'modal' + num;
+                    modal.tabIndex = -1;
+                    modal.innerHTML = `
+                        <div class="modal-dialog modal-lg"><div class="modal-content">
+                            <div class="modal-header"><h3 class="modal-title">ПР №${num}: ${titles[num]}</h3><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                            <div class="modal-body"><iframe src="pr/${numStr}.html"></iframe></div>
+                        </div></div>
+                    `;
+                    modalsContainer.appendChild(modal);
+                });
             });
             updateProgress();
         }
 
-        function getStatus(index) { return localStorage.getItem('pr_status_' + index) || 'not-done'; }
-        function setStatus(index, status) { localStorage.setItem('pr_status_' + index, status); }
-        function cycleStatus(index) {
-            const current = getStatus(index);
-            setStatus(index, current === 'not-done' ? 'done' : 'not-done');
+        function getStatus(num) { return localStorage.getItem('pr_status_' + num) || 'not-done'; }
+        function setStatus(num, status) { localStorage.setItem('pr_status_' + num, status); }
+        function cycleStatus(num) {
+            const current = getStatus(num);
+            setStatus(num, current === 'not-done' ? 'done' : 'not-done');
             renderWorks();
         }
         function resetProgress() {
-            works.forEach((_, i) => localStorage.removeItem('pr_status_' + i));
+            for (let i = 1; i <= 28; i++) localStorage.removeItem('pr_status_' + i);
             renderWorks();
         }
         function updateProgress() {
-            const done = works.filter((_, i) => getStatus(i) === 'done').length;
-            const total = works.length;
-            const percent = Math.round((done * 100) / total);
+            let done = 0;
+            for (let i = 1; i <= 28; i++) { if (getStatus(i) === 'done') done++; }
+            const percent = Math.round((done * 100) / 28);
             document.getElementById('progressBar').style.width = percent + '%';
-            document.getElementById('progressPercent').textContent = done + '/' + total + ' (' + percent + '%)';
+            document.getElementById('progressPercent').textContent = done + '/28 (' + percent + '%)';
         }
 
         renderWorks();
