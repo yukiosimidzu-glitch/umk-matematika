@@ -4,184 +4,342 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Корень n-й степени — Опорный конспект | УМК</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>√</text></svg>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; }
+        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --blue: #60a5fa; --green: #4ade80; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; }
-        .top-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        .breadcrumb { color: var(--text-muted); font-size: 14px; }
+        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); padding: 30px; line-height: 1.8; scroll-behavior: smooth; font-size: 16px; }
+        .container { max-width: 960px; margin: 0 auto; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+        .breadcrumb { color: var(--text-muted); font-size: 15px; }
         .breadcrumb a { color: var(--gold); text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
-        .btn-group { display: flex; gap: 8px; }
-        .btn-sm-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; padding: 6px 14px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; border-radius: 4px; line-height: 1.4; height: 32px; display: inline-flex; align-items: center; }
+        .btn-group { display: flex; gap: 10px; }
+        .btn-sm-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; border-radius: 6px; line-height: 1.4; height: 38px; display: inline-flex; align-items: center; }
         .btn-sm-gold:hover { background: var(--gold); color: var(--bg); }
-        .page-title { font-family: 'Playfair Display', serif; color: #fff; font-size: 2rem; margin-bottom: 5px; padding-bottom: 15px; border-bottom: 2px solid var(--gold); }
-        .page-subtitle { color: var(--gold); font-size: 0.95rem; margin-bottom: 10px; }
-        .page-info { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
+
+        .page-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 2.2rem; margin-bottom: 6px; padding-bottom: 16px; border-bottom: 2px solid var(--gold); }
+        .page-subtitle { color: var(--gold); font-size: 1.05rem; margin-bottom: 12px; }
+        .page-info { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
         .page-info a { color: var(--gold); text-decoration: none; }
-        .page-info a:hover { text-decoration: underline; }
-        .konspekt-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 25px; margin-bottom: 25px; page-break-inside: avoid; }
-        .konspekt-num { color: var(--gold); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .konspekt-title { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.3rem; margin-bottom: 15px; }
-        .block { margin-bottom: 18px; }
-        .block-label { color: var(--gold); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block; }
-        .block p, .block li { color: var(--text-muted); font-size: 14px; margin-bottom: 5px; }
-        .block ul, .block ol { padding-left: 22px; }
-        .formula-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-        .formula-table td { padding: 10px 14px; font-size: 14px; border: 1px solid var(--border); vertical-align: top; }
-        .formula-table td:first-child { color: #fff; text-align: center; width: 50%; background: rgba(255,255,255,0.02); font-weight: 500; }
+
+        .critical { background: rgba(212,160,23,0.08); border: 1.5px solid var(--gold); padding: 22px 28px; margin-bottom: 35px; border-radius: 10px; }
+        .critical h2 { color: var(--gold); font-size: 1.1rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .critical-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+        .critical-grid div { color: #fff; font-size: 1rem; }
+
+        .toc { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 20px 26px; margin-bottom: 35px; border-radius: 8px; }
+        .toc h2 { color: #fff; font-size: 1rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .toc ol { padding-left: 22px; color: var(--text-muted); font-size: 0.95rem; line-height: 2.2; }
+        .toc a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .toc a:hover { color: var(--gold); }
+
+        .konspekt-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--gold); padding: 28px; margin-bottom: 28px; page-break-inside: avoid; scroll-margin-top: 20px; border-radius: 4px; }
+        .konspekt-num { color: var(--gold); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .konspekt-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 1.4rem; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+        .konspekt-title .card-icon { font-size: 1.6rem; }
+        .block { margin-bottom: 20px; }
+        .block-label { color: var(--gold); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+        .block p, .block li { color: var(--text-muted); font-size: 15px; margin-bottom: 6px; }
+        .block ul, .block ol { padding-left: 24px; }
+        .block ul li, .block ol li { margin-bottom: 5px; }
+
+        .formula-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+        .formula-table td { padding: 11px 16px; font-size: 15px; border: 1px solid var(--border); vertical-align: top; }
+        .formula-table td:first-child { color: #fff; text-align: center; background: rgba(255,255,255,0.02); font-weight: 500; width: 45%; }
         .formula-table td:last-child { color: var(--text-muted); }
-        .example-box { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 15px 20px; margin: 12px 0; }
-        .example-label { color: var(--gold); font-size: 12px; font-weight: 600; display: block; margin-bottom: 6px; }
-        .important-badge { display: inline-block; background: #4c1a1a; color: #ff6b6b; font-size: 10px; font-weight: 700; padding: 2px 8px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .exam-badge { display: inline-block; background: #1e3a5f; color: #60a5fa; font-size: 10px; font-weight: 700; padding: 2px 8px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .prof-block { background: rgba(212,160,23,0.06); border: 1px solid rgba(212,160,23,0.25); padding: 18px 20px; margin-top: 30px; }
-        .prof-block strong { color: var(--gold); display: block; margin-bottom: 6px; }
-        .prof-block p { color: var(--text-muted); font-size: 14px; margin: 0; }
-        .img-placeholder { background: rgba(255,255,255,0.02); border: 1px dashed var(--border); padding: 30px; text-align: center; color: var(--text-muted); font-size: 13px; margin: 15px 0; }
-        .nav-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
-        @media (max-width: 600px) { body { padding: 10px; } .konspekt-card { padding: 18px; } .page-title { font-size: 1.5rem; } }
+
+        .example-box { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 16px 22px; margin: 14px 0; border-radius: 6px; }
+        .example-box p { font-size: 15px; margin-bottom: 6px; }
+        .example-label { color: var(--gold); font-size: 14px; font-weight: 600; display: block; margin-bottom: 8px; }
+
+        .mistake-box { background: rgba(255,107,107,0.06); border: 1px solid rgba(255,107,107,0.25); padding: 16px 20px; margin: 14px 0; border-radius: 6px; }
+        .mistake-box .example-label { color: var(--red); font-size: 14px; }
+        .mistake-box p { color: #fca5a5; font-size: 14px; }
+
+        .important-badge { display: inline-block; background: #4c1a1a; color: #ff6b6b; font-size: 12px; font-weight: 700; padding: 3px 10px; margin-left: 8px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 3px; }
+        .exam-badge { display: inline-block; background: #1e3a5f; color: #60a5fa; font-size: 12px; font-weight: 700; padding: 3px 10px; margin-left: 8px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 3px; }
+
+        .prof-block { background: rgba(212,160,23,0.06); border: 1px solid rgba(212,160,23,0.25); padding: 20px 24px; margin-top: 35px; border-radius: 6px; }
+        .prof-block strong { color: var(--gold); display: block; margin-bottom: 8px; font-size: 1.05rem; }
+        .prof-block p { color: var(--text-muted); font-size: 15px; margin: 0; }
+
+        .img-placeholder { background: rgba(255,255,255,0.02); border: 1px dashed var(--border); padding: 40px; text-align: center; color: var(--text-muted); font-size: 14px; margin: 20px 0; border-radius: 6px; }
+        .img-placeholder .fig-label { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+
+        .cheatsheet { background: rgba(255,255,255,0.02); border: 1px solid var(--gold); padding: 28px; margin-top: 40px; border-radius: 10px; }
+        .cheatsheet h2 { color: var(--gold); font-size: 1.2rem; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
+        .cheatsheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; }
+        .cheatsheet-grid .col-full { grid-column: 1 / -1; }
+        .cheatsheet h4 { color: #fff; font-size: 0.95rem; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+        .cheatsheet ul { padding-left: 18px; }
+        .cheatsheet li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; }
+
+        .nav-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 45px; padding-top: 22px; border-top: 1px solid var(--border); }
+
+        @media (max-width: 600px) { body { padding: 15px; font-size: 14px; } .konspekt-card { padding: 20px; } .page-title { font-size: 1.6rem; } .critical-grid { grid-template-columns: 1fr; } .cheatsheet-grid { grid-template-columns: 1fr; } }
         @media print {
             body { background: #fff; color: #000; padding: 0; font-size: 12px; }
             .top-bar, .no-print, .nav-bottom { display: none !important; }
-            .konspekt-card { background: #fff; border: 1px solid #ccc; border-left: 4px solid #000; box-shadow: none; margin-bottom: 15px; padding: 15px; }
+            .konspekt-card { background: #fff; border: 1px solid #ccc; border-left: 4px solid #000; box-shadow: none; margin-bottom: 15px; padding: 18px; }
             .konspekt-title, .page-title, .page-subtitle, .page-info { color: #000; }
             .block-label, .konspekt-num, .example-label, .prof-block strong { color: #000; }
             .block p, .block li, .formula-table td:last-child, .prof-block p { color: #333; }
             .formula-table td { border-color: #ccc; }
             .formula-table td:first-child { background: #f5f5f5; color: #000; }
             .example-box { background: #f9f9f9; border-color: #ddd; }
+            .mistake-box { background: #f9f9f9; border-color: #ddd; }
+            .mistake-box p { color: #600; }
             .prof-block { background: #f9f9f9; border-color: #ddd; }
             .img-placeholder { border-color: #ccc; color: #666; }
             .page-title { border-bottom-color: #000; }
             .important-badge, .exam-badge { border: 1px solid #000; color: #000; background: #eee; }
+            .critical { border-color: #000; background: #f9f9f9; }
+            .critical h2, .cheatsheet h2 { color: #000; }
+            .critical-grid div { color: #000; }
+            .cheatsheet, .toc { background: #f9f9f9; border-color: #000; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
-        <div class="top-bar">
-            <div class="breadcrumb"><a href="../teoreticheskij.html">← Теоретический раздел</a> / Корень n-й степени</div>
-            <div class="btn-group">
-                <button onclick="downloadHTML()" class="btn-sm-gold no-print">📥 Скачать</button>
-                <a href="javascript:window.print()" class="btn-sm-gold no-print">🖨️ Печать</a>
-            </div>
-        </div>
+<div class="top-bar">
+    <div class="breadcrumb"><a href="../teoreticheskij.html">← Теоретический раздел</a> / Корень n-й степени</div>
+    <div class="btn-group">
+        <button onclick="downloadHTML()" class="btn-sm-gold no-print">📥 Скачать</button>
+        <a href="javascript:window.print()" class="btn-sm-gold no-print">🖨️ Печать</a>
+    </div>
+</div>
 
-        <h1 class="page-title">√ Корень n-й степени</h1>
-        <p class="page-subtitle">Опорный конспект для подготовки к занятиям, контрольным и экзамену</p>
-        <p class="page-info">Практические работы: <a href="../pr/06.html">№6 — Свойства корня</a> · <a href="../pr/07.html">№7 — Иррациональные уравнения</a></p>
+<h1 class="page-title">√ Корень n-й степени</h1>
+<p class="page-subtitle">Опорный конспект для подготовки к занятиям, контрольным и экзамену</p>
+<p class="page-info">Практические работы: <a href="../pr/06.html">№6 — Свойства корня</a> · <a href="../pr/07.html">№7 — Иррациональные уравнения</a></p>
 
-        <!-- Конспект 1 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 1</div>
-            <div class="konspekt-title">Корень n-й степени и его свойства <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📖 Определение</span>
-                <p><strong>Корнем n-й степени</strong> из числа a называется такое число b, что <span data-katex="b^{n} = a"></span>.</p>
-                <p>Обозначение: <span data-katex="\sqrt[n]{a} = b"></span>, где n — показатель корня (n ≥ 2), a — подкоренное выражение.</p>
-            </div>
-            <div class="block">
-                <span class="block-label">✏️ Частные случаи</span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="\sqrt{a}"></span> (квадратный корень)</td><td>n = 2, обычно пишут без индекса</td></tr>
-                    <tr><td><span data-katex="\sqrt[3]{a}"></span> (кубический корень)</td><td>n = 3</td></tr>
-                    <tr><td><span data-katex="\sqrt{16} = 4"></span></td><td>Потому что <span data-katex="4^{2} = 16"></span></td></tr>
-                    <tr><td><span data-katex="\sqrt[3]{27} = 3"></span></td><td>Потому что <span data-katex="3^{3} = 27"></span></td></tr>
-                    <tr><td><span data-katex="\sqrt[3]{-8} = -2"></span></td><td>Потому что <span data-katex="(-2)^{3} = -8"></span></td></tr>
-                </table>
-            </div>
-            <div class="block">
-                <span class="block-label">📋 Основные свойства <span class="important-badge">Выучить!</span></span>
-                <table class="formula-table">
-                    <tr><td><span data-katex="\sqrt[n]{a \cdot b} = \sqrt[n]{a} \cdot \sqrt[n]{b}"></span></td><td>Корень произведения</td></tr>
-                    <tr><td><span data-katex="\sqrt[n]{\frac{a}{b}} = \frac{\sqrt[n]{a}}{\sqrt[n]{b}}"></span></td><td>Корень частного (b ≠ 0)</td></tr>
-                    <tr><td><span data-katex="(\sqrt[n]{a})^{n} = a"></span></td><td>Возведение корня в степень</td></tr>
-                    <tr><td><span data-katex="\sqrt[n]{a^{m}} = (\sqrt[n]{a})^{m}"></span></td><td>Корень из степени</td></tr>
-                    <tr><td><span data-katex="\sqrt[n]{\sqrt[m]{a}} = \sqrt[nm]{a}"></span></td><td>Корень из корня</td></tr>
-                </table>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Примеры</span>
-                <p><strong>1.</strong> <span data-katex="\sqrt{50} = \sqrt{25 \cdot 2} = \sqrt{25} \cdot \sqrt{2} = 5\sqrt{2}"></span></p>
-                <p><strong>2.</strong> <span data-katex="\sqrt[3]{8x^{3}} = \sqrt[3]{8} \cdot \sqrt[3]{x^{3}} = 2x"></span></p>
-                <p><strong>3.</strong> <span data-katex="(\sqrt{3})^{2} = 3"></span></p>
-            </div>
-        </div>
+<!-- КРИТИЧЕСКИЙ МИНИМУМ -->
+<div class="critical">
+    <h2>⚡ Критический минимум для экзамена</h2>
+    <div class="critical-grid">
+        <div>📌 <span data-katex="\sqrt[n]{a \cdot b} = \sqrt[n]{a} \cdot \sqrt[n]{b}"></span></div>
+        <div>📌 <span data-katex="\sqrt[n]{\frac{a}{b}} = \frac{\sqrt[n]{a}}{\sqrt[n]{b}}"></span></div>
+        <div>📌 <span data-katex="(\sqrt[n]{a})^{n} = a"></span> (a ≥ 0 для чётного n)</div>
+        <div>📌 При решении иррациональных уравнений — обязательна проверка</div>
+    </div>
+</div>
 
-        <!-- Конспект 2 -->
-        <div class="konspekt-card">
-            <div class="konspekt-num">Конспект 2</div>
-            <div class="konspekt-title">Иррациональные уравнения <span class="exam-badge">Экзамен</span></div>
-            <div class="block">
-                <span class="block-label">📖 Что такое иррациональное уравнение</span>
-                <p>Уравнение, в котором переменная находится под знаком корня. Пример: <span data-katex="\sqrt{x + 3} = 5"></span>.</p>
-            </div>
-            <div class="block">
-                <span class="block-label">🔢 Алгоритм решения (4 шага)</span>
-                <ol>
-                    <li><strong>Уединить корень</strong> — оставить его в одной части уравнения.</li>
-                    <li><strong>Возвести обе части</strong> в степень, равную показателю корня.</li>
-                    <li><strong>Решить</strong> получившееся уравнение.</li>
-                    <li><strong>Обязательно сделать проверку!</strong> Подставить корни в исходное уравнение.</li>
-                </ol>
-            </div>
-            <div class="block">
-                <span class="block-label">⚠️ Почему нужна проверка</span>
-                <p>При возведении в квадрат могут появиться <strong>посторонние корни</strong> — числа, которые не подходят к исходному уравнению. Проверка отсеивает их.</p>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Пример (будет в контрольной)</span>
-                <p>Решить: <span data-katex="\sqrt{x + 3} = 5"></span></p>
-                <p><strong>Шаг 1.</strong> Корень уже уединён.</p>
-                <p><strong>Шаг 2.</strong> <span data-katex="(\sqrt{x + 3})^{2} = 5^{2} \ \Rightarrow \ x + 3 = 25"></span></p>
-                <p><strong>Шаг 3.</strong> <span data-katex="x = 22"></span></p>
-                <p><strong>Шаг 4.</strong> Проверка: <span data-katex="\sqrt{22 + 3} = \sqrt{25} = 5"></span> — верно.</p>
-                <p><strong>Ответ:</strong> <span data-katex="x = 22"></span></p>
-            </div>
-            <div class="example-box">
-                <span class="example-label">💡 Пример с посторонним корнем</span>
-                <p>Решить: <span data-katex="\sqrt{2x + 3} = x"></span></p>
-                <p><strong>Шаг 2.</strong> <span data-katex="2x + 3 = x^{2} \ \Rightarrow \ x^{2} - 2x - 3 = 0"></span></p>
-                <p><strong>Шаг 3.</strong> <span data-katex="x_{1} = 3,\ x_{2} = -1"></span></p>
-                <p><strong>Шаг 4.</strong> Проверка: <span data-katex="x = 3"></span>: <span data-katex="\sqrt{9} = 3"></span> ✓. <span data-katex="x = -1"></span>: <span data-katex="\sqrt{1} = -1"></span> ✗.</p>
-                <p><strong>Ответ:</strong> <span data-katex="x = 3"></span></p>
-            </div>
-            <div class="example-box">
-                <span class="example-label">🏗️ Пример из строительства</span>
-                <p><strong>Задача:</strong> Площадь квадратного участка 144 м². Найти сторону.</p>
-                <p><strong>Решение:</strong> <span data-katex="S = a^{2} \ \Rightarrow \ a = \sqrt{144} = 12"></span> м.</p>
-            </div>
-        </div>
+<!-- ОГЛАВЛЕНИЕ -->
+<div class="toc">
+    <h2>📑 Содержание</h2>
+    <ol>
+        <li><a href="#s1">📖 Определение корня n-й степени</a></li>
+        <li><a href="#s2">📋 Свойства корня</a></li>
+        <li><a href="#s3">⚡ Иррациональные уравнения</a></li>
+        <li><a href="#cheatsheet">📋 Шпаргалка</a></li>
+    </ol>
+</div>
 
-        <div class="prof-block">
-            <strong>🔧 Где пригодится строителю</strong>
-            <p>Расчёт размеров и пропорций конструкций, определение стороны по известной площади, работа с формулами объёмов и площадей, расчёт диагоналей. См. практические работы №6–7.</p>
-        </div>
+<!-- 1: ОПРЕДЕЛЕНИЕ -->
+<div class="konspekt-card" id="s1">
+    <div class="konspekt-num">Раздел 1</div>
+    <div class="konspekt-title"><span class="card-icon">📖</span> Определение корня n-й степени <span class="exam-badge">Экзамен</span></div>
 
-        <div class="nav-bottom no-print">
-            <a href="../teoreticheskij.html" class="btn-sm-gold">← К списку конспектов</a>
-        </div>
-
+    <div class="block">
+        <span class="block-label">📖 Что такое корень n-й степени</span>
+        <p><strong>Корнем n-й степени</strong> из числа a называется такое число b, которое при возведении в степень n даёт a. Записывается: <span data-katex="\sqrt[n]{a} = b"></span>, где <span data-katex="b^{n} = a"></span>.</p>
+        <ul>
+            <li><strong>n</strong> — показатель корня (n ≥ 2, целое число)</li>
+            <li><strong>a</strong> — подкоренное выражение</li>
+            <li>При <strong>чётном n</strong> подкоренное выражение должно быть ≥ 0 (нельзя извлечь корень чётной степени из отрицательного числа в действительных числах)</li>
+            <li>При <strong>нечётном n</strong> подкоренное выражение может быть любым (в том числе отрицательным)</li>
+        </ul>
     </div>
 
-    <script>
-        document.querySelectorAll('[data-katex]').forEach(el => {
-            katex.render(el.dataset.katex, el, { throwOnError: false });
-        });
-        function downloadHTML() {
-            const html = document.documentElement.outerHTML;
-            const blob = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'koren-n-stepeni-konspekt.html';
-            a.click();
-            URL.revokeObjectURL(a.href);
-        }
-    </script>
+    <div class="block">
+        <span class="block-label">✏️ Частные случаи</span>
+        <table class="formula-table">
+            <tr><td><span data-katex="\sqrt{a}"></span> (квадратный корень)</td><td>n = 2, обычно пишут без индекса. Например: <span data-katex="\sqrt{16} = 4"></span>, так как <span data-katex="4^{2} = 16"></span></td></tr>
+            <tr><td><span data-katex="\sqrt[3]{a}"></span> (кубический корень)</td><td>n = 3. Например: <span data-katex="\sqrt[3]{27} = 3"></span>, так как <span data-katex="3^{3} = 27"></span></td></tr>
+            <tr><td><span data-katex="\sqrt[3]{-8} = -2"></span></td><td>Так как <span data-katex="(-2)^{3} = -8"></span>. Кубический корень из отрицательного числа существует.</td></tr>
+            <tr><td><span data-katex="\sqrt{-4}"></span> — не существует</td><td>Квадратный корень из отрицательного числа не определён в действительных числах.</td></tr>
+        </table>
+    </div>
+
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p>Путают: <span data-katex="\sqrt{(-3)^{2}} = \sqrt{9} = 3"></span>, а не −3. Квадратный корень из квадрата числа равен <strong>модулю</strong> этого числа: <span data-katex="\sqrt{x^{2}} = |x|"></span>.</p>
+    </div>
+</div>
+
+<!-- 2: СВОЙСТВА -->
+<div class="konspekt-card" id="s2">
+    <div class="konspekt-num">Раздел 2</div>
+    <div class="konspekt-title"><span class="card-icon">📋</span> Свойства корня n-й степени <span class="exam-badge">Экзамен</span></div>
+
+    <div class="block">
+        <span class="block-label">📋 Пять основных свойств <span class="important-badge">Выучить!</span></span>
+        <p>Все свойства справедливы для любых n ≥ 2. Для чётного n подкоренные выражения должны быть неотрицательными.</p>
+        <table class="formula-table">
+            <tr><td><strong>1. Корень произведения</strong></td><td><span data-katex="\sqrt[n]{a \cdot b} = \sqrt[n]{a} \cdot \sqrt[n]{b}"></span></td></tr>
+            <tr><td><strong>2. Корень частного</strong></td><td><span data-katex="\sqrt[n]{\frac{a}{b}} = \frac{\sqrt[n]{a}}{\sqrt[n]{b}}"></span> (b ≠ 0)</td></tr>
+            <tr><td><strong>3. Возведение корня в степень n</strong></td><td><span data-katex="(\sqrt[n]{a})^{n} = a"></span> — это следует из определения корня</td></tr>
+            <tr><td><strong>4. Корень из степени</strong></td><td><span data-katex="\sqrt[n]{a^{m}} = (\sqrt[n]{a})^{m}"></span> — можно менять порядок: сначала извлечь корень, потом возвести в степень, или наоборот</td></tr>
+            <tr><td><strong>5. Корень из корня</strong></td><td><span data-katex="\sqrt[n]{\sqrt[m]{a}} = \sqrt[nm]{a}"></span> — показатели корней перемножаются</td></tr>
+        </table>
+    </div>
+
+    <div class="block">
+        <span class="block-label">🔗 Как применять свойство 1 для упрощения</span>
+        <p>Если под корнем стоит произведение, и один из множителей — полный квадрат (или куб и т.д.), его можно вынести из-под корня. Это называется «вынесение множителя из-под знака корня».</p>
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">💡 Примеры</span>
+        <p><strong>1.</strong> <span data-katex="\sqrt{50} = \sqrt{25 \cdot 2} = \sqrt{25} \cdot \sqrt{2} = 5\sqrt{2}"></span> — вынесли 5 из-под корня.</p>
+        <p><strong>2.</strong> <span data-katex="\sqrt[3]{8x^{3}} = \sqrt[3]{8} \cdot \sqrt[3]{x^{3}} = 2x"></span> — свойство 1 и 3 вместе.</p>
+        <p><strong>3.</strong> <span data-katex="(\sqrt{3})^{2} = 3"></span> — свойство 3.</p>
+        <p><strong>4.</strong> <span data-katex="\sqrt[3]{\sqrt{64}} = \sqrt[3]{8} = 2"></span> — свойство 5: <span data-katex="\sqrt[6]{64} = 2"></span>.</p>
+    </div>
+
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Частая ошибка</span>
+        <p><span data-katex="\sqrt{a + b} \neq \sqrt{a} + \sqrt{b}"></span>. Корень суммы <strong>не равен</strong> сумме корней. Это работает только для умножения и деления, но не для сложения!</p>
+    </div>
+</div>
+
+<!-- 3: ИРРАЦИОНАЛЬНЫЕ УРАВНЕНИЯ -->
+<div class="konspekt-card" id="s3">
+    <div class="konspekt-num">Раздел 3</div>
+    <div class="konspekt-title"><span class="card-icon">⚡</span> Иррациональные уравнения <span class="exam-badge">Экзамен</span></div>
+
+    <div class="block">
+        <span class="block-label">📖 Что такое иррациональное уравнение</span>
+        <p><strong>Иррациональное уравнение</strong> — уравнение, в котором переменная находится <strong>под знаком корня</strong>. Пример: <span data-katex="\sqrt{x + 3} = 5"></span>.</p>
+    </div>
+
+    <div class="block">
+        <span class="block-label">🔢 Алгоритм решения <span class="important-badge">Выучить!</span></span>
+        <table class="formula-table">
+            <tr><td><strong>Шаг 1</strong></td><td><strong>Уединить корень.</strong> Перенести все члены без корня в одну сторону, оставив корень в другой. Если корней несколько — уединить один из них.</td></tr>
+            <tr><td><strong>Шаг 2</strong></td><td><strong>Возвести обе части в степень.</strong> Степень равна показателю корня. Если корень квадратный — возводим в квадрат, если кубический — в куб.</td></tr>
+            <tr><td><strong>Шаг 3</strong></td><td><strong>Решить получившееся уравнение.</strong> После возведения в степень корень исчезает, и получается обычное уравнение (линейное, квадратное и т.д.).</td></tr>
+            <tr><td><strong>Шаг 4</strong></td><td><strong>Обязательно сделать проверку!</strong> Подставить найденные корни в исходное уравнение. Возведение в квадрат может добавить посторонние корни.</td></tr>
+        </table>
+    </div>
+
+    <div class="block">
+        <span class="block-label">⚠️ Почему появляются посторонние корни</span>
+        <p>При возведении в квадрат уравнение расширяется. Например, уравнение <span data-katex="x = 2"></span> имеет один корень. А после возведения в квадрат: <span data-katex="x^{2} = 4"></span> имеет уже два корня: <span data-katex="x = 2"></span> и <span data-katex="x = -2"></span>. Второй — посторонний для исходного уравнения. Поэтому проверка <strong>обязательна</strong>.</p>
+    </div>
+
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 1 — Иллюстрация появления постороннего корня</div>
+        [График: y = √(2x+3) и y = x, точки пересечения — действительный и посторонний корень]
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">💡 Пример 1 (простой)</span>
+        <p>Решить: <span data-katex="\sqrt{x + 3} = 5"></span></p>
+        <p><strong>Шаг 1.</strong> Корень уже уединён.</p>
+        <p><strong>Шаг 2.</strong> <span data-katex="(\sqrt{x + 3})^{2} = 5^{2} \ \Rightarrow \ x + 3 = 25"></span></p>
+        <p><strong>Шаг 3.</strong> <span data-katex="x = 22"></span></p>
+        <p><strong>Шаг 4.</strong> Проверка: <span data-katex="\sqrt{22 + 3} = \sqrt{25} = 5"></span> — верно.</p>
+        <p><strong>Ответ:</strong> <span data-katex="x = 22"></span></p>
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">💡 Пример 2 (с посторонним корнем)</span>
+        <p>Решить: <span data-katex="\sqrt{2x + 3} = x"></span></p>
+        <p><strong>Шаг 1.</strong> Корень уединён.</p>
+        <p><strong>Шаг 2.</strong> <span data-katex="2x + 3 = x^{2} \ \Rightarrow \ x^{2} - 2x - 3 = 0"></span></p>
+        <p><strong>Шаг 3.</strong> <span data-katex="x_{1} = 3,\ x_{2} = -1"></span></p>
+        <p><strong>Шаг 4.</strong> Проверка:</p>
+        <p>При <span data-katex="x = 3"></span>: <span data-katex="\sqrt{2 \cdot 3 + 3} = \sqrt{9} = 3"></span> ✓</p>
+        <p>При <span data-katex="x = -1"></span>: <span data-katex="\sqrt{2 \cdot (-1) + 3} = \sqrt{1} = 1 \neq -1"></span> ✗</p>
+        <p><strong>Ответ:</strong> <span data-katex="x = 3"></span></p>
+    </div>
+
+    <div class="example-box">
+        <span class="example-label">🏗️ Пример из строительства</span>
+        <p><strong>Задача.</strong> Площадь квадратного участка 144 м². Найти длину стороны.</p>
+        <p><strong>Решение.</strong> <span data-katex="S = a^{2} \ \Rightarrow \ a^{2} = 144 \ \Rightarrow \ a = \sqrt{144} = 12"></span> м. Отрицательный корень a = −12 отбрасываем, так как длина стороны не может быть отрицательной.</p>
+    </div>
+
+    <div class="mistake-box">
+        <span class="example-label">⚠️ Типичные ошибки при решении</span>
+        <p>1. <strong>Забывают проверку.</strong> Без проверки в ответе могут оказаться посторонние корни — и задача будет решена неверно.</p>
+        <p>2. <strong>Не уединяют корень перед возведением в степень.</strong> Если возвести в квадрат сумму корня и числа, корень не исчезнет: <span data-katex="(\sqrt{x} + 2)^{2} = x + 4\sqrt{x} + 4"></span> — корень остался.</p>
+    </div>
+</div>
+
+<!-- ПРОФБЛОК -->
+<div class="prof-block">
+    <strong>🔧 Где пригодится строителю</strong>
+    <p>Расчёт размеров и пропорций конструкций, определение стороны по известной площади, работа с формулами объёмов и площадей, расчёт диагоналей, вычисление шага и размеров элементов конструкций. См. практические работы №6–7.</p>
+</div>
+
+<!-- ШПАРГАЛКА -->
+<div class="cheatsheet" id="cheatsheet">
+    <h2>📋 Шпаргалка</h2>
+    <div class="cheatsheet-grid">
+        <div>
+            <h4>📋 Свойства корня</h4>
+            <ul>
+                <li><span data-katex="\sqrt[n]{ab} = \sqrt[n]{a} \cdot \sqrt[n]{b}"></span></li>
+                <li><span data-katex="\sqrt[n]{\frac{a}{b}} = \frac{\sqrt[n]{a}}{\sqrt[n]{b}}"></span></li>
+                <li><span data-katex="(\sqrt[n]{a})^{n} = a"></span></li>
+                <li><span data-katex="\sqrt[n]{a^{m}} = (\sqrt[n]{a})^{m}"></span></li>
+            </ul>
+        </div>
+        <div>
+            <h4>⚡ Алгоритм решения</h4>
+            <ul>
+                <li>1. Уединить корень</li>
+                <li>2. Возвести в степень n</li>
+                <li>3. Решить уравнение</li>
+                <li>4. Проверка (обязательно!)</li>
+            </ul>
+        </div>
+        <div>
+            <h4>⚠️ Важно</h4>
+            <ul>
+                <li><span data-katex="\sqrt{a+b} \neq \sqrt{a} + \sqrt{b}"></span></li>
+                <li><span data-katex="\sqrt{x^{2}} = |x|"></span></li>
+                <li>Чётный корень из отрицательного числа не существует</li>
+                <li>Возведение в квадрат может дать посторонние корни</li>
+            </ul>
+        </div>
+        <div>
+            <h4>🔢 Примеры</h4>
+            <ul>
+                <li><span data-katex="\sqrt{50} = 5\sqrt{2}"></span></li>
+                <li><span data-katex="\sqrt[3]{-8} = -2"></span></li>
+                <li><span data-katex="\sqrt{(-3)^{2}} = 3"></span></li>
+                <li><span data-katex="\sqrt[3]{\sqrt{64}} = 2"></span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="nav-bottom no-print">
+    <a href="../teoreticheskij.html" class="btn-sm-gold">← К списку конспектов</a>
+</div>
+
+</div>
+
+<script>
+    document.querySelectorAll('[data-katex]').forEach(el => {
+        katex.render(el.dataset.katex, el, { throwOnError: false });
+    });
+    function downloadHTML() {
+        const html = document.documentElement.outerHTML;
+        const blob = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'koren-n-stepeni-konspekt.html';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
+</script>
 </body>
 </html>
