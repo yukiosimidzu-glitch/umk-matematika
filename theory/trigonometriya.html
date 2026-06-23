@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тригонометрия — Опорный конспект | УМК</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📐</text></svg>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <style>
@@ -15,7 +16,7 @@
         .breadcrumb { color: var(--text-muted); font-size: 15px; }
         .breadcrumb a { color: var(--gold); text-decoration: none; }
         .btn-group { display: flex; gap: 10px; }
-        .btn-sm-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; border-radius: 6px; line-height: 1.4; height: 38px; }
+        .btn-sm-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; border-radius: 6px; line-height: 1.4; height: 38px; display: inline-flex; align-items: center; }
         .btn-sm-gold:hover { background: var(--gold); color: var(--bg); }
 
         .page-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 2.2rem; margin-bottom: 6px; padding-bottom: 16px; border-bottom: 2px solid var(--gold); }
@@ -36,7 +37,8 @@
 
         .konspekt-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--gold); padding: 28px; margin-bottom: 28px; page-break-inside: avoid; scroll-margin-top: 20px; border-radius: 4px; }
         .konspekt-num { color: var(--gold); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-        .konspekt-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 1.4rem; margin-bottom: 18px; }
+        .konspekt-title { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 1.4rem; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+        .konspekt-title .card-icon { font-size: 1.6rem; }
         .block { margin-bottom: 20px; }
         .block-label { color: var(--gold); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
         .block p, .block li { color: var(--text-muted); font-size: 15px; margin-bottom: 6px; }
@@ -131,23 +133,23 @@
 <div class="toc">
     <h2>📑 Содержание</h2>
     <ol>
-        <li><a href="#okr">Единичная окружность</a></li>
-        <li><a href="#def">Определения sin, cos, tg, ctg</a></li>
-        <li><a href="#tozhd">Тождества</a></li>
-        <li><a href="#graf">Графики</a></li>
-        <li><a href="#obr">Обратные функции</a></li>
-        <li><a href="#ur">Уравнения</a></li>
-        <li><a href="#priv">Формулы приведения</a></li>
-        <li><a href="#summ">Сумма, разность, двойной аргумент</a></li>
-        <li><a href="#pol">Половинный угол, понижение степени</a></li>
-        <li><a href="#shp">Шпаргалка</a></li>
+        <li><a href="#okr">🎯 Единичная окружность</a></li>
+        <li><a href="#def">📐 Определения sin, cos, tg, ctg</a></li>
+        <li><a href="#tozhd">🔗 Тождества</a></li>
+        <li><a href="#graf">📈 Графики</a></li>
+        <li><a href="#obr">🔄 Обратные функции</a></li>
+        <li><a href="#ur">⚡ Уравнения</a></li>
+        <li><a href="#priv">🧭 Формулы приведения</a></li>
+        <li><a href="#summ">✖️ Сумма, разность, двойной аргумент</a></li>
+        <li><a href="#pol">🔻 Половинный угол, понижение степени</a></li>
+        <li><a href="#shp">📋 Шпаргалка</a></li>
     </ol>
 </div>
 
 <!-- 1 -->
 <div class="konspekt-card" id="okr">
     <div class="konspekt-num">Конспект 1</div>
-    <div class="konspekt-title">Единичная окружность. Радианная мера углов <span class="exam-badge">Экзамен</span></div>
+    <div class="konspekt-title"><span class="card-icon">🎯</span> Единичная окружность. Радианная мера углов <span class="exam-badge">Экзамен</span></div>
     <div class="block">
         <span class="block-label">📖 Что такое единичная окружность</span>
         <p>Единичная окружность — это окружность с центром в точке (0; 0) и радиусом, равным <strong>1</strong>. Она нужна, чтобы определять тригонометрические функции для любых углов, а не только для острых в прямоугольном треугольнике.</p>
@@ -191,7 +193,7 @@
 <!-- 2 -->
 <div class="konspekt-card" id="def">
     <div class="konspekt-num">Конспект 2</div>
-    <div class="konspekt-title">Синус, косинус, тангенс и котангенс <span class="exam-badge">Экзамен</span></div>
+    <div class="konspekt-title"><span class="card-icon">📐</span> Синус, косинус, тангенс и котангенс <span class="exam-badge">Экзамен</span></div>
     <div class="block">
         <span class="block-label">📖 Определения через окружность</span>
         <p>Возьмём точку на единичной окружности под углом <span data-katex="\alpha"></span>. Её координаты по определению равны <span data-katex="(\cos\alpha;\ \sin\alpha)"></span>. Это работает для любого угла, а не только острого.</p>
@@ -219,7 +221,7 @@
     <div class="example-box">
         <span class="example-label">💡 Пример</span>
         <p>Угол 210° лежит в III четверти (между 180° и 270°).</p>
-        <p><span data-katex="\sin 210^\circ = -\frac{1}{2}"></span>, <span data-katex="\cos 210^\circ = -\frac{\sqrt{3}}{2}"></span>, <span data-katex="\operatorname{tg} 210^\circ = \frac{-\frac{1}{2}}{-\frac{\sqrt{3}}{2}} = \frac{\sqrt{3}}{3}"></span></p>
+        <p><span data-katex="\sin 210^\circ = -\frac{1}{2}"></span>, <span data-katex="\cos 210^\circ = -\frac{\sqrt{3}}{2}"></span>, <span data-katex="\operatorname{tg} 210^\circ = \frac{\sqrt{3}}{3}"></span></p>
     </div>
     <div class="mistake-box">
         <span class="example-label">⚠️ Частая ошибка</span>
@@ -230,7 +232,7 @@
 <!-- 3 -->
 <div class="konspekt-card" id="tozhd">
     <div class="konspekt-num">Конспект 3</div>
-    <div class="konspekt-title">Тригонометрические тождества <span class="exam-badge">Экзамен</span></div>
+    <div class="konspekt-title"><span class="card-icon">🔗</span> Тригонометрические тождества <span class="exam-badge">Экзамен</span></div>
     <div class="block">
         <span class="block-label">📖 Что такое тождество</span>
         <p>Тождество — это равенство, которое верно при <strong>всех</strong> допустимых значениях переменной. Тригонометрические тождества связывают функции одного и того же угла и позволяют выражать одну функцию через другую.</p>
@@ -261,7 +263,7 @@
 <!-- 4 -->
 <div class="konspekt-card" id="graf">
     <div class="konspekt-num">Конспект 4</div>
-    <div class="konspekt-title">Графики тригонометрических функций</div>
+    <div class="konspekt-title"><span class="card-icon">📈</span> Графики тригонометрических функций</div>
     <div class="block">
         <span class="block-label">📖 Зачем нужны графики</span>
         <p>График показывает поведение функции на всём протяжении: где она растёт, где убывает, где пересекает ось x, где максимальные и минимальные значения. Это ключ к решению уравнений и неравенств.</p>
@@ -295,7 +297,7 @@
 <!-- 5 -->
 <div class="konspekt-card" id="obr">
     <div class="konspekt-num">Конспект 5</div>
-    <div class="konspekt-title">Обратные тригонометрические функции</div>
+    <div class="konspekt-title"><span class="card-icon">🔄</span> Обратные тригонометрические функции</div>
     <div class="block">
         <span class="block-label">📖 Зачем они нужны</span>
         <p>Обычная функция отвечает на вопрос: «какой y при заданном x?». Обратная — на вопрос: «при каком x получился такой y?». Например: мы знаем, что синус какого-то угла равен 0,5. Какой это угол? Ответ: <span data-katex="\arcsin 0{,}5 = \frac{\pi}{6}"></span>.</p>
@@ -328,7 +330,7 @@
 <!-- 6 -->
 <div class="konspekt-card" id="ur">
     <div class="konspekt-num">Конспект 6</div>
-    <div class="konspekt-title">Простейшие тригонометрические уравнения <span class="exam-badge">Экзамен</span></div>
+    <div class="konspekt-title"><span class="card-icon">⚡</span> Простейшие тригонометрические уравнения <span class="exam-badge">Экзамен</span></div>
     <div class="block">
         <span class="block-label">📖 Что значит «решить уравнение»</span>
         <p>Так как тригонометрические функции периодичны, уравнение вида sin x = a имеет бесконечно много решений. Поэтому ответ записывается в виде <strong>серии корней</strong> с целочисленным параметром k (k ∈ ℤ). Подставляя k = 0, ±1, ±2..., получаем все конкретные углы.</p>
@@ -369,7 +371,7 @@
 <!-- 7 -->
 <div class="konspekt-card" id="priv">
     <div class="konspekt-num">Конспект 7</div>
-    <div class="konspekt-title">Формулы приведения</div>
+    <div class="konspekt-title"><span class="card-icon">🧭</span> Формулы приведения</div>
     <div class="block">
         <span class="block-label">📖 Зачем они нужны</span>
         <p>Формулы приведения позволяют свести любую тригонометрическую функцию от тупого или большого угла к функции <strong>острого</strong> угла (от 0° до 90°). Это нужно для вычислений без калькулятора.</p>
@@ -401,7 +403,7 @@
 <!-- 8 -->
 <div class="konspekt-card" id="summ">
     <div class="konspekt-num">Конспект 8</div>
-    <div class="konspekt-title">Формулы суммы, разности и двойного аргумента</div>
+    <div class="konspekt-title"><span class="card-icon">✖️</span> Формулы суммы, разности и двойного аргумента</div>
     <div class="block">
         <span class="block-label">📖 Зачем они нужны</span>
         <p>Эти формулы позволяют находить синус и косинус суммы или разности углов, не вычисляя их по отдельности. А формулы двойного аргумента — упрощать выражения вроде sin 2α.</p>
@@ -435,7 +437,7 @@
 <!-- 9 -->
 <div class="konspekt-card" id="pol">
     <div class="konspekt-num">Конспект 9</div>
-    <div class="konspekt-title">Формулы половинного угла и понижения степени <span class="exam-badge">Экзамен</span></div>
+    <div class="konspekt-title"><span class="card-icon">🔻</span> Формулы половинного угла и понижения степени <span class="exam-badge">Экзамен</span></div>
     <div class="block">
         <span class="block-label">📖 Зачем они нужны</span>
         <p>Формулы половинного угла позволяют найти функцию от половины известного угла. Формулы понижения степени превращают квадрат синуса или косинуса в первую степень — это часто требуется при решении уравнений и преобразовании выражений.</p>
