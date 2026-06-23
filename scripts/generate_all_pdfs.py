@@ -49,7 +49,6 @@ def extract_from_html(filepath, container_class='variant-card'):
     
     tasks = []
     
-    # Для практических работ (doc-card) — старая проверенная логика
     if container_class == 'doc-card':
         cards = re.findall(r'<div class="doc-card">(.*?)</div>\s*(?=<div class="doc-card">|<script|$)', content, re.DOTALL)
         for card in cards:
@@ -71,7 +70,6 @@ def extract_from_html(filepath, container_class='variant-card'):
             tasks.append({'condition': condition, 'answer': answer})
         return tasks
     
-    # Для variant-card — логика с подсчётом вложенности
     pattern = f'<div class="{container_class}">'
     start_positions = [m.start() for m in re.finditer(pattern, content)]
     
@@ -147,7 +145,6 @@ def extract_konspekt_text(html_content):
     latex_blocks = []
     
     for card in cards:
-        # Заголовок конспекта
         title_match = re.search(r'<div class="konspekt-title">(.*?)</div>', card, re.DOTALL)
         if title_match:
             title = title_match.group(1)
@@ -157,10 +154,8 @@ def extract_konspekt_text(html_content):
             title = escape_latex(title)
             latex_blocks.append(r'\subsection*{' + title + '}')
         
-        # Извлекаем все блоки
         blocks = re.findall(r'<div class="block">(.*?)</div>', card, re.DOTALL)
         for block in blocks:
-            # Подзаголовок блока
             label_match = re.search(r'<span class="block-label">(.*?)</span>', block, re.DOTALL)
             if label_match:
                 label = label_match.group(1)
@@ -170,7 +165,6 @@ def extract_konspekt_text(html_content):
                 label = escape_latex(label)
                 latex_blocks.append(r'\textbf{' + label + r'}' + '\n')
             
-            # Параграфы
             paragraphs = re.findall(r'<p>(.*?)</p>', block, re.DOTALL)
             for p in paragraphs:
                 p = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', p)
@@ -180,7 +174,6 @@ def extract_konspekt_text(html_content):
                 if p:
                     latex_blocks.append(p + r'\par')
             
-            # Списки
             uls = re.findall(r'<ul>(.*?)</ul>', block, re.DOTALL)
             for ul in uls:
                 items = re.findall(r'<li>(.*?)</li>', ul, re.DOTALL)
@@ -195,12 +188,10 @@ def extract_konspekt_text(html_content):
                             latex_blocks.append(r'  \item ' + item)
                     latex_blocks.append(r'\end{itemize}')
             
-            # Таблицы
             tables = re.findall(r'<table class="formula-table">(.*?)</table>', block, re.DOTALL)
             for table in tables:
                 rows = re.findall(r'<tr>(.*?)</tr>', table, re.DOTALL)
                 if rows:
-                    # Считаем количество ячеек в первой строке
                     first_row_cells = re.findall(r'<td>(.*?)</td>', rows[0], re.DOTALL)
                     num_cols = len(first_row_cells)
                     if num_cols > 0:
@@ -222,7 +213,6 @@ def extract_konspekt_text(html_content):
                         latex_blocks.append(r'\end{tabular}')
                         latex_blocks.append(r'\vspace{6pt}')
         
-        # Примеры (example-box)
         examples = re.findall(r'<div class="example-box">(.*?)</div>', card, re.DOTALL)
         for example in examples:
             label_match = re.search(r'<span class="example-label">(.*?)</span>', example, re.DOTALL)
@@ -325,10 +315,16 @@ def add_pdf_buttons_to_pr():
             
             if '</body>' in content:
                 content = content.replace('</body>', script)
-                with open(path, 'w', encoding='utf-8') as fh:
-                    fh.write(content)
-                count += 1
-                print(f'[OK] Кнопка PDF добавлена в {f}')
+            elif '</html>' in content:
+                content = content.replace('</html>', script.replace('</body>', '') + '\n</html>')
+            else:
+                print(f'[!] Не найден </body> или </html> в {f}')
+                continue
+            
+            with open(path, 'w', encoding='utf-8') as fh:
+                fh.write(content)
+            count += 1
+            print(f'[OK] Кнопка PDF добавлена в {f}')
     
     print(f'[OK] Всего обновлено файлов: {count}')
 
@@ -372,10 +368,16 @@ def add_pdf_buttons_to_theory():
                 
                 if '</body>' in content:
                     content = content.replace('</body>', script)
-                    with open(path, 'w', encoding='utf-8') as fh:
-                        fh.write(content)
-                    count += 1
-                    print(f'[OK] Кнопка PDF добавлена в {f}')
+                elif '</html>' in content:
+                    content = content.replace('</html>', script.replace('</body>', '') + '\n</html>')
+                else:
+                    print(f'[!] Не найден </body> или </html> в {f}')
+                    continue
+                
+                with open(path, 'w', encoding='utf-8') as fh:
+                    fh.write(content)
+                count += 1
+                print(f'[OK] Кнопка PDF добавлена в {f}')
     
     print(f'[OK] Всего обновлено файлов: {count}')
 
@@ -386,7 +388,21 @@ def add_pdf_buttons_to_kontrol():
         print('[!] Папка kontrol/ не найдена')
         return
     
-    # Входной контроль
+    def insert_button(filepath, script):
+        with open(filepath, 'r', encoding='utf-8') as fh:
+            content = fh.read()
+        if 'pdf-download-btn' in content:
+            return False
+        if '</body>' in content:
+            content = content.replace('</body>', script)
+        elif '</html>' in content:
+            content = content.replace('</html>', script.replace('</body>', '') + '\n</html>')
+        else:
+            return False
+        with open(filepath, 'w', encoding='utf-8') as fh:
+            fh.write(content)
+        return True
+    
     vhod_path = os.path.join(kontrol_dir, 'vhodnoj.html')
     if os.path.exists(vhod_path):
         script = r'''<script>
@@ -401,15 +417,9 @@ def add_pdf_buttons_to_kontrol():
 })();
 </script>
 </body>'''
-        with open(vhod_path, 'r', encoding='utf-8') as fh:
-            content = fh.read()
-        if 'pdf-download-btn' not in content and '</body>' in content:
-            content = content.replace('</body>', script)
-            with open(vhod_path, 'w', encoding='utf-8') as fh:
-                fh.write(content)
+        if insert_button(vhod_path, script):
             print('[OK] Кнопка PDF добавлена в vhodnoj.html')
     
-    # Экзаменационные билеты
     exam_path = os.path.join(kontrol_dir, 'final', 'bilety.html')
     if os.path.exists(exam_path):
         script = r'''<script>
@@ -424,15 +434,9 @@ def add_pdf_buttons_to_kontrol():
 })();
 </script>
 </body>'''
-        with open(exam_path, 'r', encoding='utf-8') as fh:
-            content = fh.read()
-        if 'pdf-download-btn' not in content and '</body>' in content:
-            content = content.replace('</body>', script)
-            with open(exam_path, 'w', encoding='utf-8') as fh:
-                fh.write(content)
+        if insert_button(exam_path, script):
             print('[OK] Кнопка PDF добавлена в bilety.html')
     
-    # Самостоятельные работы
     sam_dir = os.path.join(kontrol_dir, 'current')
     if os.path.exists(sam_dir):
         for f in sorted(os.listdir(sam_dir)):
@@ -451,15 +455,9 @@ def add_pdf_buttons_to_kontrol():
 }})();
 </script>
 </body>'''
-                with open(path, 'r', encoding='utf-8') as fh:
-                    content = fh.read()
-                if 'pdf-download-btn' not in content and '</body>' in content:
-                    content = content.replace('</body>', script)
-                    with open(path, 'w', encoding='utf-8') as fh:
-                        fh.write(content)
+                if insert_button(path, script):
                     print(f'[OK] Кнопка PDF добавлена в {f}')
     
-    # Контрольные работы
     kr_dir = os.path.join(kontrol_dir, 'thematic')
     if os.path.exists(kr_dir):
         for kr_folder in sorted(os.listdir(kr_dir)):
@@ -481,12 +479,7 @@ def add_pdf_buttons_to_kontrol():
 }})();
 </script>
 </body>'''
-                        with open(path, 'r', encoding='utf-8') as fh:
-                            content = fh.read()
-                        if 'pdf-download-btn' not in content and '</body>' in content:
-                            content = content.replace('</body>', script)
-                            with open(path, 'w', encoding='utf-8') as fh:
-                                fh.write(content)
+                        if insert_button(path, script):
                             print(f'[OK] Кнопка PDF добавлена в {kr_folder}/{var_file}')
 
 def main():
@@ -499,13 +492,11 @@ def main():
         shutil.copy(cls_src, os.path.join(TEX_DIR, 'umk-matematika.cls'))
         print('[OK] umk-matematika.cls скопирован')
 
-    # ========== ДОБАВЛЯЕМ КНОПКИ PDF ==========
     print('\n=== Добавление кнопок PDF на страницы ===')
     add_pdf_buttons_to_pr()
     add_pdf_buttons_to_theory()
     add_pdf_buttons_to_kontrol()
 
-    # Практические
     print('\n=== Практические работы ===')
     pr_dir = os.path.join(ROOT_DIR, 'pr')
     if os.path.exists(pr_dir):
@@ -520,7 +511,6 @@ def main():
                         fout.write(latex)
                     print(f'[OK] pr_{name}.tex ({len(tasks)} задач)')
 
-    # Самостоятельные
     print('\n=== Самостоятельные работы ===')
     sam_dir = os.path.join(ROOT_DIR, 'kontrol', 'current')
     if os.path.exists(sam_dir):
@@ -535,7 +525,6 @@ def main():
                         fout.write(latex)
                     print(f'[OK] sam_{name}.tex ({len(tasks)} задач)')
 
-    # Контрольные
     print('\n=== Контрольные работы ===')
     kr_dir = os.path.join(ROOT_DIR, 'kontrol', 'thematic')
     if os.path.exists(kr_dir):
@@ -553,7 +542,6 @@ def main():
                                 fout.write(latex)
                             print(f'[OK] kr_{name}.tex ({len(tasks)} задач)')
 
-    # Экзамен
     print('\n=== Экзаменационные билеты ===')
     exam_file = os.path.join(ROOT_DIR, 'kontrol', 'final', 'bilety.html')
     if os.path.exists(exam_file):
@@ -564,7 +552,6 @@ def main():
                 fout.write(latex)
             print(f'[OK] exam_bilety.tex ({len(tasks)} задач)')
 
-    # Входной контроль
     print('\n=== Входной контроль ===')
     vhod_file = os.path.join(ROOT_DIR, 'kontrol', 'vhodnoj.html')
     if os.path.exists(vhod_file):
@@ -575,25 +562,25 @@ def main():
                 fout.write(latex)
             print(f'[OK] vhodnoj.tex ({len(tasks)} задач)')
 
-    # Конспекты
-    print('\n=== Теоретические конспекты ===')
-    theory_dir = os.path.join(ROOT_DIR, 'theory')
-    if os.path.exists(theory_dir):
-        for f in sorted(os.listdir(theory_dir)):
-            if f.endswith('.html'):
-                path = os.path.join(theory_dir, f)
-                with open(path, 'r', encoding='utf-8') as fh:
-                    content = fh.read()
-                title_match = re.search(r'<title>(.*?)</title>', content)
-                title = title_match.group(1) if title_match else f.replace('.html', '')
-                title = title.replace(' — Опорный конспект', '').replace(' | УМК', '')
-                
-                konspekt_text = extract_konspekt_text(content)
-                
-                latex = generate_latex_document(title, 'Опорный конспект', is_theory=True, konspekt_text=konspekt_text)
-                with open(os.path.join(TEX_DIR, f'theory_{f.replace(".html", "")}.tex'), 'w', encoding='utf-8') as fout:
-                    fout.write(latex)
-                print(f'[OK] theory_{f}')
+    # Конспекты пока отключены для скорости
+    # print('\n=== Теоретические конспекты ===')
+    # theory_dir = os.path.join(ROOT_DIR, 'theory')
+    # if os.path.exists(theory_dir):
+    #     for f in sorted(os.listdir(theory_dir)):
+    #         if f.endswith('.html'):
+    #             path = os.path.join(theory_dir, f)
+    #             with open(path, 'r', encoding='utf-8') as fh:
+    #                 content = fh.read()
+    #             title_match = re.search(r'<title>(.*?)</title>', content)
+    #             title = title_match.group(1) if title_match else f.replace('.html', '')
+    #             title = title.replace(' — Опорный конспект', '').replace(' | УМК', '')
+    #             
+    #             konspekt_text = extract_konspekt_text(content)
+    #             
+    #             latex = generate_latex_document(title, 'Опорный конспект', is_theory=True, konspekt_text=konspekt_text)
+    #             with open(os.path.join(TEX_DIR, f'theory_{f.replace(".html", "")}.tex'), 'w', encoding='utf-8') as fout:
+    #                 fout.write(latex)
+    #             print(f'[OK] theory_{f}')
 
     print(f'\nГотово! Файлы в {TEX_DIR}')
 
