@@ -66,6 +66,7 @@
         .prof-block p { color: var(--text-muted); font-size: 15px; margin: 0; }
 
         .img-placeholder { background: rgba(255,255,255,0.02); border: 1px dashed var(--border); padding: 40px; text-align: center; color: var(--text-muted); font-size: 14px; margin: 20px 0; border-radius: 6px; }
+        .img-placeholder .fig-label { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
 
         .cheatsheet { background: rgba(255,255,255,0.02); border: 1px solid var(--gold); padding: 28px; margin-top: 40px; border-radius: 10px; }
         .cheatsheet h2 { color: var(--gold); font-size: 1.2rem; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
@@ -136,7 +137,6 @@
         <li><a href="#s3">📐 Следствия из аксиом</a></li>
         <li><a href="#s4">✂️ Сечения многогранников</a></li>
         <li><a href="#s5">🔢 Метод следов</a></li>
-        <li><a href="#cheatsheet">📋 Шпаргалка</a></li>
     </ol>
 </div>
 
@@ -171,7 +171,10 @@
         </table>
         <p><strong>Важно:</strong> через две <strong>скрещивающиеся</strong> прямые плоскость провести <strong>нельзя</strong>. Скрещивающиеся прямые не параллельны и не пересекаются — они лежат в разных плоскостях. Это единственная комбинация двух прямых, через которую нельзя провести плоскость.</p>
     </div>
-    <div class="img-placeholder">[Рис. 1 — Четыре способа задания плоскости: 3 точки; прямая и точка; две пересекающиеся прямые; две параллельные прямые]</div>
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 1 — Четыре способа задания плоскости</div>
+        [3 точки; прямая + точка; 2 пересекающиеся прямые; 2 параллельные прямые]
+    </div>
 </div>
 
 <!-- 2: АКСИОМЫ -->
@@ -190,12 +193,20 @@
         <p><strong>Бытовой пример:</strong> табуретка на трёх ножках всегда стоит устойчиво — концы трёх ножек задают единственную плоскость пола. А табуретка на четырёх ножках может качаться: четыре точки не обязаны лежать в одной плоскости.</p>
         <p><strong>Обозначение плоскости:</strong> если плоскость проходит через точки A, B и C, её обозначают (ABC).</p>
     </div>
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 2 — Аксиома 1</div>
+        [Три точки A, B, C (не на одной прямой) → единственная плоскость. Контрпример: три точки на прямой → веер плоскостей]
+    </div>
 
     <div class="block">
         <span class="block-label">📜 Аксиома 2 (о прямой и плоскости)</span>
         <p><strong>Если две точки прямой лежат в плоскости, то все точки этой прямой лежат в данной плоскости.</strong></p>
         <p><strong>Бытовой пример:</strong> если прижать линейку к столу в двух местах — вся линейка плотно прилегает к столу. Прямая не может «торчать» из плоскости, если две её точки уже там.</p>
         <p><strong>Обозначение:</strong> если точки A и B прямой лежат в плоскости α, то пишут: AB ⊂ α.</p>
+    </div>
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 3 — Аксиома 2</div>
+        [Плоскость α, на ней две точки A и B, через них прямая — вся прямая лежит в плоскости]
     </div>
 
     <div class="block">
@@ -204,8 +215,10 @@
         <p><strong>Бытовой пример:</strong> две стены комнаты соприкасаются — линия их пересечения идёт строго вертикально от пола до потолка. Это прямая, общая для обеих плоскостей.</p>
         <p><strong>Важное следствие:</strong> две плоскости не могут пересекаться в одной точке. Либо не пересекаются вовсе (параллельны), либо пересекаются по целой прямой.</p>
     </div>
-
-    <div class="img-placeholder">[Рис. 2 — Иллюстрация трёх аксиом: плоскость через 3 точки, прямая в плоскости, пересечение двух плоскостей по прямой]</div>
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 4 — Аксиома 3</div>
+        [Две плоскости α и β пересекаются, линия пересечения — прямая]
+    </div>
 
     <div class="mistake-box">
         <span class="example-label">⚠️ Частая ошибка</span>
@@ -268,7 +281,10 @@
         <p>Плоскость как бы «разрезает» многогранник. Многоугольник, по которому прошёл разрез — это и есть сечение. Если многогранник выпуклый, то сечение — выпуклый многоугольник.</p>
     </div>
 
-    <div class="img-placeholder">[Рис. 3 — Куб, рассечённый плоскостью: показаны сечения в виде треугольника, прямоугольника, пятиугольника и шестиугольника]</div>
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 5 — Сечения куба</div>
+        [Куб с разными сечениями: треугольник, четырёхугольник, пятиугольник, правильный шестиугольник]
+    </div>
 
     <div class="block">
         <span class="block-label">📐 Какие многоугольники могут быть сечением куба</span>
@@ -286,6 +302,10 @@
         <span class="example-label">🏗️ Пример из строительства</span>
         <p><strong>Задача.</strong> Деревянный брус имеет форму прямоугольного параллелепипеда. Его нужно распилить под углом. Какой формы будет спил?</p>
         <p><strong>Ответ.</strong> Плоскость распила — это секущая плоскость. Если пилить параллельно основанию — спил имеет форму прямоугольника. Если под углом к основанию — параллелограмма. Если срезать угол — треугольника. Конкретная форма зависит от угла наклона пилы.</p>
+    </div>
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 6 — Строительный пример</div>
+        [Брус-параллелепипед с тремя распилами: параллельно основанию, под углом, срез угла]
     </div>
 </div>
 
@@ -309,9 +329,18 @@
         </table>
     </div>
 
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 7 — Построение сечения методом следов</div>
+        [Последовательность: точки на рёбрах → соединение в грани → след на соседней грани → замкнутое сечение]
+    </div>
+
     <div class="block">
         <span class="block-label">📐 Важное свойство (помогает проверить построение)</span>
         <p>Если секущая плоскость пересекает <strong>параллельные грани</strong> многогранника, то линии пересечения (стороны сечения) <strong>параллельны</strong> друг другу. Это следует из теоремы: если две параллельные плоскости пересечены третьей, то линии пересечения параллельны.</p>
+    </div>
+    <div class="img-placeholder">
+        <div class="fig-label">Рис. 8 — Свойство параллельных граней</div>
+        [Две параллельные плоскости пересечены третьей → линии пересечения параллельны]
     </div>
 
     <div class="example-box">
@@ -332,7 +361,6 @@
         <p>2. <strong>Забывают продлить рёбра.</strong> Часто для нахождения следа нужно продлить ребро грани — мысленно выйти за пределы многогранника.</p>
         <p>3. <strong>Не используют свойство параллельных граней.</strong> Если боковые грани параллельны, линии сечения в них параллельны — это сокращает построение.</p>
     </div>
-    <div class="img-placeholder">[Рис. 4 — Пошаговое построение сечения призмы методом следов]</div>
 </div>
 
 <!-- ПРОФБЛОК -->
@@ -380,6 +408,9 @@
             </ul>
         </div>
     </div>
+    <div style="text-align:center; margin-top:20px;">
+        <button onclick="downloadCheatsheet()" class="btn-sm-gold no-print">📥 Скачать шпаргалку</button>
+    </div>
 </div>
 
 <div class="nav-bottom no-print">
@@ -398,6 +429,16 @@
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = 'stereometriya-konspekt.html';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
+    function downloadCheatsheet() {
+        const cheatsheet = document.getElementById('cheatsheet');
+        const html = '<!DOCTYPE html>\n<html lang="ru"><head><meta charset="UTF-8"><title>Шпаргалка — Стереометрия | УМК</title><style>body{font-family:sans-serif;background:#fff;color:#000;padding:20px;max-width:600px;margin:0 auto;line-height:1.6}h2{text-align:center;border-bottom:2px solid #000;padding-bottom:10px}h4{margin:15px 0 5px 0}ul{padding-left:20px}li{margin-bottom:4px}</style></head><body>' + cheatsheet.innerHTML + '</body></html>';
+        const blob = new Blob([html], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'stereometriya-shpargalka.html';
         a.click();
         URL.revokeObjectURL(a.href);
     }
