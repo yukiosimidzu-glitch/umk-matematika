@@ -4,47 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Теоретический раздел — УМК «Математика»</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📚</text></svg>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; }
-        h1, h2 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; }
+        h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
         .page-header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 80px 0 40px; text-align: center; }
-        .page-header h1 { color: #fff; font-size: clamp(32px, 5vw, 48px); }
-        .page-header p { color: var(--gold); margin-top: 10px; }
+        .page-header h1 { color: #fff; font-size: clamp(36px, 5vw, 52px); }
+        .page-header p { color: var(--gold); margin-top: 10px; font-size: 1.1rem; }
 
         .content { padding: 60px 0; }
-        .section-card { background: var(--bg-card); border: 1px solid var(--border); padding: 30px; margin-bottom: 20px; }
-        .section-card h2 { color: #fff; margin-bottom: 15px; }
-        .section-desc { color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
+        .section-card { background: var(--bg-card); border: 1px solid var(--border); padding: 35px; margin-bottom: 25px; border-radius: 8px; }
+        .section-card h2 { color: #fff; margin-bottom: 8px; font-size: 1.5rem; }
+        .section-desc { color: var(--text-muted); margin-bottom: 25px; font-size: 1rem; }
 
-        .topics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .topic-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 25px 20px; transition: all 0.3s; text-align: center; text-decoration: none; display: block; }
-        .topic-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
-        .topic-icon { font-size: 36px; margin-bottom: 12px; }
-        .topic-title { font-size: 16px; color: #fff; margin-bottom: 5px; }
-        .topic-count { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
-        .topic-prof { font-size: 11px; color: var(--gold); }
+        .topics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .topic-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 28px 22px; transition: all 0.3s; text-align: center; text-decoration: none; display: block; border-radius: 6px; }
+        .topic-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: rgba(212,160,23,0.03); }
+        .topic-icon { font-size: 40px; margin-bottom: 14px; display: block; }
+        .topic-title { font-size: 17px; color: #fff; margin-bottom: 6px; font-weight: 600; }
+        .topic-count { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
+        .topic-prof { font-size: 12px; color: var(--gold); }
 
-        .badge { display: inline-block; background: var(--gold); color: var(--bg); padding: 4px 12px; font-size: 12px; font-weight: 600; }
-        .btn-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 12px 28px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
-        .btn-gold:hover { background: #e6b422; transform: translateY(-2px); }
-        .btn-outline { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 10px 24px; text-decoration: none; font-weight: 500; transition: all 0.3s; margin-left: 10px; }
+        .badge { display: inline-block; background: var(--gold); color: var(--bg); padding: 5px 14px; font-size: 13px; font-weight: 600; border-radius: 4px; }
+        .btn-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 12px 28px; text-decoration: none; font-weight: 600; transition: all 0.3s; border-radius: 6px; font-size: 15px; }
+        .btn-gold:hover { background: #e6b422; transform: translateY(-2px); color: var(--bg); }
+        .btn-outline { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 10px 24px; text-decoration: none; font-weight: 500; transition: all 0.3s; margin-left: 10px; border-radius: 6px; font-size: 15px; }
         .btn-outline:hover { background: var(--gold); color: var(--bg); }
-        .method-note { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 20px; margin-top: 15px; }
-        .method-note ol { color: var(--text-muted); padding-left: 20px; line-height: 2; }
-        #backToTop { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: var(--bg); border: none; font-size: 20px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+        .method-note { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); padding: 22px 24px; margin-top: 15px; border-radius: 6px; }
+        .method-note ol { color: var(--text-muted); padding-left: 24px; line-height: 2.2; font-size: 15px; }
+        #backToTop { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: var(--bg); border: none; font-size: 22px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
         #backToTop.show { opacity: 1; visibility: visible; }
         #backToTop:hover { background: #e6b422; }
-        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 13px; }
+        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
         footer a { color: var(--gold); text-decoration: none; }
 
-        @media (max-width: 768px) { .topics-grid { grid-template-columns: 1fr 1fr; } .section-card { padding: 20px; } }
+        @media (max-width: 768px) { .topics-grid { grid-template-columns: 1fr 1fr; } .section-card { padding: 24px; } }
         @media (max-width: 480px) { .topics-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -52,7 +53,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--bg-card); border-bottom: 1px solid var(--border);">
         <div class="container">
-            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold);">УМК «Математика»</a>
+            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold); font-size:1.1rem;">УМК «Математика»</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
@@ -69,8 +70,8 @@
 
     <header class="page-header">
         <div class="container">
-            <h1>Теоретический раздел</h1>
-            <p>Библиотека опорных конспектов · 30 тем</p>
+            <h1>📚 Теоретический раздел</h1>
+            <p>Библиотека опорных конспектов · 9 тем</p>
         </div>
     </header>
 
@@ -78,25 +79,70 @@
         <div class="container">
 
             <div class="section-card">
-                <h2>📖 Первый курс <span class="badge">18 конспектов</span></h2>
+                <h2>📖 Первый курс <span class="badge">5 тем</span></h2>
                 <p class="section-desc">Кликните на тему, чтобы открыть опорный конспект.</p>
                 <div class="topics-grid">
-                    <a href="theory/trigonometriya.html" class="topic-card"><div class="topic-icon">📐</div><div class="topic-title">Тригонометрия</div><div class="topic-count">8 конспектов</div><div class="topic-prof">🔧 Кровля, геодезия</div></a>
-                    <a href="theory/stereometriya.html" class="topic-card"><div class="topic-icon">📦</div><div class="topic-title">Стереометрия</div><div class="topic-count">1 конспект</div><div class="topic-prof">🔧 Чертежи, разметка</div></a>
-                    <a href="theory/koren-n-stepeni.html" class="topic-card"><div class="topic-icon">√</div><div class="topic-title">Корень n-й степени</div><div class="topic-count">2 конспекта</div><div class="topic-prof">🔧 Расчёты, пропорции</div></a>
-                    <a href="theory/parallel-perpend.html" class="topic-card"><div class="topic-icon">⟂</div><div class="topic-title">Параллельность</div><div class="topic-count">4 конспекта</div><div class="topic-prof">🔧 Вертикаль, геодезия</div></a>
-                    <a href="theory/proizvodnaya.html" class="topic-card"><div class="topic-icon">∫</div><div class="topic-title">Производная</div><div class="topic-count">3 конспекта</div><div class="topic-prof">🔧 Оптимизация, прочность</div></a>
+                    <a href="theory/trigonometriya.html" class="topic-card">
+                        <span class="topic-icon">📐</span>
+                        <div class="topic-title">Тригонометрия</div>
+                        <div class="topic-count">9 разделов</div>
+                        <div class="topic-prof">🔧 Кровля, геодезия</div>
+                    </a>
+                    <a href="theory/stereometriya.html" class="topic-card">
+                        <span class="topic-icon">📦</span>
+                        <div class="topic-title">Стереометрия</div>
+                        <div class="topic-count">5 разделов</div>
+                        <div class="topic-prof">🔧 Чертежи, разметка</div>
+                    </a>
+                    <a href="theory/koren-n-stepeni.html" class="topic-card">
+                        <span class="topic-icon">√</span>
+                        <div class="topic-title">Корень n-й степени</div>
+                        <div class="topic-count">3 раздела</div>
+                        <div class="topic-prof">🔧 Расчёты, пропорции</div>
+                    </a>
+                    <a href="theory/parallel-perpend.html" class="topic-card">
+                        <span class="topic-icon">⟂</span>
+                        <div class="topic-title">Параллельность и перпендикулярность</div>
+                        <div class="topic-count">4 раздела</div>
+                        <div class="topic-prof">🔧 Вертикаль, геодезия</div>
+                    </a>
+                    <a href="theory/proizvodnaya.html" class="topic-card">
+                        <span class="topic-icon">∫</span>
+                        <div class="topic-title">Производная</div>
+                        <div class="topic-count">3 раздела</div>
+                        <div class="topic-prof">🔧 Оптимизация, прочность</div>
+                    </a>
                 </div>
             </div>
 
             <div class="section-card">
-                <h2>📖 Второй курс <span class="badge">12 конспектов</span></h2>
+                <h2>📖 Второй курс <span class="badge">4 темы</span></h2>
                 <p class="section-desc">Кликните на тему, чтобы открыть опорный конспект.</p>
                 <div class="topics-grid">
-                    <a href="theory/stepeni-funktsii.html" class="topic-card"><div class="topic-icon">x²</div><div class="topic-title">Степени и функции</div><div class="topic-count">3 конспекта</div><div class="topic-prof">🔧 Инженерные расчёты</div></a>
-                    <a href="theory/mnogogranniki.html" class="topic-card"><div class="topic-icon">📦</div><div class="topic-title">Многогранники</div><div class="topic-count">3 конспекта</div><div class="topic-prof">🔧 Фундаменты, объёмы</div></a>
-                    <a href="theory/logarifmy.html" class="topic-card"><div class="topic-icon">📊</div><div class="topic-title">Логарифмы</div><div class="topic-count">3 конспекта</div><div class="topic-prof">🔧 Звукоизоляция, шкалы</div></a>
-                    <a href="theory/tela-vrashcheniya.html" class="topic-card"><div class="topic-icon">⚪</div><div class="topic-title">Тела вращения</div><div class="topic-count">3 конспекта</div><div class="topic-prof">🔧 Резервуары, купола</div></a>
+                    <a href="theory/stepeni-funktsii.html" class="topic-card">
+                        <span class="topic-icon">x²</span>
+                        <div class="topic-title">Степени и показательные функции</div>
+                        <div class="topic-count">3 раздела</div>
+                        <div class="topic-prof">🔧 Инженерные расчёты</div>
+                    </a>
+                    <a href="theory/mnogogranniki.html" class="topic-card">
+                        <span class="topic-icon">📦</span>
+                        <div class="topic-title">Многогранники</div>
+                        <div class="topic-count">2 раздела</div>
+                        <div class="topic-prof">🔧 Фундаменты, объёмы</div>
+                    </a>
+                    <a href="theory/logarifmy.html" class="topic-card">
+                        <span class="topic-icon">📊</span>
+                        <div class="topic-title">Логарифмы</div>
+                        <div class="topic-count">5 разделов</div>
+                        <div class="topic-prof">🔧 Звукоизоляция, шкалы</div>
+                    </a>
+                    <a href="theory/tela-vrashcheniya.html" class="topic-card">
+                        <span class="topic-icon">⚪</span>
+                        <div class="topic-title">Тела вращения</div>
+                        <div class="topic-count">3 раздела</div>
+                        <div class="topic-prof">🔧 Резервуары, купола</div>
+                    </a>
                 </div>
             </div>
 
@@ -109,15 +155,6 @@
                         <li><strong>После занятия:</strong> предложите учащимся найти профессиональную задачу по теме.</li>
                         <li><strong>Для самостоятельной работы:</strong> используйте интерактивные модели GeoGebra и Desmos.</li>
                     </ol>
-                </div>
-            </div>
-
-            <div class="section-card text-center">
-                <h2>📥 Материалы раздела</h2>
-                <p>Полные конспекты с примерами и заданиями</p>
-                <div style="margin-top: 20px;">
-                    <a href="uchebnyj_razdel.pdf" class="btn-gold" target="_blank">📄 Скачать PDF</a>
-                    <a href="javascript:window.print()" class="btn-outline">🖨️ Версия для печати</a>
                 </div>
             </div>
 
