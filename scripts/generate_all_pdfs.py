@@ -37,8 +37,7 @@ def escape_latex(text):
     for old, new in replacements.items():
         text = text.replace(old, new)
     
-    text = re.sub(r'√(\d+)', r'$\sqrt{\1}$', text)
-    text = re.sub(r'√', r'$\sqrt{}$', text)
+    text = text.replace('√', '$\\sqrt{}$')
     text = re.sub(r'<span[^>]*data-katex="([^"]*)"[^>]*></span>', r'$\1$', text, flags=re.IGNORECASE)
     text = re.sub(r'<[^>]+>', ' ', text)
     text = re.sub(r'\s+', ' ', text).strip()
