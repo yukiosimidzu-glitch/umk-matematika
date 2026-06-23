@@ -273,46 +273,40 @@
     <div class="cheatsheet-grid">
         <div>
             <h4>📐 Правила нахождения производной</h4>
-            <div style="display:grid; grid-template-columns:auto 1fr; gap:4px 12px; font-size:0.9rem; color:var(--text-muted);">
-                <div><span data-katex="(C)' = 0"></span></div><div>Константа</div>
-                <div><span data-katex="(x^{n})' = n x^{n-1}"></span></div><div>Степенная</div>
-                <div><span data-katex="(u+v)' = u'+v'"></span></div><div>Сумма</div>
-                <div><span data-katex="(Cu)' = C \cdot u'"></span></div><div>Вынос числа</div>
-                <div><span data-katex="(uv)' = u'v + uv'"></span></div><div>Произведение</div>
-                <div><span data-katex="\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^{2}}"></span></div><div>Дробь</div>
-                <div><span data-katex="((kx+b)^{n})' = nk(kx+b)^{n-1}"></span></div><div>Сложная функция</div>
-            </div>
+            <ul>
+                <li><span data-katex="(C)' = 0"></span></li>
+                <li><span data-katex="(x^{n})' = n x^{n-1}</span></li>
+                <li><span data-katex="(u+v)' = u'+v'"></span></li>
+                <li><span data-katex="(Cu)' = C \cdot u'"></span></li>
+                <li><span data-katex="(uv)' = u'v + uv'"></span></li>
+                <li><span data-katex="\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^{2}}"></span></li>
+                <li><span data-katex="((kx+b)^{n})' = nk(kx+b)^{n-1}"></span></li>
+            </ul>
         </div>
         <div>
             <h4>📏 Касательная</h4>
             <ul>
-                <li><span data-katex="f'(x_{0}) = \operatorname{tg}\alpha"></span> — тангенс угла наклона</li>
-                <li>Уравнение: <span data-katex="y = f(x_{0}) + f'(x_{0})(x - x_{0})"></span></li>
-                <li><strong>Алгоритм:</strong></li>
-                <li>1. Найти <span data-katex="f(x_{0})"></span></li>
-                <li>2. Найти <span data-katex="f'(x)"></span></li>
-                <li>3. Найти <span data-katex="f'(x_{0})"></span></li>
-                <li>4. Подставить в формулу</li>
+                <li><span data-katex="f'(x_{0}) = \operatorname{tg}\alpha"></span></li>
+                <li><span data-katex="y = f(x_{0}) + f'(x_{0})(x - x_{0})"></span></li>
+                <li>1. <span data-katex="f(x_{0})"></span> 2. <span data-katex="f'(x)"></span> 3. <span data-katex="f'(x_{0})"></span> 4. формула</li>
             </ul>
         </div>
         <div>
             <h4>📈 Экстремумы</h4>
             <ul>
                 <li><span data-katex="f'(x) = 0"></span> → критические точки</li>
-                <li><span data-katex="f'(x) > 0"></span> → функция растёт ↗</li>
-                <li><span data-katex="f'(x) < 0"></span> → функция убывает ↘</li>
-                <li>Смена + → − = <strong>максимум</strong></li>
-                <li>Смена − → + = <strong>минимум</strong></li>
+                <li><span data-katex="f'(x) > 0</span> ↗, <span data-katex="f'(x) < 0</span> ↘</li>
+                <li>+ → − = max, − → + = min</li>
                 <li>Нет смены знака = нет экстремума</li>
             </ul>
         </div>
         <div>
             <h4>⚠️ Частые ошибки</h4>
             <ul>
-                <li><span data-katex="f'(x) = 0"></span> — не всегда экстремум!</li>
-                <li>Пример: <span data-katex="x^{3}"></span>, <span data-katex="f'(0) = 0"></span>, но экстремума нет</li>
-                <li>Всегда проверяйте смену знака</li>
-                <li>В сложной функции не забывайте умножить на коэффициент при x</li>
+                <li><span data-katex="f'(x) = 0"></span> — не всегда экстремум</li>
+                <li><span data-katex="x^{3}</span>: <span data-katex="f'(0) = 0"></span>, но экстремума нет</li>
+                <li>Проверяйте смену знака</li>
+                <li>Сложная функция: умножайте на коэффициент при x</li>
             </ul>
         </div>
     </div>
