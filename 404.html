@@ -3,34 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Страница не найдена — УМК «Математика»</title>
+    <title>404 — Страница не найдена | УМК «Математика»</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #0d1117; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; }
-        .container { max-width: 500px; }
-        .error-code { font-family: 'Playfair Display', Georgia, serif; font-size: 8rem; color: var(--gold); line-height: 1; margin-bottom: 10px; }
-        .error-title { font-size: 1.5rem; color: #fff; margin-bottom: 15px; }
-        .error-text { color: var(--text-muted); font-size: 1rem; margin-bottom: 30px; line-height: 1.6; }
-        .btn-home { display: inline-block; background: var(--gold); color: var(--bg); padding: 12px 28px; text-decoration: none; font-weight: 600; border-radius: 6px; transition: all 0.3s; font-size: 15px; }
-        .btn-home:hover { background: #e6b422; transform: translateY(-2px); }
-        .links { margin-top: 25px; font-size: 14px; color: var(--text-muted); }
-        .links a { color: var(--gold); text-decoration: none; margin: 0 8px; }
-        .links a:hover { text-decoration: underline; }
+        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; overflow: hidden; }
+        .container { max-width: 600px; text-align: center; position: relative; z-index: 1; }
+        .icon { font-size: 90px; margin-bottom: 20px; animation: shake 0.5s ease-in-out infinite; display: inline-block; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) rotate(0); }
+            25% { transform: translateX(-15px) rotate(-5deg); }
+            75% { transform: translateX(15px) rotate(5deg); }
+        }
+        h1 { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-size: 1.8rem; margin-bottom: 10px; }
+        .joke { color: var(--gold); font-size: 1rem; margin-bottom: 8px; font-style: italic; min-height: 24px; }
+        .hint { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px; line-height: 1.6; }
+        .btn-home { display: inline-block; background: var(--gold); color: var(--bg); padding: 12px 28px; text-decoration: none; font-weight: 600; border-radius: 6px; transition: all 0.3s; font-size: 15px; position: relative; }
+        .btn-home:hover { background: #e6b422; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212,160,23,0.3); }
+        .formula { color: var(--text-muted); font-size: 0.8rem; margin-top: 30px; opacity: 0.5; }
+
+        .brick { position: absolute; font-size: 30px; opacity: 0.15; animation: fall linear infinite; pointer-events: none; }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(720deg); }
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <div class="error-code">404</div>
-        <h1 class="error-title">Страница не найдена</h1>
-        <p class="error-text">Возможно, вы ошиблись адресом, или страница была перемещена.<br>Проверьте правильность ссылки или вернитесь на главную.</p>
-        <a href="index.html" class="btn-home">🏠 На главную</a>
-        <div class="links">
-            <a href="teoreticheskij.html">Теория</a> ·
-            <a href="prakticheskij.html">Практика</a> ·
-            <a href="kontrol.html">Контроль</a>
-        </div>
+        <div class="icon">🏗️</div>
+        <h1>Здесь ничего не построили</h1>
+        <p class="joke" id="joke"></p>
+        <p class="hint">Страница, которую вы ищете, не существует или была снесена по программе реновации.<br>Проверьте адрес или возвращайтесь на главную.</p>
+        <a href="index.html" class="btn-home">← На главную</a>
+        <p class="formula">404 = 2² · 101</p>
     </div>
+
+    <script>
+        const jokes = [
+            'Как говорит прораб: «Этой страницы нет в проекте».',
+            'Ошибка 404: раствор замешан, а страницы нет.',
+            'Здесь должна быть страница, но она ещё на складе.',
+            'Бригада выехала. Страницы не будет до понедельника.',
+            'Страница не прошла технадзор.',
+            'По смете страница была, но её списали.',
+            'Здесь планировалась страница, но что-то пошло не так.',
+            'Ошибка 404: бетон залили, а страницу — нет.',
+        ];
+        document.getElementById('joke').textContent = jokes[Math.floor(Math.random() * jokes.length)];
+
+        const emojis = ['🧱', '🪨', '🔩', '🪵', '⚙️', '🔧', '📐', '🧰', '🪣', '🚧'];
+        function createBrick() {
+            const brick = document.createElement('div');
+            brick.className = 'brick';
+            brick.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            brick.style.left = Math.random() * 100 + '%';
+            brick.style.fontSize = (20 + Math.random() * 40) + 'px';
+            brick.style.animationDuration = (3 + Math.random() * 6) + 's';
+            brick.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(brick);
+            setTimeout(() => brick.remove(), 10000);
+        }
+        for (let i = 0; i < 15; i++) createBrick();
+        setInterval(createBrick, 800);
+    </script>
 </body>
 </html>
