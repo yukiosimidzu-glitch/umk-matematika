@@ -3,56 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Нормативный раздел — УМК «Математика»</title>
+    <meta name="description" content="Нормативный раздел УМК «Математика строит будущее». Образовательный стандарт, учебная программа, КТП, формируемые компетенции, литература.">
+    <meta name="keywords" content="нормативный раздел, УМК, математика, строители, колледж, ССО, Беларусь, Станулевич, КТП, компетенции">
+    <meta property="og:title" content="Нормативный раздел — УМК «Математика строит будущее»">
+    <meta property="og:description" content="Документы, регламентирующие образовательный процесс по математике для строительных специальностей.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a1f2b'/><text y='.75em' x='50' text-anchor='middle' font-size='55' font-family='serif' font-weight='bold' fill='%23D4A017'>M</text></svg>">
+    <title>Нормативный раздел — УМК «Математика строит будущее»</title>
+    <script>history.scrollRestoration = "manual";</script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --gold-hover: #e6b422; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; }
+        :root {
+            --bg: #0d1117;
+            --bg-card: #161b22;
+            --gold: #D4A017;
+            --gold-hover: #e6b422;
+            --text: #c9d1d9;
+            --text-muted: #8b949e;
+            --border: #30363d;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+        }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        .page-header { background: linear-gradient(180deg, #1a212f 0%, #0d1117 100%); border-bottom: 5px solid var(--gold); padding: 80px 0 50px; text-align: center; }
+        .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        .page-header {
+            background: radial-gradient(ellipse at 50% 30%, #1a2332 0%, var(--bg) 70%);
+            border-bottom: 5px solid var(--gold);
+            padding: 80px 0 50px;
+            text-align: center;
+        }
         .page-header h1 { color: #fff; font-size: clamp(30px, 5vw, 46px); margin-bottom: 10px; }
+        .page-header h1 .gold { color: var(--gold); }
         .page-header .subtitle { color: var(--gold); font-size: 1.2rem; }
         .page-header .stats { color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; }
         .page-header .stats span { color: var(--gold); font-weight: 600; }
 
         .content { padding: 50px 0; }
 
-        .section-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 12px; padding: 28px; margin-bottom: 24px; transition: all 0.3s; }
+        .section-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--gold);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+        }
         .section-card:hover { border-color: #505a6b; }
-        .section-card h3 { color: #fff; font-size: 1.25rem; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-        .section-card .icon { font-size: 26px; }
-        .section-card p, .section-card li, .section-card td { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+        .section-card h3 {
+            color: #fff;
+            font-size: 1.25rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-card h3 .icon { font-size: 26px; }
+        .section-card p,
+        .section-card li,
+        .section-card td,
+        .section-card th {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
         .section-card ul { padding-left: 20px; }
+        .section-card ul li { margin-bottom: 4px; }
 
-        .doc-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 15px; }
+        .doc-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
         .doc-card h5 { color: #fff; margin-bottom: 10px; font-size: 1rem; }
 
-        .badge-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 3px 10px; font-size: 10px; font-weight: 700; border-radius: 10px; }
+        .badge-gold {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--bg);
+            padding: 2px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 10px;
+        }
 
-        .info-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
-        .info-table td { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .info-table td:first-child { font-weight: 500; color: var(--text); width: 40px; }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .info-table th {
+            color: var(--gold);
+            text-align: left;
+            padding: 10px 14px;
+            border-bottom: 2px solid var(--gold);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .info-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .info-table td:first-child {
+            font-weight: 500;
+            color: var(--text);
+            width: 40px;
+        }
+        .info-table tr:hover td {
+            background: rgba(212, 160, 23, 0.03);
+        }
+        .info-table .gold-cell {
+            color: var(--gold);
+            font-weight: 500;
+        }
 
-        .btn-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 12px 28px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.3s; border-radius: 8px; }
-        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); }
-        .btn-outline-gold { display: inline-block; border: 1.5px solid var(--gold); color: var(--gold); padding: 12px 28px; text-decoration: none; font-weight: 500; font-size: 14px; transition: all 0.3s; border-radius: 8px; }
-        .btn-outline-gold:hover { background: var(--gold); color: var(--bg); }
+        .table-wrap { overflow-x: auto; }
 
-        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 13px; margin-top: 40px; }
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: var(--bg);
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #backToTop.show { opacity: 1; visibility: visible; }
+        #backToTop:hover { background: var(--gold-hover); }
+
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 30px 0 0 0;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 20px;
+        }
         footer a { color: var(--gold); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: left;
+        }
+        .footer-grid h4 {
+            color: #fff;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .footer-grid a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 5px;
+            transition: color 0.3s;
+        }
+        .footer-grid a:hover { color: var(--gold); text-decoration: none; }
+        .footer-grid p { color: var(--text-muted); font-size: 13px; margin: 0; }
 
-        @media (max-width: 600px) { .section-card { padding: 20px; } .page-header { padding: 45px 0 30px; } }
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+        }
+        @media (max-width: 600px) {
+            .section-card { padding: 20px; }
+            .page-header { padding: 45px 0 30px; }
+            .info-table td,
+            .info-table th { padding: 8px 10px; font-size: 13px; }
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--bg-card); border-bottom: 1px solid var(--border);">
         <div class="container">
-            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold);">УМК «Математика»</a>
+            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.1rem;">УМК «Математика»</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
@@ -67,78 +228,260 @@
         </div>
     </nav>
 
+    <!-- ===== HEADER ===== -->
     <header class="page-header">
         <div class="container">
-            <h1>📋 Нормативный раздел</h1>
+            <h1>📋 Нормативный <span class="gold">раздел</span></h1>
             <p class="subtitle">Документы, регламентирующие образовательный процесс</p>
             <p class="stats"><span>240 часов</span> · <span>6 контрольных работ</span> · <span>Выпускной экзамен</span></p>
         </div>
     </header>
 
+    <!-- ===== CONTENT ===== -->
     <div class="content">
         <div class="container">
 
-            <div class="section-card">
-                <h3><span class="icon">📄</span> Выписка из образовательного стандарта</h3>
-                <p>Образовательный стандарт общего среднего образования по учебному предмету «Математика» (базовый уровень).</p>
-                <div class="doc-card"><h5>Знания</h5><ul><li>Основные понятия алгебры и геометрии для решения прикладных задач.</li><li>Свойства степеней, корней, логарифмов, тригонометрических функций.</li><li>Методы решения уравнений, неравенств, систем.</li><li>Понятие производной, её геометрический и физический смысл.</li><li>Основные понятия стереометрии: многогранники, тела вращения.</li></ul></div>
-                <div class="doc-card"><h5>Умения</h5><ul><li>Выполнять тождественные преобразования выражений.</li><li>Решать рациональные, иррациональные, показательные, логарифмические и тригонометрические уравнения.</li><li>Исследовать функции с помощью производной.</li><li>Вычислять площади поверхностей и объёмы геометрических тел.</li></ul></div>
+            <!-- 1. ОБРАЗОВАТЕЛЬНЫЙ СТАНДАРТ -->
+            <div class="section-card fade-up">
+                <h3><span class="icon">📄</span> Образовательный стандарт</h3>
+                <p>Выписка из образовательного стандарта общего среднего образования по учебному предмету «Математика» (базовый уровень).</p>
+                <div class="doc-card">
+                    <h5>📌 Знания</h5>
+                    <ul>
+                        <li>Основные понятия алгебры и геометрии для решения прикладных задач.</li>
+                        <li>Свойства степеней, корней, логарифмов, тригонометрических функций.</li>
+                        <li>Методы решения уравнений, неравенств, систем.</li>
+                        <li>Понятие производной, её геометрический и физический смысл.</li>
+                        <li>Основные понятия стереометрии: многогранники, тела вращения.</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h5>📌 Умения</h5>
+                    <ul>
+                        <li>Выполнять тождественные преобразования выражений.</li>
+                        <li>Решать рациональные, иррациональные, показательные, логарифмические и тригонометрические уравнения.</li>
+                        <li>Исследовать функции с помощью производной.</li>
+                        <li>Вычислять площади поверхностей и объёмы геометрических тел.</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="section-card">
-    <h3><span class="icon">📘</span> Учебная программа</h3>
-    <p>Утверждена Постановлением Министерства образования Республики Беларусь от 29.07.2025 № 132.</p>
-    <table class="info-table">
-        <tr><td>Уровень</td><td>Базовый</td></tr>
-        <tr><td>Классы</td><td>X–XI (10–11 классы)</td></tr>
-        <tr><td>Язык обучения</td><td>Белорусский, русский</td></tr>
-    </table>
-    <p style="margin-top: 12px;">
-        <a href="https://adu.by/images/2025/08/12/Matem-10-11.pdf" target="_blank" style="color: var(--gold); text-decoration: none; font-weight: 500;">📎 Открыть учебную программу (PDF) →</a>
-    </p>
-</div>
+            <!-- 2. УЧЕБНАЯ ПРОГРАММА -->
+            <div class="section-card fade-up">
+                <h3><span class="icon">📘</span> Учебная программа</h3>
+                <p>Утверждена Постановлением Министерства образования Республики Беларусь от 29.07.2025 № 132.</p>
+                <table class="info-table">
+                    <tr><td>📌 Уровень</td><td>Базовый</td></tr>
+                    <tr><td>📌 Классы</td><td>X–XI (10–11 классы)</td></tr>
+                    <tr><td>📌 Язык обучения</td><td>Белорусский, русский</td></tr>
+                </table>
+                <p style="margin-top: 12px;">
+                    <a href="https://adu.by/images/2025/08/12/Matem-10-11.pdf" target="_blank" style="color: var(--gold); text-decoration: none; font-weight: 500;">📎 Открыть учебную программу (PDF) →</a>
+                </p>
+            </div>
 
-            <div class="section-card">
+            <!-- 3. ТЕМАТИЧЕСКИЙ ПЛАН -->
+            <div class="section-card fade-up">
                 <h3><span class="icon">📊</span> Тематический план</h3>
                 <p>Общее количество учебных часов: <span class="badge-gold">240</span></p>
+
                 <div class="doc-card">
-                    <h5>Первый курс — 120 часов</h5>
-                    <table class="info-table">
-                        <tr><td>1.</td><td>Тригонометрия</td><td>36 ч.</td><td><span class="badge-gold">КР №1</span></td></tr>
-                        <tr><td>2.</td><td>Введение в стереометрию</td><td>12 ч.</td><td></td></tr>
-                        <tr><td>3.</td><td>Корень n-й степени</td><td>19 ч.</td><td></td></tr>
-                        <tr><td>4.</td><td>Параллельность прямых и плоскостей</td><td>15 ч.</td><td></td></tr>
-                        <tr><td>5.</td><td>Производная</td><td>15 ч.</td><td><span class="badge-gold">КР №2</span></td></tr>
-                        <tr><td>6.</td><td>Перпендикулярность прямых и плоскостей</td><td>16 ч.</td><td><span class="badge-gold">КР №3</span></td></tr>
-                    </table>
+                    <h5>📘 Первый курс — 120 часов</h5>
+                    <div class="table-wrap">
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>№</th>
+                                    <th>Тема</th>
+                                    <th>Часы</th>
+                                    <th>Контроль</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Тригонометрия</td><td>36</td><td><span class="badge-gold">📝 КР №1</span></td></tr>
+                                <tr><td>2</td><td>Введение в стереометрию</td><td>12</td><td>—</td></tr>
+                                <tr><td>3</td><td>Корень n-й степени</td><td>19</td><td>—</td></tr>
+                                <tr><td>4</td><td>Параллельность прямых и плоскостей</td><td>15</td><td>—</td></tr>
+                                <tr><td>5</td><td>Производная</td><td>15</td><td><span class="badge-gold">📝 КР №2</span></td></tr>
+                                <tr><td>6</td><td>Перпендикулярность прямых и плоскостей</td><td>16</td><td><span class="badge-gold">📝 КР №3</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
                 <div class="doc-card">
-                    <h5>Второй курс — 120 часов</h5>
+                    <h5>📗 Второй курс — 120 часов</h5>
+                    <div class="table-wrap">
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>№</th>
+                                    <th>Тема</th>
+                                    <th>Часы</th>
+                                    <th>Контроль</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>7</td><td>Обобщение понятия степени</td><td>12</td><td>—</td></tr>
+                                <tr><td>8</td><td>Показательная функция</td><td>16</td><td><span class="badge-gold">📝 КР №4</span></td></tr>
+                                <tr><td>9</td><td>Многогранники. Объёмы</td><td>30</td><td>—</td></tr>
+                                <tr><td>10</td><td>Логарифмическая функция</td><td>24</td><td><span class="badge-gold">📝 КР №5</span></td></tr>
+                                <tr><td>11</td><td>Тела вращения</td><td>16</td><td><span class="badge-gold">📝 КР №6</span></td></tr>
+                                <tr><td></td><td>Обобщение. Подготовка к экзамену</td><td>19</td><td>—</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. КАЛЕНДАРНО-ТЕМАТИЧЕСКИЙ ПЛАН -->
+            <div class="section-card fade-up">
+                <h3><span class="icon">📅</span> Календарно-тематический план</h3>
+                <p>Примерное распределение учебных часов по темам.</p>
+                <div class="table-wrap">
                     <table class="info-table">
-                        <tr><td>7.</td><td>Обобщение понятия степени</td><td>12 ч.</td><td></td></tr>
-                        <tr><td>8.</td><td>Показательная функция</td><td>16 ч.</td><td><span class="badge-gold">КР №4</span></td></tr>
-                        <tr><td>9.</td><td>Многогранники. Объёмы</td><td>30 ч.</td><td></td></tr>
-                        <tr><td>10.</td><td>Логарифмическая функция</td><td>24 ч.</td><td><span class="badge-gold">КР №5</span></td></tr>
-                        <tr><td>11.</td><td>Тела вращения</td><td>16 ч.</td><td><span class="badge-gold">КР №6</span></td></tr>
-                        <tr><td></td><td>Обобщение. Подготовка к экзамену</td><td>19 ч.</td><td></td></tr>
+                        <thead>
+                            <tr>
+                                <th>Тема</th>
+                                <th>Лекции</th>
+                                <th>Практика</th>
+                                <th>КР</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Тригонометрия</td><td>16</td><td>16</td><td>4</td></tr>
+                            <tr><td>Введение в стереометрию</td><td>4</td><td>8</td><td>—</td></tr>
+                            <tr><td>Корень n-й степени</td><td>8</td><td>11</td><td>—</td></tr>
+                            <tr><td>Параллельность прямых и плоскостей</td><td>6</td><td>9</td><td>—</td></tr>
+                            <tr><td>Производная</td><td>6</td><td>9</td><td>—</td></tr>
+                            <tr><td>Перпендикулярность прямых и плоскостей</td><td>8</td><td>8</td><td>—</td></tr>
+                            <tr><td>Обобщение понятия степени</td><td>5</td><td>7</td><td>—</td></tr>
+                            <tr><td>Показательная функция</td><td>8</td><td>8</td><td>—</td></tr>
+                            <tr><td>Многогранники. Объёмы</td><td>12</td><td>18</td><td>—</td></tr>
+                            <tr><td>Логарифмическая функция</td><td>10</td><td>14</td><td>—</td></tr>
+                            <tr><td>Тела вращения</td><td>8</td><td>8</td><td>—</td></tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
 
-            <div class="section-card" style="text-align: center;">
-                <h3 style="justify-content: center;"><span class="icon">📥</span> Документы для скачивания</h3>
-                <p style="margin-bottom: 20px;">Полные версии всех документов нормативного раздела в формате PDF.</p>
-                <a href="normativnyj_razdel.pdf" class="btn-gold" style="margin-right: 10px;">📄 Скачать раздел</a>
-                <a href="#" class="btn-outline-gold">📅 Скачать КТП</a>
+            <!-- 5. ФОРМИРУЕМЫЕ КОМПЕТЕНЦИИ -->
+            <div class="section-card fade-up">
+                <h3><span class="icon">🎯</span> Формируемые компетенции</h3>
+                <div class="doc-card">
+                    <h5>🔹 Профессиональная</h5>
+                    <ul>
+                        <li>Применение математических методов для расчёта строительных конструкций.</li>
+                        <li>Выполнение геометрических построений, работа с чертежами и сечениями.</li>
+                        <li>Расчёт объёмов, площадей, углов и уклонов в профессиональных задачах.</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h5>🔹 Информационная</h5>
+                    <ul>
+                        <li>Работа с цифровыми инструментами (GeoGebra, Desmos).</li>
+                        <li>Использование онлайн-ресурсов для самопроверки и построения графиков.</li>
+                        <li>Навыки работы с QR-кодами для доступа к учебным материалам.</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h5>🔹 Коммуникативная</h5>
+                    <ul>
+                        <li>Оформление результатов вычислений в виде таблиц, схем и чертежей.</li>
+                        <li>Умение аргументировать выбор метода решения.</li>
+                        <li>Работа в группе при решении практико-ориентированных задач.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6. РЕКОМЕНДУЕМАЯ ЛИТЕРАТУРА -->
+            <div class="section-card fade-up">
+                <h3><span class="icon">📚</span> Рекомендуемая литература</h3>
+                <ul>
+                    <li><strong>Алгебра и начала анализа:</strong> учеб. пособие для 10–11 кл. / под ред. А.Н. Колмогорова.</li>
+                    <li><strong>Геометрия:</strong> учеб. пособие для 10–11 кл. / под ред. Л.С. Атанасяна.</li>
+                    <li><strong>Математика в строительстве:</strong> сборник практико-ориентированных задач / сост. В.И. Смирнов.</li>
+                    <li><strong>Справочник по элементарной математике:</strong> Выгодский М.Я.</li>
+                    <li><strong>Математические методы в строительном проектировании:</strong> Петров В.А.</li>
+                </ul>
             </div>
 
         </div>
     </div>
 
+    <!-- ===== ФУТЕР ===== -->
     <footer>
-        <div class="container">© 2026 Станулевич А.В., Гродно, Беларусь · <a href="index.html">На главную</a></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Контакты</h4>
+                    <a href="mailto:yukiosimidzu@gmail.com">yukiosimidzu@gmail.com</a>
+                    <a href="https://ggkst.by/" target="_blank" rel="noopener">Сайт колледжа</a>
+                </div>
+                <div>
+                    <h4>Ресурсы</h4>
+                    <a href="https://www.geogebra.org/" target="_blank" rel="noopener">GeoGebra</a>
+                    <a href="https://www.desmos.com/" target="_blank" rel="noopener">Desmos</a>
+                    <a href="https://adu.by/" target="_blank" rel="noopener">adu.by</a>
+                </div>
+                <div>
+                    <h4>Цитата</h4>
+                    <p>«Математика — это язык, на котором инженер разговаривает с природой».</p>
+                    <p style="opacity: 0.5; margin-top: 8px;">— А.Н. Крылов</p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border); margin-top: 25px; padding-top: 20px;">
+                © 2026 Станулевич Андрей Викторович, Гродно, Беларусь<br>
+                <span style="font-size:11px;color:#8b949e;line-height:1.8;">
+                    Все права защищены. Данный учебно-методический комплекс является объектом интеллектуальной собственности.<br>
+                    Полное или частичное воспроизведение, распространение, переработка без письменного разрешения автора запрещены.
+                </span>
+                <div style="margin-top: 12px; font-size: 12px; color: var(--text-muted);">
+                    👁️ Просмотров: <span id="visitCounter">0</span>
+                </div>
+            </div>
+        </div>
     </footer>
 
+    <!-- ===== КНОПКА НАВЕРХ ===== -->
+    <button id="backToTop" title="Наверх">▲</button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Анимация появления
+        function handleScroll() {
+            document.querySelectorAll('.fade-up').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 80) el.classList.add('visible');
+            });
+        }
+        window.addEventListener('load', handleScroll);
+        window.addEventListener('scroll', handleScroll);
+
+        // Кнопка Наверх
+        var backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            backToTop.classList.toggle('show', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Счётчик посещений
+        (function() {
+            let visits = localStorage.getItem('umk_visits');
+            if (visits === null) {
+                visits = 0;
+            } else {
+                visits = parseInt(visits, 10);
+            }
+            visits += 1;
+            localStorage.setItem('umk_visits', visits);
+            const counterEl = document.getElementById('visitCounter');
+            if (counterEl) {
+                counterEl.textContent = visits;
+            }
+        })();
+    </script>
 </body>
 </html>
