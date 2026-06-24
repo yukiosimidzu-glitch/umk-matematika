@@ -714,7 +714,6 @@
         window.addEventListener('scroll', function() { backToTop.classList.toggle('show', window.scrollY > 300); });
         backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-        // Формула дня
         const formulas = [
             { latex: '\\sin^{2}\\alpha + \\cos^{2}\\alpha = 1', topic: 'Тригонометрия' },
             { latex: 'a^{m} \\cdot a^{n} = a^{m+n}', topic: 'Степени' },
@@ -732,7 +731,6 @@
             katex.render(f.latex, el.querySelector('[data-katex]'), { throwOnError: false });
         }
 
-        // Счётчик посещений
         (function() {
             let visits = localStorage.getItem('umk_visits');
             if (visits === null) {
