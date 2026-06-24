@@ -4,68 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Интерактивный раздел — УМК «Математика»</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💻</text></svg>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --gold-hover: #e6b422; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; }
+        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --green: #4ade80; --blue: #60a5fa; --purple: #c084fc; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; }
+        h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        .breadcrumb-bar { padding: 16px 0; font-size: 13px; color: var(--text-muted); }
-        .breadcrumb-bar a { color: var(--gold); text-decoration: none; }
-        .breadcrumb-bar a:hover { text-decoration: underline; }
+        .hero { background: linear-gradient(135deg, #1a212f 0%, #0d1117 100%); border-bottom: 1px solid var(--border); padding: 100px 0 70px; text-align: center; }
+        .hero h1 { color: #fff; font-size: clamp(36px, 5vw, 54px); margin-bottom: 16px; }
+        .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto 30px; line-height: 1.7; }
+        .btn-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 14px 32px; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; transition: all 0.3s; }
+        .btn-gold:hover { background: #e6b422; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,160,23,0.3); color: var(--bg); }
+        .btn-outline { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 10px 22px; text-decoration: none; font-weight: 500; font-size: 14px; border-radius: 6px; transition: all 0.3s; }
+        .btn-outline:hover { background: var(--gold); color: var(--bg); }
 
-        .page-header { background: linear-gradient(180deg, #1a212f 0%, #0d1117 100%); border-bottom: 5px solid var(--gold); padding: 80px 0 50px; text-align: center; }
-        .page-header h1 { color: #fff; font-size: clamp(34px, 5.5vw, 50px); margin-bottom: 10px; }
-        .page-header .subtitle { color: var(--gold); font-size: 1.2rem; }
-        .page-header .stats { color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; }
-        .page-header .stats span { color: var(--gold); font-weight: 600; }
+        .content { padding: 60px 0; }
 
-        .content { padding: 50px 0; }
+        .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; justify-content: center; }
+        .filter-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-size: 14px; transition: all 0.3s; }
+        .filter-btn.active { background: var(--gold); color: var(--bg); border-color: var(--gold); font-weight: 600; }
+        .filter-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
 
-        .section-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 28px; transition: all 0.4s ease; position: relative; overflow: hidden; }
-        .section-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: transparent; transition: background 0.4s ease; border-radius: 16px 16px 0 0; }
-        .section-card:hover { border-color: var(--gold); box-shadow: 0 20px 45px rgba(0,0,0,0.4); transform: translateY(-6px); }
-        .section-card:hover::before { background: var(--gold); }
-        .section-card h3 { color: #fff; font-size: 1.35rem; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
-        .section-card .icon { font-size: 30px; }
-        .section-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+        .models-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .model-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
+        .model-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+        .model-preview { height: 180px; background: #0a0e14; display: flex; align-items: center; justify-content: center; font-size: 60px; border-bottom: 1px solid var(--border); }
+        .model-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+        .model-tag { display: inline-block; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-bottom: 10px; width: fit-content; }
+        .tag-geo { background: rgba(96,165,250,0.15); color: var(--blue); }
+        .tag-desmos { background: rgba(74,222,128,0.15); color: var(--green); }
+        .tag-3d { background: rgba(192,132,252,0.15); color: var(--purple); }
+        .model-body h3 { color: #fff; font-size: 1.1rem; margin-bottom: 6px; }
+        .model-body p { color: var(--text-muted); font-size: 14px; flex: 1; margin-bottom: 14px; line-height: 1.6; }
+        .model-body .model-link { color: var(--gold); font-weight: 500; font-size: 14px; text-decoration: none; margin-top: auto; }
+        .model-body .model-link:hover { text-decoration: underline; }
 
-        .models-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 20px; }
-        .model-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 22px; text-decoration: none; color: inherit; transition: all 0.3s; display: flex; flex-direction: column; }
-        .model-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .model-icon { font-size: 32px; margin-bottom: 12px; }
-        .model-title { color: #fff; font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-        .model-desc { color: var(--text-muted); font-size: 13px; flex-grow: 1; margin-bottom: 12px; }
-        .model-tag { display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 10px; font-weight: 600; margin-right: 5px; }
-        .tag-geogebra { background: rgba(77,166,255,0.15); color: #4da6ff; }
-        .tag-desmos { background: rgba(34,197,94,0.15); color: #22c55e; }
-        .tag-3d { background: rgba(168,85,247,0.15); color: #a855f7; }
-        .model-link { display: inline-block; color: var(--gold); font-weight: 500; font-size: 13px; margin-top: 8px; }
-        .model-link:hover { text-decoration: underline; }
+        .cta-section { text-align: center; padding: 40px 0 20px; }
+        .cta-section h2 { color: #fff; margin-bottom: 10px; }
+        .cta-section p { color: var(--text-muted); margin-bottom: 25px; }
 
-        .btn-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 12px 28px; text-decoration: none; font-weight: 700; font-size: 14px; transition: all 0.3s; border-radius: 10px; }
-        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); }
-        .btn-outline-gold { display: inline-block; border: 1.5px solid var(--gold); color: var(--gold); padding: 10px 22px; text-decoration: none; font-weight: 500; font-size: 13px; transition: all 0.3s; border-radius: 8px; }
-        .btn-outline-gold:hover { background: var(--gold); color: var(--bg); }
-
-        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 13px; margin-top: 40px; }
+        #backToTop { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: var(--bg); border: none; font-size: 22px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+        #backToTop.show { opacity: 1; visibility: visible; }
+        #backToTop:hover { background: #e6b422; }
+        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
         footer a { color: var(--gold); text-decoration: none; }
 
-        @media (max-width: 600px) {
-            .section-card { padding: 20px; }
-            .page-header { padding: 50px 0 35px; }
-            .models-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 600px) { .hero { padding: 60px 0 40px; } .model-preview { height: 140px; font-size: 44px; } }
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--bg-card); border-bottom: 1px solid var(--border);">
         <div class="container">
-            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold);">УМК «Математика»</a>
+            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold); font-size:1.1rem;">УМК «Математика»</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
@@ -80,115 +76,141 @@
         </div>
     </nav>
 
-    <div class="breadcrumb-bar">
-        <div class="container"><a href="index.html">Главная</a> → <strong style="color: var(--gold);">Интерактивный раздел</strong></div>
-    </div>
-
-    <header class="page-header">
+    <header class="hero">
         <div class="container">
-            <h1>💻 Интерактивный раздел</h1>
-            <p class="subtitle">GeoGebra + Desmos — математика в движении</p>
-            <p class="stats"><span>6 моделей</span> · <span>Тригонометрия</span> · <span>Стереометрия</span> · <span>Тела вращения</span></p>
+            <h1>💻 Интерактивная математика</h1>
+            <p>Строительные задачи, которые можно менять в реальном времени. Крутите модели мышкой, двигайте ползунки — смотрите как меняется результат.</p>
+            <a href="#models" class="btn-gold">Смотреть модели ↓</a>
         </div>
     </header>
 
-    <div class="content">
+    <div class="content" id="models">
         <div class="container">
 
-            <div class="section-card">
-                <h3><span class="icon">🎯</span> Как работать с моделями</h3>
-                <p>Каждая модель открывается с подробной инструкцией. Вы можете строить фигуры по шагам, менять параметры и наблюдать, как изменяется результат.</p>
-                <p style="margin-top: 10px;">
-                    <strong style="color: var(--gold);">GeoGebra</strong> — для 3D-моделей, многогранников, сечений, тел вращения.<br>
-                    <strong style="color: var(--gold);">Desmos</strong> — для графиков функций (открывается на desmos.com).
-                </p>
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterModels('all', this)">Все</button>
+                <button class="filter-btn" onclick="filterModels('trig', this)">📐 Тригонометрия</button>
+                <button class="filter-btn" onclick="filterModels('stereo', this)">📦 Стереометрия</button>
+                <button class="filter-btn" onclick="filterModels('bodies', this)">⚪ Тела вращения</button>
+                <button class="filter-btn" onclick="filterModels('func', this)">📈 Функции</button>
             </div>
 
-            <!-- Тригонометрия -->
-            <div class="section-card">
-                <h3><span class="icon">📐</span> Тригонометрия</h3>
-                <div class="models-grid">
-                    <a href="interaktiv/geogebra/edinichnaya-okruzhnost.html" class="model-card">
-                        <div class="model-icon">🎯</div>
-                        <div class="model-title">Единичная окружность</div>
-                        <div class="model-desc">Постройте окружность, точку на ней, отрезки sin и cos. Смотрите знаки по четвертям.</div>
-                        <div><span class="model-tag tag-geogebra">GeoGebra</span></div>
-                        <span class="model-link">Открыть →</span>
-                    </a>
-                    <a href="https://www.desmos.com/calculator?lang=ru" target="_blank" class="model-card">
-                        <div class="model-icon">📈</div>
-                        <div class="model-title">Графики sin, cos, tg</div>
-                        <div class="model-desc">Постройте графики тригонометрических функций. Меняйте амплитуду и период.</div>
-                        <div><span class="model-tag tag-desmos">Desmos</span></div>
-                        <span class="model-link">Открыть на desmos.com →</span>
-                    </a>
+            <div class="models-grid">
+                <div class="model-card" data-category="trig">
+                    <div class="model-preview">🎯</div>
+                    <div class="model-body">
+                        <span class="model-tag tag-geo">GeoGebra</span>
+                        <h3>Единичная окружность</h3>
+                        <p>Двигайте точку по окружности — смотрите как меняются sin и cos. Изучите знаки по четвертям.</p>
+                        <a href="interaktiv/geogebra/edinichnaya-okruzhnost.html" class="model-link">Открыть модель →</a>
+                    </div>
+                </div>
+
+                <div class="model-card" data-category="trig func">
+                    <div class="model-preview">📈</div>
+                    <div class="model-body">
+                        <span class="model-tag tag-desmos">Desmos</span>
+                        <h3>Графики sin, cos, tg</h3>
+                        <p>Постройте графики тригонометрических функций. Меняйте амплитуду, период, сдвиг.</p>
+                        <a href="https://www.desmos.com/calculator?lang=ru" target="_blank" class="model-link">Открыть на desmos.com →</a>
+                    </div>
+                </div>
+
+                <div class="model-card" data-category="stereo">
+                    <div class="model-preview">🧊</div>
+                    <div class="model-body">
+                        <span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span>
+                        <h3>Призма и параллелепипед</h3>
+                        <p>Вращайте призму в 3D. Меняйте размеры — объём пересчитывается автоматически.</p>
+                        <a href="interaktiv/geogebra/prisma-3d.html" class="model-link">Открыть модель →</a>
+                    </div>
+                </div>
+
+                <div class="model-card" data-category="stereo">
+                    <div class="model-preview">🔺</div>
+                    <div class="model-body">
+                        <span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span>
+                        <h3>Пирамида и сечение</h3>
+                        <p>Постройте пирамиду и пересеките её плоскостью. Изучите форму сечения.</p>
+                        <a href="interaktiv/geogebra/piramida-sechenie.html" class="model-link">Открыть модель →</a>
+                    </div>
+                </div>
+
+                <div class="model-card" data-category="bodies">
+                    <div class="model-preview">🥫</div>
+                    <div class="model-body">
+                        <span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span>
+                        <h3>Цилиндр</h3>
+                        <p>Меняйте радиус и высоту — объём и площадь поверхности пересчитываются на лету.</p>
+                        <a href="interaktiv/geogebra/cilindr-3d.html" class="model-link">Открыть модель →</a>
+                    </div>
+                </div>
+
+                <div class="model-card" data-category="bodies">
+                    <div class="model-preview">🔻</div>
+                    <div class="model-body">
+                        <span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span>
+                        <h3>Конус</h3>
+                        <p>Найдите образующую, площадь поверхности и объём. Покрутите конус в 3D.</p>
+                        <a href="interaktiv/geogebra/konus-3d.html" class="model-link">Открыть модель →</a>
+                    </div>
+                </div>
+
+                <div class="model-card" data-category="bodies">
+                    <div class="model-preview">⚽</div>
+                    <div class="model-body">
+                        <span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span>
+                        <h3>Шар и сечение</h3>
+                        <p>Пересеките шар плоскостью. Измерьте радиус сечения, проверьте формулу.</p>
+                        <a href="interaktiv/geogebra/shar-sechenie.html" class="model-link">Открыть модель →</a>
+                    </div>
+                </div>
+
+                <div class="model-card" data-category="func">
+                    <div class="model-preview">🏗️</div>
+                    <div class="model-body">
+                        <span class="model-tag tag-desmos">Desmos</span>
+                        <h3>Оптимизация площади участка</h3>
+                        <p>Огородите участок у стены. Двигайте ползунок — найдите максимальную площадь.</p>
+                        <span style="color:var(--text-muted);font-size:13px;font-style:italic;margin-top:auto;">Скоро будет доступна</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Стереометрия -->
-            <div class="section-card">
-                <h3><span class="icon">📦</span> Стереометрия. Многогранники</h3>
-                <div class="models-grid">
-                    <a href="interaktiv/geogebra/prisma-3d.html" class="model-card">
-                        <div class="model-icon">🧊</div>
-                        <div class="model-title">Призма и параллелепипед</div>
-                        <div class="model-desc">Постройте призму в 3D. Вращайте, меняйте размеры, считайте объём.</div>
-                        <div><span class="model-tag tag-geogebra">GeoGebra</span><span class="model-tag tag-3d">3D</span></div>
-                        <span class="model-link">Открыть →</span>
-                    </a>
-                    <a href="interaktiv/geogebra/piramida-sechenie.html" class="model-card">
-                        <div class="model-icon">🔺</div>
-                        <div class="model-title">Пирамида и сечение</div>
-                        <div class="model-desc">Постройте пирамиду и пересеките её плоскостью. Изучите форму сечения.</div>
-                        <div><span class="model-tag tag-geogebra">GeoGebra</span><span class="model-tag tag-3d">3D</span></div>
-                        <span class="model-link">Открыть →</span>
-                    </a>
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <!-- Тела вращения -->
-            <div class="section-card">
-                <h3><span class="icon">⚪</span> Тела вращения</h3>
-                <div class="models-grid">
-                    <a href="interaktiv/geogebra/cilindr-3d.html" class="model-card">
-                        <div class="model-icon">🥫</div>
-                        <div class="model-title">Цилиндр</div>
-                        <div class="model-desc">Постройте цилиндр. Меняйте радиус и высоту — объём пересчитывается автоматически.</div>
-                        <div><span class="model-tag tag-geogebra">GeoGebra</span><span class="model-tag tag-3d">3D</span></div>
-                        <span class="model-link">Открыть →</span>
-                    </a>
-                    <a href="interaktiv/geogebra/konus-3d.html" class="model-card">
-                        <div class="model-icon">🔻</div>
-                        <div class="model-title">Конус</div>
-                        <div class="model-desc">Постройте конус. Найдите образующую, площадь поверхности и объём.</div>
-                        <div><span class="model-tag tag-geogebra">GeoGebra</span><span class="model-tag tag-3d">3D</span></div>
-                        <span class="model-link">Открыть →</span>
-                    </a>
-                    <a href="interaktiv/geogebra/shar-sechenie.html" class="model-card">
-                        <div class="model-icon">⚽</div>
-                        <div class="model-title">Шар и сечение</div>
-                        <div class="model-desc">Пересеките шар плоскостью. Измерьте радиус сечения, проверьте формулу.</div>
-                        <div><span class="model-tag tag-geogebra">GeoGebra</span><span class="model-tag tag-3d">3D</span></div>
-                        <span class="model-link">Открыть →</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Платформы -->
-            <div class="section-card" style="text-align: center;">
-                <h3 style="justify-content: center;"><span class="icon">🚀</span> Платформы</h3>
-                <p style="margin-bottom: 20px;">Создавайте свои модели и исследуйте математику интерактивно.</p>
-                <a href="https://www.geogebra.org/" target="_blank" class="btn-gold" style="margin-right: 10px;">🌐 GeoGebra</a>
-                <a href="https://www.desmos.com/" target="_blank" class="btn-outline-gold">📊 Desmos</a>
-            </div>
-
+    <div class="cta-section">
+        <div class="container">
+            <h2>🚀 Создавайте свои модели</h2>
+            <p>GeoGebra и Desmos — бесплатные платформы для интерактивной математики</p>
+            <a href="https://www.geogebra.org/" target="_blank" class="btn-gold" style="margin-right:10px;">🌐 GeoGebra</a>
+            <a href="https://www.desmos.com/" target="_blank" class="btn-outline">📊 Desmos</a>
         </div>
     </div>
 
     <footer>
-        <div class="container">© 2026 Станулевич А.В., Гродно, Беларусь · <a href="index.html">На главную</a></div>
+        <div class="container">
+            © 2026 Станулевич А.В., Гродно, Беларусь<br>
+            <span style="font-size:12px;color:var(--text-muted);">Все права защищены. Копирование и распространение без согласия автора запрещено.</span>
+        </div>
     </footer>
 
+    <button id="backToTop" title="Наверх">▲</button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
+        backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+        function filterModels(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.model-card').forEach(card => {
+                card.style.display = (category === 'all' || card.dataset.category.includes(category)) ? 'flex' : 'none';
+            });
+        }
+    </script>
 </body>
 </html>
