@@ -140,18 +140,32 @@
         .start-card h4 { color: #fff; font-size: 1.05rem; margin-bottom: 6px; }
         .start-card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
 
-        .tech-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        /* ОБНОВЛЁННЫЙ БЛОК ТЕХНОЛОГИЙ — компактный */
+        .tech-grid { 
+            display: flex; 
+            gap: 12px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+        }
         .tech-item {
-            background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 16px 24px;
-            border-radius: 8px; text-align: center; font-size: 13px; color: var(--text-muted);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
             transition: all 0.3s;
+            min-width: 100px;
+            flex: 0 1 auto;
         }
         .tech-item:hover { border-color: var(--gold); color: #fff; }
         .tech-item .tech-icon { 
-    font-size: 40px; 
-    display: block; 
-    margin-bottom: 8px; 
-}
+            font-size: 32px; 
+            display: block; 
+            margin-bottom: 4px; 
+        }
+
         .interactive-block {
             background: var(--bg-card); border: 1px solid var(--gold); border-radius: 8px;
             padding: 50px; text-align: center;
@@ -202,6 +216,8 @@
             .footer-grid { grid-template-columns: 1fr; }
             .hero-title { font-size: 38px; }
             section { padding: 60px 0; }
+            .tech-item { min-width: 80px; padding: 10px 14px; }
+            .tech-item .tech-icon { font-size: 28px; }
         }
     </style>
 </head>
@@ -360,19 +376,19 @@
     </section>
 
     <section id="tech">
-    <div class="container">
-        <div class="section-label fade-up">Технологии</div>
-        <h2 class="section-title fade-up">На чём построен УМК</h2>
-        <div class="tech-grid fade-up">
-            <div class="tech-item"><span class="tech-icon">📐</span>GeoGebra</div>
-            <div class="tech-item"><span class="tech-icon">📊</span>Desmos</div>
-            <div class="tech-item"><span class="tech-icon">📝</span>KaTeX</div>
-            <div class="tech-item"><span class="tech-icon">🌐</span>GitHub Pages</div>
-            <div class="tech-item"><span class="tech-icon">🎨</span>Bootstrap 5</div>
-            <div class="tech-item"><span class="tech-icon">⚡</span>Vanilla JS</div>
+        <div class="container">
+            <div class="section-label fade-up">Технологии</div>
+            <h2 class="section-title fade-up">На чём построен УМК</h2>
+            <div class="tech-grid fade-up">
+                <div class="tech-item"><span class="tech-icon">📐</span>GeoGebra</div>
+                <div class="tech-item"><span class="tech-icon">📊</span>Desmos</div>
+                <div class="tech-item"><span class="tech-icon">📝</span>KaTeX</div>
+                <div class="tech-item"><span class="tech-icon">🌐</span>GitHub Pages</div>
+                <div class="tech-item"><span class="tech-icon">🎨</span>Bootstrap 5</div>
+                <div class="tech-item"><span class="tech-icon">⚡</span>Vanilla JS</div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <section id="interactive">
         <div class="container">
@@ -393,15 +409,13 @@
                 <div class="author-grid">
                     <div class="author-photo">📷<br>Место для фото</div>
                     <div>
-                        <!-- ОБНОВЛЁННЫЙ ТЕКСТ — ВАРИАНТ 2 (личное обращение) -->
                         <p style="font-size: 16px; color: var(--text-muted); line-height: 1.8;">
-                            Здравствуйте! Меня зовут Андрей Викторович Станулевич. Я преподаю математику в Гродненском государственном колледже строительных технологий. 
+                            Здравствуйте! Меня зовут Станулевич Андрей Викторович. Я преподаю математику в Гродненском государственном колледже строительных технологий уже 5 лет. 
                             <br><br>
                             Этот учебно-методический комплекс создан для вас с одной целью: показать, что математика — это язык, на котором говорит строительство. В каждом разделе вы найдёте задания, приближенные к реальным профессиональным ситуациям: расчёт материалов, работа с чертежами, вычисление углов, объёмов и прочности конструкций. 
                             <br><br>
                             Я активно использую цифровые инструменты GeoGebra и Desmos, чтобы сделать занятия наглядными и интересными. Искренне надеюсь, что УМК поможет вам не только освоить программу, но и полюбить математику как основу вашей будущей профессии.
                         </p>
-                        <!-- ОБНОВЛЁННАЯ ЦИТАТА -->
                         <div class="author-quote">«Строитель, который понимает математику, строит не просто стены — он строит будущее».</div>
                     </div>
                 </div>
@@ -422,6 +436,10 @@
                     Все права защищены. Данный учебно-методический комплекс является объектом интеллектуальной собственности.<br>
                     Полное или частичное воспроизведение, распространение, переработка без письменного разрешения автора запрещены.
                 </span>
+                <!-- СЧЁТЧИК ПОСЕЩЕНИЙ -->
+                <div style="margin-top: 12px; font-size: 12px; color: var(--text-muted);">
+                    👁️ Просмотров: <span id="visitCounter">0</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -457,6 +475,22 @@
         const el = document.getElementById('heroFormula');
         el.innerHTML = '📅 Формула дня: <span data-katex="' + f.latex + '"></span> — «' + f.topic + '»';
         katex.render(f.latex, el.querySelector('[data-katex]'), { throwOnError: false });
+
+        // Счётчик посещений (localStorage)
+        (function() {
+            let visits = localStorage.getItem('umk_visits');
+            if (visits === null) {
+                visits = 0;
+            } else {
+                visits = parseInt(visits, 10);
+            }
+            visits += 1;
+            localStorage.setItem('umk_visits', visits);
+            const counterEl = document.getElementById('visitCounter');
+            if (counterEl) {
+                counterEl.textContent = visits;
+            }
+        })();
     </script>
 </body>
 </html>
