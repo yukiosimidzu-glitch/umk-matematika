@@ -292,7 +292,7 @@
         const levelNames = { f: 'Фундамент', w: 'Стены', r: 'Кровля' };
         const levelBadgeClass = { f: 'level-badge-f', w: 'level-badge-w', r: 'level-badge-r' };
 
-        function renderWorks() {
+               function renderWorks() {
             const modalsContainer = document.getElementById('modalsContainer');
             modalsContainer.innerHTML = '';
 
@@ -306,8 +306,11 @@
                     const numStr = String(num).padStart(2, '0');
                     const card = document.createElement('div');
                     card.className = 'topic-card level-' + level;
-                    card.setAttribute('data-bs-toggle', 'modal');
-                    card.setAttribute('data-bs-target', '#modal' + num);
+                    card.addEventListener('click', function(e) {
+                        // Если кликнули по статусу — не открываем модалку
+                        if (e.target.closest('.topic-status')) return;
+                        openModal(num);
+                    });
                     card.innerHTML = `
                         <div class="topic-num">ПР №${num} · ${levelNames[level]}</div>
                         <div class="topic-title">${titles[num]}</div>
@@ -332,13 +335,20 @@
                 container.querySelectorAll('.topic-status').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
-                        e.preventDefault();
                         const num = parseInt(this.getAttribute('data-num'));
                         cycleStatus(num);
                     });
                 });
             });
             updateProgress();
+        }
+
+        function openModal(num) {
+            const modal = document.getElementById('modal' + num);
+            if (modal) {
+                const bsModal = new bootstrap.Modal(modal);
+                bsModal.show();
+            }
         }
 
         function getStatus(num) { return localStorage.getItem('pr_status_' + num) || 'not-done'; }
