@@ -222,6 +222,32 @@
             background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
         }
 
+        /* ===== КАРТОЧКИ РАЗДЕЛОВ ===== */
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+            border-radius: 6px; padding: 32px 24px; text-decoration: none; color: inherit;
+            transition: all 0.3s; display: flex; flex-direction: column;
+        }
+        .card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); background: rgba(212,160,23,0.02); }
+        .card-icon { font-size: 34px; margin-bottom: 14px; }
+        .card-title { font-size: 18px; color: #fff; margin-bottom: 8px; font-weight: 600; }
+        .card-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; flex-grow: 1; margin-bottom: 12px; }
+        .card-link { display: inline-block; font-size: 13px; font-weight: 500; color: var(--gold); text-decoration: none; margin-top: auto; }
+        .card:hover .card-link { text-decoration: underline; }
+
+        /* ===== С ЧЕГО НАЧАТЬ ===== */
+        .start-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .start-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+            border-radius: 6px; padding: 30px 24px; text-decoration: none; color: inherit;
+            transition: all 0.3s; display: block;
+        }
+        .start-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        .start-icon { font-size: 36px; margin-bottom: 12px; }
+        .start-card h4 { color: #fff; font-size: 1.05rem; margin-bottom: 6px; }
+        .start-card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
+
         /* ===== БЛОК «ПОЧЕМУ ВЫБИРАЮТ» ===== */
         .choose-grid {
             display: grid;
@@ -256,6 +282,37 @@
             font-size: 13px;
             line-height: 1.5;
             margin: 0;
+        }
+
+        /* ===== ТЕХНОЛОГИИ ===== */
+        .tech-grid {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .tech-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            padding: 16px 24px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            min-width: 110px;
+            flex: 0 1 auto;
+        }
+        .tech-item:hover {
+            border-color: var(--gold);
+            color: #fff;
+            background: rgba(212, 160, 23, 0.05);
+            transform: translateY(-2px);
+        }
+        .tech-item .tech-icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 6px;
         }
 
         /* ===== МИНИ-АППЛЕТЫ ===== */
@@ -315,63 +372,7 @@
             margin: 0;
         }
 
-        .section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); margin-bottom: 15px; }
-        .section-title { font-size: clamp(30px, 5vw, 44px); margin-bottom: 30px; color: #fff; }
-
-        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .card {
-            background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
-            border-radius: 6px; padding: 32px 24px; text-decoration: none; color: inherit;
-            transition: all 0.3s; display: flex; flex-direction: column;
-        }
-        .card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); background: rgba(212,160,23,0.02); }
-        .card-icon { font-size: 34px; margin-bottom: 14px; }
-        .card-title { font-size: 18px; color: #fff; margin-bottom: 8px; font-weight: 600; }
-        .card-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; flex-grow: 1; margin-bottom: 12px; }
-        .card-link { display: inline-block; font-size: 13px; font-weight: 500; color: var(--gold); text-decoration: none; margin-top: auto; }
-        .card:hover .card-link { text-decoration: underline; }
-
-        .start-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .start-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
-            border-radius: 6px; padding: 30px 24px; text-decoration: none; color: inherit;
-            transition: all 0.3s; display: block;
-        }
-        .start-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
-        .start-icon { font-size: 36px; margin-bottom: 12px; }
-        .start-card h4 { color: #fff; font-size: 1.05rem; margin-bottom: 6px; }
-        .start-card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
-
-        .tech-grid {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .tech-item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border);
-            padding: 16px 24px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-muted);
-            transition: all 0.3s;
-            min-width: 110px;
-            flex: 0 1 auto;
-        }
-        .tech-item:hover {
-            border-color: var(--gold);
-            color: #fff;
-            background: rgba(212, 160, 23, 0.05);
-            transform: translateY(-2px);
-        }
-        .tech-item .tech-icon {
-            font-size: 48px;
-            display: block;
-            margin-bottom: 6px;
-        }
-
+        /* ===== ИНТЕРАКТИВНЫЙ БЛОК ===== */
         .interactive-block {
             background: var(--bg-card); border: 1px solid var(--gold); border-radius: 8px;
             padding: 50px; text-align: center;
@@ -379,6 +380,9 @@
         .interactive-block h3 { color: #fff; margin-bottom: 10px; }
         .interactive-block p { color: var(--text-muted); margin-bottom: 20px; max-width: 600px; margin-left: auto; margin-right: auto; }
         .interactive-icons { font-size: 40px; margin-bottom: 20px; display: flex; gap: 20px; justify-content: center; }
+
+        .section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); margin-bottom: 15px; }
+        .section-title { font-size: clamp(30px, 5vw, 44px); margin-bottom: 30px; color: #fff; }
 
         .author-block {
             background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
@@ -425,12 +429,8 @@
             .hero-author { text-align: center; }
             .choose-grid { grid-template-columns: repeat(2, 1fr); }
             .applets-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 900px) {
             .cards-grid { grid-template-columns: repeat(2, 1fr); }
             .start-grid { grid-template-columns: repeat(2, 1fr); }
-            .author-grid { grid-template-columns: 1fr; text-align: center; }
-            .author-photo { margin: 0 auto; }
         }
         @media (max-width: 576px) {
             .cards-grid, .start-grid, .choose-grid { grid-template-columns: 1fr; }
@@ -447,6 +447,8 @@
             .applet-frame { height: 200px; }
             .interactive-block { padding: 30px 20px; }
             .author-block { padding: 24px; }
+            .author-grid { grid-template-columns: 1fr; text-align: center; }
+            .author-photo { margin: 0 auto; }
         }
     </style>
 </head>
@@ -560,6 +562,34 @@
         </div>
     </section>
 
+    <!-- ===== СТРУКТУРА УМК ===== -->
+    <section id="sections">
+        <div class="container">
+            <div class="section-label fade-up">Структура УМК</div>
+            <h2 class="section-title fade-up">Разделы комплекса</h2>
+            <div class="cards-grid fade-up">
+                <a href="teoreticheskij.html" class="card">
+                    <div class="card-icon">📚</div><h3 class="card-title">Теоретический раздел</h3><p class="card-text">9 опорных конспектов. Формула дня, прогресс-бар, QR-коды, аудио-озвучка тем.</p><span class="card-link">Перейти →</span>
+                </a>
+                <a href="prakticheskij.html" class="card">
+                    <div class="card-icon">🔧</div><h3 class="card-title">Практический раздел</h3><p class="card-text">28 практических работ. Трёхуровневая система, таймер, режим «Без ответов».</p><span class="card-link">Перейти →</span>
+                </a>
+                <a href="kontrol.html" class="card">
+                    <div class="card-icon">📝</div><h3 class="card-title">Контроль знаний</h3><p class="card-text">Входной, текущий, тематический, итоговый. Шкалы перевода баллов.</p><span class="card-link">Перейти →</span>
+                </a>
+                <a href="vspomogatelnyj.html" class="card">
+                    <div class="card-icon">🧰</div><h3 class="card-title">Вспомогательный раздел</h3><p class="card-text">Паспорт УМК, пояснительная записка, методическая документация, FAQ.</p><span class="card-link">Перейти →</span>
+                </a>
+                <a href="interaktiv.html" class="card">
+                    <div class="card-icon">💻</div><h3 class="card-title">Интерактивный раздел</h3><p class="card-text">GeoGebra-модели, калькуляторы, графический тренажёр, строй-игра.</p><span class="card-link">Перейти →</span>
+                </a>
+                <a href="normativnyj.html" class="card">
+                    <div class="card-icon">📋</div><h3 class="card-title">Нормативный раздел</h3><p class="card-text">Учебная программа, КТП, нормативные документы, приказы.</p><span class="card-link">Перейти →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== ПОЧЕМУ ВЫБИРАЮТ ===== -->
     <section id="choose">
         <div class="container">
@@ -615,7 +645,7 @@
                 <div class="applet-card">
                     <div class="applet-frame">
                         <span class="applet-label">3D-модель</span>
-                        <iframe src="https://www.geogebra.org/calculator/qbwz8wng?embed" title="3D-модель многогранника"></iframe>
+                        <iframe src="https://www.geogebra.org/calculator/t4jq4v5p?embed" title="3D-модель многогранника"></iframe>
                     </div>
                     <div class="applet-body">
                         <h4>🧊 Вращение многогранника</h4>
@@ -625,41 +655,13 @@
                 <div class="applet-card">
                     <div class="applet-frame">
                         <span class="applet-label">График</span>
-                        <iframe src="https://www.geogebra.org/calculator/h7jqkz7a?embed" title="График функции с параметром"></iframe>
+                        <iframe src="https://www.geogebra.org/calculator/r5q6n8p7?embed" title="График функции с параметром"></iframe>
                     </div>
                     <div class="applet-body">
                         <h4>📈 График с параметром</h4>
                         <p>Меняйте коэффициенты и смотрите, как меняется график в реальном времени.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== РАЗДЕЛЫ УМК ===== -->
-    <section id="sections">
-        <div class="container">
-            <div class="section-label fade-up">Структура УМК</div>
-            <h2 class="section-title fade-up">Разделы комплекса</h2>
-            <div class="cards-grid fade-up">
-                <a href="teoreticheskij.html" class="card">
-                    <div class="card-icon">📚</div><h3 class="card-title">Теоретический раздел</h3><p class="card-text">9 опорных конспектов. Формула дня, прогресс-бар, QR-коды, аудио-озвучка тем.</p><span class="card-link">Перейти →</span>
-                </a>
-                <a href="prakticheskij.html" class="card">
-                    <div class="card-icon">🔧</div><h3 class="card-title">Практический раздел</h3><p class="card-text">28 практических работ. Трёхуровневая система, таймер, режим «Без ответов».</p><span class="card-link">Перейти →</span>
-                </a>
-                <a href="kontrol.html" class="card">
-                    <div class="card-icon">📝</div><h3 class="card-title">Контроль знаний</h3><p class="card-text">Входной, текущий, тематический, итоговый. Шкалы перевода баллов.</p><span class="card-link">Перейти →</span>
-                </a>
-                <a href="vspomogatelnyj.html" class="card">
-                    <div class="card-icon">🧰</div><h3 class="card-title">Вспомогательный раздел</h3><p class="card-text">Паспорт УМК, пояснительная записка, методическая документация, FAQ.</p><span class="card-link">Перейти →</span>
-                </a>
-                <a href="interaktiv.html" class="card">
-                    <div class="card-icon">💻</div><h3 class="card-title">Интерактивный раздел</h3><p class="card-text">GeoGebra-модели, калькуляторы, графический тренажёр, строй-игра.</p><span class="card-link">Перейти →</span>
-                </a>
-                <a href="normativnyj.html" class="card">
-                    <div class="card-icon">📋</div><h3 class="card-title">Нормативный раздел</h3><p class="card-text">Учебная программа, КТП, нормативные документы, приказы.</p><span class="card-link">Перейти →</span>
-                </a>
             </div>
         </div>
     </section>
