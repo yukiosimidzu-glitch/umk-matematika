@@ -416,5 +416,12 @@
             el.classList.toggle('open');
         }
     </script>
+<script>
+    if (window.location.search.includes('nosol=1')) {
+        document.querySelectorAll('.solution, .solution-block, .answer, .answer-block, .btn-show').forEach(el => {
+            el.style.display = 'none';
+        });
+    }
+</script>
 </body>
 </html>

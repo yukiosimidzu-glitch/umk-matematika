@@ -136,5 +136,12 @@
         a.download = 'kr-05-logarifmicheskaya-v2.html'; a.click(); URL.revokeObjectURL(a.href);
     }
 </script>
+<script>
+    if (window.location.search.includes('nosol=1')) {
+        document.querySelectorAll('.solution, .solution-block, .answer, .answer-block, .btn-show').forEach(el => {
+            el.style.display = 'none';
+        });
+    }
+</script>
 </body>
 </html>
