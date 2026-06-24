@@ -4,98 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вспомогательный раздел — УМК «Математика»</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧰</text></svg>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --gold-hover: #e6b422; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; }
+        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --yellow: #fbbf24; --green: #4ade80; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        .breadcrumb-bar { padding: 16px 0; font-size: 13px; color: var(--text-muted); }
-        .breadcrumb-bar a { color: var(--gold); text-decoration: none; }
-        .breadcrumb-bar a:hover { text-decoration: underline; }
+        .page-header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 80px 0 40px; text-align: center; }
+        .page-header h1 { color: #fff; font-size: clamp(36px, 5vw, 52px); margin-bottom: 10px; }
+        .page-header p { color: var(--gold); font-size: 1.1rem; }
 
-        .page-header { background: linear-gradient(180deg, #1a212f 0%, #0d1117 100%); border-bottom: 5px solid var(--gold); padding: 80px 0 50px; text-align: center; }
-        .page-header h1 { color: #fff; font-size: clamp(34px, 5.5vw, 50px); margin-bottom: 10px; }
-        .page-header .subtitle { color: var(--gold); font-size: 1.3rem; }
-        .page-header .badge-row { display: flex; justify-content: center; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
-        .header-badge { display: inline-block; background: rgba(212,160,23,0.1); border: 1px solid var(--gold); color: var(--gold); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+        .content { padding: 60px 0; }
 
-        .content { padding: 50px 0; }
-
-        .section-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 28px; transition: all 0.4s ease; position: relative; overflow: hidden; }
-        .section-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: transparent; transition: background 0.4s ease; border-radius: 16px 16px 0 0; }
-        .section-card:hover { border-color: var(--gold); box-shadow: 0 20px 45px rgba(0,0,0,0.4); transform: translateY(-6px); }
-        .section-card:hover::before { background: var(--gold); }
-        .section-card h3 { color: #fff; font-size: 1.35rem; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
-        .section-card .icon { font-size: 30px; }
-        .section-card p, .section-card li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
-
-        .pasport-highlight { background: rgba(212,160,23,0.04); border: 2px solid var(--gold); border-radius: 16px; padding: 35px; margin-bottom: 28px; text-align: center; }
-        .pasport-highlight h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 12px; }
-        .pasport-highlight .big-icon { font-size: 50px; margin-bottom: 15px; }
+        .section-card { background: var(--bg-card); border: 1px solid var(--border); padding: 35px; margin-bottom: 25px; border-radius: 8px; }
+        .section-card h2 { color: #fff; margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 12px; }
+        .section-card .icon { font-size: 32px; }
+        .section-desc { color: var(--text-muted); margin-bottom: 25px; font-size: 1rem; }
 
         .doc-list { list-style: none; padding: 0; }
-        .doc-list li { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; transition: background 0.2s; border-radius: 10px; }
+        .doc-list li { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; transition: background 0.2s; border-radius: 8px; }
         .doc-list li:hover { background: rgba(212,160,23,0.03); }
         .doc-list li:last-child { border-bottom: none; }
-        .doc-name { color: #fff; font-weight: 500; }
+        .doc-name { color: #fff; font-weight: 500; font-size: 15px; }
         .doc-desc { color: var(--text-muted); font-size: 13px; }
-        .badge-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 4px 12px; font-size: 10px; font-weight: 700; border-radius: 10px; }
-
-        .formula-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
-        .formula-table th, .formula-table td { padding: 12px 14px; border: 1px solid var(--border); text-align: left; }
-        .formula-table th { background: rgba(212,160,23,0.08); color: var(--gold); font-weight: 600; }
-        .formula-table td { color: var(--text-muted); }
-        .formula-table td.formula { color: #fff; font-weight: 500; text-align: center; white-space: nowrap; }
-
-        .book-link { color: var(--gold); text-decoration: none; font-weight: 500; font-size: 13px; }
-        .book-link:hover { text-decoration: underline; color: var(--gold-hover); }
-
-        .btn-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 12px 28px; text-decoration: none; font-weight: 700; font-size: 14px; transition: all 0.3s; border-radius: 10px; }
-        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); }
-        .btn-outline-gold { display: inline-block; border: 1.5px solid var(--gold); color: var(--gold); padding: 10px 22px; text-decoration: none; font-weight: 500; font-size: 13px; transition: all 0.3s; border-radius: 8px; cursor: pointer; background: transparent; }
+        .badge { display: inline-block; background: var(--gold); color: var(--bg); padding: 4px 12px; font-size: 11px; font-weight: 600; border-radius: 4px; margin-left: 8px; }
+        .book-link { color: var(--gold); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .book-link:hover { text-decoration: underline; }
+        .btn-outline-gold { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 8px 20px; text-decoration: none; font-weight: 500; font-size: 14px; transition: all 0.3s; border-radius: 6px; cursor: pointer; background: transparent; }
         .btn-outline-gold:hover { background: var(--gold); color: var(--bg); }
-        .btn-zip { display: inline-block; background: var(--gold); color: var(--bg); padding: 16px 36px; text-decoration: none; font-weight: 700; font-size: 16px; transition: all 0.3s; border-radius: 12px; }
-        .btn-zip:hover { background: var(--gold-hover); transform: translateY(-3px); box-shadow: 0 12px 35px rgba(212,160,23,0.4); }
 
-        .teacher-block { background: rgba(212,160,23,0.04); border: 1px dashed var(--gold); padding: 26px 28px; border-radius: 12px; margin-top: 20px; }
-        .teacher-block h4 { color: var(--gold); margin-bottom: 8px; }
-        .teacher-block ul { color: var(--text-muted); font-size: 14px; padding-left: 20px; line-height: 2; }
+        .formula-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
+        .formula-table th, .formula-table td { padding: 11px 14px; border: 1px solid var(--border); text-align: left; }
+        .formula-table th { background: rgba(212,160,23,0.08); color: var(--gold); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .formula-table td { color: var(--text-muted); }
+        .formula-table td strong { color: #fff; }
+
+        .pasport-highlight { background: rgba(212,160,23,0.03); border: 1px solid var(--gold); border-radius: 8px; padding: 35px; margin-bottom: 25px; }
+        .pasport-highlight h2 { color: var(--gold); font-size: 1.5rem; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+
+        .teacher-block { background: rgba(212,160,23,0.04); border: 1px dashed var(--gold); padding: 26px 28px; border-radius: 8px; margin-top: 20px; }
+        .teacher-block h4 { color: var(--gold); margin-bottom: 12px; font-size: 1.1rem; }
+        .teacher-block ul { color: var(--text-muted); font-size: 15px; padding-left: 20px; line-height: 2; }
 
         .modal-content { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); }
         .modal-header { border-bottom: 1px solid var(--border); }
         .modal-title { color: var(--gold); font-family: 'Playfair Display', serif; }
-        .modal-body ul { color: var(--text-muted); padding-left: 20px; line-height: 2; }
-        .modal-body p { color: var(--text-muted); }
+        .modal-body { color: var(--text-muted); font-size: 15px; line-height: 1.8; }
+        .modal-body ul { padding-left: 20px; }
         .modal-body a { color: var(--gold); }
         .btn-close { filter: invert(1); }
 
-        .fab-download { position: fixed; bottom: 30px; right: 30px; z-index: 999; background: var(--gold); color: var(--bg); width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 8px 30px rgba(0,0,0,0.5); transition: all 0.3s; text-decoration: none; opacity: 0; visibility: hidden; }
-        .fab-download.show { opacity: 1; visibility: visible; }
-        .fab-download:hover { background: var(--gold-hover); transform: scale(1.1); }
-
-        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 13px; margin-top: 40px; }
+        #backToTop { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: var(--bg); border: none; font-size: 22px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+        #backToTop.show { opacity: 1; visibility: visible; }
+        #backToTop:hover { background: #e6b422; }
+        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
         footer a { color: var(--gold); text-decoration: none; }
 
-        @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(212,160,23,0.4); } 50% { box-shadow: 0 0 0 15px rgba(212,160,23,0); } }
-        .pulse { animation: pulse 2s infinite; }
-
-        @media (max-width: 600px) {
-            .section-card, .pasport-highlight { padding: 20px; }
-            .page-header { padding: 50px 0 35px; }
-            .doc-list li { flex-direction: column; align-items: flex-start; }
-            .fab-download { width: 48px; height: 48px; font-size: 20px; bottom: 20px; right: 20px; }
-        }
+        @media (max-width: 600px) { .section-card, .pasport-highlight { padding: 22px; } .page-header { padding: 60px 0 30px; } .doc-list li { flex-direction: column; align-items: flex-start; } }
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--bg-card); border-bottom: 1px solid var(--border);">
         <div class="container">
-            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold);">УМК «Математика»</a>
+            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold); font-size:1.1rem;">УМК «Математика»</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
@@ -110,124 +87,93 @@
         </div>
     </nav>
 
-    <div class="breadcrumb-bar">
-        <div class="container"><a href="index.html">Главная</a> → <strong style="color: var(--gold);">Вспомогательный раздел</strong></div>
-    </div>
-
     <header class="page-header">
         <div class="container">
             <h1>🧰 Вспомогательный раздел</h1>
-            <p class="subtitle">Учебно-программная и методическая поддержка УМК</p>
-            <div class="badge-row">
-                <span class="header-badge">📋 Паспорт профилизации</span>
-                <span class="header-badge">📐 Формулы строителя</span>
-                <span class="header-badge">📖 Методическая документация</span>
-                <span class="header-badge">📚 Литература и ЭОР</span>
-            </div>
+            <p>Учебно-программная и методическая поддержка УМК</p>
         </div>
     </header>
 
     <div class="content">
         <div class="container">
 
-            <!-- ПАСПОРТ ПРОФИЛИЗАЦИИ -->
             <div class="pasport-highlight">
-                <div class="big-icon">📋</div>
-                <h3>Паспорт профилизации</h3>
-                <p style="margin-bottom: 20px;">Документ, систематизирующий межпредметные связи математики с дисциплинами профессионального цикла</p>
-                <table class="formula-table" style="text-align: left;">
+                <h2><span style="font-size:36px;">📋</span> Паспорт профилизации</h2>
+                <p class="section-desc">Документ, систематизирующий межпредметные связи математики с дисциплинами профессионального цикла.</p>
+                <div style="overflow-x:auto;">
+                <table class="formula-table">
                     <thead><tr><th>№</th><th>Тема математики</th><th>Профессиональная дисциплина</th><th>Применение в профессии</th></tr></thead>
                     <tbody>
-                        <tr><td>1</td><td><strong>Тригонометрия</strong></td><td>Геодезия, Кровельные работы</td><td>Расчёт уклона кровли, геодезическая разбивка участка, определение высоты объекта</td></tr>
-                        <tr><td>2</td><td><strong>Производная</strong></td><td>Материаловедение, Сопромат</td><td>Оптимизация расхода материалов, расчёт прочности балок, скорость набора прочности бетона</td></tr>
-                        <tr><td>3</td><td><strong>Перпендикулярность</strong></td><td>Геодезия, Строительные работы</td><td>Контроль вертикальности конструкций, установка опалубки под прямым углом</td></tr>
-                        <tr><td>4</td><td><strong>Многогранники. Объёмы</strong></td><td>Земляные работы, Бетонные работы</td><td>Расчёт объёмов котлованов, траншей, фундаментов, калькуляция материалов</td></tr>
-                        <tr><td>5</td><td><strong>Тела вращения</strong></td><td>Проектирование, Сантехника</td><td>Расчёт объёмов резервуаров, цистерн, круглых колонн, куполов</td></tr>
-                        <tr><td>6</td><td><strong>Показательные функции</strong></td><td>Материаловедение</td><td>Моделирование роста прочности бетона, расчёт сложных процентов</td></tr>
-                        <tr><td>7</td><td><strong>Логарифмы</strong></td><td>Строительная физика</td><td>Расчёт звукоизоляции, измерение уровня шума на стройплощадке</td></tr>
-                        <tr><td>8</td><td><strong>Корни и степени</strong></td><td>Черчение, Разметка</td><td>Расчёт размеров конструкций, определение стороны по площади</td></tr>
-                        <tr><td>9</td><td><strong>Параллельность</strong></td><td>Строительные работы, Геодезия</td><td>Контроль параллельности несущих конструкций, разметка фундамента</td></tr>
-                        <tr><td>10</td><td><strong>Теорема Пифагора</strong></td><td>Кровельные работы, Разметка</td><td>Расчёт длины стропил, диагоналей, тросов, проверка прямых углов</td></tr>
+                        <tr><td>1</td><td><strong>Тригонометрия</strong></td><td>Геодезия, Кровельные работы</td><td>Расчёт уклона кровли, геодезическая разбивка участка</td></tr>
+                        <tr><td>2</td><td><strong>Производная</strong></td><td>Материаловедение, Сопромат</td><td>Оптимизация расхода материалов, расчёт прочности балок</td></tr>
+                        <tr><td>3</td><td><strong>Перпендикулярность</strong></td><td>Геодезия, Строительные работы</td><td>Контроль вертикальности конструкций</td></tr>
+                        <tr><td>4</td><td><strong>Многогранники. Объёмы</strong></td><td>Земляные работы, Бетонные работы</td><td>Расчёт объёмов котлованов, траншей, фундаментов</td></tr>
+                        <tr><td>5</td><td><strong>Тела вращения</strong></td><td>Проектирование, Сантехника</td><td>Расчёт объёмов резервуаров, цистерн, куполов</td></tr>
+                        <tr><td>6</td><td><strong>Показательные функции</strong></td><td>Материаловедение</td><td>Моделирование роста прочности бетона</td></tr>
+                        <tr><td>7</td><td><strong>Логарифмы</strong></td><td>Строительная физика</td><td>Расчёт звукоизоляции, уровня шума</td></tr>
+                        <tr><td>8</td><td><strong>Корни и степени</strong></td><td>Черчение, Разметка</td><td>Расчёт размеров конструкций</td></tr>
+                        <tr><td>9</td><td><strong>Параллельность</strong></td><td>Строительные работы</td><td>Контроль параллельности несущих конструкций</td></tr>
+                        <tr><td>10</td><td><strong>Теорема Пифагора</strong></td><td>Кровельные работы, Разметка</td><td>Расчёт длины стропил, диагоналей, проверка прямых углов</td></tr>
                     </tbody>
                 </table>
-                <p style="margin-top: 20px; font-size: 13px; color: var(--text-muted);">Паспорт составлен в соответствии с учебной программой для учреждений ССО.</p>
+                </div>
+                <p style="margin-top:15px;font-size:13px;color:var(--text-muted);">Паспорт составлен в соответствии с учебной программой для учреждений ССО.</p>
             </div>
 
-            <!-- ФОРМУЛЫ -->
             <div class="section-card">
-                <h3><span class="icon">📐</span> Ключевые формулы для строителя</h3>
-                <p>Самые важные математические формулы с числовыми примерами.</p>
+                <h2><span class="icon">📐</span> Ключевые формулы для строителя</h2>
+                <p class="section-desc">Самые важные математические формулы с числовыми примерами.</p>
+                <div style="overflow-x:auto;">
                 <table class="formula-table">
                     <thead><tr><th>Тема</th><th>Формула</th><th>Применение</th><th>Пример расчёта</th></tr></thead>
                     <tbody>
-                        <tr><td>Теорема Пифагора</td><td class="formula">c² = a² + b²</td><td>Диагонали, тросы, стропила</td><td>a=3 м, b=4 м → c=5 м</td></tr>
-                        <tr><td>Объём призмы</td><td class="formula">V = S<sub>осн</sub> · h</td><td>Фундаменты, земляные работы</td><td>S=20 м², h=1,5 м → V=30 м³</td></tr>
-                        <tr><td>Объём цилиндра</td><td class="formula">V = πr²h</td><td>Колонны, трубы, резервуары</td><td>r=0,3 м, h=6 м → V≈1,7 м³</td></tr>
-                        <tr><td>Тригонометрия</td><td class="formula">h = l · sin α</td><td>Высота по углу наклона</td><td>l=5 м, α=30° → h=2,5 м</td></tr>
-                        <tr><td>Производная</td><td class="formula">f'(x)=0 → max</td><td>Оптимизация площади/объёма</td><td>S(x)=60x–2x² → x=15 м</td></tr>
+                        <tr><td>Теорема Пифагора</td><td><strong>c² = a² + b²</strong></td><td>Диагонали, тросы, стропила</td><td>a=3 м, b=4 м → c=5 м</td></tr>
+                        <tr><td>Объём призмы</td><td><strong>V = S<sub>осн</sub> · h</strong></td><td>Фундаменты, земляные работы</td><td>S=20 м², h=1,5 м → V=30 м³</td></tr>
+                        <tr><td>Объём цилиндра</td><td><strong>V = πr²h</strong></td><td>Колонны, трубы, резервуары</td><td>r=0,3 м, h=6 м → V≈1,7 м³</td></tr>
+                        <tr><td>Тригонометрия</td><td><strong>h = l · sin α</strong></td><td>Высота по углу наклона</td><td>l=5 м, α=30° → h=2,5 м</td></tr>
+                        <tr><td>Производная</td><td><strong>f'(x)=0 → max</strong></td><td>Оптимизация площади/объёма</td><td>S(x)=60x–2x² → x=15 м</td></tr>
                     </tbody>
                 </table>
+                </div>
             </div>
 
-            <!-- МЕТОДИЧЕСКАЯ ДОКУМЕНТАЦИЯ -->
             <div class="section-card">
-                <h3><span class="icon">📖</span> Методическая документация</h3>
-                <p style="margin-bottom: 18px; color: var(--text-muted);">Комплект документов, обеспечивающих качественную реализацию УМК в учебном процессе.</p>
+                <h2><span class="icon">📖</span> Методическая документация</h2>
+                <p class="section-desc">Комплект документов, обеспечивающих качественную реализацию УМК в учебном процессе.</p>
                 <ul class="doc-list">
                     <li>
-                        <div>
-                            <span class="doc-name">Учебная программа по математике</span>
-                            <span class="badge-gold">Официально</span>
-                            <br><span class="doc-desc">Для учреждений ССО, база 10–11 классов</span>
-                        </div>
+                        <div><span class="doc-name">Учебная программа по математике</span><span class="badge">Официально</span><br><span class="doc-desc">Для учреждений ССО, база 10–11 классов</span></div>
                         <button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalProgram">👁 Просмотреть</button>
                     </li>
                     <li>
-                        <div>
-                            <span class="doc-name">Методические рекомендации по GeoGebra и Desmos</span>
-                            <span class="badge-gold">Авторские</span>
-                            <br><span class="doc-desc">Интерактивные технологии в преподавании математики</span>
-                        </div>
+                        <div><span class="doc-name">Методические рекомендации по GeoGebra и Desmos</span><span class="badge">Авторские</span><br><span class="doc-desc">Интерактивные технологии в преподавании математики</span></div>
                         <button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalGeogebra">👁 Просмотреть</button>
                     </li>
                     <li>
-                        <div>
-                            <span class="doc-name">Методика практико-ориентированного преподавания</span>
-                            <span class="badge-gold">Авторская</span>
-                            <br><span class="doc-desc">Трёхуровневая система «Фундамент — Стены — Кровля»</span>
-                        </div>
+                        <div><span class="doc-name">Методика практико-ориентированного преподавания</span><span class="badge">Авторская</span><br><span class="doc-desc">Трёхуровневая система «Фундамент — Стены — Кровля»</span></div>
                         <button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalMetodika">👁 Просмотреть</button>
                     </li>
                     <li>
-                        <div>
-                            <span class="doc-name">Инструктивно-методические письма МО РБ</span>
-                            <span class="badge-gold">Официально</span>
-                            <br><span class="doc-desc">Рекомендации на 2025/2026 учебный год</span>
-                        </div>
+                        <div><span class="doc-name">Инструктивно-методические письма МО РБ</span><span class="badge">Официально</span><br><span class="doc-desc">Рекомендации на 2025/2026 учебный год</span></div>
                         <button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalInstr">👁 Просмотреть</button>
                     </li>
                     <li>
-                        <div>
-                            <span class="doc-name">Тематика и график консультаций</span>
-                            <span class="badge-gold">Авторская</span>
-                            <br><span class="doc-desc">План консультаций на учебный год</span>
-                        </div>
+                        <div><span class="doc-name">Тематика и график консультаций</span><span class="badge">Авторская</span><br><span class="doc-desc">План консультаций на учебный год</span></div>
                         <button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalKonsult">👁 Просмотреть</button>
                     </li>
                 </ul>
             </div>
 
-            <!-- ЛИТЕРАТУРА И ЭОР -->
             <div class="section-card">
-                <h3><span class="icon">📚</span> Литература и ЭОР</h3>
-                <p style="margin-bottom: 15px;"><strong style="color: var(--gold);">Основная литература</strong></p>
+                <h2><span class="icon">📚</span> Литература и ЭОР</h2>
+                <p style="margin-bottom:15px;"><strong style="color:var(--gold);">Основная литература</strong></p>
                 <ul class="doc-list">
                     <li><span class="doc-name">Алгебра. 10 класс — Арэф'ева І.Г., Пірутка О.М. (2020)</span><a href="https://e-padruchnik.adu.by/book-viewer/web/viewer.html?file=https://e-padruchnik.adu.by/books/matematika/Algebra_10k_Arefieva_rus_2019.pdf" target="_blank" class="book-link">📖 Открыть</a></li>
                     <li><span class="doc-name">Алгебра. 11 класс — Арэф'ева І.Г., Пірутка О.М. (2020)</span><a href="https://e-padruchnik.adu.by/book-viewer/web/viewer.html?file=https://e-padruchnik.adu.by/books/matematika/Algebra_11k_Arefieva_rus_2020.pdf" target="_blank" class="book-link">📖 Открыть</a></li>
                     <li><span class="doc-name">Геометрия. 10 класс — Латоцін Л.А., Чабатарэўскі Б.Д. (2020)</span><a href="https://e-padruchnik.adu.by/book-viewer/web/viewer.html?file=https://e-padruchnik.adu.by/books/matematika/Geometriya_10kl_Latotin_rus_2020.pdf" target="_blank" class="book-link">📖 Открыть</a></li>
                     <li><span class="doc-name">Геометрия. 11 класс — Латоцін Л.А., Чабатарэўскі Б.Д. (2020)</span><a href="https://e-padruchnik.adu.by/book-viewer/web/viewer.html?file=https://e-padruchnik.adu.by/books/matematika/Geometriya_11kl_Latotin_rus_2020.pdf" target="_blank" class="book-link">📖 Открыть</a></li>
                 </ul>
-                <p style="margin: 15px 0;"><strong style="color: var(--gold);">Электронные образовательные ресурсы</strong></p>
+                <p style="margin:15px 0;"><strong style="color:var(--gold);">Электронные образовательные ресурсы</strong></p>
                 <ul class="doc-list">
                     <li><span class="doc-name">GeoGebra — интерактивная математическая среда</span><a href="https://www.geogebra.org" target="_blank" class="book-link">geogebra.org →</a></li>
                     <li><span class="doc-name">Desmos — графический калькулятор</span><a href="https://www.desmos.com" target="_blank" class="book-link">desmos.com →</a></li>
@@ -236,7 +182,6 @@
                 </ul>
             </div>
 
-            <!-- ДЛЯ ПРЕПОДАВАТЕЛЯ -->
             <div class="teacher-block">
                 <h4>📌 Для преподавателя</h4>
                 <ul>
@@ -247,66 +192,35 @@
                 </ul>
             </div>
 
-            <!-- СКАЧАТЬ ВСЁ -->
-            <div class="section-card" style="text-align: center;">
-                <h3 style="justify-content: center;"><span class="icon">📦</span> Скачать весь раздел</h3>
-                <p style="margin-bottom: 20px;">Паспорт, программа, методические рекомендации, формулы — одним архивом.</p>
-                <a href="pdf/vspomogatelnyj-razdel.zip" class="btn-zip pulse">📥 Скачать ZIP-архив</a>
-            </div>
-
         </div>
     </div>
 
-    <!-- МОДАЛЬНЫЕ ОКНА -->
-    <div class="modal fade" id="modalProgram" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Учебная программа по математике</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body"><p><strong>Типовая учебная программа</strong> для учреждений ССО (базовый уровень).</p><p><strong>Объём:</strong> 136 часов (68 + 68).</p><p><strong>Разделы:</strong> 1 курс — Тригонометрия, Стереометрия, Корни, Параллельность, Производная. 2 курс — Показательная и логарифмическая функции, Многогранники, Тела вращения.</p><p><a href="https://adu.by/images/2025/08/12/Matem-10-11.pdf" target="_blank" style="color: var(--gold);">📎 Открыть программу (PDF) →</a></p></div></div></div></div>
-    <div class="modal fade" id="modalGeogebra" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Методические рекомендации по GeoGebra и Desmos</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body"><p><strong>Автор:</strong> Станулевич А.В.</p><p>Готовые интерактивные модели по темам:</p><ul><li>Тригонометрия — единичная окружность, графики</li><li>Стереометрия — 3D-модели многогранников</li><li>Производная — исследование функций</li><li>Тела вращения — цилиндр, конус, шар</li></ul><p><a href="interaktiv.html" style="color: var(--gold);">📎 Перейти к интерактивным моделям →</a></p></div></div></div></div>
-    <div class="modal fade" id="modalMetodika" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Методика практико-ориентированного преподавания</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body"><p><strong>Автор:</strong> Станулевич А.В. Концепция: «Математика строит будущее».</p><p><strong>Трёхуровневая система:</strong></p><ul><li>🟢 Фундамент (1–4 балла) — базовый уровень</li><li>🔵 Стены (5–7 баллов) — стандартный уровень</li><li>🟡 Кровля (8–10 баллов) — профессиональные задачи</li></ul><p>Применяется во всех практических, самостоятельных и контрольных работах.</p><p><a href="prakticheskij.html" style="color: var(--gold);">📎 Перейти к практическим работам →</a></p></div></div></div></div>
-    <div class="modal fade" id="modalInstr" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Инструктивно-методические письма МО РБ</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body"><p>Официальные рекомендации Министерства образования Республики Беларусь.</p><ul><li>Усиление практико-ориентированной направленности</li><li>Внедрение цифровых образовательных ресурсов</li><li>Организация текущего и итогового контроля</li></ul><p><a href="https://adu.by/ru/homeru/obrazovatelnyj-protsess/obshchee-srednee-obrazovanie/instruktivno-metodicheskie-pisma.html" target="_blank" style="color: var(--gold);">📎 Открыть на сайте adu.by →</a></p></div></div></div></div>
-<!-- 5. Тематика консультаций -->
-<div class="modal fade" id="modalKonsult" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Тематика и график консультаций</h5>
-                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                
-                
-                <h6 style="color: var(--gold); margin-top: 20px;">📘 1 курс</h6>
-                <ul>
-                    <li><strong>Сентябрь–октябрь:</strong> Входной контроль. Повторение базовых тем за 9 классов.</li>
-                    <li><strong>Ноябрь–декабрь:</strong> Тригонометрия. Подготовка к КР №1.</li>
-                    <li><strong>Январь–февраль:</strong> Корни и степени. Иррациональные уравнения.</li>
-                    <li><strong>Март–апрель:</strong> Параллельность и перпендикулярность. Теорема о трёх перпендикулярах.</li>
-                    <li><strong>Май–июнь:</strong> Производная. Подготовка к КР №2 и КР №3.</li>
-                </ul>
-
-                <h6 style="color: var(--gold); margin-top: 20px;">📗 2 курс</h6>
-                <ul>
-                    <li><strong>Сентябрь–октябрь:</strong> Повторение. Показательная функция. Подготовка к КР №4.</li>
-                    <li><strong>Ноябрь–декабрь:</strong> Логарифмическая функция. Подготовка к КР №5.</li>
-                    <li><strong>Январь–февраль:</strong> Многогранники. Призма, пирамида, объёмы.</li>
-                    <li><strong>Март–апрель:</strong> Тела вращения. Подготовка к КР №6.</li>
-                    <li><strong>Май–июнь:</strong> Подготовка к выпускному экзамену. Разбор экзаменационных заданий.</li>
-                </ul>
-
-                <p style="margin-top: 20px; color: var(--text-muted); font-style: italic;">Конкретные даты и время утверждаются расписанием колледжа на учебный год.</p>
-            </div>
-        </div>
-    </div>
-</div>
-    <a href="pdf/vspomogatelnyj-razdel.zip" class="fab-download" id="fabZip" title="Скачать все документы" download>📥</a>
+    <div class="modal fade" id="modalProgram" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Учебная программа по математике</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p><strong>Типовая учебная программа</strong> для учреждений ССО (базовый уровень).</p><p><strong>Объём:</strong> 136 часов (68 + 68).</p><p><strong>Разделы:</strong> 1 курс — Тригонометрия, Стереометрия, Корни, Параллельность, Производная. 2 курс — Показательная и логарифмическая функции, Многогранники, Тела вращения.</p><p><a href="https://adu.by/images/2025/08/12/Matem-10-11.pdf" target="_blank" style="color:var(--gold);">📎 Открыть программу (PDF) →</a></p></div></div></div></div>
+    <div class="modal fade" id="modalGeogebra" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Методические рекомендации по GeoGebra и Desmos</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p><strong>Автор:</strong> Станулевич А.В.</p><p>Готовые интерактивные модели по темам:</p><ul><li>Тригонометрия — единичная окружность, графики</li><li>Стереометрия — 3D-модели многогранников</li><li>Производная — исследование функций</li><li>Тела вращения — цилиндр, конус, шар</li></ul><p><a href="interaktiv.html" style="color:var(--gold);">📎 Перейти к интерактивным моделям →</a></p></div></div></div></div>
+    <div class="modal fade" id="modalMetodika" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Методика практико-ориентированного преподавания</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p><strong>Автор:</strong> Станулевич А.В. Концепция: «Математика строит будущее».</p><p><strong>Трёхуровневая система:</strong></p><ul><li>🟢 Фундамент (1–4 балла) — базовый уровень</li><li>🔵 Стены (5–7 баллов) — стандартный уровень</li><li>🟡 Кровля (8–10 баллов) — профессиональные задачи</li></ul><p>Применяется во всех практических, самостоятельных и контрольных работах.</p><p><a href="prakticheskij.html" style="color:var(--gold);">📎 Перейти к практическим работам →</a></p></div></div></div></div>
+    <div class="modal fade" id="modalInstr" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Инструктивно-методические письма МО РБ</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p>Официальные рекомендации Министерства образования Республики Беларусь.</p><ul><li>Усиление практико-ориентированной направленности</li><li>Внедрение цифровых образовательных ресурсов</li><li>Организация текущего и итогового контроля</li></ul><p><a href="https://adu.by/ru/homeru/obrazovatelnyj-protsess/obshchee-srednee-obrazovanie/instruktivno-metodicheskie-pisma.html" target="_blank" style="color:var(--gold);">📎 Открыть на сайте adu.by →</a></p></div></div></div></div>
+    <div class="modal fade" id="modalKonsult" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Тематика и график консультаций</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">
+        <h6 style="color:var(--gold);margin-top:15px;">📘 1 курс</h6>
+        <ul><li><strong>Сентябрь–октябрь:</strong> Входной контроль. Повторение базовых тем за 9 классов.</li><li><strong>Ноябрь–декабрь:</strong> Тригонометрия. Подготовка к КР №1.</li><li><strong>Январь–февраль:</strong> Корни и степени. Иррациональные уравнения.</li><li><strong>Март–апрель:</strong> Параллельность и перпендикулярность.</li><li><strong>Май–июнь:</strong> Производная. Подготовка к КР №2 и №3.</li></ul>
+        <h6 style="color:var(--gold);margin-top:15px;">📗 2 курс</h6>
+        <ul><li><strong>Сентябрь–октябрь:</strong> Повторение. Показательная функция. КР №4.</li><li><strong>Ноябрь–декабрь:</strong> Логарифмическая функция. КР №5.</li><li><strong>Январь–февраль:</strong> Многогранники. Призма, пирамида, объёмы.</li><li><strong>Март–апрель:</strong> Тела вращения. КР №6.</li><li><strong>Май–июнь:</strong> Подготовка к выпускному экзамену.</li></ul>
+        <p style="margin-top:15px;color:var(--text-muted);font-style:italic;">Конкретные даты утверждаются расписанием колледжа на учебный год.</p>
+    </div></div></div></div>
 
     <footer>
-        <div class="container">© 2026 Станулевич А.В., Гродно, Беларусь · <a href="index.html">На главную</a></div>
+        <div class="container">
+            © 2026 Станулевич А.В., Гродно, Беларусь<br>
+            <span style="font-size:12px;color:var(--text-muted);">Все права защищены. Копирование и распространение без согласия автора запрещено.</span>
+        </div>
     </footer>
 
-    <script>
-        window.addEventListener('scroll', function() {
-            document.getElementById('fabZip').classList.toggle('show', window.scrollY > 500);
-        });
-    </script>
+    <button id="backToTop" title="Наверх">▲</button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
+        backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    </script>
 </body>
 </html>
