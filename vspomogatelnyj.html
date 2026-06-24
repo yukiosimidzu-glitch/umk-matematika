@@ -51,6 +51,13 @@
         .teacher-block h4 { color: var(--gold); margin-bottom: 12px; font-size: 1.1rem; }
         .teacher-block ul { color: var(--text-muted); font-size: 15px; padding-left: 20px; line-height: 2; }
 
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .feature-item { display: flex; gap: 14px; align-items: flex-start; background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 18px; border-radius: 8px; transition: all 0.3s; }
+        .feature-item:hover { border-color: var(--gold); background: rgba(212,160,23,0.02); }
+        .feature-icon { font-size: 28px; flex-shrink: 0; }
+        .feature-text strong { color: #fff; display: block; margin-bottom: 4px; font-size: 15px; }
+        .feature-text p { color: var(--text-muted); font-size: 13px; margin: 0; line-height: 1.6; }
+
         .faq-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
         .faq-header h2 { margin-bottom: 0; }
         .faq-toggle-icon { color: var(--gold); font-size: 18px; transition: transform 0.3s; }
@@ -82,7 +89,7 @@
         footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
         footer a { color: var(--gold); text-decoration: none; }
 
-        @media (max-width: 600px) { .section-card, .pasport-highlight { padding: 22px; } .page-header { padding: 60px 0 30px; } .doc-list li { flex-direction: column; align-items: flex-start; } }
+        @media (max-width: 600px) { .section-card, .pasport-highlight { padding: 22px; } .page-header { padding: 60px 0 30px; } .doc-list li { flex-direction: column; align-items: flex-start; } .features-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -114,6 +121,82 @@
     <div class="content">
         <div class="container">
 
+            <!-- ПАСПОРТ УМК -->
+            <div class="section-card">
+                <h2><span class="icon">📋</span> Паспорт учебно-методического комплекса</h2>
+                <table class="formula-table">
+                    <tr><td><strong>Полное наименование</strong></td><td>Электронный учебно-методический комплекс «Математика строит будущее»</td></tr>
+                    <tr><td><strong>Учебный предмет</strong></td><td>Математика (базовый уровень, ССО)</td></tr>
+                    <tr><td><strong>Разработчик</strong></td><td>Станулевич Андрей Викторович, преподаватель математики</td></tr>
+                    <tr><td><strong>Учреждение образования</strong></td><td>УО «Гродненский государственный колледж строительных технологий»</td></tr>
+                    <tr><td><strong>Год разработки</strong></td><td>2026</td></tr>
+                    <tr><td><strong>Общий объём часов</strong></td><td>240 часов (120 — первый курс, 120 — второй курс)</td></tr>
+                    <tr><td><strong>Количество тем</strong></td><td>9 тем (5 — первый курс, 4 — второй курс)</td></tr>
+                    <tr><td><strong>Структура УМК</strong></td><td>Теоретический раздел (9 опорных конспектов), практический раздел (28 работ), раздел контроля знаний (входной, текущий, тематический, итоговый), вспомогательный раздел, интерактивный раздел</td></tr>
+                    <tr><td><strong>Специальности</strong></td><td>Общестроительные работы (каменщик, монтажник, столяр, плотник), отделочные строительные работы (штукатур, маляр, облицовщик-плиточник), сварочные работы, санитарно-технические работы</td></tr>
+                    <tr><td><strong>Основание для разработки</strong></td><td>Кодекс Республики Беларусь об образовании, Постановление МО РБ № 427 от 08.11.2022</td></tr>
+                    <tr><td><strong>Цель</strong></td><td>Формирование математической грамотности учащихся через профессионально-ориентированное обучение</td></tr>
+                </table>
+            </div>
+
+            <!-- ПОЯСНИТЕЛЬНАЯ ЗАПИСКА -->
+            <div class="section-card">
+                <h2><span class="icon">📄</span> Пояснительная записка</h2>
+                <p>Учебно-методический комплекс «Математика строит будущее» разработан в соответствии с Кодексом Республики Беларусь об образовании и Положением об УМК на уровне среднего специального образования (постановление Министерства образования РБ № 427 от 08.11.2022).</p>
+                <p><strong>Объём и структура.</strong> УМК рассчитан на 240 часов: первый курс — 120 часов, второй курс — 120 часов. Для учебной группы 21 ТС — 240 часов за один учебный год. Учебный материал организован по блочной структуре: алгебраический и геометрический компоненты чередуются в течение учебного года.</p>
+                <p><strong>Специальности.</strong> УМК предназначен для учащихся, осваивающих квалификации: каменщик, монтажник строительных конструкций, столяр, плотник, штукатур, маляр, облицовщик-плиточник, электросварщик ручной сварки, монтаж и эксплуатация санитарно-технического оборудования.</p>
+                <p><strong>Цель УМК:</strong> формирование у учащихся математической грамотности и овладение разнообразными способами деятельности, применимыми как в образовательном процессе, так и в реальных жизненных ситуациях.</p>
+                <p><strong>Задачи:</strong></p>
+                <ul>
+                    <li>формирование представлений о математике как части общечеловеческой культуры;</li>
+                    <li>развитие логического и критического мышления, математической речи;</li>
+                    <li>формирование умения самостоятельно приобретать знания и контролировать результаты учебной деятельности;</li>
+                    <li>овладение математическими методами решения профессиональных задач строительного профиля.</li>
+                </ul>
+                <p><strong>Структура УМК.</strong> Комплекс включает: теоретический раздел (9 опорных конспектов), практический раздел (28 практических работ с трёхуровневой системой «Фундамент — Стены — Кровля»), раздел контроля знаний (входной, текущий, тематический, итоговый), вспомогательный раздел (документация, методические материалы, FAQ), интерактивный раздел (GeoGebra-модели).</p>
+                <p><strong>Актуализация.</strong> Обновление и пополнение УМК проводится в течение учебного года в соответствии с планом работы цикловой комиссии.</p>
+            </div>
+
+            <!-- ОТЛИЧИТЕЛЬНЫЕ ОСОБЕННОСТИ -->
+            <div class="section-card">
+                <h2><span class="icon">⭐</span> Отличительные особенности УМК</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🏗️</div>
+                        <div class="feature-text"><strong>Практико-ориентированный подход</strong><p>Каждая тема математики привязана к строительной специальности. Паспорт профилизации систематизирует межпредметные связи с дисциплинами профессионального цикла.</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-text"><strong>Трёхуровневая система сложности</strong><p>«Фундамент» (1–4 балла), «Стены» (5–7 баллов), «Кровля» (8–10 баллов). Дифференцированный подход в группах с разным уровнем подготовки.</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📱</div>
+                        <div class="feature-text"><strong>Цифровые образовательные технологии</strong><p>Адаптивный веб-сайт, QR-коды для доступа с мобильных устройств, аудио-озвучка тем.</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📝</div>
+                        <div class="feature-text"><strong>Режим «Без ответов»</strong><p>Скрытие решений одним переключателем для проведения самостоятельных и контрольных работ, печати раздаточного материала.</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📈</div>
+                        <div class="feature-text"><strong>Система контроля и самоконтроля</strong><p>Прогресс-бар подготовки к экзамену, таймер выполнения работ, шпаргалки с ключевыми формулами в конце каждого конспекта.</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔄</div>
+                        <div class="feature-text"><strong>Интерактивные компоненты</strong><p>Интеграция с GeoGebra для наглядности при изучении стереометрии, тригонометрии, тел вращения. Строительный тренажёр в игровом формате.</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📖</div>
+                        <div class="feature-text"><strong>Методическая поддержка преподавателя</strong><p>Паспорт профилизации, методические рекомендации, тематика консультаций, шкалы перевода баллов в соответствии с Постановлением № 427.</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">♿</div>
+                        <div class="feature-text"><strong>Доступность</strong><p>Все материалы открыты, не требуют регистрации. Сайт работает на любых устройствах. Возможно использование в дистанционном формате.</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ПАСПОРТ ПРОФИЛИЗАЦИИ -->
             <div class="pasport-highlight">
                 <h2><span style="font-size:36px;">📋</span> Паспорт профилизации</h2>
                 <p class="section-desc">Документ, систематизирующий межпредметные связи математики с дисциплинами профессионального цикла.</p>
@@ -137,6 +220,7 @@
                 <p style="margin-top:15px;font-size:13px;color:var(--text-muted);">Паспорт составлен в соответствии с учебной программой для учреждений ССО.</p>
             </div>
 
+            <!-- ФОРМУЛЫ СТРОИТЕЛЯ -->
             <div class="section-card">
                 <h2><span class="icon">📐</span> Ключевые формулы для строителя</h2>
                 <p class="section-desc">Самые важные математические формулы с числовыми примерами.</p>
@@ -154,6 +238,7 @@
                 </div>
             </div>
 
+            <!-- МЕТОДИЧЕСКАЯ ДОКУМЕНТАЦИЯ -->
             <div class="section-card">
                 <h2><span class="icon">📖</span> Методическая документация</h2>
                 <p class="section-desc">Комплект документов, обеспечивающих качественную реализацию УМК в учебном процессе.</p>
@@ -166,6 +251,7 @@
                 </ul>
             </div>
 
+            <!-- ЛИТЕРАТУРА -->
             <div class="section-card">
                 <h2><span class="icon">📚</span> Литература и ЭОР</h2>
                 <p style="margin-bottom:15px;"><strong style="color:var(--gold);">Основная литература</strong></p>
@@ -184,6 +270,7 @@
                 </ul>
             </div>
 
+            <!-- FAQ -->
             <div class="section-card faq-open">
                 <div class="faq-header" onclick="this.parentElement.classList.toggle('faq-open')">
                     <h2><span class="icon">❓</span> Часто задаваемые вопросы <span style="font-size:14px;color:var(--text-muted);margin-left:10px;">(нажмите чтобы раскрыть)</span></h2>
@@ -211,10 +298,13 @@
                 </div>
             </div>
 
+            <!-- ДЛЯ ПРЕПОДАВАТЕЛЯ -->
             <div class="teacher-block">
                 <h4>📌 Для преподавателя</h4>
                 <ul>
-                    <li><strong>Паспорт профилизации</strong> — демонстрация межпредметных связей математики и стройдисциплин.</li>
+                    <li><strong>Паспорт УМК</strong> — основные характеристики комплекса для отчётности и аттестации.</li>
+                    <li><strong>Пояснительная записка</strong> — нормативное обоснование, цели, задачи, структура.</li>
+                    <li><strong>Паспорт профилизации</strong> — межпредметные связи математики и стройдисциплин.</li>
                     <li><strong>Формулы строителя</strong> — распечатайте как памятку для учащихся (1 страница).</li>
                     <li><strong>GeoGebra и Desmos</strong> — готовые 3D-модели многогранников и тел вращения.</li>
                     <li><strong>Методические рекомендации</strong> — пошаговые инструкции по внедрению интерактива.</li>
