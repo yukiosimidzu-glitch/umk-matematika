@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --level-1: #4ade80; --level-2: #60a5fa; --level-3: #fbbf24; --level-4: #f59e0b; --level-5: #ef4444; }
+        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --yellow: #fbbf24; --green: #4ade80; --level-1: #4ade80; --level-2: #60a5fa; --level-3: #fbbf24; --level-4: #f59e0b; --level-5: #ef4444; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; }
@@ -21,17 +21,31 @@
 
         .content { padding: 60px 0; }
 
+        .mode-switch { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; background: var(--bg-card); border: 1px solid var(--border); padding: 12px 20px; border-radius: 10px; }
+        .mode-label { color: var(--text-muted); font-size: 14px; }
+        .mode-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.3s; }
+        .mode-btn.active { background: var(--gold); color: var(--bg); border-color: var(--gold); font-weight: 600; }
+        .mode-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+        .mode-btn-note { font-size: 11px; color: var(--text-muted); margin-left: auto; }
+
         .section-card { background: var(--bg-card); border: 1px solid var(--border); padding: 35px; margin-bottom: 25px; border-radius: 8px; }
         .section-card h2 { color: #fff; margin-bottom: 15px; font-size: 1.5rem; }
         .section-desc { color: var(--text-muted); margin-bottom: 25px; font-size: 1rem; }
 
         .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-bottom: 30px; }
-        .card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 28px; transition: all 0.3s; text-decoration: none; display: flex; flex-direction: column; }
+
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 28px; transition: all 0.3s; text-decoration: none; display: flex; flex-direction: column; position: relative; cursor: pointer; }
         .card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: rgba(212,160,23,0.02); }
         .icon-circle { font-size: 36px; margin-bottom: 14px; }
         .card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 8px; }
         .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; flex-grow: 1; margin-bottom: 14px; }
         .badge { display: inline-block; background: var(--gold); color: var(--bg); padding: 4px 12px; font-size: 11px; font-weight: 600; border-radius: 4px; margin-right: 5px; margin-bottom: 5px; }
+        .topic-qr { position: absolute; top: 10px; right: 10px; font-size: 16px; cursor: pointer; opacity: 0.4; transition: opacity 0.3s; background: none; border: none; color: var(--text-muted); z-index: 5; }
+        .topic-qr:hover { opacity: 1; color: var(--gold); }
+
+        .card-footer-row { display: flex; align-items: center; gap: 8px; margin-top: auto; }
+        .card-timer { font-size: 12px; color: var(--text-muted); }
+        .card-timer strong { color: var(--gold); }
 
         .table-wrap { overflow-x: auto; margin: 15px 0; }
         .scale-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 500px; }
@@ -56,6 +70,12 @@
         .teacher-block { background: rgba(212,160,23,0.04); border: 1px dashed var(--gold); padding: 26px 28px; border-radius: 8px; margin-top: 20px; }
         .teacher-block h4 { color: var(--gold); margin-bottom: 12px; font-size: 1.1rem; }
         .teacher-block ul { color: var(--text-muted); font-size: 15px; padding-left: 20px; line-height: 2; }
+
+        .qr-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
+        .qr-modal.open { display: flex; }
+        .qr-modal-content { background: #fff; padding: 30px; border-radius: 12px; text-align: center; position: relative; }
+        .qr-modal-close { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #333; background: none; border: none; }
+        .qr-modal-img { width: 200px; height: 200px; }
 
         #backToTop { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: var(--bg); border: none; font-size: 22px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
         #backToTop.show { opacity: 1; visibility: visible; }
@@ -95,34 +115,14 @@
     <div class="content">
         <div class="container">
 
-            <div class="row">
-                <a href="kontrol/vhodnoj.html" class="card">
-                    <div class="icon-circle">🔍</div>
-                    <h3>Входной контроль</h3>
-                    <p>Диагностика знаний за курс основной школы. Проводится на первом занятии 1 курса.</p>
-                    <div><span class="badge">2 варианта</span></div>
-                </a>
+            <div class="mode-switch">
+                <span class="mode-label">Режим:</span>
+                <button class="mode-btn active" id="modeFull" onclick="setMode('full')">📖 С ответами</button>
+                <button class="mode-btn" id="modeNosol" onclick="setMode('nosol')">📝 Без ответов (для печати)</button>
+                <span class="mode-btn-note">При «Без ответов» скрываются решения и ответы</span>
+            </div>
 
-                <a href="kontrol/current/index.html" class="card">
-                    <div class="icon-circle">📋</div>
-                    <h3>Текущий контроль</h3>
-                    <p>9 самостоятельных работ по 5 заданий. Время выполнения — 10–15 минут.</p>
-                    <div><span class="badge">9 работ</span><span class="badge">2 варианта</span></div>
-                </a>
-
-                <a href="kontrol/thematic/" class="card">
-                    <div class="icon-circle">📝</div>
-                    <h3>Тематические контрольные</h3>
-                    <p>6 контрольных работ. 5 заданий разных уровней, максимум 30 баллов.</p>
-                    <div><span class="badge">6 работ</span><span class="badge">2 варианта</span></div>
-                </a>
-
-                <a href="kontrol/final/" class="card">
-                    <div class="icon-circle">🎓</div>
-                    <h3>Итоговая аттестация</h3>
-                    <p>Выпускной экзамен. 10 заданий, 5 уровней, максимум 55 баллов.</p>
-                    <div><span class="badge">Теория</span><span class="badge">Задачи</span><span class="badge">Билеты</span></div>
-                </a>
+            <div class="row" id="cardsContainer">
             </div>
 
             <div class="section-card">
@@ -199,8 +199,19 @@
         </div>
     </div>
 
+    <div class="qr-modal" id="qrModal" onclick="closeQR(event)">
+        <div class="qr-modal-content" onclick="event.stopPropagation()">
+            <button class="qr-modal-close" onclick="closeQR()">&times;</button>
+            <img class="qr-modal-img" id="qrImage" src="" alt="QR-код">
+            <p style="margin-top:10px;color:#333;font-size:14px;">Наведите камеру телефона</p>
+        </div>
+    </div>
+
     <footer>
-        <div class="container">© 2026 Станулевич А.В., Гродно, Беларусь · <a href="index.html">На главную</a></div>
+        <div class="container">
+            © 2026 Станулевич А.В., Гродно, Беларусь<br>
+            <span style="font-size:12px;color:var(--text-muted);">Все права защищены. Копирование и распространение без согласия автора запрещено.</span>
+        </div>
     </footer>
 
     <button id="backToTop" title="Наверх">▲</button>
@@ -210,6 +221,52 @@
         var backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', function() { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
         backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+        let currentMode = 'full';
+        function setMode(mode) {
+            currentMode = mode;
+            document.getElementById('modeFull').classList.toggle('active', mode === 'full');
+            document.getElementById('modeNosol').classList.toggle('active', mode === 'nosol');
+        }
+
+        const cards = [
+            { icon: '🔍', title: 'Входной контроль', desc: 'Диагностика знаний за курс основной школы. Проводится на первом занятии 1 курса.', badges: ['2 варианта'], link: 'kontrol/vhodnoj.html' },
+            { icon: '📋', title: 'Текущий контроль', desc: '9 самостоятельных работ по 5 заданий. Время выполнения — 10–15 минут.', badges: ['9 работ', '2 варианта'], link: 'kontrol/current/index.html' },
+            { icon: '📝', title: 'Тематические контрольные', desc: '6 контрольных работ. 5 заданий разных уровней, максимум 30 баллов.', badges: ['6 работ', '2 варианта'], link: 'kontrol/thematic/' },
+            { icon: '🎓', title: 'Итоговая аттестация', desc: 'Выпускной экзамен. 10 заданий, 5 уровней, максимум 55 баллов.', badges: ['Теория', 'Задачи', 'Билеты'], link: 'kontrol/final/' },
+        ];
+
+        function renderCards() {
+            const container = document.getElementById('cardsContainer');
+            container.innerHTML = '';
+            cards.forEach((c, i) => {
+                const card = document.createElement('a');
+                card.href = c.link + (currentMode === 'nosol' ? '?nosol=1' : '');
+                card.className = 'card';
+                card.innerHTML = `
+                    <button class="topic-qr" onclick="event.preventDefault();event.stopPropagation();showQR('${c.link}${currentMode === 'nosol' ? '?nosol=1' : ''}')" title="QR-код">📱</button>
+                    <div class="icon-circle">${c.icon}</div>
+                    <h3>${c.title}</h3>
+                    <p>${c.desc}</p>
+                    <div>${c.badges.map(b => '<span class="badge">' + b + '</span>').join('')}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function showQR(link) {
+            const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '');
+            const fullUrl = baseUrl + '/' + link;
+            const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(fullUrl);
+            document.getElementById('qrImage').src = qrUrl;
+            document.getElementById('qrModal').classList.add('open');
+        }
+        function closeQR(event) {
+            if (event && event.target !== document.getElementById('qrModal')) return;
+            document.getElementById('qrModal').classList.remove('open');
+        }
+
+        renderCards();
     </script>
 </body>
 </html>
