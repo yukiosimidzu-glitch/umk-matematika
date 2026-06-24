@@ -14,21 +14,33 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <style>
         :root {
-                --bg: #0d1117;
+            --bg: #0d1117;
             --bg-card: #161b22;
             --gold: #D4A017;
             --gold-hover: #e6b422;
+            --gold-glow: rgba(212, 160, 23, 0.15);
             --text: #c9d1d9;
             --text-muted: #8b949e;
             --border: #30363d;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: auto; }
-        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+        }
         section { padding: 80px 0; position: relative; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
@@ -36,83 +48,156 @@
         .fade-up.visible { opacity: 1; transform: translateY(0); }
 
         .hero {
-            min-height: 100vh; display: flex; align-items: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
             background: radial-gradient(ellipse at 50% 30%, #1a2332 0%, var(--bg) 70%);
-            position: relative; overflow: hidden;
+            position: relative;
+            overflow: hidden;
         }
         .hero .container { position: relative; z-index: 1; width: 100%; }
-        .hero-label { font-size: 11px; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); margin-bottom: 40px; }
+        .hero-label { font-size: 12px; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); margin-bottom: 40px; }
         .hero-title { font-size: clamp(48px, 8vw, 88px); line-height: 1.05; margin-bottom: 20px; color: #fff; }
         .hero-title .gold { color: var(--gold); }
-        .hero-subtitle { font-size: 18px; color: var(--text-muted); max-width: 600px; line-height: 1.7; margin-bottom: 30px; }
+        .hero-subtitle { font-size: 18px; color: var(--text-muted); max-width: 600px; line-height: 1.7; margin-bottom: 15px; }
+        .hero-formula { margin-bottom: 30px; color: var(--gold); font-size: 1.1rem; }
         .hero-meta { display: flex; gap: 30px; font-size: 12px; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 40px; }
         .hero-actions { display: flex; gap: 15px; flex-wrap: wrap; }
 
-        .btn-gold { display: inline-block; padding: 14px 32px; background: var(--gold); color: var(--bg); text-decoration: none; font-weight: 600; font-size: 15px; transition: all 0.3s; }
-        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,160,23,0.3); }
-        .btn-outline { display: inline-block; padding: 14px 32px; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-weight: 500; font-size: 15px; transition: all 0.3s; }
+        .btn-gold {
+            display: inline-block; padding: 16px 36px; background: var(--gold); color: var(--bg);
+            text-decoration: none; font-weight: 700; font-size: 16px; border-radius: 6px;
+            transition: all 0.3s; border: none; cursor: pointer;
+        }
+        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-3px); box-shadow: 0 10px 35px rgba(212,160,23,0.35); color: var(--bg); }
+        .btn-outline {
+            display: inline-block; padding: 16px 36px; border: 1px solid var(--border);
+            color: var(--text); text-decoration: none; font-weight: 500; font-size: 16px;
+            border-radius: 6px; transition: all 0.3s;
+        }
         .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-        .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); margin-bottom: 15px; }
+        .section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); margin-bottom: 15px; }
         .section-title { font-size: clamp(30px, 5vw, 44px); margin-bottom: 30px; color: #fff; }
 
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+            background: var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 40px;
+        }
+        .stat-item { background: var(--bg-card); padding: 25px; text-align: center; }
+        .stat-num { font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; color: var(--gold); font-weight: 700; }
+        .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 35px 28px; text-decoration: none; color: inherit; transition: all 0.35s ease; display: flex; flex-direction: column; }
-        .card:hover { border-color: var(--gold); transform: translateY(-8px); box-shadow: 0 16px 45px rgba(0,0,0,0.5); }
-        .card-icon { font-size: 36px; margin-bottom: 18px; }
-        .card-title { font-size: 18px; color: #fff; margin-bottom: 10px; font-weight: 600; }
-        .card-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; flex-grow: 1; margin-bottom: 16px; }
-        .card-link { display: inline-block; font-size: 13px; font-weight: 500; color: var(--gold); text-decoration: none; }
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+            border-radius: 6px; padding: 32px 24px; text-decoration: none; color: inherit;
+            transition: all 0.3s; display: flex; flex-direction: column;
+        }
+        .card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); background: rgba(212,160,23,0.02); }
+        .card-icon { font-size: 34px; margin-bottom: 14px; }
+        .card-title { font-size: 18px; color: #fff; margin-bottom: 8px; font-weight: 600; }
+        .card-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; flex-grow: 1; margin-bottom: 12px; }
+        .card-link { display: inline-block; font-size: 13px; font-weight: 500; color: var(--gold); text-decoration: none; margin-top: auto; }
         .card:hover .card-link { text-decoration: underline; }
 
-        .adv-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); background: var(--bg-card); }
-        .adv-item { padding: 35px 25px; text-align: center; border-right: 1px solid var(--border); }
-        .adv-item:last-child { border-right: none; }
-        .adv-icon { font-size: 30px; margin-bottom: 15px; }
-        .adv-title { font-size: 15px; color: #fff; margin-bottom: 8px; }
-        .adv-text { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .why-item {
+            background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+            border-radius: 6px; padding: 28px; transition: all 0.3s;
+        }
+        .why-item:hover { border-color: var(--gold); background: rgba(212,160,23,0.02); }
+        .why-icon { font-size: 30px; margin-bottom: 12px; }
+        .why-item h4 { color: #fff; font-size: 1.05rem; margin-bottom: 8px; }
+        .why-item p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
 
-        .method-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-        .method-card { background: var(--bg-card); border: 1px solid var(--border); padding: 30px 20px; text-align: center; text-decoration: none; color: inherit; transition: all 0.3s; display: block; }
-        .method-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-        .method-icon { font-size: 28px; margin-bottom: 15px; }
-        .method-title { font-size: 15px; color: #fff; margin-bottom: 5px; }
-        .method-text { font-size: 13px; color: var(--text-muted); }
+        .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .preview-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+            overflow: hidden; transition: all 0.3s;
+        }
+        .preview-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+        .preview-img {
+            height: 200px; background: #0a0e14; display: flex; align-items: center; justify-content: center;
+            font-size: 50px; border-bottom: 1px solid var(--border); position: relative;
+        }
+        .preview-badge {
+            position: absolute; top: 10px; left: 10px; background: var(--gold); color: var(--bg);
+            padding: 3px 10px; border-radius: 10px; font-size: 10px; font-weight: 700;
+        }
+        .preview-body { padding: 20px; }
+        .preview-body h4 { color: #fff; font-size: 1rem; margin-bottom: 6px; }
+        .preview-body p { color: var(--text-muted); font-size: 13px; line-height: 1.5; }
 
-        .interactive-block { background: var(--bg-card); border: 1px solid var(--border); padding: 60px; }
-        .interactive-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .interactive-grid h3 { color: #fff; margin-bottom: 15px; }
-        .interactive-grid p { color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
-        .interactive-grid ul { list-style: none; color: var(--text-muted); }
-        .interactive-grid ul li { margin-bottom: 10px; }
-        .interactive-visual { font-size: 120px; text-align: center; opacity: 0.3; }
+        .start-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .start-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+            border-radius: 6px; padding: 30px 24px; text-decoration: none; color: inherit;
+            transition: all 0.3s; display: block;
+        }
+        .start-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        .start-icon { font-size: 36px; margin-bottom: 12px; }
+        .start-card h4 { color: #fff; font-size: 1.05rem; margin-bottom: 6px; }
+        .start-card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
 
-        .author-row { display: grid; grid-template-columns: 220px 1fr; gap: 50px; align-items: center; }
-        .author-photo { width: 220px; height: 220px; border: 2px dashed var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-muted); text-align: center; }
-        .author-quote { border-left: 3px solid var(--gold); padding-left: 20px; font-style: italic; font-size: 18px; color: var(--text-muted); margin-top: 20px; }
+        .tech-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .tech-item {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 16px 24px;
+            border-radius: 8px; text-align: center; font-size: 13px; color: var(--text-muted);
+            transition: all 0.3s;
+        }
+        .tech-item:hover { border-color: var(--gold); color: #fff; }
+        .tech-item .tech-icon { font-size: 24px; display: block; margin-bottom: 6px; }
 
-               .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; }
+        .interactive-block {
+            background: var(--bg-card); border: 1px solid var(--gold); border-radius: 8px;
+            padding: 50px; text-align: center;
+        }
+        .interactive-block h3 { color: #fff; margin-bottom: 10px; }
+        .interactive-block p { color: var(--text-muted); margin-bottom: 20px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .interactive-icons { font-size: 40px; margin-bottom: 20px; display: flex; gap: 20px; justify-content: center; }
+
+        .author-block {
+            background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+            border-radius: 6px; padding: 40px;
+        }
+        .author-grid { display: grid; grid-template-columns: 180px 1fr; gap: 30px; align-items: center; }
+        .author-photo {
+            width: 180px; height: 180px; border: 1px dashed var(--border);
+            display: flex; align-items: center; justify-content: center; font-size: 13px;
+            color: var(--text-muted); text-align: center; border-radius: 50%;
+        }
+        .author-quote {
+            border-left: 3px solid var(--gold); padding-left: 20px;
+            font-style: italic; font-size: 17px; color: var(--text-muted); margin-top: 15px;
+        }
+
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; }
         .footer-grid h4 { color: #fff; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
         .footer-grid a { display: block; color: var(--text-muted); text-decoration: none; font-size: 13px; margin-bottom: 5px; transition: color 0.3s; }
         .footer-grid a:hover { color: var(--gold); }
         .footer-grid p { color: var(--text-muted); font-size: 13px; margin: 0; }
-        @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; text-align: center; } }
 
-        #backToTop { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: var(--bg); border: none; font-size: 20px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+        #backToTop {
+            position: fixed; bottom: 30px; right: 30px; z-index: 999;
+            width: 48px; height: 48px; border-radius: 50%; background: var(--gold);
+            color: var(--bg); border: none; font-size: 22px; cursor: pointer;
+            opacity: 0; visibility: hidden; transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;
+        }
         #backToTop.show { opacity: 1; visibility: visible; }
+        #backToTop:hover { background: var(--gold-hover); }
 
-        @media (max-width: 900px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 992px) {
-            .adv-grid { grid-template-columns: 1fr 1fr; }
-            .adv-item { border-bottom: 1px solid var(--border); }
-            .method-grid { grid-template-columns: 1fr 1fr; }
-            .interactive-grid { grid-template-columns: 1fr; }
-            .author-row { grid-template-columns: 1fr; text-align: center; }
+        @media (max-width: 900px) {
+            .cards-grid, .why-grid, .preview-grid, .start-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .author-grid { grid-template-columns: 1fr; text-align: center; }
             .author-photo { margin: 0 auto; }
         }
         @media (max-width: 576px) {
-            .cards-grid, .adv-grid, .method-grid { grid-template-columns: 1fr; }
+            .cards-grid, .why-grid, .preview-grid, .start-grid, .stats-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 38px; }
             section { padding: 60px 0; }
         }
     </style>
@@ -121,7 +206,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--bg-card); border-bottom: 1px solid var(--border);">
         <div class="container">
-            <a class="navbar-brand" href="#" style="font-family: 'Playfair Display', serif; color: var(--gold);">УМК «Математика»</a>
+            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold); font-size:1.1rem;">УМК «Математика»</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
@@ -138,145 +223,208 @@
 
     <header class="hero">
         <div class="container">
-            <div class="hero-label">Гродненский государственный колледж строительных технологий · Гродно</div>
-            <h1 class="hero-title">Математика<br><span class="gold">строит будущее</span></h1>
-            <p class="hero-subtitle">Интерактивный учебно-методический комплекс для учреждений среднего специального образования. Практика, расчёты, 3D-модели.</p>
-            <div class="hero-meta">
-                <span>Станулевич А.В.</span>
-                <span>2026</span>
-            </div>
-            <div class="hero-actions">
-                <a href="#sections" class="btn-gold">К разделам</a>
-                <a href="#about" class="btn-outline">Об авторе</a>
+            <div class="hero-label fade-up">УО «Гродненский государственный колледж строительных технологий»</div>
+            <h1 class="hero-title fade-up">Математика<br><span class="gold">строит будущее</span></h1>
+            <p class="hero-subtitle fade-up">Единственный в Беларуси УМК, где каждая тема математики привязана к строительной профессии. Трёхуровневая система, QR-коды, аудио-озвучка, таймеры, 3D-модели.</p>
+            <div class="hero-formula fade-up" id="heroFormula"></div>
+            <div class="hero-actions fade-up">
+                <a href="#sections" class="btn-gold">К разделам ↓</a>
+                <a href="teoreticheskij.html" class="btn-outline">Начать учиться →</a>
             </div>
         </div>
     </header>
+
+    <section id="stats">
+        <div class="container">
+            <div class="stats-grid fade-up">
+                <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">опорных конспектов</div></div>
+                <div class="stat-item"><div class="stat-num">28</div><div class="stat-label">практических работ</div></div>
+                <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">интерактивных 3D-моделей</div></div>
+                <div class="stat-item"><div class="stat-num">240</div><div class="stat-label">часов учебной программы</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="start">
+        <div class="container">
+            <div class="section-label fade-up">С чего начать</div>
+            <h2 class="section-title fade-up">Выберите свой путь</h2>
+            <div class="start-grid fade-up">
+                <a href="teoreticheskij.html" class="start-card">
+                    <div class="start-icon">🎓</div>
+                    <h4>Я студент</h4>
+                    <p>Откройте конспекты. В каждом — шпаргалка, аудио и профессиональные примеры.</p>
+                </a>
+                <a href="vspomogatelnyj.html" class="start-card">
+                    <div class="start-icon">👨‍🏫</div>
+                    <h4>Я преподаватель</h4>
+                    <p>Методические материалы, паспорт УМК, пояснительная записка, рекомендации.</p>
+                </a>
+                <a href="vspomogatelnyj.html#pasport-umk" class="start-card">
+                    <div class="start-icon">📋</div>
+                    <h4>Я проверяющий</h4>
+                    <p>Паспорт УМК, нормативная база, отличительные особенности комплекса.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="preview">
+        <div class="container">
+            <div class="section-label fade-up">Посмотрите как это работает</div>
+            <h2 class="section-title fade-up">Что внутри УМК</h2>
+            <div class="preview-grid fade-up">
+                <div class="preview-card">
+                    <div class="preview-img"><span class="preview-badge">Теория</span>📖</div>
+                    <div class="preview-body"><h4>Опорные конспекты</h4><p>Формула дня, интерактивное оглавление, частые ошибки, шпаргалка в конце.</p></div>
+                </div>
+                <div class="preview-card">
+                    <div class="preview-img"><span class="preview-badge">Практика</span>⏱️</div>
+                    <div class="preview-body"><h4>Практические с таймером</h4><p>Три уровня сложности, таймер выполнения, режим «Без ответов» для самостоятельных.</p></div>
+                </div>
+                <div class="preview-card">
+                    <div class="preview-img"><span class="preview-badge">3D</span>🧊</div>
+                    <div class="preview-body"><h4>Интерактивные модели</h4><p>Вращайте призмы и пирамиды, меняйте размеры, смотрите как меняется объём.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="sections">
         <div class="container">
             <div class="section-label fade-up">Структура УМК</div>
             <h2 class="section-title fade-up">Разделы комплекса</h2>
             <div class="cards-grid fade-up">
-                <a href="normativnyj.html" class="card">
-                    <div class="card-icon">📋</div>
-                    <h3 class="card-title">Нормативный</h3>
-                    <p class="card-text">Программа, КТП, паспорт УМК.</p>
-                    <span class="card-link">Перейти →</span>
-                </a>
                 <a href="teoreticheskij.html" class="card">
-                    <div class="card-icon">📖</div>
-                    <h3 class="card-title">Теоретический</h3>
-                    <p class="card-text">Конспекты, лекции, презентации.</p>
-                    <span class="card-link">Перейти →</span>
+                    <div class="card-icon">📚</div><h3 class="card-title">Теоретический раздел</h3><p class="card-text">9 опорных конспектов. Формула дня, прогресс-бар, QR-коды, аудио-озвучка тем.</p><span class="card-link">Перейти →</span>
                 </a>
                 <a href="prakticheskij.html" class="card">
-                    <div class="card-icon">🔧</div>
-                    <h3 class="card-title">Практический</h3>
-                    <p class="card-text">Практические работы, задания GeoGebra.</p>
-                    <span class="card-link">Перейти →</span>
+                    <div class="card-icon">🔧</div><h3 class="card-title">Практический раздел</h3><p class="card-text">28 практических работ. Трёхуровневая система, таймер, режим «Без ответов».</p><span class="card-link">Перейти →</span>
                 </a>
                 <a href="kontrol.html" class="card">
-                    <div class="card-icon">📝</div>
-                    <h3 class="card-title">Контроль знаний</h3>
-                    <p class="card-text">КР, тесты, вопросы к экзамену.</p>
-                    <span class="card-link">Перейти →</span>
+                    <div class="card-icon">📝</div><h3 class="card-title">Контроль знаний</h3><p class="card-text">Входной, текущий, тематический, итоговый. Шкалы перевода баллов.</p><span class="card-link">Перейти →</span>
                 </a>
                 <a href="vspomogatelnyj.html" class="card">
-                    <div class="card-icon">🧰</div>
-                    <h3 class="card-title">Вспомогательный</h3>
-                    <p class="card-text">Паспорт профилизации, литература, глоссарий.</p>
-                    <span class="card-link">Перейти →</span>
+                    <div class="card-icon">🧰</div><h3 class="card-title">Вспомогательный раздел</h3><p class="card-text">Паспорт УМК, пояснительная записка, методическая документация, FAQ.</p><span class="card-link">Перейти →</span>
                 </a>
                 <a href="interaktiv.html" class="card">
-                    <div class="card-icon">💻</div>
-                    <h3 class="card-title">Интерактив</h3>
-                    <p class="card-text">GeoGebra, Desmos, 3D-модели.</p>
-                    <span class="card-link">Перейти →</span>
+                    <div class="card-icon">💻</div><h3 class="card-title">Интерактивный раздел</h3><p class="card-text">GeoGebra-модели, калькуляторы, графический тренажёр, строй-игра.</p><span class="card-link">Перейти →</span>
+                </a>
+                <a href="normativnyj.html" class="card">
+                    <div class="card-icon">📋</div><h3 class="card-title">Нормативный раздел</h3><p class="card-text">Учебная программа, КТП, нормативные документы, приказы.</p><span class="card-link">Перейти →</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="advantages">
+    <section id="why">
         <div class="container">
-            <div class="section-label fade-up">Принципы</div>
-            <h2 class="section-title fade-up">Почему этот УМК</h2>
-            <div class="adv-grid fade-up">
-                <div class="adv-item"><div class="adv-icon">🔧</div><h4 class="adv-title">Практика</h4><p class="adv-text">Каждая тема привязана к профессии</p></div>
-                <div class="adv-item"><div class="adv-icon">📊</div><h4 class="adv-title">Три уровня</h4><p class="adv-text">Фундамент — Стены — Кровля</p></div>
-                <div class="adv-item"><div class="adv-icon">💻</div><h4 class="adv-title">Цифра</h4><p class="adv-text">GeoGebra и Desmos на сайте</p></div>
-                <div class="adv-item"><div class="adv-icon">📚</div><h4 class="adv-title">PDF</h4><p class="adv-text">Скачивайте и работайте</p></div>
+            <div class="section-label fade-up">Почему этот УМК</div>
+            <h2 class="section-title fade-up">Что делает комплекс уникальным</h2>
+            <div class="why-grid fade-up">
+                <div class="why-item">
+                    <div class="why-icon">🏗️</div>
+                    <h4>Привязан к профессии</h4>
+                    <p>Каждая тема математики объясняется через строительные задачи. Уклон кровли — тригонометрия, объём фундамента — многогранники, шум стройки — логарифмы.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">📊</div>
+                    <h4>Три уровня сложности</h4>
+                    <p>«Фундамент» для всех, «Стены» для уверенных, «Кровля» для отличников. Дифференциация в каждой практической работе.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">📱</div>
+                    <h4>QR-коды и аудио</h4>
+                    <p>Навёл телефон — открыл задание. Включил аудио — прослушал тему по дороге. Без регистрации, без паролей.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">📝</div>
+                    <h4>Режим «Без ответов»</h4>
+                    <p>Один переключатель скрывает все решения. Распечатайте контрольную за 10 секунд — студенты видят только задания.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">⏱️</div>
+                    <h4>Таймер и прогресс-бар</h4>
+                    <p>Студент видит сколько времени потратил на работу. Преподаватель видит какие темы усвоены группой.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">🔄</div>
+                    <h4>3D-модели и тренажёры</h4>
+                    <p>Вращайте многогранники мышкой. Играйте в «Построй дом» — 10 правильных ответов строят коттедж.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="methodical">
+    <section id="tech">
         <div class="container">
-            <div class="section-label fade-up">Материалы</div>
-            <h2 class="section-title fade-up">Методические разработки</h2>
-            <div class="method-grid fade-up">
-                <a href="uroki/optimizacia.html" class="method-card"><div class="method-icon">🏆</div><h4 class="method-title">Открытый урок</h4><p class="method-text">Оптимизация конструкций</p></a>
-                <a href="meropriyatiya/stroyploshadka.html" class="method-card"><div class="method-icon">🎮</div><h4 class="method-title">Мероприятие</h4><p class="method-text">Математика на стройплощадке</p></a>
-                <a href="master-klassy/privyazka.html" class="method-card"><div class="method-icon">🎓</div><h4 class="method-title">Мастер-класс</h4><p class="method-text">Привязка к профессии</p></a>
-                <a href="rekomendacii/geogebra-desmos.html" class="method-card"><div class="method-icon">💻</div><h4 class="method-title">GeoGebra и Desmos</h4><p class="method-text">Методические рекомендации</p></a>
+            <div class="section-label fade-up">Технологии</div>
+            <h2 class="section-title fade-up">На чём построен УМК</h2>
+            <div class="tech-grid fade-up">
+                <div class="tech-item"><span class="tech-icon">📐</span>GeoGebra</div>
+                <div class="tech-item"><span class="tech-icon">📊</span>Desmos</div>
+                <div class="tech-item"><span class="tech-icon">📝</span>KaTeX</div>
+                <div class="tech-item"><span class="tech-icon">🌐</span>GitHub Pages</div>
+                <div class="tech-item"><span class="tech-icon">🎨</span>Bootstrap 5</div>
+                <div class="tech-item"><span class="tech-icon">⚡</span>Vanilla JS</div>
             </div>
         </div>
     </section>
 
     <section id="interactive">
         <div class="container">
-            <div class="section-label fade-up">Инструменты</div>
-            <h2 class="section-title fade-up">Интерактивная математика</h2>
             <div class="interactive-block fade-up">
-                <div class="interactive-grid">
-                    <div>
-                        <h3>GeoGebra + Desmos</h3>
-                        <p>Меняйте параметры и смотрите, как это работает — прямо в браузере.</p>
-                        <ul>
-                            <li>📐 3D-модели многогранников</li>
-                            <li>📈 Графики с анимацией</li>
-                            <li>🔧 Расчёт конструкций онлайн</li>
-                        </ul>
-                        <a href="interaktiv.html" class="btn-gold" style="margin-top: 20px; display: inline-block;">Перейти к моделям →</a>
-                    </div>
-                    <div class="interactive-visual">💻</div>
-                </div>
+                <div class="interactive-icons">📐 🧊 🔺 ⚽ 🥫 🔻</div>
+                <h3>Интерактивная математика — попробуйте прямо сейчас</h3>
+                <p>3D-модели многогранников, калькуляторы строителя, графический тренажёр и игра «Построй дом». Всё работает в браузере, бесплатно и без регистрации.</p>
+                <a href="interaktiv.html" class="btn-gold">Открыть интерактивный раздел →</a>
             </div>
         </div>
     </section>
 
     <section id="about">
         <div class="container">
-            <div class="section-label fade-up">Автор</div>
+            <div class="section-label fade-up">Автор УМК</div>
             <h2 class="section-title fade-up">Станулевич Андрей Викторович</h2>
-            <div class="author-row fade-up">
-                <div class="author-photo">📷<br>Место для фото</div>
-                <div>
-                    <p style="font-size: 16px; color: var(--text-muted); line-height: 1.8;">Преподаватель математики Гродненского государственного колледжа строительных технологий. Специализация — практико-ориентированное преподавание. Разработчик УМК, автор методических рекомендаций по использованию GeoGebra и Desmos.</p>
-                    <div class="author-quote">«Учить математике — значит учить строить. Дома, мосты, будущее».</div>
+            <div class="author-block fade-up">
+                <div class="author-grid">
+                    <div class="author-photo">📷<br>Место для фото</div>
+                    <div>
+                        <!-- ОБНОВЛЁННЫЙ ТЕКСТ — ВАРИАНТ 2 (личное обращение) -->
+                        <p style="font-size: 16px; color: var(--text-muted); line-height: 1.8;">
+                            Здравствуйте! Меня зовут Станулевич Андрей Викторович. Я преподаю математику в Гродненском государственном колледже строительных технологий уже 5 лет. 
+                            <br><br>
+                            Этот учебно-методический комплекс создан для вас с одной целью: показать, что математика — это язык, на котором говорит строительство. В каждом разделе вы найдёте задания, приближенные к реальным профессиональным ситуациям: расчёт материалов, работа с чертежами, вычисление углов, объёмов и прочности конструкций. 
+                            <br><br>
+                            Я активно использую цифровые инструменты GeoGebra и Desmos, чтобы сделать занятия наглядными и интересными. Искренне надеюсь, что УМК поможет вам не только освоить программу, но и полюбить математику как основу вашей будущей профессии.
+                        </p>
+                        <!-- ОБНОВЛЁННАЯ ЦИТАТА -->
+                        <div class="author-quote">«Строитель, который понимает математику, строит не просто стены — он строит будущее».</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-   <footer style="background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0 0 0; text-align: center; font-size: 14px;">
-    <div class="container">
-        <div class="footer-grid">
-            <div><h4>Контакты</h4><a href="mailto:yukiosimidzu@gmail.com">yukiosimidzu@gmail.com</a><a href="https://ggkst.by/" target="_blank" rel="noopener">Сайт колледжа</a></div>
-            <div><h4>Ресурсы</h4><a href="https://www.geogebra.org/" target="_blank" rel="noopener">GeoGebra</a><a href="https://www.desmos.com/" target="_blank" rel="noopener">Desmos</a><a href="https://adu.by/" target="_blank" rel="noopener">adu.by</a></div>
-            <div><h4>Цитата</h4><p>«Математика — это язык, на котором инженер разговаривает с природой».</p><p style="opacity: 0.5; margin-top: 8px;">— А.Н. Крылов</p></div>
+    <footer style="background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0 0 0; text-align: center; font-size: 14px;">
+        <div class="container">
+            <div class="footer-grid">
+                <div><h4>Контакты</h4><a href="mailto:yukiosimidzu@gmail.com">yukiosimidzu@gmail.com</a><a href="https://ggkst.by/" target="_blank" rel="noopener">Сайт колледжа</a></div>
+                <div><h4>Ресурсы</h4><a href="https://www.geogebra.org/" target="_blank" rel="noopener">GeoGebra</a><a href="https://www.desmos.com/" target="_blank" rel="noopener">Desmos</a><a href="https://adu.by/" target="_blank" rel="noopener">adu.by</a></div>
+                <div><h4>Цитата</h4><p>«Математика — это язык, на котором инженер разговаривает с природой».</p><p style="opacity: 0.5; margin-top: 8px;">— А.Н. Крылов</p></div>
+            </div>
+            <div style="border-top: 1px solid var(--border); margin-top: 25px; padding-top: 20px;">
+                © 2026 Станулевич Андрей Викторович, Гродно, Беларусь<br>
+                <span style="font-size:11px;color:#8b949e;line-height:1.8;">
+                    Все права защищены. Данный учебно-методический комплекс является объектом интеллектуальной собственности.<br>
+                    Полное или частичное воспроизведение, распространение, переработка без письменного разрешения автора запрещены.
+                </span>
+            </div>
         </div>
-        <div style="border-top: 1px solid var(--border); margin-top: 25px; padding-top: 20px;">
-            © 2026 Станулевич Андрей Викторович, Гродно, Беларусь<br>
-            <span style="font-size:11px;color:#8b949e;line-height:1.8;">
-                Все права защищены. Данный учебно-методический комплекс является объектом интеллектуальной собственности.<br>
-                Полное или частичное воспроизведение, распространение, переработка без письменного разрешения автора запрещены.
-            </span>
-        </div>
-    </div>
-</footer>
+    </footer>
 
     <button id="backToTop" title="Наверх">▲</button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function handleScroll() {
@@ -289,11 +437,23 @@
         window.addEventListener('scroll', handleScroll);
 
         var backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) backToTop.classList.add('show');
-            else backToTop.classList.remove('show');
-        });
+        window.addEventListener('scroll', function() { backToTop.classList.toggle('show', window.scrollY > 300); });
         backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+        const formulas = [
+            { latex: '\\sin^{2}\\alpha + \\cos^{2}\\alpha = 1', topic: 'Тригонометрия' },
+            { latex: 'a^{m} \\cdot a^{n} = a^{m+n}', topic: 'Степени' },
+            { latex: 'V = S_{\\text{осн}} \\cdot H', topic: 'Многогранники' },
+            { latex: 'f\'(x_{0}) = \\operatorname{tg}\\alpha', topic: 'Производная' },
+            { latex: '\\log_{a}(xy) = \\log_{a}x + \\log_{a}y', topic: 'Логарифмы' },
+            { latex: 'V = \\frac{4}{3}\\pi R^{3}', topic: 'Тела вращения' },
+        ];
+        const today = new Date();
+        const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+        const f = formulas[dayOfYear % formulas.length];
+        const el = document.getElementById('heroFormula');
+        el.innerHTML = '📅 Формула дня: <span data-katex="' + f.latex + '"></span> — «' + f.topic + '»';
+        katex.render(f.latex, el.querySelector('[data-katex]'), { throwOnError: false });
     </script>
 </body>
 </html>
