@@ -15,9 +15,10 @@
         h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        .page-header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 80px 0 40px; text-align: center; }
+        .page-header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 80px 0 30px; text-align: center; }
         .page-header h1 { color: #fff; font-size: clamp(36px, 5vw, 52px); margin-bottom: 10px; }
         .page-header p { color: var(--gold); font-size: 1.1rem; }
+        .update-date { color: var(--text-muted); font-size: 12px; margin-top: 8px; }
 
         .content { padding: 60px 0; }
 
@@ -37,15 +38,13 @@
         .book-link:hover { text-decoration: underline; }
         .btn-outline-gold { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 8px 20px; text-decoration: none; font-weight: 500; font-size: 14px; transition: all 0.3s; border-radius: 6px; cursor: pointer; background: transparent; }
         .btn-outline-gold:hover { background: var(--gold); color: var(--bg); }
+        .btn-sm { padding: 6px 14px; font-size: 12px; }
 
         .formula-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
         .formula-table th, .formula-table td { padding: 11px 14px; border: 1px solid var(--border); text-align: left; }
         .formula-table th { background: rgba(212,160,23,0.08); color: var(--gold); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
         .formula-table td { color: var(--text-muted); }
         .formula-table td strong { color: #fff; }
-
-        .pasport-highlight { background: rgba(212,160,23,0.03); border: 1px solid var(--gold); border-radius: 8px; padding: 35px; margin-bottom: 25px; }
-        .pasport-highlight h2 { color: var(--gold); font-size: 1.5rem; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
 
         .teacher-block { background: rgba(212,160,23,0.04); border: 1px dashed var(--gold); padding: 26px 28px; border-radius: 8px; margin-top: 20px; }
         .teacher-block h4 { color: var(--gold); margin-bottom: 12px; font-size: 1.1rem; }
@@ -58,12 +57,13 @@
         .feature-text strong { color: #fff; display: block; margin-bottom: 4px; font-size: 15px; }
         .feature-text p { color: var(--text-muted); font-size: 13px; margin: 0; line-height: 1.6; }
 
-        .faq-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
-        .faq-header h2 { margin-bottom: 0; }
-        .faq-toggle-icon { color: var(--gold); font-size: 18px; transition: transform 0.3s; }
-        .faq-open .faq-toggle-icon { transform: rotate(180deg); }
-        .faq-body { display: none; margin-top: 20px; }
-        .faq-open .faq-body { display: block; }
+        .collapsible-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+        .collapsible-header h2 { margin-bottom: 0; }
+        .collapsible-toggle { color: var(--gold); font-size: 18px; transition: transform 0.3s; }
+        .collapsible-open .collapsible-toggle { transform: rotate(180deg); }
+        .collapsible-body { display: none; margin-top: 20px; }
+        .collapsible-open .collapsible-body { display: block; }
+        .collapsible-actions { display: flex; gap: 8px; align-items: center; }
 
         .faq-list { display: flex; flex-direction: column; gap: 2px; }
         .faq-item { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
@@ -89,7 +89,7 @@
         footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
         footer a { color: var(--gold); text-decoration: none; }
 
-        @media (max-width: 600px) { .section-card, .pasport-highlight { padding: 22px; } .page-header { padding: 60px 0 30px; } .doc-list li { flex-direction: column; align-items: flex-start; } .features-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .section-card { padding: 22px; } .page-header { padding: 60px 0 30px; } .doc-list li { flex-direction: column; align-items: flex-start; } .features-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -115,88 +115,14 @@
         <div class="container">
             <h1>🧰 Вспомогательный раздел</h1>
             <p>Учебно-программная и методическая поддержка УМК</p>
+            <p class="update-date">Последнее обновление: 24 июня 2026 г.</p>
         </div>
     </header>
 
     <div class="content">
         <div class="container">
 
-            <!-- ПАСПОРТ УМК -->
-            <div class="section-card">
-                <h2><span class="icon">📋</span> Паспорт учебно-методического комплекса</h2>
-                <table class="formula-table">
-                    <tr><td><strong>Полное наименование</strong></td><td>Электронный учебно-методический комплекс «Математика строит будущее»</td></tr>
-                    <tr><td><strong>Учебный предмет</strong></td><td>Математика (базовый уровень, ССО)</td></tr>
-                    <tr><td><strong>Разработчик</strong></td><td>Станулевич Андрей Викторович, преподаватель математики</td></tr>
-                    <tr><td><strong>Учреждение образования</strong></td><td>УО «Гродненский государственный колледж строительных технологий»</td></tr>
-                    <tr><td><strong>Год разработки</strong></td><td>2026</td></tr>
-                    <tr><td><strong>Общий объём часов</strong></td><td>240 часов (120 — первый курс, 120 — второй курс)</td></tr>
-                    <tr><td><strong>Количество тем</strong></td><td>9 тем (5 — первый курс, 4 — второй курс)</td></tr>
-                    <tr><td><strong>Структура УМК</strong></td><td>Теоретический раздел (9 опорных конспектов), практический раздел (28 работ), раздел контроля знаний (входной, текущий, тематический, итоговый), вспомогательный раздел, интерактивный раздел</td></tr>
-                    <tr><td><strong>Специальности</strong></td><td>Общестроительные работы (каменщик, монтажник, столяр, плотник), отделочные строительные работы (штукатур, маляр, облицовщик-плиточник), сварочные работы, санитарно-технические работы</td></tr>
-                    <tr><td><strong>Основание для разработки</strong></td><td>Кодекс Республики Беларусь об образовании, Постановление МО РБ № 427 от 08.11.2022</td></tr>
-                    <tr><td><strong>Цель</strong></td><td>Формирование математической грамотности учащихся через профессионально-ориентированное обучение</td></tr>
-                </table>
-            </div>
-
-            <!-- ПОЯСНИТЕЛЬНАЯ ЗАПИСКА -->
-            <div class="section-card">
-                <h2><span class="icon">📄</span> Пояснительная записка</h2>
-                <p>Учебно-методический комплекс «Математика строит будущее» разработан в соответствии с Кодексом Республики Беларусь об образовании и Положением об УМК на уровне среднего специального образования (постановление Министерства образования РБ № 427 от 08.11.2022).</p>
-                <p><strong>Объём и структура.</strong> УМК рассчитан на 240 часов: первый курс — 120 часов, второй курс — 120 часов. Для учебной группы 21 ТС — 240 часов за один учебный год. Учебный материал организован по блочной структуре: алгебраический и геометрический компоненты чередуются в течение учебного года.</p>
-                <p><strong>Специальности.</strong> УМК предназначен для учащихся, осваивающих квалификации: каменщик, монтажник строительных конструкций, столяр, плотник, штукатур, маляр, облицовщик-плиточник, электросварщик ручной сварки, монтаж и эксплуатация санитарно-технического оборудования.</p>
-                <p><strong>Цель УМК:</strong> формирование у учащихся математической грамотности и овладение разнообразными способами деятельности, применимыми как в образовательном процессе, так и в реальных жизненных ситуациях.</p>
-                <p><strong>Задачи:</strong></p>
-                <ul>
-                    <li>формирование представлений о математике как части общечеловеческой культуры;</li>
-                    <li>развитие логического и критического мышления, математической речи;</li>
-                    <li>формирование умения самостоятельно приобретать знания и контролировать результаты учебной деятельности;</li>
-                    <li>овладение математическими методами решения профессиональных задач строительного профиля.</li>
-                </ul>
-                <p><strong>Структура УМК.</strong> Комплекс включает: теоретический раздел (9 опорных конспектов), практический раздел (28 практических работ с трёхуровневой системой «Фундамент — Стены — Кровля»), раздел контроля знаний (входной, текущий, тематический, итоговый), вспомогательный раздел (документация, методические материалы, FAQ), интерактивный раздел (GeoGebra-модели).</p>
-                <p><strong>Актуализация.</strong> Обновление и пополнение УМК проводится в течение учебного года в соответствии с планом работы цикловой комиссии.</p>
-            </div>
-
-            <!-- ОТЛИЧИТЕЛЬНЫЕ ОСОБЕННОСТИ -->
-            <div class="section-card">
-                <h2><span class="icon">⭐</span> Отличительные особенности УМК</h2>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">🏗️</div>
-                        <div class="feature-text"><strong>Практико-ориентированный подход</strong><p>Каждая тема математики привязана к строительной специальности. Паспорт профилизации систематизирует межпредметные связи с дисциплинами профессионального цикла.</p></div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📊</div>
-                        <div class="feature-text"><strong>Трёхуровневая система сложности</strong><p>«Фундамент» (1–4 балла), «Стены» (5–7 баллов), «Кровля» (8–10 баллов). Дифференцированный подход в группах с разным уровнем подготовки.</p></div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📱</div>
-                        <div class="feature-text"><strong>Цифровые образовательные технологии</strong><p>Адаптивный веб-сайт, QR-коды для доступа с мобильных устройств, аудио-озвучка тем.</p></div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📝</div>
-                        <div class="feature-text"><strong>Режим «Без ответов»</strong><p>Скрытие решений одним переключателем для проведения самостоятельных и контрольных работ, печати раздаточного материала.</p></div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📈</div>
-                        <div class="feature-text"><strong>Система контроля и самоконтроля</strong><p>Прогресс-бар подготовки к экзамену, таймер выполнения работ, шпаргалки с ключевыми формулами в конце каждого конспекта.</p></div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🔄</div>
-                        <div class="feature-text"><strong>Интерактивные компоненты</strong><p>Интеграция с GeoGebra для наглядности при изучении стереометрии, тригонометрии, тел вращения. Строительный тренажёр в игровом формате.</p></div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📖</div>
-                        <div class="feature-text"><strong>Методическая поддержка преподавателя</strong><p>Паспорт профилизации, методические рекомендации, тематика консультаций, шкалы перевода баллов в соответствии с Постановлением № 427.</p></div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">♿</div>
-                        <div class="feature-text"><strong>Доступность</strong><p>Все материалы открыты, не требуют регистрации. Сайт работает на любых устройствах. Возможно использование в дистанционном формате.</p></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ФОРМУЛЫ СТРОИТЕЛЯ -->
+            <!-- КЛЮЧЕВЫЕ ФОРМУЛЫ -->
             <div class="section-card">
                 <h2><span class="icon">📐</span> Ключевые формулы для строителя</h2>
                 <p class="section-desc">Самые важные математические формулы с числовыми примерами.</p>
@@ -246,13 +172,88 @@
                 </ul>
             </div>
 
-            <!-- FAQ -->
-                        <div class="section-card">
-                <div class="faq-header" onclick="this.parentElement.classList.toggle('faq-open')">
-                    <h2><span class="icon">❓</span> Часто задаваемые вопросы <span style="font-size:14px;color:var(--text-muted);margin-left:10px;">(нажмите чтобы раскрыть)</span></h2>
-                    <span class="faq-toggle-icon">▼</span>
+            <!-- ПАСПОРТ УМК (свёрнут) -->
+            <div class="section-card">
+                <div class="collapsible-header" onclick="this.parentElement.classList.toggle('collapsible-open')">
+                    <h2><span class="icon">📋</span> Паспорт учебно-методического комплекса</h2>
+                    <div class="collapsible-actions">
+                        <button class="btn-outline-gold btn-sm" onclick="event.stopPropagation();printSection('pasport-umk')">🖨️ Печать</button>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
                 </div>
-                <div class="faq-body">
+                <div class="collapsible-body" id="pasport-umk">
+                    <table class="formula-table">
+                        <tr><td><strong>Полное наименование</strong></td><td>Электронный учебно-методический комплекс «Математика строит будущее»</td></tr>
+                        <tr><td><strong>Учебный предмет</strong></td><td>Математика (базовый уровень, ССО)</td></tr>
+                        <tr><td><strong>Разработчик</strong></td><td>Станулевич Андрей Викторович, преподаватель математики</td></tr>
+                        <tr><td><strong>Учреждение образования</strong></td><td>УО «Гродненский государственный колледж строительных технологий»</td></tr>
+                        <tr><td><strong>Год разработки</strong></td><td>2026</td></tr>
+                        <tr><td><strong>Общий объём часов</strong></td><td>240 часов (120 — первый курс, 120 — второй курс)</td></tr>
+                        <tr><td><strong>Количество тем</strong></td><td>9 тем (5 — первый курс, 4 — второй курс)</td></tr>
+                        <tr><td><strong>Структура УМК</strong></td><td>Теоретический раздел (9 опорных конспектов), практический раздел (28 работ), раздел контроля знаний (входной, текущий, тематический, итоговый), вспомогательный раздел, интерактивный раздел</td></tr>
+                        <tr><td><strong>Специальности</strong></td><td>Общестроительные работы (каменщик, монтажник, столяр, плотник), отделочные строительные работы (штукатур, маляр, облицовщик-плиточник), сварочные работы, санитарно-технические работы</td></tr>
+                        <tr><td><strong>Основание для разработки</strong></td><td>Кодекс Республики Беларусь об образовании, Постановление МО РБ № 427 от 08.11.2022</td></tr>
+                        <tr><td><strong>Цель</strong></td><td>Формирование математической грамотности учащихся через профессионально-ориентированное обучение</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ПОЯСНИТЕЛЬНАЯ ЗАПИСКА (свёрнута) -->
+            <div class="section-card">
+                <div class="collapsible-header" onclick="this.parentElement.classList.toggle('collapsible-open')">
+                    <h2><span class="icon">📄</span> Пояснительная записка</h2>
+                    <div class="collapsible-actions">
+                        <button class="btn-outline-gold btn-sm" onclick="event.stopPropagation();printSection('poyasnitelnaya')">🖨️ Печать</button>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                </div>
+                <div class="collapsible-body" id="poyasnitelnaya">
+                    <p>Учебно-методический комплекс «Математика строит будущее» разработан в соответствии с Кодексом Республики Беларусь об образовании и Положением об УМК на уровне среднего специального образования (постановление Министерства образования РБ № 427 от 08.11.2022).</p>
+                    <p><strong>Объём и структура.</strong> УМК рассчитан на 240 часов: первый курс — 120 часов, второй курс — 120 часов. Для учебной группы 21 ТС — 240 часов за один учебный год. Учебный материал организован по блочной структуре: алгебраический и геометрический компоненты чередуются в течение учебного года.</p>
+                    <p><strong>Специальности.</strong> УМК предназначен для учащихся, осваивающих квалификации: каменщик, монтажник строительных конструкций, столяр, плотник, штукатур, маляр, облицовщик-плиточник, электросварщик ручной сварки, монтаж и эксплуатация санитарно-технического оборудования.</p>
+                    <p><strong>Цель УМК:</strong> формирование у учащихся математической грамотности и овладение разнообразными способами деятельности, применимыми как в образовательном процессе, так и в реальных жизненных ситуациях.</p>
+                    <p><strong>Задачи:</strong></p>
+                    <ul>
+                        <li>формирование представлений о математике как части общечеловеческой культуры;</li>
+                        <li>развитие логического и критического мышления, математической речи;</li>
+                        <li>формирование умения самостоятельно приобретать знания и контролировать результаты учебной деятельности;</li>
+                        <li>овладение математическими методами решения профессиональных задач строительного профиля.</li>
+                    </ul>
+                    <p><strong>Структура УМК.</strong> Комплекс включает: теоретический раздел (9 опорных конспектов), практический раздел (28 практических работ с трёхуровневой системой «Фундамент — Стены — Кровля»), раздел контроля знаний (входной, текущий, тематический, итоговый), вспомогательный раздел (документация, методические материалы, FAQ), интерактивный раздел (GeoGebra-модели).</p>
+                    <p><strong>Актуализация.</strong> Обновление и пополнение УМК проводится в течение учебного года в соответствии с планом работы цикловой комиссии.</p>
+                </div>
+            </div>
+
+            <!-- ОТЛИЧИТЕЛЬНЫЕ ОСОБЕННОСТИ (свёрнуты) -->
+            <div class="section-card">
+                <div class="collapsible-header" onclick="this.parentElement.classList.toggle('collapsible-open')">
+                    <h2><span class="icon">⭐</span> Отличительные особенности УМК</h2>
+                    <div class="collapsible-actions">
+                        <button class="btn-outline-gold btn-sm" onclick="event.stopPropagation();printSection('features')">🖨️ Печать</button>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                </div>
+                <div class="collapsible-body" id="features">
+                    <div class="features-grid">
+                        <div class="feature-item"><div class="feature-icon">🏗️</div><div class="feature-text"><strong>Практико-ориентированный подход</strong><p>Каждая тема математики привязана к строительной специальности. Паспорт профилизации систематизирует межпредметные связи с дисциплинами профессионального цикла.</p></div></div>
+                        <div class="feature-item"><div class="feature-icon">📊</div><div class="feature-text"><strong>Трёхуровневая система сложности</strong><p>«Фундамент» (1–4 балла), «Стены» (5–7 баллов), «Кровля» (8–10 баллов). Дифференцированный подход в группах с разным уровнем подготовки.</p></div></div>
+                        <div class="feature-item"><div class="feature-icon">📱</div><div class="feature-text"><strong>Цифровые образовательные технологии</strong><p>Адаптивный веб-сайт, QR-коды для доступа с мобильных устройств, аудио-озвучка тем.</p></div></div>
+                        <div class="feature-item"><div class="feature-icon">📝</div><div class="feature-text"><strong>Режим «Без ответов»</strong><p>Скрытие решений одним переключателем для проведения самостоятельных и контрольных работ, печати раздаточного материала.</p></div></div>
+                        <div class="feature-item"><div class="feature-icon">📈</div><div class="feature-text"><strong>Система контроля и самоконтроля</strong><p>Прогресс-бар подготовки к экзамену, таймер выполнения работ, шпаргалки с ключевыми формулами в конце каждого конспекта.</p></div></div>
+                        <div class="feature-item"><div class="feature-icon">🔄</div><div class="feature-text"><strong>Интерактивные компоненты</strong><p>Интеграция с GeoGebra для наглядности при изучении стереометрии, тригонометрии, тел вращения. Строительный тренажёр в игровом формате.</p></div></div>
+                        <div class="feature-item"><div class="feature-icon">📖</div><div class="feature-text"><strong>Методическая поддержка преподавателя</strong><p>Паспорт профилизации, методические рекомендации, тематика консультаций, шкалы перевода баллов в соответствии с Постановлением № 427.</p></div></div>
+                        <div class="feature-item"><div class="feature-icon">♿</div><div class="feature-text"><strong>Доступность</strong><p>Все материалы открыты, не требуют регистрации. Сайт работает на любых устройствах. Возможно использование в дистанционном формате.</p></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ (свёрнут) -->
+            <div class="section-card">
+                <div class="collapsible-header" onclick="this.parentElement.classList.toggle('collapsible-open')">
+                    <h2><span class="icon">❓</span> Часто задаваемые вопросы</h2>
+                    <span class="collapsible-toggle">▼</span>
+                </div>
+                <div class="collapsible-body">
                     <p class="section-desc">Ответы на самые популярные вопросы студентов и преподавателей.</p>
                     <div class="faq-list">
                         <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Зачем строителю математика? Где она пригодится?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Математика — это инструмент строителя. Тригонометрия нужна для расчёта уклонов кровли и геодезической разбивки. Производная — для оптимизации расхода материалов. Объёмы — для расчёта бетона и земляных работ. Логарифмы — для измерения шума и звукоизоляции. В каждом конспекте есть блок «🔧 Где пригодится строителю» — начните с него.</div></div>
@@ -280,7 +281,6 @@
                 <ul>
                     <li><strong>Паспорт УМК</strong> — основные характеристики комплекса для отчётности и аттестации.</li>
                     <li><strong>Пояснительная записка</strong> — нормативное обоснование, цели, задачи, структура.</li>
-                    <li><strong>Паспорт профилизации</strong> — межпредметные связи математики и стройдисциплин.</li>
                     <li><strong>Формулы строителя</strong> — распечатайте как памятку для учащихся (1 страница).</li>
                     <li><strong>GeoGebra и Desmos</strong> — готовые 3D-модели многогранников и тел вращения.</li>
                     <li><strong>Методические рекомендации</strong> — пошаговые инструкции по внедрению интерактива.</li>
@@ -310,6 +310,15 @@
         var backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', function() { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
         backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+        function printSection(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const win = window.open('', '_blank', 'width=800,height=600');
+            win.document.write('<html><head><title>Печать</title><style>body{font-family:Roboto,sans-serif;font-size:14px;line-height:1.6;color:#000;padding:20px;max-width:800px;margin:0 auto}table{width:100%;border-collapse:collapse;margin:10px 0}td,th{padding:8px 12px;border:1px solid #ccc;text-align:left}th{background:#f5f5f5;font-weight:700}strong{color:#000}ul{padding-left:20px}li{margin-bottom:4px}.feature-item{display:flex;gap:10px;margin-bottom:12px;align-items:flex-start}.feature-icon{font-size:24px}.feature-text strong{display:block;margin-bottom:2px}</style></head><body>' + el.innerHTML + '</body></html>');
+            win.document.close();
+            setTimeout(() => win.print(), 500);
+        }
     </script>
 </body>
 </html>
