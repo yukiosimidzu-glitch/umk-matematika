@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -64,9 +65,6 @@
         .topic-status.not-done:hover { background: rgba(255,107,107,0.2); }
         .topic-status.done { background: rgba(74,222,128,0.1); color: var(--green); border-color: rgba(74,222,128,0.3); }
         .topic-status.done:hover { background: rgba(74,222,128,0.2); }
-
-        .topic-preview { display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #1a1f2b; border: 1px solid var(--gold); padding: 12px 16px; border-radius: 8px; font-size: 13px; color: var(--text-muted); white-space: nowrap; z-index: 10; margin-bottom: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); max-width: 300px; overflow: hidden; text-overflow: ellipsis; }
-        .topic-card:hover .topic-preview { display: block; }
 
         .topic-qr { position: absolute; top: 10px; right: 10px; font-size: 16px; cursor: pointer; opacity: 0.4; transition: opacity 0.3s; background: none; border: none; color: var(--text-muted); z-index: 5; }
         .topic-qr:hover { opacity: 1; color: var(--gold); }
@@ -257,15 +255,15 @@
                 <div class="method-timeline">
                     <div class="method-step">
                         <div class="method-step-header"><div class="method-step-num">1</div><h3>Фундамент (1–4 балла) — решение по образцу</h3></div>
-                        <div class="method-step-body"><p>Базовые задачи для <strong>всех учащихся</strong>. Повторяют действия, разобранные на занятии. Если не получается — вернитесь к конспекту в теоретическом разделе.</p><div class="method-result">🎯 Цель: закрепить базовый навык. Эти задачи обеспечивают минимальный балл для зачёта.</div></div>
+                        <div class="method-step-body"><p>Базовые задачи для <strong>всех учащихся</strong>. Повторяют действия, разобранные на занятии.</p><div class="method-result">🎯 Цель: закрепить базовый навык. Эти задачи обеспечивают минимальный балл для зачёта.</div></div>
                     </div>
                     <div class="method-step">
                         <div class="method-step-header"><div class="method-step-num">2</div><h3>Стены (5–7 баллов) — типовая профессиональная задача</h3></div>
-                        <div class="method-step-body"><p>Задачи <strong>средней сложности</strong>. Требуют комбинировать 2–3 действия. Часто связаны со строительной тематикой.</p><div class="method-result">🎯 Цель: научиться применять знания в типовых ситуациях. Эти задачи формируют профессиональное мышление.</div></div>
+                        <div class="method-step-body"><p>Задачи <strong>средней сложности</strong>. Требуют комбинировать 2–3 действия.</p><div class="method-result">🎯 Цель: научиться применять знания в типовых ситуациях.</div></div>
                     </div>
                     <div class="method-step">
                         <div class="method-step-header"><div class="method-step-num">3</div><h3>Кровля (8–10 баллов) — нестандартная задача</h3></div>
-                        <div class="method-step-body"><p>Задачи <strong>повышенной сложности</strong>. Требуют самостоятельно составить план решения.</p><div class="method-result">🎯 Цель: подготовка к экзамену и реальным рабочим ситуациям, где нет готовых решений.</div></div>
+                        <div class="method-step-body"><p>Задачи <strong>повышенной сложности</strong>. Требуют самостоятельно составить план решения.</p><div class="method-result">🎯 Цель: подготовка к экзамену и реальным рабочим ситуациям.</div></div>
                     </div>
                 </div>
             </div>
@@ -329,17 +327,6 @@
 
         const levelNames = { f: 'Фундамент', w: 'Стены', r: 'Кровля' };
 
-        const previews = {
-            1:'Переведите 30° в радианы.',2:'Переведите 90° в радианы.',3:'Упростите выражение, используя тождество.',4:'Решите простейшее тригонометрическое уравнение.',
-            5:'Через три точки проведите плоскость.',6:'Вычислите значение корня n-й степени.',7:'Решите иррациональное уравнение.',
-            8:'Найдите производную степенной функции.',9:'Составьте уравнение касательной к графику.',10:'Найдите точку максимума функции.',
-            11:'Докажите параллельность прямых.',12:'Докажите перпендикулярность прямой и плоскости.',13:'Примените теорему о трёх перпендикулярах.',14:'Найдите двугранный угол.',15:'Докажите перпендикулярность плоскостей.',
-            16:'Вычислите значение степени с рациональным показателем.',17:'Решите показательное уравнение.',18:'Решите показательное неравенство.',
-            19:'Найдите объём и площадь поверхности призмы.',20:'Найдите объём параллелепипеда.',21:'Найдите объём и площадь поверхности пирамиды.',22:'Найдите объём усечённой пирамиды.',
-            23:'Вычислите логарифм по определению.',24:'Решите логарифмическое уравнение.',25:'Решите логарифмическое неравенство.',
-            26:'Найдите площадь поверхности сферы и объём шара.',27:'Найдите объём и площадь поверхности цилиндра.',28:'Найдите объём и площадь поверхности конуса.',
-        };
-
         function renderWorks() {
             const modalsContainer = document.getElementById('modalsContainer');
             modalsContainer.innerHTML = '';
@@ -360,7 +347,6 @@
                     });
                     card.innerHTML = `
                         <button class="topic-qr" onclick="event.stopPropagation();showQR('pr/${numStr}.html${currentMode === 'nosol' ? '?nosol=1' : ''}')" title="QR-код">📱</button>
-                        <div class="topic-preview">${previews[num]}</div>
                         <div class="topic-num">ПР №${num} · ${levelNames[level]}</div>
                         <div class="topic-title">${titles[num]}</div>
                         <span class="topic-status ${status}" data-num="${num}">${status === 'not-done' ? '⚪ Не сделано' : '🟢 Выполнено'}</span>
@@ -463,3 +449,4 @@
     </script>
 </body>
 </html>
+```
