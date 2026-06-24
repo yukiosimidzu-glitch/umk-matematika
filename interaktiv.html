@@ -3,116 +3,522 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Интерактивный раздел — УМК «Математика»</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💻</text></svg>">
+    <meta name="description" content="Интерактивный раздел УМК «Математика строит будущее» — GeoGebra, калькуляторы, тренажёры.">
+    <meta name="keywords" content="интерактив, GeoGebra, калькуляторы, тренажёры, математика, строители">
+    <meta property="og:title" content="Интерактивный раздел — УМК «Математика строит будущее»">
+    <meta property="og:description" content="GeoGebra-модели, строительные калькуляторы, графические тренажёры и игры.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a1f2b'/><text y='.75em' x='50' text-anchor='middle' font-size='55' font-family='serif' font-weight='bold' fill='%23D4A017'>M</text></svg>">
+    <title>Интерактивный раздел — УМК «Математика строит будущее»</title>
+    <script>history.scrollRestoration = "manual";</script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --red: #ff6b6b; --green: #4ade80; --blue: #60a5fa; --purple: #c084fc; }
+        :root {
+            --bg: #0d1117;
+            --bg-card: #161b22;
+            --gold: #D4A017;
+            --gold-hover: #e6b422;
+            --text: #c9d1d9;
+            --text-muted: #8b949e;
+            --border: #30363d;
+            --sidebar-width: 260px;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; }
-        h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+        }
 
-        .hero { background: linear-gradient(135deg, #1a212f 0%, #0d1117 100%); border-bottom: 1px solid var(--border); padding: 100px 0 70px; text-align: center; }
-        .hero h1 { color: #fff; font-size: clamp(36px, 5vw, 54px); margin-bottom: 16px; }
-        .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto 30px; line-height: 1.7; }
-        .btn-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 14px 32px; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; transition: all 0.3s; cursor: pointer; border: none; }
-        .btn-gold:hover { background: #e6b422; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,160,23,0.3); color: var(--bg); }
-        .btn-outline { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 10px 22px; text-decoration: none; font-weight: 500; font-size: 14px; border-radius: 6px; transition: all 0.3s; cursor: pointer; background: transparent; }
-        .btn-outline:hover { background: var(--gold); color: var(--bg); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        .content { padding: 60px 0; }
-        .section-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 35px; margin-bottom: 25px; border-radius: 6px; }
-        .section-card h2 { color: #fff; margin-bottom: 12px; font-size: 1.4rem; display: flex; align-items: center; gap: 12px; }
-        .section-card .icon { font-size: 32px; }
+        /* ===== NAVBAR ===== */
+        .navbar-custom {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 0;
+        }
+        .navbar-custom .brand {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+        .navbar-custom .nav-link {
+            color: var(--text-muted);
+            font-size: 14px;
+            padding: 8px 16px;
+            transition: color 0.3s;
+        }
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: var(--gold);
+        }
 
-        .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; justify-content: center; }
-        .filter-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-size: 14px; transition: all 0.3s; }
-        .filter-btn.active { background: var(--gold); color: var(--bg); border-color: var(--gold); font-weight: 600; }
-        .filter-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+        /* ===== LAYOUT ===== */
+        .app-layout {
+            display: flex;
+            min-height: calc(100vh - 60px);
+            gap: 0;
+        }
 
-        .models-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-        .model-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
-        .model-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
-        .model-preview { height: 180px; background: #0a0e14; display: flex; align-items: center; justify-content: center; font-size: 60px; border-bottom: 1px solid var(--border); }
-        .model-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
-        .model-tag { display: inline-block; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-bottom: 10px; width: fit-content; }
-        .tag-geo { background: rgba(96,165,250,0.15); color: var(--blue); }
-        .tag-desmos { background: rgba(74,222,128,0.15); color: var(--green); }
-        .tag-3d { background: rgba(192,132,252,0.15); color: var(--purple); }
-        .tag-calc { background: rgba(251,191,36,0.15); color: #fbbf24; }
-        .tag-game { background: rgba(248,113,113,0.15); color: #f87171; }
-        .model-body h3 { color: #fff; font-size: 1.1rem; margin-bottom: 6px; }
-        .model-body p { color: var(--text-muted); font-size: 14px; flex: 1; margin-bottom: 14px; line-height: 1.6; }
-        .model-body .model-link { color: var(--gold); font-weight: 500; font-size: 14px; text-decoration: none; margin-top: auto; }
-        .model-body .model-link:hover { text-decoration: underline; }
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 24px 0 30px 0;
+            flex-shrink: 0;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 2px;
+        }
 
-        .calc-group { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .calc-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 20px; border-radius: 8px; }
-        .calc-item h4 { color: #fff; font-size: 1rem; margin-bottom: 12px; }
-        .calc-item label { color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 4px; }
-        .calc-item input { width: 100%; padding: 8px 12px; background: #0a0e14; border: 1px solid var(--border); color: #fff; border-radius: 6px; font-size: 14px; margin-bottom: 10px; }
-        .calc-item .result { color: var(--gold); font-weight: 600; font-size: 1.1rem; margin-top: 8px; }
+        .sidebar-section {
+            padding: 0 16px;
+            margin-bottom: 24px;
+        }
+        .sidebar-section .section-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            opacity: 0.5;
+            margin-bottom: 8px;
+        }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-bottom: 2px;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+        }
+        .sidebar-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text);
+        }
+        .sidebar-item.active {
+            background: rgba(212, 160, 23, 0.1);
+            color: var(--gold);
+        }
+        .sidebar-item .icon {
+            font-size: 20px;
+            width: 28px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .sidebar-item .badge {
+            margin-left: auto;
+            font-size: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: var(--text-muted);
+        }
+        .sidebar-item.active .badge {
+            background: rgba(212, 160, 23, 0.15);
+            color: var(--gold);
+        }
 
-        .timeline { position: relative; padding-left: 30px; border-left: 2px solid var(--gold); }
-        .timeline-item { margin-bottom: 20px; position: relative; }
-        .timeline-item::before { content: ''; position: absolute; left: -36px; top: 6px; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; }
-        .timeline-item h4 { color: var(--gold); font-size: 1rem; margin-bottom: 4px; }
-        .timeline-item p { color: var(--text-muted); font-size: 14px; }
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            padding: 30px 40px 60px 40px;
+            overflow-y: auto;
+            min-width: 0;
+        }
 
-        .map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
-        .map-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 18px; text-align: center; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
-        .map-item:hover { border-color: var(--gold); background: rgba(212,160,23,0.03); }
-        .map-item .map-icon { font-size: 36px; margin-bottom: 8px; }
-        .map-item .map-title { color: #fff; font-size: 14px; font-weight: 600; }
-        .map-item .map-formula { color: var(--gold); font-size: 12px; margin-top: 6px; display: none; }
-        .map-item.open .map-formula { display: block; }
+        /* ===== HERO ===== */
+        .hero-mini {
+            background: radial-gradient(ellipse at 70% 30%, #1a2332 0%, var(--bg) 70%);
+            border-radius: 16px;
+            padding: 40px 48px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-mini::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .hero-mini h1 {
+            font-size: clamp(28px, 4vw, 40px);
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .hero-mini h1 .gold {
+            color: var(--gold);
+        }
+        .hero-mini .subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .hero-stats-inline {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin: 16px 0 24px 0;
+        }
+        .hero-stat {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 12px 24px;
+            border-radius: 10px;
+            min-width: 120px;
+            text-align: center;
+        }
+        .hero-stat .num {
+            display: block;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            line-height: 1.1;
+        }
+        .hero-stat .label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
 
-        .decibel-slider { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .decibel-slider input[type=range] { flex: 1; min-width: 200px; accent-color: var(--gold); }
-        .decibel-value { color: var(--gold); font-weight: 700; font-size: 2rem; min-width: 80px; text-align: center; }
-        .decibel-example { color: var(--text-muted); font-size: 14px; }
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn-gold {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--gold);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-gold:hover {
+            background: var(--gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 160, 23, 0.3);
+        }
+        .btn-outline {
+            display: inline-block;
+            padding: 12px 28px;
+            background: transparent;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
 
-        .quiz-area { text-align: center; }
-        .quiz-graph { background: #0a0e14; border: 1px solid var(--border); height: 200px; display: flex; align-items: center; justify-content: center; font-size: 48px; margin-bottom: 16px; border-radius: 8px; }
-        .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .quiz-option { padding: 12px; border: 1px solid var(--border); background: transparent; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.3s; }
-        .quiz-option:hover { border-color: var(--gold); }
-        .quiz-option.correct { background: rgba(74,222,128,0.2); border-color: var(--green); }
-        .quiz-option.wrong { background: rgba(255,107,107,0.2); border-color: var(--red); }
+        /* ===== ПОИСК ===== */
+        .search-wrapper {
+            margin-bottom: 24px;
+        }
+        #searchModels {
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 15px;
+            transition: border 0.3s;
+        }
+        #searchModels::placeholder {
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+        #searchModels:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
 
-        .game-area { text-align: center; }
-        .game-building { font-size: 60px; margin: 20px 0; min-height: 80px; }
-        .game-progress { display: flex; gap: 4px; justify-content: center; margin-bottom: 20px; }
-        .game-block { width: 24px; height: 24px; border-radius: 4px; background: var(--border); }
-        .game-block.done { background: var(--gold); }
-        .game-block.fail { background: var(--red); }
-        .game-task { color: #fff; font-size: 1.1rem; margin-bottom: 16px; }
-        .game-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .game-option { padding: 12px; border: 1px solid var(--border); background: transparent; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.3s; }
-        .game-option:hover { border-color: var(--gold); }
-        .game-option.correct { background: rgba(74,222,128,0.2); border-color: var(--green); }
-        .game-option.wrong { background: rgba(255,107,107,0.2); border-color: var(--red); }
+        /* ===== ПРОГРЕСС ===== */
+        .progress-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+        .progress-card .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .progress-card .progress-header h3 {
+            font-size: 16px;
+            color: #fff;
+            margin: 0;
+        }
+        .progress-card .progress-header span {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .progress-track {
+            height: 10px;
+            background: #0a0e14;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+        .progress-track .fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-hover));
+            border-radius: 10px;
+            transition: width 0.8s ease;
+        }
+        .progress-card .progress-note {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin: 0;
+        }
 
-        .cta-section { text-align: center; padding: 40px 0 20px; }
+        /* ===== ВКЛАДКИ ===== */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        #backToTop { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: var(--bg); border: none; font-size: 22px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
-        #backToTop.show { opacity: 1; visibility: visible; }
-        #backToTop:hover { background: #e6b422; }
-        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
-        footer a { color: var(--gold); text-decoration: none; }
+        /* ===== КАРТОЧКИ МОДЕЛЕЙ ===== */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .model-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+        }
+        .model-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+        .model-card .icon-big {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .model-card h4 {
+            color: #fff;
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+        .model-card p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.5;
+            flex-grow: 1;
+            margin-bottom: 12px;
+        }
+        .model-card .card-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .model-card .tag {
+            font-size: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 2px 10px;
+            border-radius: 12px;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        .model-card .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        .model-card .card-footer .btn-sm {
+            font-size: 12px;
+            padding: 4px 14px;
+            border-radius: 6px;
+            background: rgba(212, 160, 23, 0.1);
+            color: var(--gold);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .model-card .card-footer .btn-sm:hover {
+            background: rgba(212, 160, 23, 0.2);
+        }
+        .favorite-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            padding: 0 4px;
+        }
+        .favorite-btn:hover {
+            transform: scale(1.15);
+        }
+        .favorite-btn.active {
+            color: var(--gold);
+        }
 
-        @media (max-width: 600px) { .calc-group { grid-template-columns: 1fr; } .quiz-options, .game-options { grid-template-columns: 1fr; } }
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 220px;
+                padding: 16px 0;
+            }
+            .main-content {
+                padding: 20px 24px 40px 24px;
+            }
+            .hero-mini {
+                padding: 28px 24px;
+            }
+        }
+        @media (max-width: 768px) {
+            .app-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 12px 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                justify-content: center;
+            }
+            .sidebar-section {
+                padding: 0 8px;
+                margin-bottom: 0;
+                display: contents;
+            }
+            .sidebar-item {
+                padding: 8px 14px;
+                font-size: 13px;
+                width: auto;
+                flex: 0 1 auto;
+            }
+            .sidebar-item .badge {
+                display: none;
+            }
+            .main-content {
+                padding: 16px;
+            }
+            .hero-mini {
+                padding: 20px 16px;
+            }
+            .hero-stats-inline {
+                gap: 12px;
+            }
+            .hero-stat {
+                min-width: 80px;
+                padding: 10px 16px;
+            }
+            .hero-stat .num {
+                font-size: 20px;
+            }
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .hero-actions .btn-gold,
+            .hero-actions .btn-outline {
+                text-align: center;
+                width: 100%;
+            }
+            .progress-card .progress-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--bg-card); border-bottom: 1px solid var(--border);">
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold); font-size:1.1rem;">УМК «Математика»</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <a class="brand" href="index.html">УМК «Математика»</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="normativnyj.html">Нормативный</a></li>
@@ -126,258 +532,381 @@
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="container">
-            <h1>💻 Интерактивная математика</h1>
-            <p>Строительные задачи, которые можно менять в реальном времени. Калькуляторы, тренажёры, 3D-модели, игры.</p>
-            <a href="#models" class="btn-gold">Смотреть модели ↓</a>
-        </div>
-    </header>
+    <!-- ===== APP LAYOUT ===== -->
+    <div class="app-layout">
 
-    <div class="content" id="models">
-        <div class="container">
-
-            <!-- ФИЛЬТРЫ -->
-            <div class="filter-bar">
-                <button class="filter-btn active" onclick="filterAll('all', this)">Все</button>
-                <button class="filter-btn" onclick="filterAll('geo', this)">🎯 GeoGebra</button>
-                <button class="filter-btn" onclick="filterAll('calc', this)">🧮 Калькуляторы</button>
-                <button class="filter-btn" onclick="filterAll('game', this)">🎮 Тренажёры</button>
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-section">
+                <div class="section-label">Разделы</div>
+                <button class="sidebar-item active" data-tab="geogebra">
+                    <span class="icon">📐</span> GeoGebra
+                    <span class="badge">6</span>
+                </button>
+                <button class="sidebar-item" data-tab="calculators">
+                    <span class="icon">🧮</span> Калькуляторы
+                    <span class="badge">8</span>
+                </button>
+                <button class="sidebar-item" data-tab="trainers">
+                    <span class="icon">🎮</span> Тренажёры
+                    <span class="badge">7</span>
+                </button>
+                <button class="sidebar-item" data-tab="labs">
+                    <span class="icon">🔬</span> Лаборатории
+                    <span class="badge">4</span>
+                </button>
+                <button class="sidebar-item" data-tab="map">
+                    <span class="icon">🗺️</span> Карта стройки
+                    <span class="badge">1</span>
+                </button>
+                <button class="sidebar-item" data-tab="achievements">
+                    <span class="icon">🏆</span> Достижения
+                    <span class="badge">5</span>
+                </button>
             </div>
-
-            <!-- GeoGebra МОДЕЛИ -->
-            <div class="section-card filterable geo" id="geogebra-models">
-                <h2><span class="icon">🎯</span> Интерактивные GeoGebra-модели</h2>
-                <div class="models-grid">
-                    <div class="model-card"><div class="model-preview">🎯</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><h3>Единичная окружность</h3><p>Двигайте точку — смотрите sin и cos.</p><a href="interaktiv/geogebra/edinichnaya-okruzhnost.html" class="model-link">Открыть →</a></div></div>
-                    <div class="model-card"><div class="model-preview">🧊</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span><h3>Призма и параллелепипед</h3><p>Вращайте в 3D, меняйте размеры.</p><a href="interaktiv/geogebra/prisma-3d.html" class="model-link">Открыть →</a></div></div>
-                    <div class="model-card"><div class="model-preview">🔺</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span><h3>Пирамида и сечение</h3><p>Пересекайте плоскостью.</p><a href="interaktiv/geogebra/piramida-sechenie.html" class="model-link">Открыть →</a></div></div>
-                    <div class="model-card"><div class="model-preview">🥫</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span><h3>Цилиндр</h3><p>Объём и площадь на лету.</p><a href="interaktiv/geogebra/cilindr-3d.html" class="model-link">Открыть →</a></div></div>
-                    <div class="model-card"><div class="model-preview">🔻</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span><h3>Конус</h3><p>Образующая, площадь, объём.</p><a href="interaktiv/geogebra/konus-3d.html" class="model-link">Открыть →</a></div></div>
-                    <div class="model-card"><div class="model-preview">⚽</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span><h3>Шар и сечение</h3><p>Проверьте формулу сечения.</p><a href="interaktiv/geogebra/shar-sechenie.html" class="model-link">Открыть →</a></div></div>
-                </div>
+            <div class="sidebar-section" style="border-top:1px solid var(--border);padding-top:16px;margin-top:4px;">
+                <div class="section-label">Пользователь</div>
+                <button class="sidebar-item" id="favoritesTab">
+                    <span class="icon">⭐</span> Избранное
+                    <span class="badge" id="favCount">0</span>
+                </button>
+                <button class="sidebar-item" id="teacherModeToggle">
+                    <span class="icon">👨‍🏫</span> Режим преподавателя
+                </button>
             </div>
+        </aside>
 
-            <!-- 2. КАЛЬКУЛЯТОРЫ СТРОИТЕЛЯ -->
-            <div class="section-card filterable calc" id="calculators">
-                <h2><span class="icon">🧮</span> Калькуляторы строителя</h2>
-                <div class="calc-group">
-                    <div class="calc-item">
-                        <h4>🏗️ Объём бетона (ленточный фундамент)</h4>
-                        <label>Длина (м)</label><input type="number" id="calc1-length" value="30" oninput="calcConcrete()">
-                        <label>Ширина (м)</label><input type="number" id="calc1-width" value="0.6" oninput="calcConcrete()">
-                        <label>Глубина (м)</label><input type="number" id="calc1-depth" value="1.2" oninput="calcConcrete()">
-                        <div class="result" id="calc1-result">Объём: 21.6 м³</div>
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="main-content">
+
+            <!-- ===== HERO MINI ===== -->
+            <div class="hero-mini" id="heroMini">
+                <h1>🧊 Интерактивный <span class="gold">раздел</span></h1>
+                <p class="subtitle">GeoGebra-модели, строительные калькуляторы, графические тренажёры и игры</p>
+
+                <div class="hero-stats-inline">
+                    <div class="hero-stat">
+                        <span class="num">24</span>
+                        <span class="label">интерактивные модели</span>
                     </div>
-                    <div class="calc-item">
-                        <h4>📐 Уклон кровли</h4>
-                        <label>Длина ската (м)</label><input type="number" id="calc2-length" value="10" oninput="calcRoof()">
-                        <label>Угол наклона (градусы)</label><input type="number" id="calc2-angle" value="30" oninput="calcRoof()">
-                        <div class="result" id="calc2-result">Высота подъёма: 5.00 м</div>
+                    <div class="hero-stat">
+                        <span class="num">8</span>
+                        <span class="label">калькуляторов</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="num">7</span>
+                        <span class="label">тренажёров</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="num">100%</span>
+                        <span class="label">бесплатно</span>
                     </div>
                 </div>
-            </div>
 
-            <!-- 3. ВИРТУАЛЬНАЯ ЛАБОРАТОРИЯ СЕЧЕНИЙ -->
-            <div class="section-card filterable geo" id="lab">
-                <h2><span class="icon">🔬</span> Виртуальная лаборатория «Сечения»</h2>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Выберите фигуру — проведите секущую плоскость — увидите форму сечения.</p>
-                <div class="models-grid">
-                    <div class="model-card"><div class="model-preview">🟦</div><div class="model-body"><h3>Куб</h3><p>Треугольник, четырёхугольник, пятиугольник, шестиугольник.</p><a href="interaktiv/geogebra/prisma-3d.html" class="model-link">Открыть →</a></div></div>
-                    <div class="model-card"><div class="model-preview">🔺</div><div class="model-body"><h3>Призма</h3><p>Сечение треугольной и четырёхугольной призмы.</p><a href="interaktiv/geogebra/piramida-sechenie.html" class="model-link">Открыть →</a></div></div>
-                    <div class="model-card"><div class="model-preview">📐</div><div class="model-body"><h3>Пирамида</h3><p>Сечение пирамиды плоскостью — треугольник, трапеция.</p><a href="interaktiv/geogebra/piramida-sechenie.html" class="model-link">Открыть →</a></div></div>
+                <div class="hero-actions">
+                    <a href="#models" class="btn-gold">Смотреть модели ↓</a>
+                    <button class="btn-outline" onclick="randomCard()">🎲 Случайное задание</button>
                 </div>
             </div>
 
-            <!-- 4. ГРАФИЧЕСКИЙ ТРЕНАЖЁР -->
-            <div class="section-card filterable game" id="graph-quiz">
-                <h2><span class="icon">📈</span> Графический тренажёр</h2>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Угадайте формулу функции по её графику. 5 раундов.</p>
-                <div class="quiz-area">
-                    <div class="quiz-graph" id="quiz-graph">📈</div>
-                    <p style="color:#fff;margin-bottom:14px;" id="quiz-question">Какая функция изображена на графике?</p>
-                    <div class="quiz-options" id="quiz-options"></div>
-                    <p style="color:var(--gold);margin-top:14px;font-weight:600;" id="quiz-score"></p>
+            <!-- ===== ПОИСК ===== -->
+            <div class="search-wrapper">
+                <input type="text" id="searchModels" placeholder="🔍 Поиск моделей, калькуляторов и тренажёров...">
+            </div>
+
+            <!-- ===== ПРОГРЕСС ===== -->
+            <div class="progress-card" id="progressCard">
+                <div class="progress-header">
+                    <h3>📊 Ваш прогресс</h3>
+                    <span id="progressText">Пройдено 0 из 24</span>
+                </div>
+                <div class="progress-track">
+                    <div class="fill" id="mainProgress" style="width:0%;"></div>
+                </div>
+                <p class="progress-note">Продолжайте изучать интерактивные модели, чтобы увеличить прогресс</p>
+            </div>
+
+            <!-- ===== ВКЛАДКИ ===== -->
+            <div id="tabGeogebra" class="tab-content active">
+                <h3 style="color:#fff;margin-bottom:16px;">📐 GeoGebra-модели</h3>
+                <div class="models-grid" id="modelsGrid">
+                    <!-- Карточки будут добавлены через JS -->
                 </div>
             </div>
 
-            <!-- 5. ШКАЛА ДЕЦИБЕЛ -->
-            <div class="section-card filterable calc" id="decibel">
-                <h2><span class="icon">🔊</span> Интерактивная шкала децибел</h2>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Передвиньте ползунок — увидите уровень шума и пример из жизни.</p>
-                <div class="decibel-slider">
-                    <span style="color:var(--text-muted);">0 дБ</span>
-                    <input type="range" min="0" max="130" value="60" oninput="updateDecibel(this.value)">
-                    <span style="color:var(--text-muted);">130 дБ</span>
-                    <div class="decibel-value" id="decibel-value">60</div>
-                </div>
-                <p class="decibel-example" id="decibel-example" style="margin-top:12px;">Обычный разговор (60 дБ)</p>
-            </div>
-
-            <!-- 6. ТАЙМЛАЙН -->
-            <div class="section-card filterable" id="timeline">
-                <h2><span class="icon">📜</span> История математики в строительстве</h2>
-                <div class="timeline">
-                    <div class="timeline-item"><h4>~2600 г. до н.э.</h4><p>Пирамида Хеопса — использование теоремы Пифагора для разметки прямых углов.</p></div>
-                    <div class="timeline-item"><h4>~300 г. до н.э.</h4><p>Евклид — «Начала». Аксиомы геометрии, которые до сих пор лежат в основе строительных расчётов.</p></div>
-                    <div class="timeline-item"><h4>XVII век</h4><p>Ньютон и Лейбниц — производная. Оптимизация конструкций, расчёт балок на прочность.</p></div>
-                    <div class="timeline-item"><h4>XX век</h4><p>Компьютерное моделирование. Расчёт небоскрёбов, мостов, куполов методом конечных элементов.</p></div>
-                    <div class="timeline-item"><h4>Сегодня</h4><p>BIM-технологии, 3D-печать зданий, цифровые двойники — математика управляет стройкой.</p></div>
+            <div id="tabCalculators" class="tab-content">
+                <h3 style="color:#fff;margin-bottom:16px;">🧮 Калькуляторы строителя</h3>
+                <div class="models-grid" id="calculatorsGrid">
+                    <!-- Карточки будут добавлены через JS -->
                 </div>
             </div>
 
-            <!-- 7. ИНТЕРАКТИВНАЯ КАРТА -->
-            <div class="section-card filterable" id="build-map">
-                <h2><span class="icon">🗺️</span> Интерактивная карта «Где математика в стройке»</h2>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Кликните на элемент здания — увидите формулу.</p>
-                <div class="map-grid">
-                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🏛️</div><div class="map-title">Фундамент</div><div class="map-formula">V = S · h</div></div>
-                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🧱</div><div class="map-title">Стены</div><div class="map-formula">S = a · b</div></div>
-                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🏗️</div><div class="map-title">Колонны</div><div class="map-formula">V = πr²h</div></div>
-                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🔺</div><div class="map-title">Кровля</div><div class="map-formula">h = l · sin α</div></div>
-                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🪜</div><div class="map-title">Лестница</div><div class="map-formula">n = H / h</div></div>
-                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🪟</div><div class="map-title">Окна</div><div class="map-formula">P = 2(a+b)</div></div>
+            <div id="tabTrainers" class="tab-content">
+                <h3 style="color:#fff;margin-bottom:16px;">🎮 Тренажёры</h3>
+                <div class="models-grid" id="trainersGrid">
+                    <!-- Карточки будут добавлены через JS -->
                 </div>
             </div>
 
-            <!-- 8. ТРЕНАЖЁР "СТРОИТЕЛЬНАЯ МАТЕМАТИКА" -->
-            <div class="section-card filterable game" id="build-game">
-                <h2><span class="icon">🎮</span> Тренажёр «Строительная математика»</h2>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Решите 10 профессиональных задач — постройте дом. Ошибка — здание рушится!</p>
-                <div class="game-area">
-                    <div class="game-progress" id="game-progress"></div>
-                    <div class="game-building" id="game-building">🏚️</div>
-                    <div class="game-task" id="game-task"></div>
-                    <div class="game-options" id="game-options"></div>
-                    <p style="color:var(--gold);margin-top:14px;font-weight:600;" id="game-score"></p>
-                    <button class="btn-outline" onclick="startGame()" style="margin-top:10px;">🔄 Начать заново</button>
+            <div id="tabLabs" class="tab-content">
+                <h3 style="color:#fff;margin-bottom:16px;">🔬 Лаборатории</h3>
+                <p style="color:var(--text-muted);">Интерактивные лаборатории для экспериментов с математическими моделями.</p>
+                <div class="models-grid" id="labsGrid" style="margin-top:16px;">
+                    <!-- Карточки будут добавлены через JS -->
                 </div>
             </div>
 
-        </div>
+            <div id="tabMap" class="tab-content">
+                <h3 style="color:#fff;margin-bottom:16px;">🗺️ Карта стройки</h3>
+                <p style="color:var(--text-muted);">Интерактивная карта строительной площадки с математическими задачами.</p>
+                <div class="models-grid" id="mapGrid" style="margin-top:16px;">
+                    <!-- Карточки будут добавлены через JS -->
+                </div>
+            </div>
+
+            <div id="tabAchievements" class="tab-content">
+                <h3 style="color:#fff;margin-bottom:16px;">🏆 Достижения</h3>
+                <p style="color:var(--text-muted);">Здесь будут отображаться ваши достижения.</p>
+                <div class="models-grid" id="achievementsGrid" style="margin-top:16px;">
+                    <!-- Карточки будут добавлены через JS -->
+                </div>
+            </div>
+
+            <div id="tabFavorites" class="tab-content">
+                <h3 style="color:#fff;margin-bottom:16px;">⭐ Избранное</h3>
+                <p style="color:var(--text-muted);">Ваши избранные модели и инструменты.</p>
+                <div class="models-grid" id="favoritesGrid" style="margin-top:16px;">
+                    <!-- Карточки будут добавлены через JS -->
+                </div>
+            </div>
+
+        </main>
     </div>
 
-    <div class="cta-section">
+    <!-- ===== ФУТЕР ===== -->
+    <footer style="background: var(--bg-card); border-top: 1px solid var(--border); padding: 24px 0; text-align: center; font-size: 13px; color: var(--text-muted);">
         <div class="container">
-            <h2>🚀 Создавайте свои модели</h2>
-            <p>GeoGebra и Desmos — бесплатные платформы для интерактивной математики</p>
-            <a href="https://www.geogebra.org/" target="_blank" class="btn-gold" style="margin-right:10px;">🌐 GeoGebra</a>
-            <a href="https://www.desmos.com/" target="_blank" class="btn-outline">📊 Desmos</a>
-        </div>
-    </div>
-
-    <footer>
-        <div class="container">
-            © 2026 Станулевич А.В., Гродно, Беларусь<br>
-            <span style="font-size:12px;color:var(--text-muted);">Все права защищены. Копирование и распространение без согласия автора запрещено.</span>
+            © 2026 Станулевич Андрей Викторович, Гродно, Беларусь · <a href="index.html" style="color:var(--gold);text-decoration:none;">На главную</a>
+            <div style="margin-top:6px;font-size:11px;color:var(--text-muted);opacity:0.5;">
+                Интерактивный раздел УМК «Математика строит будущее»
+            </div>
         </div>
     </footer>
 
-    <button id="backToTop" title="Наверх">▲</button>
+    <button id="backToTop" style="position:fixed;bottom:30px;right:30px;z-index:999;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--bg);border:none;font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.4);">▲</button>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        var backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', function() { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
-        backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-        function filterAll(cat, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.filterable').forEach(el => {
-                el.style.display = (cat === 'all' || el.classList.contains(cat)) ? 'block' : 'none';
-            });
-        }
-
-        // Калькуляторы
-        function calcConcrete() { const l=+document.getElementById('calc1-length').value||0,w=+document.getElementById('calc1-width').value||0,d=+document.getElementById('calc1-depth').value||0; document.getElementById('calc1-result').textContent='Объём: '+(l*w*d).toFixed(1)+' м³'; }
-        function calcRoof() { const l=+document.getElementById('calc2-length').value||0,a=+document.getElementById('calc2-angle').value||0; const h=l*Math.sin(a*Math.PI/180); document.getElementById('calc2-result').textContent='Высота подъёма: '+h.toFixed(2)+' м'; }
-        calcConcrete(); calcRoof();
-
-        // Децибелы
-        function updateDecibel(v) {
-            document.getElementById('decibel-value').textContent = v;
-            const examples = {0:'Порог слышимости',20:'Шёпот',40:'Библиотека',60:'Обычный разговор',80:'Оживлённая улица',90:'Стройплощадка',100:'Отбойный молоток',110:'Рок-концерт',120:'Реактивный самолёт',130:'Болевой порог'};
-            const keys = Object.keys(examples).map(Number).sort((a,b)=>a-b);
-            let ex = examples[0];
-            for(let k of keys){ if(v>=k) ex=examples[k]; }
-            document.getElementById('decibel-example').textContent = ex + ' (' + v + ' дБ)';
-        }
-        updateDecibel(60);
-
-        // Графический тренажёр
-        const graphQuiz = [
-            { graph:'📈', q:'y = x²', opts:['y = x²','y = x³','y = 2x','y = √x'], correct:0 },
-            { graph:'📉', q:'y = sin x', opts:['y = cos x','y = sin x','y = tg x','y = x'], correct:1 },
-            { graph:'📈', q:'y = 2ˣ', opts:['y = x²','y = log₂x','y = 2ˣ','y = 2x'], correct:2 },
+        // ===== ДАННЫЕ =====
+        const models = [
+            { id: 1, tab: 'geogebra', icon: '📐', title: 'Вращение призмы', desc: '3D-модель для изучения объёма и площади поверхности.', tags: ['3D', 'Геометрия'] },
+            { id: 2, tab: 'geogebra', icon: '🔺', title: 'Построение сечения', desc: 'Интерактивное построение сечений многогранников.', tags: ['Сечения', 'Стереометрия'] },
+            { id: 3, tab: 'geogebra', icon: '📊', title: 'График с параметром', desc: 'Меняйте коэффициенты и наблюдайте за изменением графика.', tags: ['Графики', 'Функции'] },
+            { id: 4, tab: 'geogebra', icon: '🧊', title: 'Пирамида в 3D', desc: 'Вращайте пирамиду, изучайте её элементы.', tags: ['3D', 'Пирамида'] },
+            { id: 5, tab: 'geogebra', icon: '📈', title: 'Тригонометрический круг', desc: 'Интерактивный круг для изучения тригонометрических функций.', tags: ['Тригонометрия'] },
+            { id: 6, tab: 'geogebra', icon: '📐', title: 'Теорема Пифагора', desc: 'Визуальное доказательство теоремы Пифагора.', tags: ['Теорема', 'Геометрия'] },
+            { id: 7, tab: 'calculators', icon: '🏗️', title: 'Объём бетона', desc: 'Расчёт объёма бетона для фундамента, стен и перекрытий.', tags: ['Бетон', 'Строительство'] },
+            { id: 8, tab: 'calculators', icon: '🧱', title: 'Количество кирпича', desc: 'Расчёт количества кирпича для кладки стен.', tags: ['Кирпич', 'Строительство'] },
+            { id: 9, tab: 'calculators', icon: '🔲', title: 'Расход плитки', desc: 'Расчёт количества плитки для пола и стен.', tags: ['Плитка', 'Отделка'] },
+            { id: 10, tab: 'calculators', icon: '📐', title: 'Уклон кровли', desc: 'Расчёт угла наклона кровли по заданным параметрам.', tags: ['Кровля', 'Углы'] },
+            { id: 11, tab: 'calculators', icon: '🎨', title: 'Расход краски', desc: 'Расчёт количества краски для стен и фасадов.', tags: ['Краска', 'Отделка'] },
+            { id: 12, tab: 'calculators', icon: '🪜', title: 'Расчёт лестницы', desc: 'Расчёт параметров лестничного марша.', tags: ['Лестницы', 'Строительство'] },
+            { id: 13, tab: 'calculators', icon: '🔩', title: 'Расчёт арматуры', desc: 'Расчёт необходимого количества арматуры для фундамента.', tags: ['Арматура', 'Фундамент'] },
+            { id: 14, tab: 'calculators', icon: '📊', title: 'Площадь фасада', desc: 'Расчёт площади фасада для отделочных работ.', tags: ['Фасад', 'Отделка'] },
+            { id: 15, tab: 'trainers', icon: '📈', title: 'График y = x²', desc: 'Изучите свойства параболы в интерактивном режиме.', tags: ['Графики', 'Функции'] },
+            { id: 16, tab: 'trainers', icon: '📈', title: 'График sin(x)', desc: 'Изучите синусоиду в интерактивном режиме.', tags: ['Графики', 'Тригонометрия'] },
+            { id: 17, tab: 'trainers', icon: '📈', title: 'График 2ˣ', desc: 'Изучите показательную функцию в интерактивном режиме.', tags: ['Графики', 'Показательная'] },
+            { id: 18, tab: 'trainers', icon: '📈', title: 'График log₂x', desc: 'Изучите логарифмическую функцию в интерактивном режиме.', tags: ['Графики', 'Логарифмы'] },
+            { id: 19, tab: 'trainers', icon: '🧩', title: 'Уравнения с параметром', desc: 'Решайте уравнения с параметром и проверяйте ответы.', tags: ['Уравнения', 'Параметры'] },
+            { id: 20, tab: 'trainers', icon: '🧩', title: 'Системы уравнений', desc: 'Решайте системы уравнений в интерактивном режиме.', tags: ['Уравнения', 'Системы'] },
+            { id: 21, tab: 'trainers', icon: '🧩', title: 'Неравенства', desc: 'Решайте неравенства в интерактивном режиме.', tags: ['Неравенства'] },
+            { id: 22, tab: 'labs', icon: '🔬', title: 'Свойства корней', desc: 'Интерактивная лаборатория по изучению свойств корней.', tags: ['Корни', 'Алгебра'] },
+            { id: 23, tab: 'labs', icon: '🔬', title: 'Свойства логарифмов', desc: 'Интерактивная лаборатория по изучению свойств логарифмов.', tags: ['Логарифмы', 'Алгебра'] },
+            { id: 24, tab: 'labs', icon: '🔬', title: 'Тригонометрические тождества', desc: 'Интерактивная лаборатория по изучению тригонометрических тождеств.', tags: ['Тригонометрия'] },
         ];
-        let quizIndex = 0, quizScore = 0;
-        function loadQuiz() {
-            if(quizIndex >= graphQuiz.length){ document.getElementById('quiz-graph').textContent='🏆'; document.getElementById('quiz-question').textContent='Вы прошли тренажёр!'; document.getElementById('quiz-options').innerHTML=''; document.getElementById('quiz-score').textContent='Счёт: '+quizScore+'/'+graphQuiz.length; return; }
-            const q = graphQuiz[quizIndex];
-            document.getElementById('quiz-graph').textContent = q.graph;
-            document.getElementById('quiz-question').textContent = q.q;
-            document.getElementById('quiz-score').textContent = 'Счёт: '+quizScore+'/'+graphQuiz.length;
-            const opts = document.getElementById('quiz-options');
-            opts.innerHTML = '';
-            q.opts.forEach((o,i)=>{
-                const btn = document.createElement('button');
-                btn.className = 'quiz-option';
-                btn.textContent = o;
-                btn.onclick = function(){
-                    document.querySelectorAll('.quiz-option').forEach(b=>b.disabled=true);
-                    if(i===q.correct){ btn.classList.add('correct'); quizScore++; }
-                    else { btn.classList.add('wrong'); document.querySelectorAll('.quiz-option')[q.correct].classList.add('correct'); }
-                    setTimeout(()=>{ quizIndex++; loadQuiz(); }, 1000);
-                };
-                opts.appendChild(btn);
-            });
-        }
-        loadQuiz();
 
-        // Строительный тренажёр
-        const buildTasks = [
-            { q:'Площадь квадратного участка 144 м². Найдите сторону.', opts:['12 м','14 м','16 м','10 м'], correct:0 },
-            { q:'Объём бетона для фундамента 30×0.6×1.2 м:', opts:['21.6 м³','18 м³','25 м³','30 м³'], correct:0 },
-            { q:'Уклон кровли 30°, длина ската 10 м. Высота подъёма:', opts:['5 м','8.66 м','10 м','3 м'], correct:0 },
-            { q:'log₂8 = ?', opts:['3','4','2','8'], correct:0 },
-            { q:'Производная от x³:', opts:['3x²','x²','3x','3x³'], correct:0 },
-        ];
-        let buildIndex = 0, buildScore = 0, buildFails = 0;
-        function loadBuildTask() {
-            if(buildIndex >= buildTasks.length){ document.getElementById('game-building').textContent = buildFails===0?'🏠':'🏚️'; document.getElementById('game-task').textContent = buildFails===0?'Дом построен! Вы отлично знаете математику!':'Стройка завершена. Ошибок: '+buildFails; document.getElementById('game-options').innerHTML=''; document.getElementById('game-score').textContent='Правильно: '+buildScore+'/'+buildTasks.length; return; }
-            const t = buildTasks[buildIndex];
-            document.getElementById('game-task').textContent = t.q;
-            document.getElementById('game-score').textContent = 'Правильно: '+buildScore+'/'+buildTasks.length;
-            const opts = document.getElementById('game-options');
-            opts.innerHTML = '';
-            t.opts.forEach((o,i)=>{
-                const btn = document.createElement('button');
-                btn.className = 'game-option';
-                btn.textContent = o;
-                btn.onclick = function(){
-                    document.querySelectorAll('.game-option').forEach(b=>b.disabled=true);
-                    if(i===t.correct){ btn.classList.add('correct'); buildScore++; updateGameProgress(true); }
-                    else { btn.classList.add('wrong'); buildFails++; updateGameProgress(false); document.querySelectorAll('.game-option')[t.correct].classList.add('correct'); }
-                    document.getElementById('game-building').textContent = buildFails===0?'🏗️':'💥';
-                    setTimeout(()=>{ buildIndex++; loadBuildTask(); }, 800);
-                };
-                opts.appendChild(btn);
+        // ===== СОСТОЯНИЕ =====
+        let favorites = JSON.parse(localStorage.getItem('interaktiv_favorites')) || [];
+        let progress = JSON.parse(localStorage.getItem('interaktiv_progress')) || { completed: [] };
+        let currentTab = 'geogebra';
+
+        // ===== РЕНДЕР =====
+        function renderCards(tabId, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const filtered = models.filter(m => m.tab === tabId);
+            container.innerHTML = filtered.map(m => createCard(m)).join('');
+        }
+
+        function createCard(model) {
+            const isFav = favorites.includes(model.id);
+            const isCompleted = progress.completed.includes(model.id);
+            return `
+                <div class="model-card" data-id="${model.id}" data-tab="${model.tab}" onclick="openModel(${model.id})">
+                    <div class="icon-big">${model.icon}</div>
+                    <h4>${model.title}</h4>
+                    <p>${model.desc}</p>
+                    <div class="card-tags">${model.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+                    <div class="card-footer">
+                        <button class="btn-sm" onclick="event.stopPropagation();openModel(${model.id})">Открыть →</button>
+                        <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="event.stopPropagation();toggleFavorite(${model.id})">${isFav ? '⭐' : '☆'}</button>
+                    </div>
+                    ${isCompleted ? '<div style="font-size:11px;color:var(--gold);margin-top:4px;">✅ Пройдено</div>' : ''}
+                </div>
+            `;
+        }
+
+        // ===== ВКЛАДКИ =====
+        function switchTab(tabId) {
+            currentTab = tabId;
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            const target = document.getElementById('tab' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+            if (target) target.classList.add('active');
+            document.querySelectorAll('.sidebar-item[data-tab]').forEach(el => {
+                el.classList.toggle('active', el.dataset.tab === tabId);
             });
+            renderCards(tabId, tabId + 'Grid');
+            updateProgress();
         }
-        function updateGameProgress(ok) {
-            const blocks = document.getElementById('game-progress').children;
-            if(buildIndex < blocks.length){ blocks[buildIndex].className = 'game-block '+(ok?'done':'fail'); }
+
+        document.querySelectorAll('.sidebar-item[data-tab]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                switchTab(this.dataset.tab);
+            });
+        });
+
+        // ===== ИЗБРАННОЕ =====
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(f => f !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('interaktiv_favorites', JSON.stringify(favorites));
+            renderCurrentTab();
+            updateFavCount();
         }
-        function startGame() {
-            buildIndex=0; buildScore=0; buildFails=0;
-            document.getElementById('game-building').textContent='🏚️';
-            const prog = document.getElementById('game-progress');
-            prog.innerHTML = '';
-            for(let i=0;i<buildTasks.length;i++){ const d=document.createElement('div'); d.className='game-block'; prog.appendChild(d); }
-            loadBuildTask();
+
+        function updateFavCount() {
+            document.getElementById('favCount').textContent = favorites.length;
         }
-        startGame();
+
+        // ===== ПРОГРЕСС =====
+        function updateProgress() {
+            const total = models.length;
+            const completed = progress.completed.length;
+            const pct = Math.round((completed / total) * 100);
+            document.getElementById('mainProgress').style.width = pct + '%';
+            document.getElementById('progressText').textContent = `Пройдено ${completed} из ${total}`;
+            // Перерисовка текущей вкладки
+            renderCurrentTab();
+        }
+
+        function markCompleted(id) {
+            if (!progress.completed.includes(id)) {
+                progress.completed.push(id);
+                localStorage.setItem('interaktiv_progress', JSON.stringify(progress));
+                updateProgress();
+            }
+        }
+
+        // ===== ОТКРЫТИЕ МОДЕЛИ =====
+        function openModel(id) {
+            markCompleted(id);
+            const model = models.find(m => m.id === id);
+            if (model) {
+                // Здесь позже будет открытие конкретной модели
+                alert('Открывается: ' + model.title + '\n' + model.desc);
+            }
+        }
+
+        // ===== СЛУЧАЙНОЕ ЗАДАНИЕ =====
+        function randomCard() {
+            const cards = document.querySelectorAll('.model-card');
+            if (!cards.length) return;
+            const random = cards[Math.floor(Math.random() * cards.length)];
+            random.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            random.style.borderColor = 'var(--gold)';
+            random.style.boxShadow = '0 0 30px rgba(212,160,23,0.2)';
+            setTimeout(() => {
+                random.style.borderColor = '';
+                random.style.boxShadow = '';
+            }, 3000);
+        }
+
+        // ===== ПОИСК =====
+        document.getElementById('searchModels').addEventListener('input', function() {
+            const value = this.value.toLowerCase().trim();
+            document.querySelectorAll('.model-card').forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(value) ? 'flex' : 'none';
+            });
+        });
+
+        // ===== ИЗБРАННОЕ (вкладка) =====
+        document.getElementById('favoritesTab').addEventListener('click', function() {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('tabFavorites').classList.add('active');
+            document.querySelectorAll('.sidebar-item[data-tab]').forEach(el => el.classList.remove('active'));
+            this.classList.add('active');
+            renderFavorites();
+        });
+
+        function renderFavorites() {
+            const container = document.getElementById('favoritesGrid');
+            const favModels = models.filter(m => favorites.includes(m.id));
+            container.innerHTML = favModels.length ? favModels.map(m => createCard(m)).join('') : '<p style="color:var(--text-muted);">⭐ Нет избранных моделей. Добавьте их, нажав на звёздочку у карточки.</p>';
+        }
+
+        // ===== РЕНДЕР ТЕКУЩЕЙ ВКЛАДКИ =====
+        function renderCurrentTab() {
+            const tabMap = {
+                geogebra: 'geogebraGrid',
+                calculators: 'calculatorsGrid',
+                trainers: 'trainersGrid',
+                labs: 'labsGrid',
+                map: 'mapGrid',
+                achievements: 'achievementsGrid'
+            };
+            const containerId = tabMap[currentTab];
+            if (containerId) {
+                renderCards(currentTab, containerId);
+            }
+        }
+
+        // ===== РЕЖИМ ПРЕПОДАВАТЕЛЯ =====
+        let teacherMode = false;
+        document.getElementById('teacherModeToggle').addEventListener('click', function() {
+            teacherMode = !teacherMode;
+            this.classList.toggle('active');
+            document.body.classList.toggle('teacher-mode');
+            if (teacherMode) {
+                this.style.color = 'var(--gold)';
+                alert('👨‍🏫 Режим преподавателя включён. Будут отображаться ответы и методические комментарии.');
+            } else {
+                this.style.color = '';
+                alert('👨‍🏫 Режим преподавателя выключен.');
+            }
+        });
+
+        // ===== КНОПКА НАВЕРХ =====
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            backToTop.classList.toggle('show', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        renderCards('geogebra', 'geogebraGrid');
+        renderCards('calculators', 'calculatorsGrid');
+        renderCards('trainers', 'trainersGrid');
+        renderCards('labs', 'labsGrid');
+        renderCards('map', 'mapGrid');
+        renderCards('achievements', 'achievementsGrid');
+        updateProgress();
+        updateFavCount();
     </script>
 </body>
 </html>
