@@ -4,78 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Раздел контроля знаний — УМК «Математика»</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📝</text></svg>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; 
-            --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d;
-            --level-1: #4ade80; --level-2: #60a5fa; --level-3: #fbbf24; --level-4: #f59e0b; --level-5: #ef4444;
-        }
+        :root { --bg: #0d1117; --bg-card: #161b22; --gold: #D4A017; --text: #c9d1d9; --text-muted: #8b949e; --border: #30363d; --level-1: #4ade80; --level-2: #60a5fa; --level-3: #fbbf24; --level-4: #f59e0b; --level-5: #ef4444; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        .page-header { 
-            background: linear-gradient(180deg, #1a212f 0%, #0d1117 100%); 
-            border-bottom: 5px solid var(--gold); 
-            padding: 80px 0 50px; text-align: center; 
-        }
-        .page-header h1 { color: #fff; font-size: clamp(30px, 5vw, 46px); margin-bottom: 10px; letter-spacing: 0.5px; }
-        .page-header .subtitle { color: var(--gold); font-size: 1.2rem; margin-bottom: 8px; }
-        .page-header .stats { color: var(--text-muted); font-size: 0.9rem; }
-        .page-header .stats span { color: var(--gold); font-weight: 600; }
+        .page-header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 80px 0 40px; text-align: center; }
+        .page-header h1 { color: #fff; font-size: clamp(36px, 5vw, 52px); margin-bottom: 10px; }
+        .page-header p { color: var(--gold); font-size: 1.1rem; }
 
-        .content { padding: 50px 0; }
+        .content { padding: 60px 0; }
 
-        .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; margin-bottom: 30px; }
-        .card { 
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; 
-            padding: 30px 26px; display: flex; flex-direction: column; transition: all 0.4s ease; 
-            position: relative; overflow: hidden;
-        }
-        .card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-            background: var(--gold); opacity: 0; transition: opacity 0.35s ease; border-radius: 16px 16px 0 0;
-        }
-        .card:hover { 
-            transform: translateY(-12px); border-color: var(--gold); 
-            box-shadow: 0 24px 48px -12px rgba(212,160,23,0.12); 
-        }
-        .card:hover::before { opacity: 1; }
+        .section-card { background: var(--bg-card); border: 1px solid var(--border); padding: 35px; margin-bottom: 25px; border-radius: 8px; }
+        .section-card h2 { color: #fff; margin-bottom: 15px; font-size: 1.5rem; }
+        .section-desc { color: var(--text-muted); margin-bottom: 25px; font-size: 1rem; }
 
-        .icon-circle { 
-            width: 58px; height: 58px; background: rgba(212,160,23,0.08); border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; font-size: 27px; 
-            margin-bottom: 18px; transition: all 0.35s ease;
-        }
-        .card:hover .icon-circle { background: rgba(212,160,23,0.18); transform: scale(1.08); }
-
+        .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-bottom: 30px; }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 28px; transition: all 0.3s; text-decoration: none; display: flex; flex-direction: column; }
+        .card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: rgba(212,160,23,0.02); }
+        .icon-circle { font-size: 36px; margin-bottom: 14px; }
         .card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 8px; }
-        .card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; flex-grow: 1; margin-bottom: 14px; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; flex-grow: 1; margin-bottom: 14px; }
+        .badge { display: inline-block; background: var(--gold); color: var(--bg); padding: 4px 12px; font-size: 11px; font-weight: 600; border-radius: 4px; margin-right: 5px; margin-bottom: 5px; }
 
-        .badges-row { display: flex; flex-wrap: nowrap; gap: 6px; margin-bottom: 16px; align-items: center; }
-        .badge { 
-            display: inline-flex; align-items: center; justify-content: center; 
-            background: var(--gold); color: var(--bg); padding: 4px 12px; 
-            font-size: 10px; font-weight: 700; border-radius: 14px; white-space: nowrap; 
-            height: 24px; line-height: 1; letter-spacing: 0.3px;
-        }
-
-        .btn-outline-gold { 
-            display: inline-block; border: 1.5px solid var(--gold); color: var(--gold); 
-            padding: 9px 20px; text-decoration: none; font-weight: 500; font-size: 13px; 
-            transition: all 0.3s; text-align: center; border-radius: 8px; align-self: flex-start;
-        }
-        .btn-outline-gold:hover { background: var(--gold); color: var(--bg); }
-
-        .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 15px 0; }
-        .scale-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 500px; }
+        .table-wrap { overflow-x: auto; margin: 15px 0; }
+        .scale-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 500px; }
         .scale-table th, .scale-table td { padding: 10px 14px; border: 1px solid var(--border); text-align: center; }
         .scale-table th { background: rgba(212,160,23,0.08); color: var(--gold); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
         .scale-table td { color: var(--text-muted); }
-        .scale-table tbody tr:hover td { background: rgba(212,160,23,0.03); }
         .scale-table .mark-col { color: var(--gold); font-weight: 700; font-size: 15px; }
         .scale-table .level-1 { border-left: 4px solid var(--level-1); }
         .scale-table .level-2 { border-left: 4px solid var(--level-2); }
@@ -86,37 +48,29 @@
         .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         @media (max-width: 700px) { .two-cols { grid-template-columns: 1fr; } }
 
-        .note-box { 
-            background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); 
-            border-left: 5px solid var(--gold); padding: 18px 22px; margin-top: 20px; border-radius: 0 8px 8px 0;
-        }
-        .note-box p { color: var(--text-muted); font-size: 14px; margin: 4px 0; }
+        .note-box { background: rgba(212,160,23,0.05); border: 1px solid rgba(212,160,23,0.2); border-left: 5px solid var(--gold); padding: 18px 22px; margin-top: 20px; border-radius: 0 8px 8px 0; }
+        .note-box p { color: var(--text-muted); font-size: 15px; margin: 4px 0; }
         .note-box strong { color: var(--gold); }
         .note-box a { color: var(--gold); text-decoration: underline; }
 
-        .teacher-block { 
-            background: rgba(212,160,23,0.04); border: 1px dashed var(--gold); 
-            padding: 26px 28px; border-radius: 12px; margin-top: 20px;
-        }
+        .teacher-block { background: rgba(212,160,23,0.04); border: 1px dashed var(--gold); padding: 26px 28px; border-radius: 8px; margin-top: 20px; }
         .teacher-block h4 { color: var(--gold); margin-bottom: 12px; font-size: 1.1rem; }
-        .teacher-block ul { color: var(--text-muted); font-size: 14px; padding-left: 20px; line-height: 2; }
+        .teacher-block ul { color: var(--text-muted); font-size: 15px; padding-left: 20px; line-height: 2; }
 
-        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 13px; }
+        #backToTop { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: var(--bg); border: none; font-size: 22px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+        #backToTop.show { opacity: 1; visibility: visible; }
+        #backToTop:hover { background: #e6b422; }
+        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
         footer a { color: var(--gold); text-decoration: none; }
 
-        @media (max-width: 600px) {
-            .card { padding: 22px 18px; }
-            .page-header { padding: 45px 0 30px; }
-            .scale-table { font-size: 11px; }
-            .scale-table th, .scale-table td { padding: 6px 8px; }
-        }
+        @media (max-width: 600px) { .card { padding: 22px 18px; } .page-header { padding: 60px 0 30px; } .scale-table { font-size: 12px; } }
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--bg-card); border-bottom: 1px solid var(--border);">
         <div class="container">
-            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold);">УМК «Математика»</a>
+            <a class="navbar-brand" href="index.html" style="font-family: 'Playfair Display', serif; color: var(--gold); font-size:1.1rem;">УМК «Математика»</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
@@ -133,13 +87,8 @@
 
     <header class="page-header">
         <div class="container">
-            <h1>Раздел контроля знаний</h1>
-            <p class="subtitle">Система объективной оценки учебных достижений</p>
-            <p class="stats">
-                <span>30 материалов</span> · 
-                <span>5 уровней</span> · 
-                Соответствует Постановлению МО РБ № 427
-            </p>
+            <h1>📝 Раздел контроля знаний</h1>
+            <p>Система объективной оценки учебных достижений · 30 материалов · 5 уровней</p>
         </div>
     </header>
 
@@ -147,42 +96,38 @@
         <div class="container">
 
             <div class="row">
-                <div class="card">
+                <a href="kontrol/vhodnoj.html" class="card">
                     <div class="icon-circle">🔍</div>
                     <h3>Входной контроль</h3>
                     <p>Диагностика знаний за курс основной школы. Проводится на первом занятии 1 курса.</p>
-                    <div class="badges-row"><span class="badge">2 варианта</span></div>
-                    <a href="kontrol/vhodnoj.html" class="btn-outline-gold">Перейти →</a>
-                </div>
+                    <div><span class="badge">2 варианта</span></div>
+                </a>
 
-                <div class="card">
+                <a href="kontrol/current/index.html" class="card">
                     <div class="icon-circle">📋</div>
                     <h3>Текущий контроль</h3>
                     <p>9 самостоятельных работ по 5 заданий. Время выполнения — 10–15 минут.</p>
-                    <div class="badges-row"><span class="badge">9 работ</span><span class="badge">2 варианта</span></div>
-                    <a href="kontrol/current/index.html" class="btn-outline-gold">Перейти →</a>
-                </div>
+                    <div><span class="badge">9 работ</span><span class="badge">2 варианта</span></div>
+                </a>
 
-                <div class="card">
+                <a href="kontrol/thematic/" class="card">
                     <div class="icon-circle">📝</div>
                     <h3>Тематические контрольные</h3>
                     <p>6 контрольных работ. 5 заданий разных уровней, максимум 30 баллов.</p>
-                    <div class="badges-row"><span class="badge">6 работ</span><span class="badge">2 варианта</span></div>
-                    <a href="kontrol/thematic/" class="btn-outline-gold">Перейти →</a>
-                </div>
+                    <div><span class="badge">6 работ</span><span class="badge">2 варианта</span></div>
+                </a>
 
-                <div class="card">
+                <a href="kontrol/final/" class="card">
                     <div class="icon-circle">🎓</div>
                     <h3>Итоговая аттестация</h3>
                     <p>Выпускной экзамен. 10 заданий, 5 уровней, максимум 55 баллов.</p>
-                    <div class="badges-row"><span class="badge">Теория</span><span class="badge">Задачи</span><span class="badge">Билеты</span></div>
-                    <a href="kontrol/final/" class="btn-outline-gold">Перейти →</a>
-                </div>
+                    <div><span class="badge">Теория</span><span class="badge">Задачи</span><span class="badge">Билеты</span></div>
+                </a>
             </div>
 
-            <div class="card" style="display: block;">
-                <h3>📊 Структура заданий по уровням</h3>
-                <p style="margin-bottom: 10px;">Контрольная / самостоятельная — 5 заданий. Экзамен — 10 заданий (по 2 на уровень).</p>
+            <div class="section-card">
+                <h2>📊 Структура заданий по уровням</h2>
+                <p class="section-desc">Контрольная / самостоятельная — 5 заданий. Экзамен — 10 заданий (по 2 на уровень).</p>
                 <div class="table-wrap">
                     <table class="scale-table">
                         <thead>
@@ -200,16 +145,16 @@
                 <p style="text-align: right; color: var(--gold); font-weight: 600;">Максимум: 30 (КР) / 55 (экзамен)</p>
             </div>
 
-            <div class="card" style="display: block;">
-                <h3>📈 Шкала перевода баллов в отметку</h3>
+            <div class="section-card">
+                <h2>📈 Шкала перевода баллов в отметку</h2>
                 <div class="two-cols">
                     <div>
-                        <h4 style="color: var(--gold); font-size: 1rem; margin-bottom: 10px;">5 заданий (макс. 30 б.)</h4>
+                        <h3 style="color: var(--gold); font-size: 1rem; margin-bottom: 10px;">5 заданий (макс. 30 б.)</h3>
                         <div class="table-wrap">
                             <table class="scale-table">
                                 <thead><tr><th>Баллы</th><th>Отметка</th></tr></thead>
                                 <tbody>
-                                    <tr><td>1</td><td class="mark-col">1</td></tr><tr><td>2</td><td class="mark-col">2</td></tr>
+                                    <tr><td>1–2</td><td class="mark-col">1–2</td></tr>
                                     <tr><td>3–5</td><td class="mark-col">3</td></tr><tr><td>6–8</td><td class="mark-col">4</td></tr>
                                     <tr><td>9–11</td><td class="mark-col">5</td></tr><tr><td>12–14</td><td class="mark-col">6</td></tr>
                                     <tr><td>15–18</td><td class="mark-col">7</td></tr><tr><td>19–23</td><td class="mark-col">8</td></tr>
@@ -219,12 +164,12 @@
                         </div>
                     </div>
                     <div>
-                        <h4 style="color: var(--gold); font-size: 1rem; margin-bottom: 10px;">10 заданий (макс. 55 б.)</h4>
+                        <h3 style="color: var(--gold); font-size: 1rem; margin-bottom: 10px;">10 заданий (макс. 55 б.)</h3>
                         <div class="table-wrap">
                             <table class="scale-table">
                                 <thead><tr><th>Баллы</th><th>Отметка</th></tr></thead>
                                 <tbody>
-                                    <tr><td>1</td><td class="mark-col">1</td></tr><tr><td>2–4</td><td class="mark-col">2</td></tr>
+                                    <tr><td>1–4</td><td class="mark-col">1–2</td></tr>
                                     <tr><td>5–7</td><td class="mark-col">3</td></tr><tr><td>8–12</td><td class="mark-col">4</td></tr>
                                     <tr><td>13–18</td><td class="mark-col">5</td></tr><tr><td>19–25</td><td class="mark-col">6</td></tr>
                                     <tr><td>26–33</td><td class="mark-col">7</td></tr><tr><td>34–42</td><td class="mark-col">8</td></tr>
@@ -255,11 +200,16 @@
     </div>
 
     <footer>
-        <div class="container">
-            © 2026 Станулевич А.В., Гродно, Беларусь · <a href="index.html">На главную</a>
-        </div>
+        <div class="container">© 2026 Станулевич А.В., Гродно, Беларусь · <a href="index.html">На главную</a></div>
     </footer>
 
+    <button id="backToTop" title="Наверх">▲</button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
+        backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    </script>
 </body>
 </html>
