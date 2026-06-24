@@ -300,69 +300,75 @@
             margin: 0;
         }
 
-        /* ===== ТЕХНОЛОГИИ ===== */
-        .tech-grid {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
+        /* ===== ТЕХНОЛОГИИ — ГРУППЫ ===== */
+        .tech-groups {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
         }
-        .tech-item {
-            background: rgba(255,255,255,0.02);
+        .tech-group {
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            padding: 16px 24px;
             border-radius: 10px;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-muted);
+            padding: 24px 20px 20px;
             transition: all 0.3s;
-            min-width: 110px;
-            flex: 0 1 auto;
         }
-        .tech-item:hover {
+        .tech-group:hover {
             border-color: var(--gold);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .tech-group-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        .tech-group-header .group-icon {
+            font-size: 28px;
+        }
+        .tech-group-header .group-title {
+            font-size: 16px;
+            font-weight: 600;
             color: #fff;
-            background: rgba(212, 160, 23, 0.05);
-            transform: translateY(-2px);
+            letter-spacing: 0.3px;
         }
-        .tech-item .tech-icon {
-            font-size: 48px;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .tech-progress {
-            margin-top: 30px;
-            text-align: center;
-            padding: 16px 20px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-        }
-        .tech-progress .progress-label {
-            font-size: 13px;
+        .tech-group-header .group-sub {
+            font-size: 11px;
             color: var(--text-muted);
-            margin-bottom: 6px;
+            margin-left: auto;
+            background: rgba(212,160,23,0.1);
+            padding: 2px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(212,160,23,0.2);
         }
-        .tech-progress .progress-bar-wrap {
-            width: 100%;
-            max-width: 400px;
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            margin: 0 auto;
-            overflow: hidden;
+        .tech-item-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
-        .tech-progress .progress-bar-fill {
-            width: 92%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--gold-hover));
-            border-radius: 4px;
-            transition: width 1.5s ease;
+        .tech-item-group:last-child {
+            border-bottom: none;
         }
-        .tech-progress .progress-note {
+        .tech-item-group .ti-icon {
+            font-size: 22px;
+            width: 32px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .tech-item-group .ti-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #e6edf3;
+            min-width: 90px;
+        }
+        .tech-item-group .ti-desc {
             font-size: 12px;
             color: var(--text-muted);
-            margin-top: 6px;
+            line-height: 1.3;
         }
 
         /* ===== ИНТЕРАКТИВНЫЙ БЛОК ===== */
@@ -424,6 +430,10 @@
             .choose-grid { grid-template-columns: repeat(2, 1fr); }
             .cards-grid { grid-template-columns: repeat(2, 1fr); }
             .start-grid { grid-template-columns: repeat(2, 1fr); }
+            .tech-groups { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .tech-groups { grid-template-columns: 1fr; }
         }
         @media (max-width: 576px) {
             .cards-grid, .start-grid, .choose-grid { grid-template-columns: 1fr; }
@@ -435,12 +445,13 @@
             .hero-emblem { width: 90px; height: 90px; }
             .btn-large { padding: 14px 28px; font-size: 15px; }
             section { padding: 60px 0; }
-            .tech-item { min-width: 80px; padding: 12px 16px; }
-            .tech-item .tech-icon { font-size: 36px; }
             .interactive-block { padding: 30px 20px; }
             .author-block { padding: 24px; }
             .author-grid { grid-template-columns: 1fr; text-align: center; }
             .author-photo { margin: 0 auto; }
+            .tech-group { padding: 18px 14px; }
+            .tech-item-group .ti-name { min-width: 70px; font-size: 13px; }
+            .tech-item-group .ti-desc { font-size: 11px; }
         }
     </style>
 </head>
@@ -621,22 +632,100 @@
         <div class="container">
             <div class="section-label fade-up">Технологии</div>
             <h2 class="section-title fade-up">На чём построен УМК</h2>
-            <div class="tech-grid fade-up">
-                <div class="tech-item"><span class="tech-icon">📐</span>GeoGebra</div>
-                <div class="tech-item"><span class="tech-icon">📊</span>Desmos</div>
-                <div class="tech-item"><span class="tech-icon">📝</span>KaTeX</div>
-                <div class="tech-item"><span class="tech-icon">🌐</span>GitHub Pages</div>
-                <div class="tech-item"><span class="tech-icon">🎨</span>Bootstrap 5</div>
-                <div class="tech-item"><span class="tech-icon">⚡</span>Vanilla JS</div>
-                <div class="tech-item"><span class="tech-icon">🔊</span>Web Speech API</div>
-                <div class="tech-item"><span class="tech-icon">📱</span>QR API</div>
-            </div>
-            <div class="tech-progress fade-up">
-                <div class="progress-label">Готовность УМК к использованию</div>
-                <div class="progress-bar-wrap">
-                    <div class="progress-bar-fill" style="width: 92%;"></div>
+            <div class="tech-groups fade-up">
+
+                <!-- ГРУППА 1: ФРОНТЕНД -->
+                <div class="tech-group">
+                    <div class="tech-group-header">
+                        <span class="group-icon">🖥️</span>
+                        <span class="group-title">Фронтенд</span>
+                        <span class="group-sub">UI/UX</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">📐</span>
+                        <span class="ti-name">GeoGebra</span>
+                        <span class="ti-desc">3D-модели и построения</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">📊</span>
+                        <span class="ti-name">Desmos</span>
+                        <span class="ti-desc">Графики с анимацией</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">📝</span>
+                        <span class="ti-name">KaTeX</span>
+                        <span class="ti-desc">Рендеринг формул</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">🎨</span>
+                        <span class="ti-name">Bootstrap 5</span>
+                        <span class="ti-desc">Адаптивная вёрстка</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">🔗</span>
+                        <span class="ti-name">Font Awesome</span>
+                        <span class="ti-desc">Иконки интерфейса</span>
+                    </div>
                 </div>
-                <div class="progress-note">92% материала готово · 8% — доработка интерактива</div>
+
+                <!-- ГРУППА 2: БЭКЕНД И ИНФРАСТРУКТУРА -->
+                <div class="tech-group">
+                    <div class="tech-group-header">
+                        <span class="group-icon">⚙️</span>
+                        <span class="group-title">Бэкенд и инфраструктура</span>
+                        <span class="group-sub">DevOps</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">🌐</span>
+                        <span class="ti-name">GitHub Pages</span>
+                        <span class="ti-desc">Хостинг и деплой</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">🔄</span>
+                        <span class="ti-name">GitHub Actions</span>
+                        <span class="ti-desc">CI/CD автоматизация</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">🐍</span>
+                        <span class="ti-name">Python</span>
+                        <span class="ti-desc">Скрипты и генерация PDF</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">📄</span>
+                        <span class="ti-name">LaTeX</span>
+                        <span class="ti-desc">PDF-версии разделов</span>
+                    </div>
+                </div>
+
+                <!-- ГРУППА 3: ФУНКЦИОНАЛ И ИНТЕРАКТИВНОСТЬ -->
+                <div class="tech-group">
+                    <div class="tech-group-header">
+                        <span class="group-icon">🧩</span>
+                        <span class="group-title">Функционал и интерактивность</span>
+                        <span class="group-sub">JS + API</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">⚡</span>
+                        <span class="ti-name">Vanilla JS</span>
+                        <span class="ti-desc">Таймеры, аудио, прогресс</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">📱</span>
+                        <span class="ti-name">QR API</span>
+                        <span class="ti-desc">Генерация QR-кодов</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">🔊</span>
+                        <span class="ti-name">Web Speech API</span>
+                        <span class="ti-desc">Аудио-озвучка текстов</span>
+                    </div>
+                    <div class="tech-item-group">
+                        <span class="ti-icon">📦</span>
+                        <span class="ti-name">localStorage</span>
+                        <span class="ti-desc">Прогресс и настройки</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
