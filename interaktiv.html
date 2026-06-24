@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Интерактивный раздел УМК «Математика строит будущее» — GeoGebra, калькуляторы, тренажёры.">
-    <meta name="keywords" content="интерактив, GeoGebra, калькуляторы, тренажёры, математика, строители">
-    <meta property="og:title" content="Интерактивный раздел — УМК «Математика строит будущее»">
-    <meta property="og:description" content="GeoGebra-модели, строительные калькуляторы, графические тренажёры и игры.">
-    <meta property="og:type" content="website">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a1f2b'/><text y='.75em' x='50' text-anchor='middle' font-size='55' font-family='serif' font-weight='bold' fill='%23D4A017'>M</text></svg>">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Интерактивный раздел УМК «Математика строит будущее» — GeoGebra, калькуляторы, тренажёры." />
+    <meta name="keywords" content="интерактив, GeoGebra, калькуляторы, тренажёры, математика, строители" />
+    <meta property="og:title" content="Интерактивный раздел — УМК «Математика строит будущее»" />
+    <meta property="og:description" content="GeoGebra-модели, строительные калькуляторы, графические тренажёры и игры." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a1f2b'/><text y='.75em' x='50' text-anchor='middle' font-size='55' font-family='serif' font-weight='bold' fill='%23D4A017'>M</text></svg>" />
     <title>Интерактивный раздел — УМК «Математика строит будущее»</title>
     <script>history.scrollRestoration = "manual";</script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet" />
     <style>
         :root {
             --bg: #0d1117;
@@ -84,16 +84,9 @@
             height: calc(100vh - 60px);
             overflow-y: auto;
         }
-        .sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .sidebar::-webkit-scrollbar-track {
-            background: var(--bg);
-        }
-        .sidebar::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 2px;
-        }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: var(--bg); }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
 
         .sidebar-section {
             padding: 0 16px;
@@ -184,9 +177,7 @@
             color: #fff;
             margin-bottom: 4px;
         }
-        .hero-mini h1 .gold {
-            color: var(--gold);
-        }
+        .hero-mini h1 .gold { color: var(--gold); }
         .hero-mini .subtitle {
             color: var(--text-muted);
             font-size: 16px;
@@ -430,6 +421,101 @@
             color: var(--gold);
         }
 
+        /* ===== КАЛЬКУЛЯТОРЫ ===== */
+        .calculator-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 28px;
+            transition: all 0.3s;
+        }
+        .calculator-card:hover {
+            border-color: var(--gold);
+        }
+        .calculator-card h4 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        .calculator-card .calc-desc {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        .calc-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 24px;
+            margin-bottom: 14px;
+        }
+        .calc-row label {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .calc-row label span {
+            font-weight: 500;
+            color: var(--text);
+        }
+        .calc-row input,
+        .calc-row select {
+            padding: 8px 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 14px;
+            width: 100%;
+            transition: border 0.3s;
+        }
+        .calc-row input:focus,
+        .calc-row select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .calc-result {
+            background: rgba(212, 160, 23, 0.06);
+            border: 1px solid rgba(212, 160, 23, 0.15);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .calc-result .label {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .calc-result .value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+        }
+        .calc-result .value .unit {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .calc-history {
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+        }
+        .calc-history .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+            font-size: 12px;
+        }
+
         /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 992px) {
             .sidebar {
@@ -492,8 +578,9 @@
             .models-grid {
                 grid-template-columns: 1fr;
             }
-        }
-        @media (max-width: 480px) {
+            .calc-row {
+                grid-template-columns: 1fr;
+            }
             .hero-actions {
                 flex-direction: column;
                 width: 100%;
@@ -506,6 +593,15 @@
             .progress-card .progress-header {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+        }
+        @media (max-width: 480px) {
+            .calculator-card {
+                padding: 16px;
+            }
+            .calc-result {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -579,32 +675,18 @@
         <!-- ===== MAIN CONTENT ===== -->
         <main class="main-content">
 
-            <!-- ===== HERO MINI ===== -->
-            <div class="hero-mini" id="heroMini">
+            <!-- ===== HERO ===== -->
+            <div class="hero-mini">
                 <h1>🧊 Интерактивный <span class="gold">раздел</span></h1>
                 <p class="subtitle">GeoGebra-модели, строительные калькуляторы, графические тренажёры и игры</p>
-
                 <div class="hero-stats-inline">
-                    <div class="hero-stat">
-                        <span class="num">24</span>
-                        <span class="label">интерактивные модели</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="num">8</span>
-                        <span class="label">калькуляторов</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="num">7</span>
-                        <span class="label">тренажёров</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="num">100%</span>
-                        <span class="label">бесплатно</span>
-                    </div>
+                    <div class="hero-stat"><span class="num">24</span><span class="label">интерактивные модели</span></div>
+                    <div class="hero-stat"><span class="num">8</span><span class="label">калькуляторов</span></div>
+                    <div class="hero-stat"><span class="num">7</span><span class="label">тренажёров</span></div>
+                    <div class="hero-stat"><span class="num">100%</span><span class="label">бесплатно</span></div>
                 </div>
-
                 <div class="hero-actions">
-                    <a href="#models" class="btn-gold">Смотреть модели ↓</a>
+                    <button class="btn-gold" onclick="document.getElementById('searchModels').focus()">🔍 Найти модель</button>
                     <button class="btn-outline" onclick="randomCard()">🎲 Случайное задание</button>
                 </div>
             </div>
@@ -615,7 +697,7 @@
             </div>
 
             <!-- ===== ПРОГРЕСС ===== -->
-            <div class="progress-card" id="progressCard">
+            <div class="progress-card">
                 <div class="progress-header">
                     <h3>📊 Ваш прогресс</h3>
                     <span id="progressText">Пройдено 0 из 24</span>
@@ -627,57 +709,53 @@
             </div>
 
             <!-- ===== ВКЛАДКИ ===== -->
+
+            <!-- GeoGebra -->
             <div id="tabGeogebra" class="tab-content active">
                 <h3 style="color:#fff;margin-bottom:16px;">📐 GeoGebra-модели</h3>
-                <div class="models-grid" id="modelsGrid">
-                    <!-- Карточки будут добавлены через JS -->
-                </div>
+                <div class="models-grid" id="geogebraGrid"></div>
             </div>
 
+            <!-- Калькуляторы -->
             <div id="tabCalculators" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:16px;">🧮 Калькуляторы строителя</h3>
-                <div class="models-grid" id="calculatorsGrid">
-                    <!-- Карточки будут добавлены через JS -->
+                <div id="calculatorsContainer">
+                    <!-- Калькуляторы будут добавлены через JS -->
                 </div>
             </div>
 
+            <!-- Тренажёры -->
             <div id="tabTrainers" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:16px;">🎮 Тренажёры</h3>
-                <div class="models-grid" id="trainersGrid">
-                    <!-- Карточки будут добавлены через JS -->
-                </div>
+                <div class="models-grid" id="trainersGrid"></div>
             </div>
 
+            <!-- Лаборатории -->
             <div id="tabLabs" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:16px;">🔬 Лаборатории</h3>
                 <p style="color:var(--text-muted);">Интерактивные лаборатории для экспериментов с математическими моделями.</p>
-                <div class="models-grid" id="labsGrid" style="margin-top:16px;">
-                    <!-- Карточки будут добавлены через JS -->
-                </div>
+                <div class="models-grid" id="labsGrid" style="margin-top:16px;"></div>
             </div>
 
+            <!-- Карта стройки -->
             <div id="tabMap" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:16px;">🗺️ Карта стройки</h3>
                 <p style="color:var(--text-muted);">Интерактивная карта строительной площадки с математическими задачами.</p>
-                <div class="models-grid" id="mapGrid" style="margin-top:16px;">
-                    <!-- Карточки будут добавлены через JS -->
-                </div>
+                <div class="models-grid" id="mapGrid" style="margin-top:16px;"></div>
             </div>
 
+            <!-- Достижения -->
             <div id="tabAchievements" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:16px;">🏆 Достижения</h3>
                 <p style="color:var(--text-muted);">Здесь будут отображаться ваши достижения.</p>
-                <div class="models-grid" id="achievementsGrid" style="margin-top:16px;">
-                    <!-- Карточки будут добавлены через JS -->
-                </div>
+                <div class="models-grid" id="achievementsGrid" style="margin-top:16px;"></div>
             </div>
 
+            <!-- Избранное -->
             <div id="tabFavorites" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:16px;">⭐ Избранное</h3>
                 <p style="color:var(--text-muted);">Ваши избранные модели и инструменты.</p>
-                <div class="models-grid" id="favoritesGrid" style="margin-top:16px;">
-                    <!-- Карточки будут добавлены через JS -->
-                </div>
+                <div class="models-grid" id="favoritesGrid" style="margin-top:16px;"></div>
             </div>
 
         </main>
@@ -697,7 +775,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // ===== ДАННЫЕ =====
+        // ==========================================
+        // ДАННЫЕ МОДЕЛЕЙ
+        // ==========================================
         const models = [
             { id: 1, tab: 'geogebra', icon: '📐', title: 'Вращение призмы', desc: '3D-модель для изучения объёма и площади поверхности.', tags: ['3D', 'Геометрия'] },
             { id: 2, tab: 'geogebra', icon: '🔺', title: 'Построение сечения', desc: 'Интерактивное построение сечений многогранников.', tags: ['Сечения', 'Стереометрия'] },
@@ -705,58 +785,251 @@
             { id: 4, tab: 'geogebra', icon: '🧊', title: 'Пирамида в 3D', desc: 'Вращайте пирамиду, изучайте её элементы.', tags: ['3D', 'Пирамида'] },
             { id: 5, tab: 'geogebra', icon: '📈', title: 'Тригонометрический круг', desc: 'Интерактивный круг для изучения тригонометрических функций.', tags: ['Тригонометрия'] },
             { id: 6, tab: 'geogebra', icon: '📐', title: 'Теорема Пифагора', desc: 'Визуальное доказательство теоремы Пифагора.', tags: ['Теорема', 'Геометрия'] },
-            { id: 7, tab: 'calculators', icon: '🏗️', title: 'Объём бетона', desc: 'Расчёт объёма бетона для фундамента, стен и перекрытий.', tags: ['Бетон', 'Строительство'] },
-            { id: 8, tab: 'calculators', icon: '🧱', title: 'Количество кирпича', desc: 'Расчёт количества кирпича для кладки стен.', tags: ['Кирпич', 'Строительство'] },
-            { id: 9, tab: 'calculators', icon: '🔲', title: 'Расход плитки', desc: 'Расчёт количества плитки для пола и стен.', tags: ['Плитка', 'Отделка'] },
-            { id: 10, tab: 'calculators', icon: '📐', title: 'Уклон кровли', desc: 'Расчёт угла наклона кровли по заданным параметрам.', tags: ['Кровля', 'Углы'] },
-            { id: 11, tab: 'calculators', icon: '🎨', title: 'Расход краски', desc: 'Расчёт количества краски для стен и фасадов.', tags: ['Краска', 'Отделка'] },
-            { id: 12, tab: 'calculators', icon: '🪜', title: 'Расчёт лестницы', desc: 'Расчёт параметров лестничного марша.', tags: ['Лестницы', 'Строительство'] },
-            { id: 13, tab: 'calculators', icon: '🔩', title: 'Расчёт арматуры', desc: 'Расчёт необходимого количества арматуры для фундамента.', tags: ['Арматура', 'Фундамент'] },
-            { id: 14, tab: 'calculators', icon: '📊', title: 'Площадь фасада', desc: 'Расчёт площади фасада для отделочных работ.', tags: ['Фасад', 'Отделка'] },
-            { id: 15, tab: 'trainers', icon: '📈', title: 'График y = x²', desc: 'Изучите свойства параболы в интерактивном режиме.', tags: ['Графики', 'Функции'] },
-            { id: 16, tab: 'trainers', icon: '📈', title: 'График sin(x)', desc: 'Изучите синусоиду в интерактивном режиме.', tags: ['Графики', 'Тригонометрия'] },
-            { id: 17, tab: 'trainers', icon: '📈', title: 'График 2ˣ', desc: 'Изучите показательную функцию в интерактивном режиме.', tags: ['Графики', 'Показательная'] },
-            { id: 18, tab: 'trainers', icon: '📈', title: 'График log₂x', desc: 'Изучите логарифмическую функцию в интерактивном режиме.', tags: ['Графики', 'Логарифмы'] },
-            { id: 19, tab: 'trainers', icon: '🧩', title: 'Уравнения с параметром', desc: 'Решайте уравнения с параметром и проверяйте ответы.', tags: ['Уравнения', 'Параметры'] },
-            { id: 20, tab: 'trainers', icon: '🧩', title: 'Системы уравнений', desc: 'Решайте системы уравнений в интерактивном режиме.', tags: ['Уравнения', 'Системы'] },
-            { id: 21, tab: 'trainers', icon: '🧩', title: 'Неравенства', desc: 'Решайте неравенства в интерактивном режиме.', tags: ['Неравенства'] },
-            { id: 22, tab: 'labs', icon: '🔬', title: 'Свойства корней', desc: 'Интерактивная лаборатория по изучению свойств корней.', tags: ['Корни', 'Алгебра'] },
-            { id: 23, tab: 'labs', icon: '🔬', title: 'Свойства логарифмов', desc: 'Интерактивная лаборатория по изучению свойств логарифмов.', tags: ['Логарифмы', 'Алгебра'] },
-            { id: 24, tab: 'labs', icon: '🔬', title: 'Тригонометрические тождества', desc: 'Интерактивная лаборатория по изучению тригонометрических тождеств.', tags: ['Тригонометрия'] },
+            { id: 7, tab: 'trainers', icon: '📈', title: 'График y = x²', desc: 'Изучите свойства параболы в интерактивном режиме.', tags: ['Графики', 'Функции'] },
+            { id: 8, tab: 'trainers', icon: '📈', title: 'График sin(x)', desc: 'Изучите синусоиду в интерактивном режиме.', tags: ['Графики', 'Тригонометрия'] },
+            { id: 9, tab: 'trainers', icon: '📈', title: 'График 2ˣ', desc: 'Изучите показательную функцию в интерактивном режиме.', tags: ['Графики', 'Показательная'] },
+            { id: 10, tab: 'trainers', icon: '📈', title: 'График log₂x', desc: 'Изучите логарифмическую функцию в интерактивном режиме.', tags: ['Графики', 'Логарифмы'] },
+            { id: 11, tab: 'trainers', icon: '🧩', title: 'Уравнения с параметром', desc: 'Решайте уравнения с параметром и проверяйте ответы.', tags: ['Уравнения', 'Параметры'] },
+            { id: 12, tab: 'trainers', icon: '🧩', title: 'Системы уравнений', desc: 'Решайте системы уравнений в интерактивном режиме.', tags: ['Уравнения', 'Системы'] },
+            { id: 13, tab: 'trainers', icon: '🧩', title: 'Неравенства', desc: 'Решайте неравенства в интерактивном режиме.', tags: ['Неравенства'] },
+            { id: 14, tab: 'labs', icon: '🔬', title: 'Свойства корней', desc: 'Интерактивная лаборатория по изучению свойств корней.', tags: ['Корни', 'Алгебра'] },
+            { id: 15, tab: 'labs', icon: '🔬', title: 'Свойства логарифмов', desc: 'Интерактивная лаборатория по изучению свойств логарифмов.', tags: ['Логарифмы', 'Алгебра'] },
+            { id: 16, tab: 'labs', icon: '🔬', title: 'Тригонометрические тождества', desc: 'Интерактивная лаборатория по изучению тригонометрических тождеств.', tags: ['Тригонометрия'] },
+            { id: 17, tab: 'labs', icon: '🔬', title: 'Производная функции', desc: 'Интерактивная лаборатория по изучению производной.', tags: ['Производная', 'Анализ'] },
+            { id: 18, tab: 'map', icon: '🗺️', title: 'Карта строительной площадки', desc: 'Интерактивная карта с математическими задачами.', tags: ['Карта', 'Строительство'] },
+            { id: 19, tab: 'achievements', icon: '🏅', title: 'Геометр', desc: 'Изучите все геометрические модели.', tags: ['Достижение'] },
+            { id: 20, tab: 'achievements', icon: '🏅', title: 'Строитель', desc: 'Используйте все строительные калькуляторы.', tags: ['Достижение'] },
+            { id: 21, tab: 'achievements', icon: '🏅', title: 'Мастер функций', desc: 'Изучите все графические тренажёры.', tags: ['Достижение'] },
+            { id: 22, tab: 'achievements', icon: '🏅', title: 'Эксперт по логарифмам', desc: 'Изучите все лаборатории по логарифмам.', tags: ['Достижение'] },
+            { id: 23, tab: 'achievements', icon: '🏅', title: 'Без ошибок', desc: 'Пройдите все тесты без ошибок.', tags: ['Достижение'] },
         ];
 
-        // ===== СОСТОЯНИЕ =====
+        // ==========================================
+        // КАЛЬКУЛЯТОРЫ
+        // ==========================================
+        const calculators = [{
+            id: 'calc1',
+            title: '🏗️ Объём бетона',
+            desc: 'Расчёт объёма бетона для фундамента, стен и перекрытий.',
+            fields: [
+                { name: 'length', label: 'Длина (м)', type: 'number', default: 10, step: 0.5 },
+                { name: 'width', label: 'Ширина (м)', type: 'number', default: 6, step: 0.5 },
+                { name: 'height', label: 'Высота (м)', type: 'number', default: 0.5, step: 0.1 }
+            ],
+            formula: (vals) => vals.length * vals.width * vals.height,
+            unit: 'м³',
+            historyKey: 'calc_history_beton'
+        }, {
+            id: 'calc2',
+            title: '🧱 Количество кирпича',
+            desc: 'Расчёт количества кирпича для кладки стен.',
+            fields: [
+                { name: 'length', label: 'Длина стены (м)', type: 'number', default: 10, step: 0.5 },
+                { name: 'height', label: 'Высота стены (м)', type: 'number', default: 3, step: 0.1 },
+                { name: 'thickness', label: 'Толщина кладки (м)', type: 'number', default: 0.38, step: 0.01 }
+            ],
+            formula: (vals) => Math.ceil(vals.length * vals.height * vals.thickness * 400),
+            unit: 'шт',
+            historyKey: 'calc_history_brick'
+        }, {
+            id: 'calc3',
+            title: '🔲 Расход плитки',
+            desc: 'Расчёт количества плитки для пола и стен.',
+            fields: [
+                { name: 'length', label: 'Длина поверхности (м)', type: 'number', default: 5, step: 0.5 },
+                { name: 'width', label: 'Ширина поверхности (м)', type: 'number', default: 4, step: 0.5 },
+                { name: 'tileSize', label: 'Размер плитки (м×м)', type: 'select', options: ['0.09', '0.16', '0.25', '0.36'],
+                    default: '0.16' }
+            ],
+            formula: (vals) => Math.ceil((vals.length * vals.width) / parseFloat(vals.tileSize) * 1.05),
+            unit: 'шт (с запасом 5%)',
+            historyKey: 'calc_history_tile'
+        }, {
+            id: 'calc4',
+            title: '📐 Уклон кровли',
+            desc: 'Расчёт угла наклона кровли по заданным параметрам.',
+            fields: [
+                { name: 'height', label: 'Высота конька (м)', type: 'number', default: 3, step: 0.1 },
+                { name: 'span', label: 'Ширина пролёта (м)', type: 'number', default: 6, step: 0.5 }
+            ],
+            formula: (vals) => {
+                const angle = Math.atan(vals.height / (vals.span / 2)) * 180 / Math.PI;
+                return angle.toFixed(1);
+            },
+            unit: 'градусов',
+            historyKey: 'calc_history_roof'
+        }, {
+            id: 'calc5',
+            title: '🎨 Расход краски',
+            desc: 'Расчёт количества краски для стен и фасадов.',
+            fields: [
+                { name: 'length', label: 'Длина стены (м)', type: 'number', default: 10, step: 0.5 },
+                { name: 'height', label: 'Высота стены (м)', type: 'number', default: 3, step: 0.1 },
+                { name: 'coverage', label: 'Расход краски (м²/л)', type: 'number', default: 8, step: 0.5 }
+            ],
+            formula: (vals) => (vals.length * vals.height / vals.coverage).toFixed(1),
+            unit: 'л',
+            historyKey: 'calc_history_paint'
+        }, {
+            id: 'calc6',
+            title: '🪜 Расчёт лестницы',
+            desc: 'Расчёт параметров лестничного марша.',
+            fields: [
+                { name: 'height', label: 'Высота подъёма (м)', type: 'number', default: 3, step: 0.1 },
+                { name: 'tread', label: 'Ширина проступи (м)', type: 'number', default: 0.3, step: 0.01 },
+                { name: 'riser', label: 'Высота подступенка (м)', type: 'number', default: 0.15, step: 0.01 }
+            ],
+            formula: (vals) => {
+                const steps = Math.round(vals.height / vals.riser);
+                const length = steps * vals.tread;
+                return `Ступеней: ${steps}, длина марша: ${length.toFixed(2)} м`;
+            },
+            unit: '',
+            historyKey: 'calc_history_stairs'
+        }, {
+            id: 'calc7',
+            title: '🔩 Расчёт арматуры',
+            desc: 'Расчёт необходимого количества арматуры для фундамента.',
+            fields: [
+                { name: 'length', label: 'Длина фундамента (м)', type: 'number', default: 10, step: 0.5 },
+                { name: 'width', label: 'Ширина фундамента (м)', type: 'number', default: 6, step: 0.5 },
+                { name: 'rods', label: 'Количество прутков на 1 м²', type: 'number', default: 8, step: 1 }
+            ],
+            formula: (vals) => Math.ceil(vals.length * vals.width * vals.rods / 10),
+            unit: 'прутков (дл. 10 м)',
+            historyKey: 'calc_history_rebar'
+        }, {
+            id: 'calc8',
+            title: '📊 Площадь фасада',
+            desc: 'Расчёт площади фасада для отделочных работ.',
+            fields: [
+                { name: 'length', label: 'Длина фасада (м)', type: 'number', default: 20, step: 0.5 },
+                { name: 'height', label: 'Высота фасада (м)', type: 'number', default: 8, step: 0.1 },
+                { name: 'windows', label: 'Площадь окон (м²)', type: 'number', default: 5, step: 0.5 }
+            ],
+            formula: (vals) => (vals.length * vals.height - vals.windows).toFixed(1),
+            unit: 'м²',
+            historyKey: 'calc_history_facade'
+        }];
+
+        // ==========================================
+        // СОСТОЯНИЕ
+        // ==========================================
         let favorites = JSON.parse(localStorage.getItem('interaktiv_favorites')) || [];
         let progress = JSON.parse(localStorage.getItem('interaktiv_progress')) || { completed: [] };
         let currentTab = 'geogebra';
+        let teacherMode = false;
 
-        // ===== РЕНДЕР =====
+        // ==========================================
+        // РЕНДЕР КАРТОЧЕК
+        // ==========================================
         function renderCards(tabId, containerId) {
             const container = document.getElementById(containerId);
             if (!container) return;
             const filtered = models.filter(m => m.tab === tabId);
-            container.innerHTML = filtered.map(m => createCard(m)).join('');
+            container.innerHTML = filtered.length ? filtered.map(m => createCard(m)).join('') :
+                `<p style="color:var(--text-muted);grid-column:1/-1;">Нет моделей в этом разделе</p>`;
         }
 
         function createCard(model) {
             const isFav = favorites.includes(model.id);
             const isCompleted = progress.completed.includes(model.id);
             return `
-                <div class="model-card" data-id="${model.id}" data-tab="${model.tab}" onclick="openModel(${model.id})">
+                <div class="model-card" data-id="${model.id}" data-tab="${model.tab}">
                     <div class="icon-big">${model.icon}</div>
                     <h4>${model.title}</h4>
                     <p>${model.desc}</p>
                     <div class="card-tags">${model.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
                     <div class="card-footer">
-                        <button class="btn-sm" onclick="event.stopPropagation();openModel(${model.id})">Открыть →</button>
-                        <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="event.stopPropagation();toggleFavorite(${model.id})">${isFav ? '⭐' : '☆'}</button>
+                        <button class="btn-sm" onclick="openModel(${model.id})">Открыть →</button>
+                        <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(${model.id})">${isFav ? '⭐' : '☆'}</button>
                     </div>
                     ${isCompleted ? '<div style="font-size:11px;color:var(--gold);margin-top:4px;">✅ Пройдено</div>' : ''}
                 </div>
             `;
         }
 
-        // ===== ВКЛАДКИ =====
+        // ==========================================
+        // РЕНДЕР КАЛЬКУЛЯТОРОВ
+        // ==========================================
+        function renderCalculators() {
+            const container = document.getElementById('calculatorsContainer');
+            if (!container) return;
+            container.innerHTML = calculators.map(calc => `
+                <div class="calculator-card" style="margin-bottom:20px;" id="calc-${calc.id}">
+                    <h4>${calc.title}</h4>
+                    <p class="calc-desc">${calc.desc}</p>
+                    <div class="calc-row">
+                        ${calc.fields.map(f => `
+                            <label>
+                                <span>${f.label}</span>
+                                ${f.type === 'select' ? `
+                                    <select id="${calc.id}_${f.name}" onchange="updateCalc('${calc.id}')">
+                                        ${f.options.map(o => `<option value="${o}" ${o === f.default ? 'selected' : ''}>${o}</option>`).join('')}
+                                    </select>
+                                ` : `
+                                    <input type="number" id="${calc.id}_${f.name}" value="${f.default}" step="${f.step || 1}" oninput="updateCalc('${calc.id}')">
+                                `}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="calc-result">
+                        <span class="label">Результат:</span>
+                        <span class="value" id="${calc.id}_result">— <span class="unit">${calc.unit}</span></span>
+                    </div>
+                    <div class="calc-history" id="${calc.id}_history"></div>
+                </div>
+            `).join('');
+
+            // Инициализация калькуляторов
+            calculators.forEach(calc => updateCalc(calc.id));
+        }
+
+        function updateCalc(calcId) {
+            const calc = calculators.find(c => c.id === calcId);
+            if (!calc) return;
+
+            const values = {};
+            calc.fields.forEach(f => {
+                const el = document.getElementById(`${calcId}_${f.name}`);
+                values[f.name] = f.type === 'select' ? el.value : parseFloat(el.value) || 0;
+            });
+
+            let result = calc.formula(values);
+            const resultEl = document.getElementById(`${calcId}_result`);
+            if (resultEl) {
+                resultEl.innerHTML = `${result} <span class="unit">${calc.unit}</span>`;
+            }
+
+            // Сохраняем историю
+            const history = JSON.parse(localStorage.getItem(calc.historyKey)) || [];
+            if (history.length > 0) {
+                const historyEl = document.getElementById(`${calcId}_history`);
+                if (historyEl) {
+                    const last = history[history.length - 1];
+                    historyEl.innerHTML = `
+                        <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">📋 Последний расчёт:</div>
+                        <div class="history-item">
+                            <span>${last.date}</span>
+                            <span style="color:var(--gold);font-weight:600;">${last.result}</span>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        function saveHistory(calcId, result) {
+            const calc = calculators.find(c => c.id === calcId);
+            if (!calc) return;
+            const history = JSON.parse(localStorage.getItem(calc.historyKey)) || [];
+            history.push({ date: new Date().toLocaleString(), result: result });
+            if (history.length > 10) history.shift();
+            localStorage.setItem(calc.historyKey, JSON.stringify(history));
+        }
+
+        // ==========================================
+        // ВКЛАДКИ
+        // ==========================================
         function switchTab(tabId) {
             currentTab = tabId;
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -765,7 +1038,19 @@
             document.querySelectorAll('.sidebar-item[data-tab]').forEach(el => {
                 el.classList.toggle('active', el.dataset.tab === tabId);
             });
-            renderCards(tabId, tabId + 'Grid');
+
+            if (tabId === 'calculators') {
+                renderCalculators();
+            } else {
+                const gridMap = {
+                    geogebra: 'geogebraGrid',
+                    trainers: 'trainersGrid',
+                    labs: 'labsGrid',
+                    map: 'mapGrid',
+                    achievements: 'achievementsGrid'
+                };
+                if (gridMap[tabId]) renderCards(tabId, gridMap[tabId]);
+            }
             updateProgress();
         }
 
@@ -775,7 +1060,9 @@
             });
         });
 
-        // ===== ИЗБРАННОЕ =====
+        // ==========================================
+        // ИЗБРАННОЕ
+        // ==========================================
         function toggleFavorite(id) {
             if (favorites.includes(id)) {
                 favorites = favorites.filter(f => f !== id);
@@ -791,14 +1078,30 @@
             document.getElementById('favCount').textContent = favorites.length;
         }
 
-        // ===== ПРОГРЕСС =====
+        function renderFavorites() {
+            const container = document.getElementById('favoritesGrid');
+            const favModels = models.filter(m => favorites.includes(m.id));
+            container.innerHTML = favModels.length ? favModels.map(m => createCard(m)).join('') :
+                '<p style="color:var(--text-muted);grid-column:1/-1;">⭐ Нет избранных моделей. Добавьте их, нажав на звёздочку у карточки.</p>';
+        }
+
+        document.getElementById('favoritesTab').addEventListener('click', function() {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('tabFavorites').classList.add('active');
+            document.querySelectorAll('.sidebar-item[data-tab]').forEach(el => el.classList.remove('active'));
+            this.classList.add('active');
+            renderFavorites();
+        });
+
+        // ==========================================
+        // ПРОГРЕСС
+        // ==========================================
         function updateProgress() {
             const total = models.length;
             const completed = progress.completed.length;
             const pct = Math.round((completed / total) * 100);
             document.getElementById('mainProgress').style.width = pct + '%';
             document.getElementById('progressText').textContent = `Пройдено ${completed} из ${total}`;
-            // Перерисовка текущей вкладки
             renderCurrentTab();
         }
 
@@ -810,17 +1113,20 @@
             }
         }
 
-        // ===== ОТКРЫТИЕ МОДЕЛИ =====
+        // ==========================================
+        // ОТКРЫТИЕ МОДЕЛИ
+        // ==========================================
         function openModel(id) {
             markCompleted(id);
             const model = models.find(m => m.id === id);
             if (model) {
-                // Здесь позже будет открытие конкретной модели
-                alert('Открывается: ' + model.title + '\n' + model.desc);
+                alert('🔓 Открывается: ' + model.title + '\n' + model.desc + '\n\n✅ Модель отмечена как пройденная!');
             }
         }
 
-        // ===== СЛУЧАЙНОЕ ЗАДАНИЕ =====
+        // ==========================================
+        // СЛУЧАЙНОЕ ЗАДАНИЕ
+        // ==========================================
         function randomCard() {
             const cards = document.querySelectorAll('.model-card');
             if (!cards.length) return;
@@ -834,7 +1140,9 @@
             }, 3000);
         }
 
-        // ===== ПОИСК =====
+        // ==========================================
+        // ПОИСК
+        // ==========================================
         document.getElementById('searchModels').addEventListener('input', function() {
             const value = this.value.toLowerCase().trim();
             document.querySelectorAll('.model-card').forEach(card => {
@@ -843,26 +1151,44 @@
             });
         });
 
-        // ===== ИЗБРАННОЕ (вкладка) =====
-        document.getElementById('favoritesTab').addEventListener('click', function() {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.getElementById('tabFavorites').classList.add('active');
-            document.querySelectorAll('.sidebar-item[data-tab]').forEach(el => el.classList.remove('active'));
-            this.classList.add('active');
-            renderFavorites();
+        // ==========================================
+        // РЕЖИМ ПРЕПОДАВАТЕЛЯ
+        // ==========================================
+        document.getElementById('teacherModeToggle').addEventListener('click', function() {
+            teacherMode = !teacherMode;
+            this.classList.toggle('active');
+            if (teacherMode) {
+                this.style.color = 'var(--gold)';
+                document.querySelectorAll('.calculator-card').forEach(el => {
+                    el.style.borderColor = 'var(--gold)';
+                });
+                alert('👨‍🏫 Режим преподавателя включён.\n\n🔍 Будут отображаться формулы и методические комментарии.');
+            } else {
+                this.style.color = '';
+                document.querySelectorAll('.calculator-card').forEach(el => {
+                    el.style.borderColor = '';
+                });
+                alert('👨‍🏫 Режим преподавателя выключен.');
+            }
         });
 
-        function renderFavorites() {
-            const container = document.getElementById('favoritesGrid');
-            const favModels = models.filter(m => favorites.includes(m.id));
-            container.innerHTML = favModels.length ? favModels.map(m => createCard(m)).join('') : '<p style="color:var(--text-muted);">⭐ Нет избранных моделей. Добавьте их, нажав на звёздочку у карточки.</p>';
-        }
+        // ==========================================
+        // КНОПКА НАВЕРХ
+        // ==========================================
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            backToTop.classList.toggle('show', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-        // ===== РЕНДЕР ТЕКУЩЕЙ ВКЛАДКИ =====
+        // ==========================================
+        // РЕНДЕР ТЕКУЩЕЙ ВКЛАДКИ
+        // ==========================================
         function renderCurrentTab() {
             const tabMap = {
                 geogebra: 'geogebraGrid',
-                calculators: 'calculatorsGrid',
                 trainers: 'trainersGrid',
                 labs: 'labsGrid',
                 map: 'mapGrid',
@@ -874,39 +1200,23 @@
             }
         }
 
-        // ===== РЕЖИМ ПРЕПОДАВАТЕЛЯ =====
-        let teacherMode = false;
-        document.getElementById('teacherModeToggle').addEventListener('click', function() {
-            teacherMode = !teacherMode;
-            this.classList.toggle('active');
-            document.body.classList.toggle('teacher-mode');
-            if (teacherMode) {
-                this.style.color = 'var(--gold)';
-                alert('👨‍🏫 Режим преподавателя включён. Будут отображаться ответы и методические комментарии.');
-            } else {
-                this.style.color = '';
-                alert('👨‍🏫 Режим преподавателя выключен.');
-            }
-        });
-
-        // ===== КНОПКА НАВЕРХ =====
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', function() {
-            backToTop.classList.toggle('show', window.scrollY > 300);
-        });
-        backToTop.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        // ==========================================
+        // ИНИЦИАЛИЗАЦИЯ
+        // ==========================================
         renderCards('geogebra', 'geogebraGrid');
-        renderCards('calculators', 'calculatorsGrid');
         renderCards('trainers', 'trainersGrid');
         renderCards('labs', 'labsGrid');
         renderCards('map', 'mapGrid');
         renderCards('achievements', 'achievementsGrid');
         updateProgress();
         updateFavCount();
+        renderCalculators();
+
+        console.log('🚀 Интерактивный раздел загружен!');
+        console.log('📊 Моделей:', models.length);
+        console.log('🧮 Калькуляторов:', calculators.length);
+        console.log('⭐ Избранное:', favorites.length);
+        console.log('📈 Прогресс:', progress.completed.length, '/', models.length);
     </script>
 </body>
 </html>
