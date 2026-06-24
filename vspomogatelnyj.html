@@ -51,6 +51,13 @@
         .teacher-block h4 { color: var(--gold); margin-bottom: 12px; font-size: 1.1rem; }
         .teacher-block ul { color: var(--text-muted); font-size: 15px; padding-left: 20px; line-height: 2; }
 
+        .faq-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+        .faq-header h2 { margin-bottom: 0; }
+        .faq-toggle-icon { color: var(--gold); font-size: 18px; transition: transform 0.3s; }
+        .faq-open .faq-toggle-icon { transform: rotate(180deg); }
+        .faq-body { display: none; margin-top: 20px; }
+        .faq-open .faq-body { display: block; }
+
         .faq-list { display: flex; flex-direction: column; gap: 2px; }
         .faq-item { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
         .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; cursor: pointer; background: rgba(255,255,255,0.02); transition: background 0.3s; user-select: none; font-size: 15px; color: #fff; }
@@ -151,26 +158,11 @@
                 <h2><span class="icon">📖</span> Методическая документация</h2>
                 <p class="section-desc">Комплект документов, обеспечивающих качественную реализацию УМК в учебном процессе.</p>
                 <ul class="doc-list">
-                    <li>
-                        <div><span class="doc-name">Учебная программа по математике</span><span class="badge">Официально</span><br><span class="doc-desc">Для учреждений ССО, база 10–11 классов</span></div>
-                        <button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalProgram">👁 Просмотреть</button>
-                    </li>
-                    <li>
-                        <div><span class="doc-name">Методические рекомендации по GeoGebra и Desmos</span><span class="badge">Авторские</span><br><span class="doc-desc">Интерактивные технологии в преподавании математики</span></div>
-                        <button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalGeogebra">👁 Просмотреть</button>
-                    </li>
-                    <li>
-                        <div><span class="doc-name">Методика практико-ориентированного преподавания</span><span class="badge">Авторская</span><br><span class="doc-desc">Трёхуровневая система «Фундамент — Стены — Кровля»</span></div>
-                        <button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalMetodika">👁 Просмотреть</button>
-                    </li>
-                    <li>
-                        <div><span class="doc-name">Инструктивно-методические письма МО РБ</span><span class="badge">Официально</span><br><span class="doc-desc">Рекомендации на 2025/2026 учебный год</span></div>
-                        <button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalInstr">👁 Просмотреть</button>
-                    </li>
-                    <li>
-                        <div><span class="doc-name">Тематика и график консультаций</span><span class="badge">Авторская</span><br><span class="doc-desc">План консультаций на учебный год</span></div>
-                        <button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalKonsult">👁 Просмотреть</button>
-                    </li>
+                    <li><div><span class="doc-name">Учебная программа по математике</span><span class="badge">Официально</span><br><span class="doc-desc">Для учреждений ССО, база 10–11 классов</span></div><button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalProgram">👁 Просмотреть</button></li>
+                    <li><div><span class="doc-name">Методические рекомендации по GeoGebra и Desmos</span><span class="badge">Авторские</span><br><span class="doc-desc">Интерактивные технологии в преподавании математики</span></div><button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalGeogebra">👁 Просмотреть</button></li>
+                    <li><div><span class="doc-name">Методика практико-ориентированного преподавания</span><span class="badge">Авторская</span><br><span class="doc-desc">Трёхуровневая система «Фундамент — Стены — Кровля»</span></div><button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalMetodika">👁 Просмотреть</button></li>
+                    <li><div><span class="doc-name">Инструктивно-методические письма МО РБ</span><span class="badge">Официально</span><br><span class="doc-desc">Рекомендации на 2025/2026 учебный год</span></div><button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalInstr">👁 Просмотреть</button></li>
+                    <li><div><span class="doc-name">Тематика и график консультаций</span><span class="badge">Авторская</span><br><span class="doc-desc">План консультаций на учебный год</span></div><button class="btn-outline-gold" data-bs-toggle="modal" data-bs-target="#modalKonsult">👁 Просмотреть</button></li>
                 </ul>
             </div>
 
@@ -192,118 +184,29 @@
                 </ul>
             </div>
 
-            <div class="section-card">
-                <h2><span class="icon">❓</span> Часто задаваемые вопросы</h2>
-                <p class="section-desc">Ответы на самые популярные вопросы студентов и преподавателей.</p>
-
-                <div class="faq-list">
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Зачем строителю математика? Где она пригодится?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">Математика — это инструмент строителя. Тригонометрия нужна для расчёта уклонов кровли и геодезической разбивки. Производная — для оптимизации расхода материалов. Объёмы — для расчёта бетона и земляных работ. Логарифмы — для измерения шума и звукоизоляции. В каждом конспекте есть блок «🔧 Где пригодится строителю» — начните с него.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Как быстро найти нужную тему?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">Откройте <a href="teoreticheskij.html" style="color:var(--gold);">теоретический раздел</a> — там все 9 тем с описанием содержимого. Кликните на тему → откроется конспект. В каждом конспекте есть оглавление с якорями — кликайте и переходите к нужному разделу.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Где взять шпаргалку перед экзаменом?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">В конце каждого конспекта есть раздел <strong>«📋 Шпаргалка «За 5 минут до экзамена»»</strong>. Там собраны все ключевые формулы. Нажмите кнопку <strong>«Скачать шпаргалку»</strong> — получите компактный HTML-файл. Откройте его на телефоне по дороге на экзамен.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Как открыть конспект на телефоне?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">Наведите камеру телефона на QR-код (кнопка 📱 в правом верхнем углу карточки темы в <a href="teoreticheskij.html" style="color:var(--gold);">теоретическом разделе</a>). Или просто откройте сайт в браузере телефона — он адаптирован под мобильные устройства.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Что делать, если не сдал контрольную?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>О, классика! Не сдали? Бывает. Обычно помогает открыть конспект. Знаете, такой файл на сайте, где написано «Тригонометрия» или «Производная». Там формулы, примеры, всё разжёвано. Нет, правда, попробуйте — работает.</p>
-                            <p>А если серьёзно: консультация по расписанию, пересдача по договорённости. Но конспект откройте. Хотя бы из уважения к тому, что автор его писал дольше, чем вы готовились.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Как работает режим «Без ответов»?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">В <a href="prakticheskij.html" style="color:var(--gold);">практическом разделе</a> и <a href="kontrol.html" style="color:var(--gold);">разделе контроля</a> есть переключатель «С ответами / Без ответов». В режиме «Без ответов» скрываются все решения и ответы. Используйте для самостоятельной работы или распечатки заданий для группы.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Чем открыть PDF-файлы на телефоне?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">На Android — приложение Google PDF Viewer (установлено по умолчанию) или Adobe Acrobat Reader. На iPhone — приложение «Книги» или Adobe Acrobat Reader. Все PDF на сайте открываются прямо в браузере без скачивания.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Как преподавателю распечатать контрольную без ответов?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">Зайдите в <a href="kontrol.html" style="color:var(--gold);">раздел контроля</a> → переключите режим на «Без ответов» → откройте нужную работу → нажмите 🖨️ Печать в верхнем меню. Или скачайте PDF через кнопку «📥 Скачать» в модальном окне.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Что означают уровни «Фундамент», «Стены», «Кровля»?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">Это трёхуровневая система сложности. <strong>🟢 Фундамент (1–4 балла)</strong> — базовые задачи, решение по образцу, для всех. <strong>🔵 Стены (5–7 баллов)</strong> — типовые профессиональные задачи. <strong>🟡 Кровля (8–10 баллов)</strong> — нестандартные задачи повышенной сложности. Подробнее — в разделе «Методика практико-ориентированного преподавания».</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Как быстро выучить таблицу производных?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">Откройте <a href="theory/proizvodnaya.html" style="color:var(--gold);">конспект по производной</a> → раздел «Таблица производных». Выпишите формулы на листок. Повесьте над столом. Каждый день решайте по 5 примеров из ПР №8. Через неделю будете помнить всё.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Почему в тригонометрии используют радианы, а не градусы?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">Радианы — это «естественная» мера угла. Без них невозможно вычислять производные от sin и cos. Если бы мы использовали градусы, формула (sin x)' = cos x была бы другой. Радианы упрощают все формулы в высшей математике.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Как пользоваться интерактивными моделями GeoGebra?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">Зайдите в <a href="interaktiv.html" style="color:var(--gold);">интерактивный раздел</a> → выберите модель → она откроется в браузере. Двигайте ползунки, вращайте 3D-модели мышкой. Все модели работают без установки дополнительных программ. На телефоне — касанием пальца.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Что делать, если сайт не открывается?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">1. Проверьте интернет. 2. Попробуйте открыть в другом браузере (Chrome, Firefox). 3. Очистите кэш браузера (Ctrl+F5). 4. Если сайт всё ещё не работает — напишите преподавателю на почту: yukiosimidzu@gmail.com.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Можно ли использовать материалы УМК в других колледжах?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">Материалы УМК являются объектом интеллектуальной собственности. Использование в других учреждениях образования допускается только с письменного разрешения автора. Для получения разрешения напишите на почту: yukiosimidzu@gmail.com.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                            <span>Как предложить улучшение или сообщить об ошибке?</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-answer">Напишите на почту yukiosimidzu@gmail.com. Опишите, что именно вы нашли — в каком разделе, какой конспект, какая ошибка. Автор рассмотрит все предложения. Спасибо, что помогаете делать УМК лучше!</div>
+            <div class="section-card faq-open">
+                <div class="faq-header" onclick="this.parentElement.classList.toggle('faq-open')">
+                    <h2><span class="icon">❓</span> Часто задаваемые вопросы <span style="font-size:14px;color:var(--text-muted);margin-left:10px;">(нажмите чтобы раскрыть)</span></h2>
+                    <span class="faq-toggle-icon">▼</span>
+                </div>
+                <div class="faq-body">
+                    <p class="section-desc">Ответы на самые популярные вопросы студентов и преподавателей.</p>
+                    <div class="faq-list">
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Зачем строителю математика? Где она пригодится?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Математика — это инструмент строителя. Тригонометрия нужна для расчёта уклонов кровли и геодезической разбивки. Производная — для оптимизации расхода материалов. Объёмы — для расчёта бетона и земляных работ. Логарифмы — для измерения шума и звукоизоляции. В каждом конспекте есть блок «🔧 Где пригодится строителю» — начните с него.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Как быстро найти нужную тему?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Откройте <a href="teoreticheskij.html" style="color:var(--gold);">теоретический раздел</a> — там все 9 тем с описанием содержимого. Кликните на тему → откроется конспект. В каждом конспекте есть оглавление с якорями — кликайте и переходите к нужному разделу.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Где взять шпаргалку перед экзаменом?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">В конце каждого конспекта есть раздел <strong>«📋 Шпаргалка «За 5 минут до экзамена»»</strong>. Там собраны все ключевые формулы. Нажмите кнопку <strong>«Скачать шпаргалку»</strong> — получите компактный HTML-файл. Откройте его на телефоне по дороге на экзамен.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Как открыть конспект на телефоне?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Наведите камеру телефона на QR-код (кнопка 📱 в правом верхнем углу карточки темы в <a href="teoreticheskij.html" style="color:var(--gold);">теоретическом разделе</a>). Или просто откройте сайт в браузере телефона — он адаптирован под мобильные устройства.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Что делать, если не сдал контрольную?</span><span class="faq-arrow">▼</span></div><div class="faq-answer"><p>О, классика! Не сдали? Бывает. Обычно помогает открыть конспект. Знаете, такой файл на сайте, где написано «Тригонометрия» или «Производная». Там формулы, примеры, всё разжёвано. Нет, правда, попробуйте — работает.</p><p>А если серьёзно: консультация по расписанию, пересдача по договорённости. Но конспект откройте. Хотя бы из уважения к тому, что автор его писал дольше, чем вы готовились.</p></div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Как работает режим «Без ответов»?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">В <a href="prakticheskij.html" style="color:var(--gold);">практическом разделе</a> и <a href="kontrol.html" style="color:var(--gold);">разделе контроля</a> есть переключатель «С ответами / Без ответов». В режиме «Без ответов» скрываются все решения и ответы. Используйте для самостоятельной работы или распечатки заданий для группы.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Чем открыть PDF-файлы на телефоне?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">На Android — приложение Google PDF Viewer (установлено по умолчанию) или Adobe Acrobat Reader. На iPhone — приложение «Книги» или Adobe Acrobat Reader. Все PDF на сайте открываются прямо в браузере без скачивания.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Как преподавателю распечатать контрольную без ответов?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Зайдите в <a href="kontrol.html" style="color:var(--gold);">раздел контроля</a> → переключите режим на «Без ответов» → откройте нужную работу → нажмите 🖨️ Печать в верхнем меню. Или скачайте PDF через кнопку «📥 Скачать» в модальном окне.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Что означают уровни «Фундамент», «Стены», «Кровля»?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Это трёхуровневая система сложности. <strong>🟢 Фундамент (1–4 балла)</strong> — базовые задачи, решение по образцу, для всех. <strong>🔵 Стены (5–7 баллов)</strong> — типовые профессиональные задачи. <strong>🟡 Кровля (8–10 баллов)</strong> — нестандартные задачи повышенной сложности. Подробнее — в разделе «Методика практико-ориентированного преподавания».</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Как быстро выучить таблицу производных?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Откройте <a href="theory/proizvodnaya.html" style="color:var(--gold);">конспект по производной</a> → раздел «Таблица производных». Выпишите формулы на листок. Повесьте над столом. Каждый день решайте по 5 примеров из ПР №8. Через неделю будете помнить всё.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Почему в тригонометрии используют радианы, а не градусы?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Радианы — это «естественная» мера угла. Без них невозможно вычислять производные от sin и cos. Если бы мы использовали градусы, формула (sin x)' = cos x была бы другой. Радианы упрощают все формулы в высшей математике.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Как пользоваться интерактивными моделями GeoGebra?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Зайдите в <a href="interaktiv.html" style="color:var(--gold);">интерактивный раздел</a> → выберите модель → она откроется в браузере. Двигайте ползунки, вращайте 3D-модели мышкой. Все модели работают без установки дополнительных программ. На телефоне — касанием пальца.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Что делать, если сайт не открывается?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">1. Проверьте интернет. 2. Попробуйте открыть в другом браузере (Chrome, Firefox). 3. Очистите кэш браузера (Ctrl+F5). 4. Если сайт всё ещё не работает — напишите преподавателю на почту: yukiosimidzu@gmail.com.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Можно ли использовать материалы УМК в других колледжах?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Материалы УМК являются объектом интеллектуальной собственности. Использование в других учреждениях образования допускается только с письменного разрешения автора. Для получения разрешения напишите на почту: yukiosimidzu@gmail.com.</div></div>
+                        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Как предложить улучшение или сообщить об ошибке?</span><span class="faq-arrow">▼</span></div><div class="faq-answer">Напишите на почту yukiosimidzu@gmail.com. Опишите, что именно вы нашли — в каком разделе, какой конспект, какая ошибка. Автор рассмотрит все предложения. Спасибо, что помогаете делать УМК лучше!</div></div>
                     </div>
                 </div>
             </div>
@@ -325,13 +228,7 @@
     <div class="modal fade" id="modalGeogebra" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Методические рекомендации по GeoGebra и Desmos</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p><strong>Автор:</strong> Станулевич А.В.</p><p>Готовые интерактивные модели по темам:</p><ul><li>Тригонометрия — единичная окружность, графики</li><li>Стереометрия — 3D-модели многогранников</li><li>Производная — исследование функций</li><li>Тела вращения — цилиндр, конус, шар</li></ul><p><a href="interaktiv.html" style="color:var(--gold);">📎 Перейти к интерактивным моделям →</a></p></div></div></div></div>
     <div class="modal fade" id="modalMetodika" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Методика практико-ориентированного преподавания</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p><strong>Автор:</strong> Станулевич А.В. Концепция: «Математика строит будущее».</p><p><strong>Трёхуровневая система:</strong></p><ul><li>🟢 Фундамент (1–4 балла) — базовый уровень</li><li>🔵 Стены (5–7 баллов) — стандартный уровень</li><li>🟡 Кровля (8–10 баллов) — профессиональные задачи</li></ul><p>Применяется во всех практических, самостоятельных и контрольных работах.</p><p><a href="prakticheskij.html" style="color:var(--gold);">📎 Перейти к практическим работам →</a></p></div></div></div></div>
     <div class="modal fade" id="modalInstr" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Инструктивно-методические письма МО РБ</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p>Официальные рекомендации Министерства образования Республики Беларусь.</p><ul><li>Усиление практико-ориентированной направленности</li><li>Внедрение цифровых образовательных ресурсов</li><li>Организация текущего и итогового контроля</li></ul><p><a href="https://adu.by/ru/homeru/obrazovatelnyj-protsess/obshchee-srednee-obrazovanie/instruktivno-metodicheskie-pisma.html" target="_blank" style="color:var(--gold);">📎 Открыть на сайте adu.by →</a></p></div></div></div></div>
-    <div class="modal fade" id="modalKonsult" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Тематика и график консультаций</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">
-        <h6 style="color:var(--gold);margin-top:15px;">📘 1 курс</h6>
-        <ul><li><strong>Сентябрь–октябрь:</strong> Входной контроль. Повторение базовых тем за 9 классов.</li><li><strong>Ноябрь–декабрь:</strong> Тригонометрия. Подготовка к КР №1.</li><li><strong>Январь–февраль:</strong> Корни и степени. Иррациональные уравнения.</li><li><strong>Март–апрель:</strong> Параллельность и перпендикулярность.</li><li><strong>Май–июнь:</strong> Производная. Подготовка к КР №2 и №3.</li></ul>
-        <h6 style="color:var(--gold);margin-top:15px;">📗 2 курс</h6>
-        <ul><li><strong>Сентябрь–октябрь:</strong> Повторение. Показательная функция. КР №4.</li><li><strong>Ноябрь–декабрь:</strong> Логарифмическая функция. КР №5.</li><li><strong>Январь–февраль:</strong> Многогранники. Призма, пирамида, объёмы.</li><li><strong>Март–апрель:</strong> Тела вращения. КР №6.</li><li><strong>Май–июнь:</strong> Подготовка к выпускному экзамену.</li></ul>
-        <p style="margin-top:15px;color:var(--text-muted);font-style:italic;">Конкретные даты утверждаются расписанием колледжа на учебный год.</p>
-    </div></div></div></div>
+    <div class="modal fade" id="modalKonsult" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Тематика и график консультаций</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><h6 style="color:var(--gold);margin-top:15px;">📘 1 курс</h6><ul><li><strong>Сентябрь–октябрь:</strong> Входной контроль. Повторение базовых тем за 9 классов.</li><li><strong>Ноябрь–декабрь:</strong> Тригонометрия. Подготовка к КР №1.</li><li><strong>Январь–февраль:</strong> Корни и степени. Иррациональные уравнения.</li><li><strong>Март–апрель:</strong> Параллельность и перпендикулярность.</li><li><strong>Май–июнь:</strong> Производная. Подготовка к КР №2 и №3.</li></ul><h6 style="color:var(--gold);margin-top:15px;">📗 2 курс</h6><ul><li><strong>Сентябрь–октябрь:</strong> Повторение. Показательная функция. КР №4.</li><li><strong>Ноябрь–декабрь:</strong> Логарифмическая функция. КР №5.</li><li><strong>Январь–февраль:</strong> Многогранники. Призма, пирамида, объёмы.</li><li><strong>Март–апрель:</strong> Тела вращения. КР №6.</li><li><strong>Май–июнь:</strong> Подготовка к выпускному экзамену.</li></ul><p style="margin-top:15px;color:var(--text-muted);font-style:italic;">Конкретные даты утверждаются расписанием колледжа на учебный год.</p></div></div></div></div>
 
     <footer>
         <div class="container">
