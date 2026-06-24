@@ -340,11 +340,6 @@
             border-bottom: 1px solid var(--border);
             position: relative;
         }
-        .applet-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
         .applet-label {
             position: absolute;
             top: 10px;
@@ -645,7 +640,12 @@
                 <div class="applet-card">
                     <div class="applet-frame">
                         <span class="applet-label">3D-модель</span>
-                        <iframe src="https://www.geogebra.org/calculator/t4jq4v5p?embed" title="3D-модель многогранника"></iframe>
+                        <div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#0a0e14;color:var(--text-muted);flex-direction:column;gap:8px;padding:20px;text-align:center;">
+                            <div style="font-size:48px;">🧊</div>
+                            <div style="font-size:14px;font-weight:500;color:#fff;">3D-модель многогранника</div>
+                            <a href="https://www.geogebra.org/calculator/t4jq4v5p" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-size:13px;border:1px solid var(--gold);padding:6px 16px;border-radius:6px;transition:all 0.3s;margin-top:4px;">Открыть в GeoGebra →</a>
+                            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Нажмите, чтобы открыть интерактивную модель</div>
+                        </div>
                     </div>
                     <div class="applet-body">
                         <h4>🧊 Вращение многогранника</h4>
@@ -655,7 +655,12 @@
                 <div class="applet-card">
                     <div class="applet-frame">
                         <span class="applet-label">График</span>
-                        <iframe src="https://www.geogebra.org/calculator/r5q6n8p7?embed" title="График функции с параметром"></iframe>
+                        <div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#0a0e14;color:var(--text-muted);flex-direction:column;gap:8px;padding:20px;text-align:center;">
+                            <div style="font-size:48px;">📈</div>
+                            <div style="font-size:14px;font-weight:500;color:#fff;">График с параметром</div>
+                            <a href="https://www.geogebra.org/calculator/r5q6n8p7" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-size:13px;border:1px solid var(--gold);padding:6px 16px;border-radius:6px;transition:all 0.3s;margin-top:4px;">Открыть в GeoGebra →</a>
+                            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Нажмите, чтобы открыть интерактивный график</div>
+                        </div>
                     </div>
                     <div class="applet-body">
                         <h4>📈 График с параметром</h4>
