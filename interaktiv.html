@@ -333,7 +333,7 @@
             margin: 0;
         }
 
-        /* ===== СТАТИСТИКА ПОЛЬЗОВАТЕЛЯ ===== */
+        /* ===== СТАТИСТИКА ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -454,6 +454,7 @@
             padding: 24px 28px;
             transition: all 0.3s;
             margin-bottom: 20px;
+            position: relative;
         }
         .calculator-card:hover {
             border-color: var(--gold);
@@ -535,8 +536,21 @@
             border-top: 1px solid var(--border);
             padding-top: 10px;
         }
+        .calc-teacher-note {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: rgba(212, 160, 23, 0.05);
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--text-muted);
+            display: none;
+        }
+        .teacher-mode .calc-teacher-note {
+            display: block;
+        }
 
-        /* ===== ТРЕНАЖЁРЫ (SVG-ГРАФИКИ) ===== */
+        /* ===== ТРЕНАЖЁРЫ ===== */
         .trainer-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -544,6 +558,7 @@
             padding: 24px 28px;
             transition: all 0.3s;
             margin-bottom: 20px;
+            position: relative;
         }
         .trainer-card:hover {
             border-color: var(--gold);
@@ -638,61 +653,6 @@
             display: inline-block;
         }
 
-        /* ===== ДОСТИЖЕНИЯ ===== */
-        .achievement-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: all 0.3s;
-            margin-bottom: 12px;
-        }
-        .achievement-card:hover {
-            border-color: var(--gold);
-        }
-        .achievement-card .ach-icon {
-            font-size: 36px;
-            flex-shrink: 0;
-        }
-        .achievement-card .ach-info {
-            flex: 1;
-        }
-        .achievement-card .ach-info h4 {
-            color: #fff;
-            font-size: 16px;
-            margin-bottom: 2px;
-        }
-        .achievement-card .ach-info p {
-            color: var(--text-muted);
-            font-size: 13px;
-            margin: 0;
-        }
-        .achievement-card .ach-status {
-            font-size: 13px;
-            font-weight: 600;
-            padding: 4px 14px;
-            border-radius: 20px;
-            flex-shrink: 0;
-        }
-        .achievement-card .ach-status.locked {
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-        }
-        .achievement-card .ach-status.unlocked {
-            background: rgba(212, 160, 23, 0.15);
-            color: var(--gold);
-            border: 1px solid rgba(212, 160, 23, 0.3);
-        }
-        .achievement-card .ach-status .progress-text {
-            font-weight: 400;
-            font-size: 11px;
-            opacity: 0.7;
-        }
-
         /* ===== ТЕСТЫ ===== */
         .test-card {
             background: var(--bg-card);
@@ -700,6 +660,7 @@
             border-radius: 12px;
             padding: 24px 28px;
             margin-bottom: 20px;
+            position: relative;
         }
         .test-card h4 {
             color: #fff;
@@ -771,6 +732,96 @@
             background: rgba(255, 107, 107, 0.1);
             border: 1px solid rgba(255, 107, 107, 0.3);
             color: #ff6b6b;
+        }
+        .test-teacher-answers {
+            margin-top: 8px;
+            padding: 10px 14px;
+            background: rgba(212, 160, 23, 0.05);
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--text-muted);
+            display: none;
+        }
+        .teacher-mode .test-teacher-answers {
+            display: block;
+        }
+
+        /* ===== ДОСТИЖЕНИЯ ===== */
+        .achievement-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s;
+            margin-bottom: 12px;
+        }
+        .achievement-card:hover {
+            border-color: var(--gold);
+        }
+        .achievement-card .ach-icon {
+            font-size: 36px;
+            flex-shrink: 0;
+        }
+        .achievement-card .ach-info {
+            flex: 1;
+        }
+        .achievement-card .ach-info h4 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+        .achievement-card .ach-info p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin: 0;
+        }
+        .achievement-card .ach-status {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+        .achievement-card .ach-status.locked {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        .achievement-card .ach-status.unlocked {
+            background: rgba(212, 160, 23, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(212, 160, 23, 0.3);
+        }
+
+        /* ===== РЕЖИМ ПРЕПОДАВАТЕЛЯ ===== */
+        .teacher-mode .calculator-card,
+        .teacher-mode .trainer-card,
+        .teacher-mode .test-card {
+            border-color: var(--gold);
+        }
+        .teacher-mode .calculator-card:hover,
+        .teacher-mode .trainer-card:hover,
+        .teacher-mode .test-card:hover {
+            border-color: var(--gold-hover);
+        }
+        .teacher-badge {
+            display: none;
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 11px;
+            background: var(--gold);
+            color: var(--bg);
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .teacher-mode .teacher-badge {
+            display: block;
         }
 
         /* ===== АДАПТИВНОСТЬ ===== */
@@ -878,6 +929,15 @@
             }
             .stats-grid .stat-card .num {
                 font-size: 18px;
+            }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .hero-actions .btn-gold,
+            .hero-actions .btn-outline {
+                text-align: center;
+                width: 100%;
             }
         }
     </style>
@@ -1108,7 +1168,8 @@
             ],
             formula: (vals) => vals.length * vals.width * vals.height,
             unit: 'м³',
-            historyKey: 'calc_history_beton'
+            historyKey: 'calc_history_beton',
+            teacherNote: '📐 Формула: V = a × b × h. Используется для расчёта фундаментов, стен и перекрытий.'
         }, {
             id: 'calc2',
             title: '🧱 Количество кирпича',
@@ -1120,7 +1181,8 @@
             ],
             formula: (vals) => Math.ceil(vals.length * vals.height * vals.thickness * 400),
             unit: 'шт',
-            historyKey: 'calc_history_brick'
+            historyKey: 'calc_history_brick',
+            teacherNote: '📐 Формула: N = L × H × T × 400. Усреднённый расход 400 шт/м³.'
         }, {
             id: 'calc3',
             title: '🔲 Расход плитки',
@@ -1133,7 +1195,8 @@
             ],
             formula: (vals) => Math.ceil((vals.length * vals.width) / parseFloat(vals.tileSize) * 1.05),
             unit: 'шт (с запасом 5%)',
-            historyKey: 'calc_history_tile'
+            historyKey: 'calc_history_tile',
+            teacherNote: '📐 Формула: N = S_пов / S_плитки × 1.05. Добавлен запас 5% на подрезку.'
         }, {
             id: 'calc4',
             title: '📐 Уклон кровли',
@@ -1147,7 +1210,8 @@
                 return angle.toFixed(1);
             },
             unit: 'градусов',
-            historyKey: 'calc_history_roof'
+            historyKey: 'calc_history_roof',
+            teacherNote: '📐 Формула: α = arctg(h / (L/2)). Угол наклона в градусах.'
         }, {
             id: 'calc5',
             title: '🎨 Расход краски',
@@ -1159,7 +1223,8 @@
             ],
             formula: (vals) => (vals.length * vals.height / vals.coverage).toFixed(1),
             unit: 'л',
-            historyKey: 'calc_history_paint'
+            historyKey: 'calc_history_paint',
+            teacherNote: '📐 Формула: V = S / R. Где R — расход краски на 1 литр.'
         }, {
             id: 'calc6',
             title: '🪜 Расчёт лестницы',
@@ -1175,7 +1240,8 @@
                 return `Ступеней: ${steps}, длина марша: ${length.toFixed(2)} м`;
             },
             unit: '',
-            historyKey: 'calc_history_stairs'
+            historyKey: 'calc_history_stairs',
+            teacherNote: '📐 Формула: N = H / h_riser, L = N × l_tread. Рекомендуемые параметры: проступь 0.28–0.32 м, подступенок 0.14–0.17 м.'
         }, {
             id: 'calc7',
             title: '🔩 Расчёт арматуры',
@@ -1187,7 +1253,8 @@
             ],
             formula: (vals) => Math.ceil(vals.length * vals.width * vals.rods / 10),
             unit: 'прутков (дл. 10 м)',
-            historyKey: 'calc_history_rebar'
+            historyKey: 'calc_history_rebar',
+            teacherNote: '📐 Формула: N = L × W × n_rods / 10. Усреднённый расход арматуры для фундамента.'
         }, {
             id: 'calc8',
             title: '📊 Площадь фасада',
@@ -1199,7 +1266,8 @@
             ],
             formula: (vals) => (vals.length * vals.height - vals.windows).toFixed(1),
             unit: 'м²',
-            historyKey: 'calc_history_facade'
+            historyKey: 'calc_history_facade',
+            teacherNote: '📐 Формула: S = L × H — S_окон. Учитывает площадь оконных проёмов.'
         }];
 
         // ==========================================
@@ -1217,7 +1285,8 @@
             ],
             xMin: -5,
             xMax: 5,
-            color: '#D4A017'
+            color: '#D4A017',
+            teacherNote: '📐 Квадратичная функция y = ax² + bx + c. Вершина параболы: x₀ = -b/(2a).'
         }, {
             id: 'trainer2',
             title: '📈 График sin(x)',
@@ -1230,7 +1299,8 @@
             ],
             xMin: -6.28,
             xMax: 6.28,
-            color: '#4ade80'
+            color: '#4ade80',
+            teacherNote: '📐 Тригонометрическая функция y = A·sin(f·x + φ). Период: T = 2π/f.'
         }, {
             id: 'trainer3',
             title: '📈 График 2ˣ',
@@ -1242,7 +1312,8 @@
             ],
             xMin: -4,
             xMax: 4,
-            color: '#60a5fa'
+            color: '#60a5fa',
+            teacherNote: '📐 Показательная функция y = aˣ + c. При a > 1 — возрастает, при 0 < a < 1 — убывает.'
         }, {
             id: 'trainer4',
             title: '📈 График log₂(x)',
@@ -1257,7 +1328,8 @@
             ],
             xMin: 0.1,
             xMax: 10,
-            color: '#f472b6'
+            color: '#f472b6',
+            teacherNote: '📐 Логарифмическая функция y = log_a(x) + c. Область определения: x > 0.'
         }];
 
         // ==========================================
@@ -1279,7 +1351,8 @@
                 q: 'Чему равна площадь прямоугольника со сторонами 4 и 5?',
                 options: ['9', '20', '10', '15'],
                 correct: 1
-            }]
+            }],
+            teacherNote: '📐 Сумма углов треугольника = 180°. Квадрат — частный случай прямоугольника. Площадь прямоугольника = a × b.'
         }, {
             id: 'test2',
             title: '🧮 Тест по тригонометрии',
@@ -1296,7 +1369,8 @@
                 q: 'Какое значение имеет sin(90°)?',
                 options: ['0', '1', '-1', '0.5'],
                 correct: 1
-            }]
+            }],
+            teacherNote: '📐 sin(0°) = 0, cos(0°) = 1, sin(90°) = 1. Запомните основные значения для быстрых вычислений.'
         }, {
             id: 'test3',
             title: '📈 Тест по функциям',
@@ -1315,7 +1389,8 @@
                     'Множество точек пересечения с осью X', 'Множество точек пересечения с осью Y'
                 ],
                 correct: 1
-            }]
+            }],
+            teacherNote: '📐 Линейная функция: y = kx + b. y = x² — парабола. Область определения — допустимые значения аргумента.'
         }];
 
         // ==========================================
@@ -1341,7 +1416,6 @@
             title: 'Строитель',
             desc: 'Используйте все 8 строительных калькуляторов.',
             check: () => {
-                // Проверяем, что каждый калькулятор использован хотя бы раз
                 const calcHistory = calculators.map(c => JSON.parse(localStorage.getItem(c.historyKey)) || []);
                 return calcHistory.every(h => h.length > 0);
             },
@@ -1356,8 +1430,7 @@
             title: 'Мастер функций',
             desc: 'Изучите все 4 графических тренажёра.',
             check: () => {
-                const trainerIds = trainers.map(t => t.id);
-                return trainerIds.every(id => progress.completed.includes(parseInt('100' + trainerIds.indexOf(id))));
+                return trainers.every((t, i) => progress.completed.includes(100 + i));
             },
             progress: () => {
                 const done = trainers.filter((t, i) => progress.completed.includes(100 + i)).length;
@@ -1384,8 +1457,7 @@
             desc: 'Пройдите все тесты с результатом 100%.',
             check: () => {
                 const testResults = JSON.parse(localStorage.getItem('test_results')) || {};
-                const allTests = tests.every(t => testResults[t.id] && testResults[t.id].score === 100);
-                return allTests && Object.keys(testResults).length === tests.length;
+                return tests.every(t => testResults[t.id] && testResults[t.id].score === 100);
             },
             progress: () => {
                 const testResults = JSON.parse(localStorage.getItem('test_results')) || {};
@@ -1400,7 +1472,7 @@
         let favorites = JSON.parse(localStorage.getItem('interaktiv_favorites')) || [];
         let progress = JSON.parse(localStorage.getItem('interaktiv_progress')) || { completed: [] };
         let currentTab = 'geogebra';
-        let teacherMode = false;
+        let teacherMode = JSON.parse(localStorage.getItem('interaktiv_teacher_mode')) || false;
 
         // ==========================================
         // РЕНДЕР КАРТОЧЕК
@@ -1439,6 +1511,7 @@
             if (!container) return;
             container.innerHTML = calculators.map(calc => `
                 <div class="calculator-card" id="calc-${calc.id}">
+                    <span class="teacher-badge">👨‍🏫</span>
                     <h4>${calc.title}</h4>
                     <p class="calc-desc">${calc.desc}</p>
                     <div class="calc-row">
@@ -1460,6 +1533,7 @@
                         <span class="value" id="${calc.id}_result">— <span class="unit">${calc.unit}</span></span>
                     </div>
                     <div class="calc-history" id="${calc.id}_history"></div>
+                    <div class="calc-teacher-note">${calc.teacherNote}</div>
                 </div>
             `).join('');
             calculators.forEach(calc => updateCalc(calc.id));
@@ -1478,7 +1552,6 @@
             if (resultEl) {
                 resultEl.innerHTML = `${result} <span class="unit">${calc.unit}</span>`;
             }
-            // Сохраняем историю
             saveHistory(calcId, result);
             const history = JSON.parse(localStorage.getItem(calc.historyKey)) || [];
             if (history.length > 0) {
@@ -1513,6 +1586,7 @@
             if (!container) return;
             container.innerHTML = trainers.map(t => `
                 <div class="trainer-card" id="trainer-${t.id}">
+                    <span class="teacher-badge">👨‍🏫</span>
                     <h4>${t.title}</h4>
                     <p class="trainer-desc">${t.desc}</p>
                     <div class="trainer-controls">
@@ -1537,6 +1611,7 @@
                             <span>${t.title.replace('📈 ', '')}</span>
                         </div>
                     </div>
+                    <div class="calc-teacher-note">${t.teacherNote}</div>
                 </div>
             `).join('');
             trainers.forEach(t => {
@@ -1606,7 +1681,7 @@
 
             if (points.length === 0) {
                 svg.innerHTML =
-                `<text x="300" y="200" text-anchor="middle" fill="#8b949e" font-size="14">Нет данных для отображения</text>`;
+                    `<text x="300" y="200" text-anchor="middle" fill="#8b949e" font-size="14">Нет данных для отображения</text>`;
                 return;
             }
 
@@ -1730,6 +1805,7 @@
 
                 return `
                     <div class="test-card" id="test-${test.id}">
+                        <span class="teacher-badge">👨‍🏫</span>
                         <h4>${test.title}</h4>
                         <p class="test-desc">${test.desc}</p>
                         ${result ? `
@@ -1754,6 +1830,7 @@
                                 </div>
                             `).join('')}
                         </div>
+                        <div class="test-teacher-answers">${test.teacherNote}</div>
                         <button class="btn-gold" onclick="checkTest('${test.id}')" style="margin-top:12px;padding:8px 24px;font-size:14px;">
                             Проверить тест
                         </button>
@@ -1774,7 +1851,6 @@
             if (!selectedAnswers[testId]) selectedAnswers[testId] = {};
             selectedAnswers[testId][questionIdx] = answerIdx;
 
-            // Визуальное выделение
             const container = document.querySelector(`#test-${testId}-questions`);
             if (container) {
                 const qDiv = container.querySelector(`[data-q="${key}"]`);
@@ -1829,7 +1905,6 @@
             testResults[testId] = { score, correct, total };
             localStorage.setItem('test_results', JSON.stringify(testResults));
 
-            // Показываем результат
             const card = document.getElementById(`test-${testId}`);
             if (card) {
                 const existing = card.querySelector('.test-result');
@@ -1842,7 +1917,6 @@
                 card.appendChild(resultDiv);
             }
 
-            // Обновляем достижения
             checkAchievements();
             updateStats();
         }
@@ -2047,21 +2121,33 @@
         // ==========================================
         document.getElementById('teacherModeToggle').addEventListener('click', function() {
             teacherMode = !teacherMode;
+            localStorage.setItem('interaktiv_teacher_mode', JSON.stringify(teacherMode));
             this.classList.toggle('active');
             if (teacherMode) {
+                document.body.classList.add('teacher-mode');
                 this.style.color = 'var(--gold)';
-                document.querySelectorAll('.calculator-card, .trainer-card, .test-card').forEach(el => {
-                    el.style.borderColor = 'var(--gold)';
-                });
-                alert('👨‍🏫 Режим преподавателя включён.\n\n🔍 Будут отображаться формулы, методические комментарии и правильные ответы в тестах.');
+                alert('👨‍🏫 Режим преподавателя включён.\n\n🔍 Отображаются формулы, методические комментарии и правильные ответы в тестах.');
             } else {
+                document.body.classList.remove('teacher-mode');
                 this.style.color = '';
-                document.querySelectorAll('.calculator-card, .trainer-card, .test-card').forEach(el => {
-                    el.style.borderColor = '';
-                });
                 alert('👨‍🏫 Режим преподавателя выключен.');
             }
+            // Обновляем визуал
+            document.querySelectorAll('.calculator-card, .trainer-card, .test-card').forEach(el => {
+                if (teacherMode) {
+                    el.style.borderColor = 'var(--gold)';
+                } else {
+                    el.style.borderColor = '';
+                }
+            });
         });
+
+        // Восстанавливаем состояние
+        if (teacherMode) {
+            document.body.classList.add('teacher-mode');
+            document.getElementById('teacherModeToggle').style.color = 'var(--gold)';
+            document.getElementById('teacherModeToggle').classList.add('active');
+        }
 
         // ==========================================
         // КНОПКА НАВЕРХ
@@ -2109,6 +2195,7 @@
         console.log('🏆 Достижений:', achievements.length);
         console.log('⭐ Избранное:', favorites.length);
         console.log('📈 Прогресс:', progress.completed.length, '/', models.length);
+        console.log('👨‍🏫 Режим преподавателя:', teacherMode ? 'включён' : 'выключен');
     </script>
 </body>
 </html>
