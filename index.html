@@ -67,9 +67,31 @@
             font-size: clamp(44px, 7vw, 76px);
             line-height: 1.05;
             color: #fff;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
-        .hero-title .gold { color: var(--gold); }
+        .hero-title .gold {
+            color: var(--gold);
+            position: relative;
+        }
+        .hero-title .gold::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 2px;
+            opacity: 0.4;
+        }
+        .hero-title .highlight {
+            display: inline-block;
+            animation: pulseGold 3s ease-in-out infinite;
+        }
+        @keyframes pulseGold {
+            0%, 100% { text-shadow: 0 0 20px rgba(212, 160, 23, 0.2); }
+            50% { text-shadow: 0 0 40px rgba(212, 160, 23, 0.5); }
+        }
         .hero-subtitle {
             font-size: 17px;
             color: var(--text-muted);
@@ -110,16 +132,42 @@
             font-size: 17px;
             font-weight: 600;
             border-radius: 8px;
+            transition: all 0.3s;
         }
-        .btn-gold.btn-large:hover {
+        .btn-gold {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--bg);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-gold:hover {
+            background: var(--gold-hover);
             transform: translateY(-3px);
             box-shadow: 0 12px 40px rgba(212, 160, 23, 0.35);
+            color: var(--bg);
         }
-        .btn-outline.btn-large {
-            border-width: 2px;
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid var(--border);
+            color: var(--text);
+            text-decoration: none;
+            background: transparent;
+            cursor: pointer;
         }
-        .btn-outline.btn-large:hover {
-            background: rgba(212, 160, 23, 0.08);
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 160, 23, 0.05);
+            transform: translateY(-3px);
+        }
+        .btn-outline .arrow {
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        .btn-outline:hover .arrow {
+            transform: translateX(4px);
         }
 
         .hero-visual {
@@ -174,29 +222,101 @@
             background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
         }
 
-        .btn-gold {
-            display: inline-block; padding: 16px 36px; background: var(--gold); color: var(--bg);
-            text-decoration: none; font-weight: 700; font-size: 16px; border-radius: 6px;
-            transition: all 0.3s; border: none; cursor: pointer;
+        /* ===== БЛОК «ПОЧЕМУ ВЫБИРАЮТ» ===== */
+        .choose-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
-        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-3px); box-shadow: 0 10px 35px rgba(212,160,23,0.35); color: var(--bg); }
-        .btn-outline {
-            display: inline-block; padding: 16px 36px; border: 1px solid var(--border);
-            color: var(--text); text-decoration: none; font-weight: 500; font-size: 16px;
-            border-radius: 6px; transition: all 0.3s;
+        .choose-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: all 0.3s;
         }
-        .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+        .choose-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .choose-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .choose-item h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+        .choose-item p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* ===== МИНИ-АППЛЕТЫ ===== */
+        .applets-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .applet-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .applet-card:hover {
+            border-color: var(--gold);
+        }
+        .applet-frame {
+            height: 280px;
+            background: #0a0e14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+        .applet-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .applet-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--gold);
+            color: var(--bg);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .applet-body {
+            padding: 16px 20px;
+        }
+        .applet-body h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .applet-body p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin: 0;
+        }
 
         .section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); margin-bottom: 15px; }
         .section-title { font-size: clamp(30px, 5vw, 44px); margin-bottom: 30px; color: #fff; }
-
-        .stats-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-            background: var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 40px;
-        }
-        .stat-item { background: var(--bg-card); padding: 25px; text-align: center; }
-        .stat-num { font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; color: var(--gold); font-weight: 700; }
-        .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .card {
@@ -211,34 +331,6 @@
         .card-link { display: inline-block; font-size: 13px; font-weight: 500; color: var(--gold); text-decoration: none; margin-top: auto; }
         .card:hover .card-link { text-decoration: underline; }
 
-        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .why-item {
-            background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
-            border-radius: 6px; padding: 28px; transition: all 0.3s;
-        }
-        .why-item:hover { border-color: var(--gold); background: rgba(212,160,23,0.02); }
-        .why-icon { font-size: 30px; margin-bottom: 12px; }
-        .why-item h4 { color: #fff; font-size: 1.05rem; margin-bottom: 8px; }
-        .why-item p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
-
-        .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .preview-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
-            overflow: hidden; transition: all 0.3s;
-        }
-        .preview-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-        .preview-img {
-            height: 200px; background: #0a0e14; display: flex; align-items: center; justify-content: center;
-            font-size: 50px; border-bottom: 1px solid var(--border); position: relative;
-        }
-        .preview-badge {
-            position: absolute; top: 10px; left: 10px; background: var(--gold); color: var(--bg);
-            padding: 3px 10px; border-radius: 10px; font-size: 10px; font-weight: 700;
-        }
-        .preview-body { padding: 20px; }
-        .preview-body h4 { color: #fff; font-size: 1rem; margin-bottom: 6px; }
-        .preview-body p { color: var(--text-muted); font-size: 13px; line-height: 1.5; }
-
         .start-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .start-card {
             background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
@@ -250,11 +342,11 @@
         .start-card h4 { color: #fff; font-size: 1.05rem; margin-bottom: 6px; }
         .start-card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
 
-        .tech-grid { 
-            display: flex; 
-            gap: 16px; 
-            justify-content: center; 
-            flex-wrap: wrap; 
+        .tech-grid {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         .tech-item {
             background: rgba(255,255,255,0.02);
@@ -268,16 +360,16 @@
             min-width: 110px;
             flex: 0 1 auto;
         }
-        .tech-item:hover { 
-            border-color: var(--gold); 
-            color: #fff; 
+        .tech-item:hover {
+            border-color: var(--gold);
+            color: #fff;
             background: rgba(212, 160, 23, 0.05);
             transform: translateY(-2px);
         }
-        .tech-item .tech-icon { 
-            font-size: 48px; 
-            display: block; 
-            margin-bottom: 6px; 
+        .tech-item .tech-icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 6px;
         }
 
         .interactive-block {
@@ -331,15 +423,17 @@
             .hero-visual { flex-direction: row; flex-wrap: wrap; justify-content: center; }
             .hero-emblem { width: 120px; height: 120px; }
             .hero-author { text-align: center; }
+            .choose-grid { grid-template-columns: repeat(2, 1fr); }
+            .applets-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 900px) {
-            .cards-grid, .why-grid, .preview-grid, .start-grid { grid-template-columns: repeat(2, 1fr); }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .cards-grid { grid-template-columns: repeat(2, 1fr); }
+            .start-grid { grid-template-columns: repeat(2, 1fr); }
             .author-grid { grid-template-columns: 1fr; text-align: center; }
             .author-photo { margin: 0 auto; }
         }
         @media (max-width: 576px) {
-            .cards-grid, .why-grid, .preview-grid, .start-grid, .stats-grid { grid-template-columns: 1fr; }
+            .cards-grid, .start-grid, .choose-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
             .hero-title { font-size: 38px; }
             .hero-stats { gap: 20px; flex-wrap: wrap; }
@@ -350,6 +444,9 @@
             section { padding: 60px 0; }
             .tech-item { min-width: 80px; padding: 12px 16px; }
             .tech-item .tech-icon { font-size: 36px; }
+            .applet-frame { height: 200px; }
+            .interactive-block { padding: 30px 20px; }
+            .author-block { padding: 24px; }
         }
     </style>
 </head>
@@ -372,13 +469,14 @@
         </div>
     </nav>
 
+    <!-- ===== HERO ===== -->
     <header class="hero">
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-content">
                     <h1 class="hero-title fade-up">
                         Математика<br>
-                        <span class="gold">строит будущее</span>
+                        <span class="gold highlight">строит будущее</span>
                     </h1>
                     <p class="hero-subtitle fade-up">
                         Интерактивный учебно-методический комплекс для учреждений<br>
@@ -400,7 +498,7 @@
                     </div>
                     <div class="hero-actions fade-up">
                         <a href="#sections" class="btn-gold btn-large">К разделам ↓</a>
-                        <a href="teoreticheskij.html" class="btn-outline btn-large">Начать учиться →</a>
+                        <a href="teoreticheskij.html" class="btn-outline btn-large">Начать учиться <span class="arrow">→</span></a>
                     </div>
                 </div>
 
@@ -437,17 +535,7 @@
         <div class="hero-line"></div>
     </header>
 
-    <section id="stats">
-        <div class="container">
-            <div class="stats-grid fade-up">
-                <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">опорных конспектов</div></div>
-                <div class="stat-item"><div class="stat-num">28</div><div class="stat-label">практических работ</div></div>
-                <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">интерактивных 3D-моделей</div></div>
-                <div class="stat-item"><div class="stat-num">240</div><div class="stat-label">часов учебной программы</div></div>
-            </div>
-        </div>
-    </section>
-
+    <!-- ===== С ЧЕГО НАЧАТЬ ===== -->
     <section id="start">
         <div class="container">
             <div class="section-label fade-up">С чего начать</div>
@@ -472,27 +560,67 @@
         </div>
     </section>
 
-    <section id="preview">
+    <!-- ===== ПОЧЕМУ ВЫБИРАЮТ ===== -->
+    <section id="choose">
         <div class="container">
-            <div class="section-label fade-up">Посмотрите как это работает</div>
-            <h2 class="section-title fade-up">Что внутри УМК</h2>
-            <div class="preview-grid fade-up">
-                <div class="preview-card">
-                    <div class="preview-img"><span class="preview-badge">Теория</span>📖</div>
-                    <div class="preview-body"><h4>Опорные конспекты</h4><p>Формула дня, интерактивное оглавление, частые ошибки, шпаргалка в конце.</p></div>
+            <div class="section-label fade-up">Преимущества</div>
+            <h2 class="section-title fade-up">Почему выбирают этот УМК</h2>
+            <div class="choose-grid fade-up">
+                <div class="choose-item">
+                    <span class="choose-icon">🏗️</span>
+                    <h4>Привязан к профессии</h4>
+                    <p>Каждая тема — через строительные задачи: уклон кровли, объём фундамента, шум стройки.</p>
                 </div>
-                <div class="preview-card">
-                    <div class="preview-img"><span class="preview-badge">Практика</span>⏱️</div>
-                    <div class="preview-body"><h4>Практические с таймером</h4><p>Три уровня сложности, таймер выполнения, режим «Без ответов» для самостоятельных.</p></div>
+                <div class="choose-item">
+                    <span class="choose-icon">📊</span>
+                    <h4>Три уровня сложности</h4>
+                    <p>«Фундамент» — «Стены» — «Кровля». Дифференциация для каждого студента.</p>
                 </div>
-                <div class="preview-card">
-                    <div class="preview-img"><span class="preview-badge">3D</span>🧊</div>
-                    <div class="preview-body"><h4>Интерактивные модели</h4><p>Вращайте призмы и пирамиды, меняйте размеры, смотрите как меняется объём.</p></div>
+                <div class="choose-item">
+                    <span class="choose-icon">📱</span>
+                    <h4>QR-коды и аудио</h4>
+                    <p>Навёл телефон — открыл задание. Включил аудио — прослушал тему по дороге.</p>
+                </div>
+                <div class="choose-item">
+                    <span class="choose-icon">⚡</span>
+                    <h4>Цифровые инструменты</h4>
+                    <p>GeoGebra, Desmos, 3D-модели, таймеры, прогресс-бар и режим «Без ответов».</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ===== МИНИ-АППЛЕТЫ ===== -->
+    <section id="applets">
+        <div class="container">
+            <div class="section-label fade-up">Попробуйте сами</div>
+            <h2 class="section-title fade-up">Интерактивные модели</h2>
+            <div class="applets-grid fade-up">
+                <div class="applet-card">
+                    <div class="applet-frame">
+                        <span class="applet-label">3D-модель</span>
+                        <iframe src="https://www.geogebra.org/calculator/qbwz8wng?embed" title="3D-модель многогранника"></iframe>
+                    </div>
+                    <div class="applet-body">
+                        <h4>🧊 Вращение многогранника</h4>
+                        <p>Вращайте мышкой, меняйте масштаб — изучайте геометрию в 3D.</p>
+                    </div>
+                </div>
+                <div class="applet-card">
+                    <div class="applet-frame">
+                        <span class="applet-label">График</span>
+                        <iframe src="https://www.geogebra.org/calculator/h7jqkz7a?embed" title="График функции с параметром"></iframe>
+                    </div>
+                    <div class="applet-body">
+                        <h4>📈 График с параметром</h4>
+                        <p>Меняйте коэффициенты и смотрите, как меняется график в реальном времени.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== РАЗДЕЛЫ УМК ===== -->
     <section id="sections">
         <div class="container">
             <div class="section-label fade-up">Структура УМК</div>
@@ -520,45 +648,7 @@
         </div>
     </section>
 
-    <section id="why">
-        <div class="container">
-            <div class="section-label fade-up">Почему этот УМК</div>
-            <h2 class="section-title fade-up">Что делает комплекс уникальным</h2>
-            <div class="why-grid fade-up">
-                <div class="why-item">
-                    <div class="why-icon">🏗️</div>
-                    <h4>Привязан к профессии</h4>
-                    <p>Каждая тема математики объясняется через строительные задачи. Уклон кровли — тригонометрия, объём фундамента — многогранники, шум стройки — логарифмы.</p>
-                </div>
-                <div class="why-item">
-                    <div class="why-icon">📊</div>
-                    <h4>Три уровня сложности</h4>
-                    <p>«Фундамент» для всех, «Стены» для уверенных, «Кровля» для отличников. Дифференциация в каждой практической работе.</p>
-                </div>
-                <div class="why-item">
-                    <div class="why-icon">📱</div>
-                    <h4>QR-коды и аудио</h4>
-                    <p>Навёл телефон — открыл задание. Включил аудио — прослушал тему по дороге. Без регистрации, без паролей.</p>
-                </div>
-                <div class="why-item">
-                    <div class="why-icon">📝</div>
-                    <h4>Режим «Без ответов»</h4>
-                    <p>Один переключатель скрывает все решения. Распечатайте контрольную за 10 секунд — студенты видят только задания.</p>
-                </div>
-                <div class="why-item">
-                    <div class="why-icon">⏱️</div>
-                    <h4>Таймер и прогресс-бар</h4>
-                    <p>Студент видит сколько времени потратил на работу. Преподаватель видит какие темы усвоены группой.</p>
-                </div>
-                <div class="why-item">
-                    <div class="why-icon">🔄</div>
-                    <h4>3D-модели и тренажёры</h4>
-                    <p>Вращайте многогранники мышкой. Играйте в «Построй дом» — 10 правильных ответов строят коттедж.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- ===== ТЕХНОЛОГИИ ===== -->
     <section id="tech">
         <div class="container">
             <div class="section-label fade-up">Технологии</div>
@@ -574,17 +664,19 @@
         </div>
     </section>
 
+    <!-- ===== ИНТЕРАКТИВНЫЙ БЛОК ===== -->
     <section id="interactive">
         <div class="container">
             <div class="interactive-block fade-up">
                 <div class="interactive-icons">📐 🧊 🔺 ⚽ 🥫 🔻</div>
                 <h3>Интерактивная математика — попробуйте прямо сейчас</h3>
                 <p>3D-модели многогранников, калькуляторы строителя, графический тренажёр и игра «Построй дом». Всё работает в браузере, бесплатно и без регистрации.</p>
-                <a href="interaktiv.html" class="btn-gold">Открыть интерактивный раздел →</a>
+                <a href="interaktiv.html" class="btn-gold" style="padding: 16px 36px; font-size: 16px; border-radius: 6px;">Открыть интерактивный раздел →</a>
             </div>
         </div>
     </section>
 
+    <!-- ===== АВТОР ===== -->
     <section id="about">
         <div class="container">
             <div class="section-label fade-up">Автор УМК</div>
@@ -594,9 +686,9 @@
                     <div class="author-photo">📷<br>Место для фото</div>
                     <div>
                         <p style="font-size: 16px; color: var(--text-muted); line-height: 1.8;">
-                            Здравствуйте! Меня зовут Станулевич Андрей Викторович. Я преподаю математику в Гродненском государственном колледже строительных технологий уже 5 лет. 
+                            Здравствуйте! Меня зовут Станулевич Андрей Викторович. Я преподаю математику в Гродненском государственном колледже строительных технологий уже 5 лет.
                             <br><br>
-                            Этот учебно-методический комплекс создан для вас с одной целью: показать, что математика — это язык, на котором говорит строительство. В каждом разделе вы найдёте задания, приближенные к реальным профессиональным ситуациям: расчёт материалов, работа с чертежами, вычисление углов, объёмов и прочности конструкций. 
+                            Этот учебно-методический комплекс создан для вас с одной целью: показать, что математика — это язык, на котором говорит строительство. В каждом разделе вы найдёте задания, приближенные к реальным профессиональным ситуациям: расчёт материалов, работа с чертежами, вычисление углов, объёмов и прочности конструкций.
                             <br><br>
                             Я активно использую цифровые инструменты GeoGebra и Desmos, чтобы сделать занятия наглядными и интересными. Искренне надеюсь, что УМК поможет вам не только освоить программу, но и полюбить математику как основу вашей будущей профессии.
                         </p>
@@ -607,6 +699,7 @@
         </div>
     </section>
 
+    <!-- ===== ФУТЕР ===== -->
     <footer style="background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0 0 0; text-align: center; font-size: 14px;">
         <div class="container">
             <div class="footer-grid">
