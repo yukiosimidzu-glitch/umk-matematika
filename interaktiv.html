@@ -18,12 +18,15 @@
         .hero { background: linear-gradient(135deg, #1a212f 0%, #0d1117 100%); border-bottom: 1px solid var(--border); padding: 100px 0 70px; text-align: center; }
         .hero h1 { color: #fff; font-size: clamp(36px, 5vw, 54px); margin-bottom: 16px; }
         .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto 30px; line-height: 1.7; }
-        .btn-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 14px 32px; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; transition: all 0.3s; }
+        .btn-gold { display: inline-block; background: var(--gold); color: var(--bg); padding: 14px 32px; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; transition: all 0.3s; cursor: pointer; border: none; }
         .btn-gold:hover { background: #e6b422; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,160,23,0.3); color: var(--bg); }
-        .btn-outline { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 10px 22px; text-decoration: none; font-weight: 500; font-size: 14px; border-radius: 6px; transition: all 0.3s; }
+        .btn-outline { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 10px 22px; text-decoration: none; font-weight: 500; font-size: 14px; border-radius: 6px; transition: all 0.3s; cursor: pointer; background: transparent; }
         .btn-outline:hover { background: var(--gold); color: var(--bg); }
 
         .content { padding: 60px 0; }
+        .section-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 35px; margin-bottom: 25px; border-radius: 6px; }
+        .section-card h2 { color: #fff; margin-bottom: 12px; font-size: 1.4rem; display: flex; align-items: center; gap: 12px; }
+        .section-card .icon { font-size: 32px; }
 
         .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; justify-content: center; }
         .filter-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-size: 14px; transition: all 0.3s; }
@@ -31,7 +34,7 @@
         .filter-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
 
         .models-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-        .model-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
+        .model-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
         .model-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
         .model-preview { height: 180px; background: #0a0e14; display: flex; align-items: center; justify-content: center; font-size: 60px; border-bottom: 1px solid var(--border); }
         .model-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
@@ -39,14 +42,61 @@
         .tag-geo { background: rgba(96,165,250,0.15); color: var(--blue); }
         .tag-desmos { background: rgba(74,222,128,0.15); color: var(--green); }
         .tag-3d { background: rgba(192,132,252,0.15); color: var(--purple); }
+        .tag-calc { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .tag-game { background: rgba(248,113,113,0.15); color: #f87171; }
         .model-body h3 { color: #fff; font-size: 1.1rem; margin-bottom: 6px; }
         .model-body p { color: var(--text-muted); font-size: 14px; flex: 1; margin-bottom: 14px; line-height: 1.6; }
         .model-body .model-link { color: var(--gold); font-weight: 500; font-size: 14px; text-decoration: none; margin-top: auto; }
         .model-body .model-link:hover { text-decoration: underline; }
 
+        .calc-group { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .calc-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 20px; border-radius: 8px; }
+        .calc-item h4 { color: #fff; font-size: 1rem; margin-bottom: 12px; }
+        .calc-item label { color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 4px; }
+        .calc-item input { width: 100%; padding: 8px 12px; background: #0a0e14; border: 1px solid var(--border); color: #fff; border-radius: 6px; font-size: 14px; margin-bottom: 10px; }
+        .calc-item .result { color: var(--gold); font-weight: 600; font-size: 1.1rem; margin-top: 8px; }
+
+        .timeline { position: relative; padding-left: 30px; border-left: 2px solid var(--gold); }
+        .timeline-item { margin-bottom: 20px; position: relative; }
+        .timeline-item::before { content: ''; position: absolute; left: -36px; top: 6px; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; }
+        .timeline-item h4 { color: var(--gold); font-size: 1rem; margin-bottom: 4px; }
+        .timeline-item p { color: var(--text-muted); font-size: 14px; }
+
+        .map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+        .map-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 18px; text-align: center; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
+        .map-item:hover { border-color: var(--gold); background: rgba(212,160,23,0.03); }
+        .map-item .map-icon { font-size: 36px; margin-bottom: 8px; }
+        .map-item .map-title { color: #fff; font-size: 14px; font-weight: 600; }
+        .map-item .map-formula { color: var(--gold); font-size: 12px; margin-top: 6px; display: none; }
+        .map-item.open .map-formula { display: block; }
+
+        .decibel-slider { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .decibel-slider input[type=range] { flex: 1; min-width: 200px; accent-color: var(--gold); }
+        .decibel-value { color: var(--gold); font-weight: 700; font-size: 2rem; min-width: 80px; text-align: center; }
+        .decibel-example { color: var(--text-muted); font-size: 14px; }
+
+        .quiz-area { text-align: center; }
+        .quiz-graph { background: #0a0e14; border: 1px solid var(--border); height: 200px; display: flex; align-items: center; justify-content: center; font-size: 48px; margin-bottom: 16px; border-radius: 8px; }
+        .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .quiz-option { padding: 12px; border: 1px solid var(--border); background: transparent; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.3s; }
+        .quiz-option:hover { border-color: var(--gold); }
+        .quiz-option.correct { background: rgba(74,222,128,0.2); border-color: var(--green); }
+        .quiz-option.wrong { background: rgba(255,107,107,0.2); border-color: var(--red); }
+
+        .game-area { text-align: center; }
+        .game-building { font-size: 60px; margin: 20px 0; min-height: 80px; }
+        .game-progress { display: flex; gap: 4px; justify-content: center; margin-bottom: 20px; }
+        .game-block { width: 24px; height: 24px; border-radius: 4px; background: var(--border); }
+        .game-block.done { background: var(--gold); }
+        .game-block.fail { background: var(--red); }
+        .game-task { color: #fff; font-size: 1.1rem; margin-bottom: 16px; }
+        .game-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .game-option { padding: 12px; border: 1px solid var(--border); background: transparent; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.3s; }
+        .game-option:hover { border-color: var(--gold); }
+        .game-option.correct { background: rgba(74,222,128,0.2); border-color: var(--green); }
+        .game-option.wrong { background: rgba(255,107,107,0.2); border-color: var(--red); }
+
         .cta-section { text-align: center; padding: 40px 0 20px; }
-        .cta-section h2 { color: #fff; margin-bottom: 10px; }
-        .cta-section p { color: var(--text-muted); margin-bottom: 25px; }
 
         #backToTop { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: var(--bg); border: none; font-size: 22px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
         #backToTop.show { opacity: 1; visibility: visible; }
@@ -54,7 +104,7 @@
         footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
         footer a { color: var(--gold); text-decoration: none; }
 
-        @media (max-width: 600px) { .hero { padding: 60px 0 40px; } .model-preview { height: 140px; font-size: 44px; } }
+        @media (max-width: 600px) { .calc-group { grid-template-columns: 1fr; } .quiz-options, .game-options { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -79,7 +129,7 @@
     <header class="hero">
         <div class="container">
             <h1>💻 Интерактивная математика</h1>
-            <p>Строительные задачи, которые можно менять в реальном времени. Крутите модели мышкой, двигайте ползунки — смотрите как меняется результат.</p>
+            <p>Строительные задачи, которые можно менять в реальном времени. Калькуляторы, тренажёры, 3D-модели, игры.</p>
             <a href="#models" class="btn-gold">Смотреть модели ↓</a>
         </div>
     </header>
@@ -87,93 +137,120 @@
     <div class="content" id="models">
         <div class="container">
 
+            <!-- ФИЛЬТРЫ -->
             <div class="filter-bar">
-                <button class="filter-btn active" onclick="filterModels('all', this)">Все</button>
-                <button class="filter-btn" onclick="filterModels('trig', this)">📐 Тригонометрия</button>
-                <button class="filter-btn" onclick="filterModels('stereo', this)">📦 Стереометрия</button>
-                <button class="filter-btn" onclick="filterModels('bodies', this)">⚪ Тела вращения</button>
-                <button class="filter-btn" onclick="filterModels('func', this)">📈 Функции</button>
+                <button class="filter-btn active" onclick="filterAll('all', this)">Все</button>
+                <button class="filter-btn" onclick="filterAll('geo', this)">🎯 GeoGebra</button>
+                <button class="filter-btn" onclick="filterAll('calc', this)">🧮 Калькуляторы</button>
+                <button class="filter-btn" onclick="filterAll('game', this)">🎮 Тренажёры</button>
             </div>
 
-            <div class="models-grid">
-                <div class="model-card" data-category="trig">
-                    <div class="model-preview">🎯</div>
-                    <div class="model-body">
-                        <span class="model-tag tag-geo">GeoGebra</span>
-                        <h3>Единичная окружность</h3>
-                        <p>Двигайте точку по окружности — смотрите как меняются sin и cos. Изучите знаки по четвертям.</p>
-                        <a href="interaktiv/geogebra/edinichnaya-okruzhnost.html" class="model-link">Открыть модель →</a>
+            <!-- GeoGebra МОДЕЛИ -->
+            <div class="section-card filterable geo" id="geogebra-models">
+                <h2><span class="icon">🎯</span> Интерактивные GeoGebra-модели</h2>
+                <div class="models-grid">
+                    <div class="model-card"><div class="model-preview">🎯</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><h3>Единичная окружность</h3><p>Двигайте точку — смотрите sin и cos.</p><a href="interaktiv/geogebra/edinichnaya-okruzhnost.html" class="model-link">Открыть →</a></div></div>
+                    <div class="model-card"><div class="model-preview">🧊</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span><h3>Призма и параллелепипед</h3><p>Вращайте в 3D, меняйте размеры.</p><a href="interaktiv/geogebra/prisma-3d.html" class="model-link">Открыть →</a></div></div>
+                    <div class="model-card"><div class="model-preview">🔺</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span><h3>Пирамида и сечение</h3><p>Пересекайте плоскостью.</p><a href="interaktiv/geogebra/piramida-sechenie.html" class="model-link">Открыть →</a></div></div>
+                    <div class="model-card"><div class="model-preview">🥫</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span><h3>Цилиндр</h3><p>Объём и площадь на лету.</p><a href="interaktiv/geogebra/cilindr-3d.html" class="model-link">Открыть →</a></div></div>
+                    <div class="model-card"><div class="model-preview">🔻</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span><h3>Конус</h3><p>Образующая, площадь, объём.</p><a href="interaktiv/geogebra/konus-3d.html" class="model-link">Открыть →</a></div></div>
+                    <div class="model-card"><div class="model-preview">⚽</div><div class="model-body"><span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span><h3>Шар и сечение</h3><p>Проверьте формулу сечения.</p><a href="interaktiv/geogebra/shar-sechenie.html" class="model-link">Открыть →</a></div></div>
+                </div>
+            </div>
+
+            <!-- 2. КАЛЬКУЛЯТОРЫ СТРОИТЕЛЯ -->
+            <div class="section-card filterable calc" id="calculators">
+                <h2><span class="icon">🧮</span> Калькуляторы строителя</h2>
+                <div class="calc-group">
+                    <div class="calc-item">
+                        <h4>🏗️ Объём бетона (ленточный фундамент)</h4>
+                        <label>Длина (м)</label><input type="number" id="calc1-length" value="30" oninput="calcConcrete()">
+                        <label>Ширина (м)</label><input type="number" id="calc1-width" value="0.6" oninput="calcConcrete()">
+                        <label>Глубина (м)</label><input type="number" id="calc1-depth" value="1.2" oninput="calcConcrete()">
+                        <div class="result" id="calc1-result">Объём: 21.6 м³</div>
+                    </div>
+                    <div class="calc-item">
+                        <h4>📐 Уклон кровли</h4>
+                        <label>Длина ската (м)</label><input type="number" id="calc2-length" value="10" oninput="calcRoof()">
+                        <label>Угол наклона (градусы)</label><input type="number" id="calc2-angle" value="30" oninput="calcRoof()">
+                        <div class="result" id="calc2-result">Высота подъёма: 5.00 м</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="model-card" data-category="trig func">
-                    <div class="model-preview">📈</div>
-                    <div class="model-body">
-                        <span class="model-tag tag-desmos">Desmos</span>
-                        <h3>Графики sin, cos, tg</h3>
-                        <p>Постройте графики тригонометрических функций. Меняйте амплитуду, период, сдвиг.</p>
-                        <a href="https://www.desmos.com/calculator?lang=ru" target="_blank" class="model-link">Открыть на desmos.com →</a>
-                    </div>
+            <!-- 3. ВИРТУАЛЬНАЯ ЛАБОРАТОРИЯ СЕЧЕНИЙ -->
+            <div class="section-card filterable geo" id="lab">
+                <h2><span class="icon">🔬</span> Виртуальная лаборатория «Сечения»</h2>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Выберите фигуру — проведите секущую плоскость — увидите форму сечения.</p>
+                <div class="models-grid">
+                    <div class="model-card"><div class="model-preview">🟦</div><div class="model-body"><h3>Куб</h3><p>Треугольник, четырёхугольник, пятиугольник, шестиугольник.</p><a href="interaktiv/geogebra/prisma-3d.html" class="model-link">Открыть →</a></div></div>
+                    <div class="model-card"><div class="model-preview">🔺</div><div class="model-body"><h3>Призма</h3><p>Сечение треугольной и четырёхугольной призмы.</p><a href="interaktiv/geogebra/piramida-sechenie.html" class="model-link">Открыть →</a></div></div>
+                    <div class="model-card"><div class="model-preview">📐</div><div class="model-body"><h3>Пирамида</h3><p>Сечение пирамиды плоскостью — треугольник, трапеция.</p><a href="interaktiv/geogebra/piramida-sechenie.html" class="model-link">Открыть →</a></div></div>
                 </div>
+            </div>
 
-                <div class="model-card" data-category="stereo">
-                    <div class="model-preview">🧊</div>
-                    <div class="model-body">
-                        <span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span>
-                        <h3>Призма и параллелепипед</h3>
-                        <p>Вращайте призму в 3D. Меняйте размеры — объём пересчитывается автоматически.</p>
-                        <a href="interaktiv/geogebra/prisma-3d.html" class="model-link">Открыть модель →</a>
-                    </div>
+            <!-- 4. ГРАФИЧЕСКИЙ ТРЕНАЖЁР -->
+            <div class="section-card filterable game" id="graph-quiz">
+                <h2><span class="icon">📈</span> Графический тренажёр</h2>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Угадайте формулу функции по её графику. 5 раундов.</p>
+                <div class="quiz-area">
+                    <div class="quiz-graph" id="quiz-graph">📈</div>
+                    <p style="color:#fff;margin-bottom:14px;" id="quiz-question">Какая функция изображена на графике?</p>
+                    <div class="quiz-options" id="quiz-options"></div>
+                    <p style="color:var(--gold);margin-top:14px;font-weight:600;" id="quiz-score"></p>
                 </div>
+            </div>
 
-                <div class="model-card" data-category="stereo">
-                    <div class="model-preview">🔺</div>
-                    <div class="model-body">
-                        <span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span>
-                        <h3>Пирамида и сечение</h3>
-                        <p>Постройте пирамиду и пересеките её плоскостью. Изучите форму сечения.</p>
-                        <a href="interaktiv/geogebra/piramida-sechenie.html" class="model-link">Открыть модель →</a>
-                    </div>
+            <!-- 5. ШКАЛА ДЕЦИБЕЛ -->
+            <div class="section-card filterable calc" id="decibel">
+                <h2><span class="icon">🔊</span> Интерактивная шкала децибел</h2>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Передвиньте ползунок — увидите уровень шума и пример из жизни.</p>
+                <div class="decibel-slider">
+                    <span style="color:var(--text-muted);">0 дБ</span>
+                    <input type="range" min="0" max="130" value="60" oninput="updateDecibel(this.value)">
+                    <span style="color:var(--text-muted);">130 дБ</span>
+                    <div class="decibel-value" id="decibel-value">60</div>
                 </div>
+                <p class="decibel-example" id="decibel-example" style="margin-top:12px;">Обычный разговор (60 дБ)</p>
+            </div>
 
-                <div class="model-card" data-category="bodies">
-                    <div class="model-preview">🥫</div>
-                    <div class="model-body">
-                        <span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span>
-                        <h3>Цилиндр</h3>
-                        <p>Меняйте радиус и высоту — объём и площадь поверхности пересчитываются на лету.</p>
-                        <a href="interaktiv/geogebra/cilindr-3d.html" class="model-link">Открыть модель →</a>
-                    </div>
+            <!-- 6. ТАЙМЛАЙН -->
+            <div class="section-card filterable" id="timeline">
+                <h2><span class="icon">📜</span> История математики в строительстве</h2>
+                <div class="timeline">
+                    <div class="timeline-item"><h4>~2600 г. до н.э.</h4><p>Пирамида Хеопса — использование теоремы Пифагора для разметки прямых углов.</p></div>
+                    <div class="timeline-item"><h4>~300 г. до н.э.</h4><p>Евклид — «Начала». Аксиомы геометрии, которые до сих пор лежат в основе строительных расчётов.</p></div>
+                    <div class="timeline-item"><h4>XVII век</h4><p>Ньютон и Лейбниц — производная. Оптимизация конструкций, расчёт балок на прочность.</p></div>
+                    <div class="timeline-item"><h4>XX век</h4><p>Компьютерное моделирование. Расчёт небоскрёбов, мостов, куполов методом конечных элементов.</p></div>
+                    <div class="timeline-item"><h4>Сегодня</h4><p>BIM-технологии, 3D-печать зданий, цифровые двойники — математика управляет стройкой.</p></div>
                 </div>
+            </div>
 
-                <div class="model-card" data-category="bodies">
-                    <div class="model-preview">🔻</div>
-                    <div class="model-body">
-                        <span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span>
-                        <h3>Конус</h3>
-                        <p>Найдите образующую, площадь поверхности и объём. Покрутите конус в 3D.</p>
-                        <a href="interaktiv/geogebra/konus-3d.html" class="model-link">Открыть модель →</a>
-                    </div>
+            <!-- 7. ИНТЕРАКТИВНАЯ КАРТА -->
+            <div class="section-card filterable" id="build-map">
+                <h2><span class="icon">🗺️</span> Интерактивная карта «Где математика в стройке»</h2>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Кликните на элемент здания — увидите формулу.</p>
+                <div class="map-grid">
+                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🏛️</div><div class="map-title">Фундамент</div><div class="map-formula">V = S · h</div></div>
+                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🧱</div><div class="map-title">Стены</div><div class="map-formula">S = a · b</div></div>
+                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🏗️</div><div class="map-title">Колонны</div><div class="map-formula">V = πr²h</div></div>
+                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🔺</div><div class="map-title">Кровля</div><div class="map-formula">h = l · sin α</div></div>
+                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🪜</div><div class="map-title">Лестница</div><div class="map-formula">n = H / h</div></div>
+                    <div class="map-item" onclick="this.classList.toggle('open')"><div class="map-icon">🪟</div><div class="map-title">Окна</div><div class="map-formula">P = 2(a+b)</div></div>
                 </div>
+            </div>
 
-                <div class="model-card" data-category="bodies">
-                    <div class="model-preview">⚽</div>
-                    <div class="model-body">
-                        <span class="model-tag tag-geo">GeoGebra</span><span class="model-tag tag-3d">3D</span>
-                        <h3>Шар и сечение</h3>
-                        <p>Пересеките шар плоскостью. Измерьте радиус сечения, проверьте формулу.</p>
-                        <a href="interaktiv/geogebra/shar-sechenie.html" class="model-link">Открыть модель →</a>
-                    </div>
-                </div>
-
-                <div class="model-card" data-category="func">
-                    <div class="model-preview">🏗️</div>
-                    <div class="model-body">
-                        <span class="model-tag tag-desmos">Desmos</span>
-                        <h3>Оптимизация площади участка</h3>
-                        <p>Огородите участок у стены. Двигайте ползунок — найдите максимальную площадь.</p>
-                        <span style="color:var(--text-muted);font-size:13px;font-style:italic;margin-top:auto;">Скоро будет доступна</span>
-                    </div>
+            <!-- 8. ТРЕНАЖЁР "СТРОИТЕЛЬНАЯ МАТЕМАТИКА" -->
+            <div class="section-card filterable game" id="build-game">
+                <h2><span class="icon">🎮</span> Тренажёр «Строительная математика»</h2>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Решите 10 профессиональных задач — постройте дом. Ошибка — здание рушится!</p>
+                <div class="game-area">
+                    <div class="game-progress" id="game-progress"></div>
+                    <div class="game-building" id="game-building">🏚️</div>
+                    <div class="game-task" id="game-task"></div>
+                    <div class="game-options" id="game-options"></div>
+                    <p style="color:var(--gold);margin-top:14px;font-weight:600;" id="game-score"></p>
+                    <button class="btn-outline" onclick="startGame()" style="margin-top:10px;">🔄 Начать заново</button>
                 </div>
             </div>
 
@@ -204,13 +281,103 @@
         window.addEventListener('scroll', function() { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
         backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-        function filterModels(category, btn) {
+        function filterAll(cat, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            document.querySelectorAll('.model-card').forEach(card => {
-                card.style.display = (category === 'all' || card.dataset.category.includes(category)) ? 'flex' : 'none';
+            document.querySelectorAll('.filterable').forEach(el => {
+                el.style.display = (cat === 'all' || el.classList.contains(cat)) ? 'block' : 'none';
             });
         }
+
+        // Калькуляторы
+        function calcConcrete() { const l=+document.getElementById('calc1-length').value||0,w=+document.getElementById('calc1-width').value||0,d=+document.getElementById('calc1-depth').value||0; document.getElementById('calc1-result').textContent='Объём: '+(l*w*d).toFixed(1)+' м³'; }
+        function calcRoof() { const l=+document.getElementById('calc2-length').value||0,a=+document.getElementById('calc2-angle').value||0; const h=l*Math.sin(a*Math.PI/180); document.getElementById('calc2-result').textContent='Высота подъёма: '+h.toFixed(2)+' м'; }
+        calcConcrete(); calcRoof();
+
+        // Децибелы
+        function updateDecibel(v) {
+            document.getElementById('decibel-value').textContent = v;
+            const examples = {0:'Порог слышимости',20:'Шёпот',40:'Библиотека',60:'Обычный разговор',80:'Оживлённая улица',90:'Стройплощадка',100:'Отбойный молоток',110:'Рок-концерт',120:'Реактивный самолёт',130:'Болевой порог'};
+            const keys = Object.keys(examples).map(Number).sort((a,b)=>a-b);
+            let ex = examples[0];
+            for(let k of keys){ if(v>=k) ex=examples[k]; }
+            document.getElementById('decibel-example').textContent = ex + ' (' + v + ' дБ)';
+        }
+        updateDecibel(60);
+
+        // Графический тренажёр
+        const graphQuiz = [
+            { graph:'📈', q:'y = x²', opts:['y = x²','y = x³','y = 2x','y = √x'], correct:0 },
+            { graph:'📉', q:'y = sin x', opts:['y = cos x','y = sin x','y = tg x','y = x'], correct:1 },
+            { graph:'📈', q:'y = 2ˣ', opts:['y = x²','y = log₂x','y = 2ˣ','y = 2x'], correct:2 },
+        ];
+        let quizIndex = 0, quizScore = 0;
+        function loadQuiz() {
+            if(quizIndex >= graphQuiz.length){ document.getElementById('quiz-graph').textContent='🏆'; document.getElementById('quiz-question').textContent='Вы прошли тренажёр!'; document.getElementById('quiz-options').innerHTML=''; document.getElementById('quiz-score').textContent='Счёт: '+quizScore+'/'+graphQuiz.length; return; }
+            const q = graphQuiz[quizIndex];
+            document.getElementById('quiz-graph').textContent = q.graph;
+            document.getElementById('quiz-question').textContent = q.q;
+            document.getElementById('quiz-score').textContent = 'Счёт: '+quizScore+'/'+graphQuiz.length;
+            const opts = document.getElementById('quiz-options');
+            opts.innerHTML = '';
+            q.opts.forEach((o,i)=>{
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.textContent = o;
+                btn.onclick = function(){
+                    document.querySelectorAll('.quiz-option').forEach(b=>b.disabled=true);
+                    if(i===q.correct){ btn.classList.add('correct'); quizScore++; }
+                    else { btn.classList.add('wrong'); document.querySelectorAll('.quiz-option')[q.correct].classList.add('correct'); }
+                    setTimeout(()=>{ quizIndex++; loadQuiz(); }, 1000);
+                };
+                opts.appendChild(btn);
+            });
+        }
+        loadQuiz();
+
+        // Строительный тренажёр
+        const buildTasks = [
+            { q:'Площадь квадратного участка 144 м². Найдите сторону.', opts:['12 м','14 м','16 м','10 м'], correct:0 },
+            { q:'Объём бетона для фундамента 30×0.6×1.2 м:', opts:['21.6 м³','18 м³','25 м³','30 м³'], correct:0 },
+            { q:'Уклон кровли 30°, длина ската 10 м. Высота подъёма:', opts:['5 м','8.66 м','10 м','3 м'], correct:0 },
+            { q:'log₂8 = ?', opts:['3','4','2','8'], correct:0 },
+            { q:'Производная от x³:', opts:['3x²','x²','3x','3x³'], correct:0 },
+        ];
+        let buildIndex = 0, buildScore = 0, buildFails = 0;
+        function loadBuildTask() {
+            if(buildIndex >= buildTasks.length){ document.getElementById('game-building').textContent = buildFails===0?'🏠':'🏚️'; document.getElementById('game-task').textContent = buildFails===0?'Дом построен! Вы отлично знаете математику!':'Стройка завершена. Ошибок: '+buildFails; document.getElementById('game-options').innerHTML=''; document.getElementById('game-score').textContent='Правильно: '+buildScore+'/'+buildTasks.length; return; }
+            const t = buildTasks[buildIndex];
+            document.getElementById('game-task').textContent = t.q;
+            document.getElementById('game-score').textContent = 'Правильно: '+buildScore+'/'+buildTasks.length;
+            const opts = document.getElementById('game-options');
+            opts.innerHTML = '';
+            t.opts.forEach((o,i)=>{
+                const btn = document.createElement('button');
+                btn.className = 'game-option';
+                btn.textContent = o;
+                btn.onclick = function(){
+                    document.querySelectorAll('.game-option').forEach(b=>b.disabled=true);
+                    if(i===t.correct){ btn.classList.add('correct'); buildScore++; updateGameProgress(true); }
+                    else { btn.classList.add('wrong'); buildFails++; updateGameProgress(false); document.querySelectorAll('.game-option')[t.correct].classList.add('correct'); }
+                    document.getElementById('game-building').textContent = buildFails===0?'🏗️':'💥';
+                    setTimeout(()=>{ buildIndex++; loadBuildTask(); }, 800);
+                };
+                opts.appendChild(btn);
+            });
+        }
+        function updateGameProgress(ok) {
+            const blocks = document.getElementById('game-progress').children;
+            if(buildIndex < blocks.length){ blocks[buildIndex].className = 'game-block '+(ok?'done':'fail'); }
+        }
+        function startGame() {
+            buildIndex=0; buildScore=0; buildFails=0;
+            document.getElementById('game-building').textContent='🏚️';
+            const prog = document.getElementById('game-progress');
+            prog.innerHTML = '';
+            for(let i=0;i<buildTasks.length;i++){ const d=document.createElement('div'); d.className='game-block'; prog.appendChild(d); }
+            loadBuildTask();
+        }
+        startGame();
     </script>
 </body>
 </html>
