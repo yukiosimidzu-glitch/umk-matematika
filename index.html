@@ -140,30 +140,35 @@
         .start-card h4 { color: #fff; font-size: 1.05rem; margin-bottom: 6px; }
         .start-card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
 
-        /* ОБНОВЛЁННЫЙ БЛОК ТЕХНОЛОГИЙ — компактный */
+        /* ОБНОВЛЁННЫЙ БЛОК ТЕХНОЛОГИЙ — иконки 48px */
         .tech-grid { 
             display: flex; 
-            gap: 12px; 
+            gap: 16px; 
             justify-content: center; 
             flex-wrap: wrap; 
         }
         .tech-item {
             background: rgba(255,255,255,0.02);
             border: 1px solid var(--border);
-            padding: 12px 20px;
-            border-radius: 8px;
+            padding: 16px 24px;
+            border-radius: 10px;
             text-align: center;
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text-muted);
             transition: all 0.3s;
-            min-width: 100px;
+            min-width: 110px;
             flex: 0 1 auto;
         }
-        .tech-item:hover { border-color: var(--gold); color: #fff; }
+        .tech-item:hover { 
+            border-color: var(--gold); 
+            color: #fff; 
+            background: rgba(212, 160, 23, 0.05);
+            transform: translateY(-2px);
+        }
         .tech-item .tech-icon { 
-            font-size: 32px; 
+            font-size: 48px; 
             display: block; 
-            margin-bottom: 4px; 
+            margin-bottom: 6px; 
         }
 
         .interactive-block {
@@ -216,8 +221,8 @@
             .footer-grid { grid-template-columns: 1fr; }
             .hero-title { font-size: 38px; }
             section { padding: 60px 0; }
-            .tech-item { min-width: 80px; padding: 10px 14px; }
-            .tech-item .tech-icon { font-size: 28px; }
+            .tech-item { min-width: 80px; padding: 12px 16px; }
+            .tech-item .tech-icon { font-size: 36px; }
         }
     </style>
 </head>
@@ -436,7 +441,6 @@
                     Все права защищены. Данный учебно-методический комплекс является объектом интеллектуальной собственности.<br>
                     Полное или частичное воспроизведение, распространение, переработка без письменного разрешения автора запрещены.
                 </span>
-                <!-- СЧЁТЧИК ПОСЕЩЕНИЙ -->
                 <div style="margin-top: 12px; font-size: 12px; color: var(--text-muted);">
                     👁️ Просмотров: <span id="visitCounter">0</span>
                 </div>
