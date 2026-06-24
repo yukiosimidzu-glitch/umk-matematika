@@ -47,21 +47,132 @@
         .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+        /* ===== HERO ===== */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: radial-gradient(ellipse at 50% 30%, #1a2332 0%, var(--bg) 70%);
+            background: radial-gradient(ellipse at 60% 30%, #1a2332 0%, var(--bg) 70%);
             position: relative;
             overflow: hidden;
+            padding: 40px 0;
         }
-        .hero .container { position: relative; z-index: 1; width: 100%; }
-        .hero-label { font-size: 12px; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); margin-bottom: 40px; }
-        .hero-title { font-size: clamp(48px, 8vw, 88px); line-height: 1.05; margin-bottom: 20px; color: #fff; }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 50px;
+            align-items: center;
+        }
+        .hero-title {
+            font-size: clamp(44px, 7vw, 76px);
+            line-height: 1.05;
+            color: #fff;
+            margin-bottom: 16px;
+        }
         .hero-title .gold { color: var(--gold); }
-        .hero-subtitle { font-size: 18px; color: var(--text-muted); max-width: 600px; line-height: 1.7; margin-bottom: 15px; }
-        .hero-formula { margin-bottom: 30px; color: var(--gold); font-size: 1.1rem; }
-        .hero-actions { display: flex; gap: 15px; flex-wrap: wrap; }
+        .hero-subtitle {
+            font-size: 17px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 28px;
+            max-width: 600px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+        }
+        .hero-stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+        .hero-stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn-large {
+            padding: 16px 40px;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+        .btn-gold.btn-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(212, 160, 23, 0.35);
+        }
+        .btn-outline.btn-large {
+            border-width: 2px;
+        }
+        .btn-outline.btn-large:hover {
+            background: rgba(212, 160, 23, 0.08);
+        }
+
+        .hero-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        .hero-emblem {
+            width: 160px;
+            height: 160px;
+            flex-shrink: 0;
+        }
+        .hero-emblem svg {
+            width: 100%;
+            height: 100%;
+        }
+        .hero-principles {
+            display: flex;
+            gap: 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 20px;
+        }
+        .hero-principle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .principle-icon { font-size: 18px; }
+        .principle-text { font-weight: 500; color: var(--text); }
+        .hero-author {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.6;
+            border-top: 1px solid var(--border);
+            padding-top: 14px;
+            width: 100%;
+        }
+        .hero-author strong { color: #fff; }
+
+        .hero-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+        }
 
         .btn-gold {
             display: inline-block; padding: 16px 36px; background: var(--gold); color: var(--bg);
@@ -79,7 +190,6 @@
         .section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); margin-bottom: 15px; }
         .section-title { font-size: clamp(30px, 5vw, 44px); margin-bottom: 30px; color: #fff; }
 
-        /* СТАТИСТИКА */
         .stats-grid {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
             background: var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 40px;
@@ -88,7 +198,6 @@
         .stat-num { font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; color: var(--gold); font-weight: 700; }
         .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 
-        /* КАРТОЧКИ РАЗДЕЛОВ */
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .card {
             background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
@@ -102,7 +211,6 @@
         .card-link { display: inline-block; font-size: 13px; font-weight: 500; color: var(--gold); text-decoration: none; margin-top: auto; }
         .card:hover .card-link { text-decoration: underline; }
 
-        /* ПОЧЕМУ ЭТОТ УМК */
         .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .why-item {
             background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
@@ -113,7 +221,6 @@
         .why-item h4 { color: #fff; font-size: 1.05rem; margin-bottom: 8px; }
         .why-item p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
 
-        /* ПРЕВЬЮ */
         .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .preview-card {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
@@ -132,7 +239,6 @@
         .preview-body h4 { color: #fff; font-size: 1rem; margin-bottom: 6px; }
         .preview-body p { color: var(--text-muted); font-size: 13px; line-height: 1.5; }
 
-        /* С ЧЕГО НАЧАТЬ */
         .start-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .start-card {
             background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
@@ -144,78 +250,36 @@
         .start-card h4 { color: #fff; font-size: 1.05rem; margin-bottom: 6px; }
         .start-card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
 
-        /* === ТЕХНОЛОГИИ — ГРУППЫ === */
-        .tech-groups {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+        .tech-grid { 
+            display: flex; 
+            gap: 16px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
         }
-        .tech-group {
-            background: var(--bg-card);
+        .tech-item {
+            background: rgba(255,255,255,0.02);
             border: 1px solid var(--border);
+            padding: 16px 24px;
             border-radius: 10px;
-            padding: 24px 20px 20px;
-            transition: all 0.3s;
-        }
-        .tech-group:hover {
-            border-color: var(--gold);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        }
-        .tech-group-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 12px;
-            margin-bottom: 16px;
-        }
-        .tech-group-header .group-icon {
-            font-size: 28px;
-        }
-        .tech-group-header .group-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-            letter-spacing: 0.3px;
-        }
-        .tech-group-header .group-sub {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-left: auto;
-            background: rgba(212,160,23,0.1);
-            padding: 2px 10px;
-            border-radius: 12px;
-            border: 1px solid rgba(212,160,23,0.2);
-        }
-        .tech-item-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-        .tech-item-group:last-child {
-            border-bottom: none;
-        }
-        .tech-item-group .ti-icon {
-            font-size: 22px;
-            width: 32px;
             text-align: center;
-            flex-shrink: 0;
-        }
-        .tech-item-group .ti-name {
             font-size: 14px;
-            font-weight: 500;
-            color: #e6edf3;
-            min-width: 90px;
-        }
-        .tech-item-group .ti-desc {
-            font-size: 12px;
             color: var(--text-muted);
-            line-height: 1.3;
+            transition: all 0.3s;
+            min-width: 110px;
+            flex: 0 1 auto;
+        }
+        .tech-item:hover { 
+            border-color: var(--gold); 
+            color: #fff; 
+            background: rgba(212, 160, 23, 0.05);
+            transform: translateY(-2px);
+        }
+        .tech-item .tech-icon { 
+            font-size: 48px; 
+            display: block; 
+            margin-bottom: 6px; 
         }
 
-        /* ИНТЕРАКТИВНЫЙ БЛОК */
         .interactive-block {
             background: var(--bg-card); border: 1px solid var(--gold); border-radius: 8px;
             padding: 50px; text-align: center;
@@ -224,7 +288,6 @@
         .interactive-block p { color: var(--text-muted); margin-bottom: 20px; max-width: 600px; margin-left: auto; margin-right: auto; }
         .interactive-icons { font-size: 40px; margin-bottom: 20px; display: flex; gap: 20px; justify-content: center; }
 
-        /* АВТОР */
         .author-block {
             background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold);
             border-radius: 6px; padding: 40px;
@@ -240,7 +303,6 @@
             font-style: italic; font-size: 17px; color: var(--text-muted); margin-top: 15px;
         }
 
-        /* ФУТЕР */
         .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; }
         .footer-grid h4 { color: #fff; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
         .footer-grid a { display: block; color: var(--text-muted); text-decoration: none; font-size: 13px; margin-bottom: 5px; transition: color 0.3s; }
@@ -257,9 +319,18 @@
         #backToTop.show { opacity: 1; visibility: visible; }
         #backToTop:hover { background: var(--gold-hover); }
 
-        /* АДАПТИВНОСТЬ */
         @media (max-width: 992px) {
-            .tech-groups { grid-template-columns: repeat(2, 1fr); }
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+            .hero-subtitle { max-width: 100%; }
+            .hero-stats { justify-content: center; }
+            .hero-actions { justify-content: center; }
+            .hero-visual { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+            .hero-emblem { width: 120px; height: 120px; }
+            .hero-author { text-align: center; }
         }
         @media (max-width: 900px) {
             .cards-grid, .why-grid, .preview-grid, .start-grid { grid-template-columns: repeat(2, 1fr); }
@@ -267,15 +338,18 @@
             .author-grid { grid-template-columns: 1fr; text-align: center; }
             .author-photo { margin: 0 auto; }
         }
-        @media (max-width: 768px) {
-            .tech-groups { grid-template-columns: 1fr; }
-        }
         @media (max-width: 576px) {
             .cards-grid, .why-grid, .preview-grid, .start-grid, .stats-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
             .hero-title { font-size: 38px; }
+            .hero-stats { gap: 20px; flex-wrap: wrap; }
+            .hero-stat-num { font-size: 24px; }
+            .hero-principles { flex-wrap: wrap; justify-content: center; }
+            .hero-emblem { width: 90px; height: 90px; }
+            .btn-large { padding: 14px 28px; font-size: 15px; }
             section { padding: 60px 0; }
-            .interactive-block { padding: 30px 20px; }
+            .tech-item { min-width: 80px; padding: 12px 16px; }
+            .tech-item .tech-icon { font-size: 36px; }
         }
     </style>
 </head>
@@ -298,21 +372,71 @@
         </div>
     </nav>
 
-    <!-- ===== HERO ===== -->
     <header class="hero">
         <div class="container">
-            <div class="hero-label fade-up">УО «Гродненский государственный колледж строительных технологий»</div>
-            <h1 class="hero-title fade-up">Математика<br><span class="gold">строит будущее</span></h1>
-            <p class="hero-subtitle fade-up">Единственный в Беларуси УМК, где каждая тема математики привязана к строительной профессии. Трёхуровневая система, QR-коды, аудио-озвучка, таймеры, 3D-модели.</p>
-            <div class="hero-formula fade-up" id="heroFormula"></div>
-            <div class="hero-actions fade-up">
-                <a href="#sections" class="btn-gold">К разделам ↓</a>
-                <a href="teoreticheskij.html" class="btn-outline">Начать учиться →</a>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1 class="hero-title fade-up">
+                        Математика<br>
+                        <span class="gold">строит будущее</span>
+                    </h1>
+                    <p class="hero-subtitle fade-up">
+                        Интерактивный учебно-методический комплекс для учреждений<br>
+                        среднего специального образования строительного профиля
+                    </p>
+                    <div class="hero-stats fade-up">
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">240</span>
+                            <span class="hero-stat-label">учебных часов</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">28</span>
+                            <span class="hero-stat-label">практических работ</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">9</span>
+                            <span class="hero-stat-label">опорных конспектов</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions fade-up">
+                        <a href="#sections" class="btn-gold btn-large">К разделам ↓</a>
+                        <a href="teoreticheskij.html" class="btn-outline btn-large">Начать учиться →</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual fade-up">
+                    <div class="hero-emblem">
+                        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="10" y="10" width="100" height="100" rx="16" fill="#161b22" stroke="#D4A017" stroke-width="4"/>
+                            <text x="60" y="78" text-anchor="middle" font-size="52" font-family="Georgia, serif" font-weight="bold" fill="#D4A017">М</text>
+                            <text x="60" y="96" text-anchor="middle" font-size="11" fill="#8b949e" letter-spacing="2">УМК</text>
+                        </svg>
+                    </div>
+                    <div class="hero-principles">
+                        <div class="hero-principle">
+                            <span class="principle-icon">📖</span>
+                            <span class="principle-text">Теория</span>
+                        </div>
+                        <div class="hero-principle">
+                            <span class="principle-icon">🔧</span>
+                            <span class="principle-text">Практика</span>
+                        </div>
+                        <div class="hero-principle">
+                            <span class="principle-icon">📝</span>
+                            <span class="principle-text">Контроль</span>
+                        </div>
+                    </div>
+                    <div class="hero-author">
+                        <span>Автор:</span>
+                        <strong>Станулевич А.В.</strong>
+                        <span>· Гродненский колледж строительных технологий</span>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="hero-line"></div>
     </header>
 
-    <!-- ===== СТАТИСТИКА ===== -->
     <section id="stats">
         <div class="container">
             <div class="stats-grid fade-up">
@@ -324,7 +448,6 @@
         </div>
     </section>
 
-    <!-- ===== С ЧЕГО НАЧАТЬ ===== -->
     <section id="start">
         <div class="container">
             <div class="section-label fade-up">С чего начать</div>
@@ -349,7 +472,6 @@
         </div>
     </section>
 
-    <!-- ===== ПРЕВЬЮ ===== -->
     <section id="preview">
         <div class="container">
             <div class="section-label fade-up">Посмотрите как это работает</div>
@@ -371,7 +493,6 @@
         </div>
     </section>
 
-    <!-- ===== РАЗДЕЛЫ УМК ===== -->
     <section id="sections">
         <div class="container">
             <div class="section-label fade-up">Структура УМК</div>
@@ -399,7 +520,6 @@
         </div>
     </section>
 
-    <!-- ===== ПОЧЕМУ ЭТОТ УМК ===== -->
     <section id="why">
         <div class="container">
             <div class="section-label fade-up">Почему этот УМК</div>
@@ -439,110 +559,21 @@
         </div>
     </section>
 
-    <!-- ===== ТЕХНОЛОГИИ (ГРУППЫ) ===== -->
     <section id="tech">
         <div class="container">
             <div class="section-label fade-up">Технологии</div>
             <h2 class="section-title fade-up">На чём построен УМК</h2>
-            <div class="tech-groups fade-up">
-
-                <!-- ГРУППА 1: ФРОНТЕНД -->
-                <div class="tech-group">
-                    <div class="tech-group-header">
-                        <span class="group-icon">🖥️</span>
-                        <span class="group-title">Фронтенд</span>
-                        <span class="group-sub">UI/UX</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">📐</span>
-                        <span class="ti-name">GeoGebra</span>
-                        <span class="ti-desc">3D-модели и построения</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">📊</span>
-                        <span class="ti-name">Desmos</span>
-                        <span class="ti-desc">Графики с анимацией</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">📝</span>
-                        <span class="ti-name">KaTeX</span>
-                        <span class="ti-desc">Рендеринг формул</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">🎨</span>
-                        <span class="ti-name">Bootstrap 5</span>
-                        <span class="ti-desc">Адаптивная вёрстка</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">🔗</span>
-                        <span class="ti-name">Font Awesome</span>
-                        <span class="ti-desc">Иконки интерфейса</span>
-                    </div>
-                </div>
-
-                <!-- ГРУППА 2: БЭКЕНД И ИНФРАСТРУКТУРА -->
-                <div class="tech-group">
-                    <div class="tech-group-header">
-                        <span class="group-icon">⚙️</span>
-                        <span class="group-title">Бэкенд и инфраструктура</span>
-                        <span class="group-sub">DevOps</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">🌐</span>
-                        <span class="ti-name">GitHub Pages</span>
-                        <span class="ti-desc">Хостинг и деплой</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">🔄</span>
-                        <span class="ti-name">GitHub Actions</span>
-                        <span class="ti-desc">CI/CD автоматизация</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">🐍</span>
-                        <span class="ti-name">Python</span>
-                        <span class="ti-desc">Скрипты и генерация PDF</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">📄</span>
-                        <span class="ti-name">LaTeX</span>
-                        <span class="ti-desc">PDF-версии разделов</span>
-                    </div>
-                </div>
-
-                <!-- ГРУППА 3: ФУНКЦИОНАЛ И ИНТЕРАКТИВНОСТЬ -->
-                <div class="tech-group">
-                    <div class="tech-group-header">
-                        <span class="group-icon">🧩</span>
-                        <span class="group-title">Функционал и интерактивность</span>
-                        <span class="group-sub">JS + API</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">⚡</span>
-                        <span class="ti-name">Vanilla JS</span>
-                        <span class="ti-desc">Таймеры, аудио, прогресс</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">📱</span>
-                        <span class="ti-name">QR API</span>
-                        <span class="ti-desc">Генерация QR-кодов</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">🔊</span>
-                        <span class="ti-name">Web Speech API</span>
-                        <span class="ti-desc">Аудио-озвучка текстов</span>
-                    </div>
-                    <div class="tech-item-group">
-                        <span class="ti-icon">📦</span>
-                        <span class="ti-name">localStorage</span>
-                        <span class="ti-desc">Прогресс и настройки</span>
-                    </div>
-                </div>
-
+            <div class="tech-grid fade-up">
+                <div class="tech-item"><span class="tech-icon">📐</span>GeoGebra</div>
+                <div class="tech-item"><span class="tech-icon">📊</span>Desmos</div>
+                <div class="tech-item"><span class="tech-icon">📝</span>KaTeX</div>
+                <div class="tech-item"><span class="tech-icon">🌐</span>GitHub Pages</div>
+                <div class="tech-item"><span class="tech-icon">🎨</span>Bootstrap 5</div>
+                <div class="tech-item"><span class="tech-icon">⚡</span>Vanilla JS</div>
             </div>
         </div>
     </section>
 
-    <!-- ===== ИНТЕРАКТИВНЫЙ БЛОК ===== -->
     <section id="interactive">
         <div class="container">
             <div class="interactive-block fade-up">
@@ -554,7 +585,6 @@
         </div>
     </section>
 
-    <!-- ===== АВТОР ===== -->
     <section id="about">
         <div class="container">
             <div class="section-label fade-up">Автор УМК</div>
@@ -577,7 +607,6 @@
         </div>
     </section>
 
-    <!-- ===== ФУТЕР ===== -->
     <footer style="background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 0 0 0; text-align: center; font-size: 14px;">
         <div class="container">
             <div class="footer-grid">
@@ -627,10 +656,12 @@
         const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
         const f = formulas[dayOfYear % formulas.length];
         const el = document.getElementById('heroFormula');
-        el.innerHTML = '📅 Формула дня: <span data-katex="' + f.latex + '"></span> — «' + f.topic + '»';
-        katex.render(f.latex, el.querySelector('[data-katex]'), { throwOnError: false });
+        if (el) {
+            el.innerHTML = '📅 Формула дня: <span data-katex="' + f.latex + '"></span> — «' + f.topic + '»';
+            katex.render(f.latex, el.querySelector('[data-katex]'), { throwOnError: false });
+        }
 
-        // Счётчик посещений (localStorage)
+        // Счётчик посещений
         (function() {
             let visits = localStorage.getItem('umk_visits');
             if (visits === null) {
