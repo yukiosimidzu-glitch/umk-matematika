@@ -21,13 +21,19 @@
 
         .content { padding: 60px 0; }
 
-        .progress-bar-wrap { background: var(--bg-card); border: 1px solid var(--border); padding: 20px 28px; margin-bottom: 35px; border-radius: 10px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .progress-bar-wrap { background: var(--bg-card); border: 1px solid var(--border); padding: 20px 28px; margin-bottom: 20px; border-radius: 10px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
         .progress-bar-wrap .label { color: #fff; font-size: 14px; white-space: nowrap; }
         .progress-bar-outer { flex: 1; min-width: 200px; height: 12px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; }
         .progress-bar-inner { height: 100%; background: var(--gold); border-radius: 6px; transition: width 0.5s; width: 0%; }
         .progress-bar-wrap .percent { color: var(--gold); font-size: 14px; font-weight: 600; white-space: nowrap; }
         .btn-reset-progress { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.3s; }
         .btn-reset-progress:hover { border-color: var(--red); color: var(--red); }
+
+        .mode-switch { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; background: var(--bg-card); border: 1px solid var(--border); padding: 12px 20px; border-radius: 10px; }
+        .mode-label { color: var(--text-muted); font-size: 14px; }
+        .mode-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.3s; }
+        .mode-btn.active { background: var(--gold); color: var(--bg); border-color: var(--gold); font-weight: 600; }
+        .mode-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
 
         .topic-group { background: var(--bg-card); border: 1px solid var(--border); margin-bottom: 20px; border-radius: 8px; padding: 0; overflow: hidden; }
         .group-header { display: flex; justify-content: space-between; align-items: center; padding: 24px 28px; cursor: pointer; transition: background 0.3s; user-select: none; }
@@ -43,7 +49,7 @@
 
         .topics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 
-        .topic-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 20px 16px; transition: all 0.3s; cursor: pointer; text-align: center; border-radius: 6px; display: flex; flex-direction: column; align-items: center; }
+        .topic-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 20px 16px; transition: all 0.3s; cursor: pointer; text-align: center; border-radius: 6px; display: flex; flex-direction: column; align-items: center; position: relative; }
         .topic-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
         .topic-card.level-f { border-left-color: var(--level-f); }
         .topic-card.level-w { border-left-color: var(--level-w); }
@@ -58,17 +64,19 @@
         .topic-status.not-done:hover { background: rgba(255,107,107,0.2); }
         .topic-status.done { background: rgba(74,222,128,0.1); color: var(--green); border-color: rgba(74,222,128,0.3); }
         .topic-status.done:hover { background: rgba(74,222,128,0.2); }
-        .level-badge { display: inline-block; padding: 3px 10px; font-size: 11px; font-weight: 600; border-radius: 10px; }
-        .level-badge-f { background: #0e3a1f; color: #4ade80; }
-        .level-badge-w { background: #1e3a5f; color: #60a5fa; }
-        .level-badge-r { background: #4c3a1f; color: #fbbf24; }
+
+        .topic-preview { display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #1a1f2b; border: 1px solid var(--gold); padding: 12px 16px; border-radius: 8px; font-size: 13px; color: var(--text-muted); white-space: nowrap; z-index: 10; margin-bottom: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); max-width: 300px; overflow: hidden; text-overflow: ellipsis; }
+        .topic-card:hover .topic-preview { display: block; }
 
         .modal-content { background: var(--bg-card); border: 1px solid var(--border); }
         .modal-header { border-bottom: 1px solid var(--border); }
         .modal-title { color: #fff; font-family: 'Playfair Display', serif; }
         .btn-close { filter: invert(1); }
-        .modal-body { padding: 0; }
-        .modal-body iframe { width: 100%; height: 75vh; border: none; }
+        .modal-body { padding: 0; position: relative; }
+        .modal-body iframe { width: 100%; height: 70vh; border: none; }
+        .timer-bar { background: rgba(212,160,23,0.1); border-bottom: 1px solid var(--gold); padding: 8px 16px; color: var(--gold); font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+        .timer-bar .timer-reset { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 2px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; }
+        .timer-bar .timer-reset:hover { background: var(--gold); color: var(--bg); }
 
         .badge { display: inline-block; background: var(--gold); color: var(--bg); padding: 5px 14px; font-size: 13px; font-weight: 600; border-radius: 4px; }
 
@@ -128,6 +136,12 @@
                 <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar"></div></div>
                 <span class="percent" id="progressPercent">0/28 (0%)</span>
                 <button class="btn-reset-progress" onclick="resetProgress()">Сбросить</button>
+            </div>
+
+            <div class="mode-switch">
+                <span class="mode-label">Режим:</span>
+                <button class="mode-btn active" id="modeFull" onclick="setMode('full')">📖 С ответами</button>
+                <button class="mode-btn" id="modeNosol" onclick="setMode('nosol')">📝 Без ответов</button>
             </div>
 
             <div class="topic-group open">
@@ -266,6 +280,14 @@
 
         function toggleGroup(header) { header.parentElement.classList.toggle('open'); }
 
+        let currentMode = 'full';
+        function setMode(mode) {
+            currentMode = mode;
+            document.getElementById('modeFull').classList.toggle('active', mode === 'full');
+            document.getElementById('modeNosol').classList.toggle('active', mode === 'nosol');
+            renderWorks();
+        }
+
         const groups = {
             'group-trig': [1,2,3,4], 'group-stereo': [5], 'group-roots': [6,7], 'group-deriv': [8,9,10],
             'group-parperp': [11,12,13,14,15], 'group-powers': [16,17,18], 'group-poly': [19,20,21,22],
@@ -290,9 +312,39 @@
         };
 
         const levelNames = { f: 'Фундамент', w: 'Стены', r: 'Кровля' };
-        const levelBadgeClass = { f: 'level-badge-f', w: 'level-badge-w', r: 'level-badge-r' };
 
-               function renderWorks() {
+        const previews = {
+            1: 'Переведите 30° в радианы.',
+            2: 'Переведите 90° в радианы.',
+            3: 'Упростите выражение, используя тождество.',
+            4: 'Решите простейшее тригонометрическое уравнение.',
+            5: 'Через три точки проведите плоскость.',
+            6: 'Вычислите значение корня n-й степени.',
+            7: 'Решите иррациональное уравнение.',
+            8: 'Найдите производную степенной функции.',
+            9: 'Составьте уравнение касательной к графику.',
+            10: 'Найдите точку максимума функции.',
+            11: 'Докажите параллельность прямых.',
+            12: 'Докажите перпендикулярность прямой и плоскости.',
+            13: 'Примените теорему о трёх перпендикулярах.',
+            14: 'Найдите двугранный угол.',
+            15: 'Докажите перпендикулярность плоскостей.',
+            16: 'Вычислите значение степени с рациональным показателем.',
+            17: 'Решите показательное уравнение.',
+            18: 'Решите показательное неравенство.',
+            19: 'Найдите объём и площадь поверхности призмы.',
+            20: 'Найдите объём параллелепипеда.',
+            21: 'Найдите объём и площадь поверхности пирамиды.',
+            22: 'Найдите объём усечённой пирамиды.',
+            23: 'Вычислите логарифм по определению.',
+            24: 'Решите логарифмическое уравнение.',
+            25: 'Решите логарифмическое неравенство.',
+            26: 'Найдите площадь поверхности сферы и объём шара.',
+            27: 'Найдите объём и площадь поверхности цилиндра.',
+            28: 'Найдите объём и площадь поверхности конуса.',
+        };
+
+        function renderWorks() {
             const modalsContainer = document.getElementById('modalsContainer');
             modalsContainer.innerHTML = '';
 
@@ -307,11 +359,11 @@
                     const card = document.createElement('div');
                     card.className = 'topic-card level-' + level;
                     card.addEventListener('click', function(e) {
-                        // Если кликнули по статусу — не открываем модалку
                         if (e.target.closest('.topic-status')) return;
                         openModal(num);
                     });
                     card.innerHTML = `
+                        <div class="topic-preview">${previews[num]}</div>
                         <div class="topic-num">ПР №${num} · ${levelNames[level]}</div>
                         <div class="topic-title">${titles[num]}</div>
                         <span class="topic-status ${status}" data-num="${num}">${status === 'not-done' ? '⚪ Не сделано' : '🟢 Выполнено'}</span>
@@ -326,7 +378,11 @@
                     modal.innerHTML = `
                         <div class="modal-dialog modal-lg"><div class="modal-content">
                             <div class="modal-header"><h3 class="modal-title">ПР №${num}: ${titles[num]}</h3><button class="btn-close" data-bs-dismiss="modal"></button></div>
-                            <div class="modal-body"><iframe src="pr/${numStr}.html"></iframe></div>
+                            <div class="timer-bar">
+                                <span>⏱️ Время: <strong id="timer${num}">00:00</strong></span>
+                                <button class="timer-reset" onclick="resetTimer(${num})">Сброс</button>
+                            </div>
+                            <div class="modal-body"><iframe src="pr/${numStr}.html${currentMode === 'nosol' ? '?nosol=1' : ''}"></iframe></div>
                         </div></div>
                     `;
                     modalsContainer.appendChild(modal);
@@ -343,12 +399,38 @@
             updateProgress();
         }
 
+        const timers = {};
         function openModal(num) {
             const modal = document.getElementById('modal' + num);
             if (modal) {
                 const bsModal = new bootstrap.Modal(modal);
                 bsModal.show();
+                startTimer(num);
+                modal.addEventListener('hidden.bs.modal', function() {
+                    stopTimer(num);
+                }, { once: true });
             }
+        }
+
+        function startTimer(num) {
+            if (timers[num]) return;
+            let seconds = 0;
+            const el = document.getElementById('timer' + num);
+            timers[num] = setInterval(() => {
+                seconds++;
+                const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const s = (seconds % 60).toString().padStart(2, '0');
+                if (el) el.textContent = m + ':' + s;
+            }, 1000);
+        }
+        function stopTimer(num) {
+            if (timers[num]) { clearInterval(timers[num]); delete timers[num]; }
+        }
+        function resetTimer(num) {
+            stopTimer(num);
+            const el = document.getElementById('timer' + num);
+            if (el) el.textContent = '00:00';
+            startTimer(num);
         }
 
         function getStatus(num) { return localStorage.getItem('pr_status_' + num) || 'not-done'; }
