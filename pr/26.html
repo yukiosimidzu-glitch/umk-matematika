@@ -155,6 +155,10 @@
             var el = document.getElementById(id);
             el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
         }
+        if (window.location.search.includes('nosol=1')) {
+            document.querySelectorAll('.solution-block, .answer').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.btn-outline-gold').forEach(el => el.style.display = 'none');
+        }
     </script>
 </body>
 </html>
