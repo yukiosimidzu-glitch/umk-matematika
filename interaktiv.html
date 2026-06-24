@@ -333,7 +333,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== КАРТОЧКИ МОДЕЛЕЙ ===== */
+        /* ===== КАРТОЧКИ ===== */
         .models-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -428,6 +428,7 @@
             border-radius: 12px;
             padding: 24px 28px;
             transition: all 0.3s;
+            margin-bottom: 20px;
         }
         .calculator-card:hover {
             border-color: var(--gold);
@@ -509,11 +510,114 @@
             border-top: 1px solid var(--border);
             padding-top: 10px;
         }
-        .calc-history .history-item {
+
+        /* ===== ТРЕНАЖЁРЫ (SVG-ГРАФИКИ) ===== */
+        .trainer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 28px;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        .trainer-card:hover {
+            border-color: var(--gold);
+        }
+        .trainer-card h4 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        .trainer-card .trainer-desc {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        .trainer-controls {
             display: flex;
-            justify-content: space-between;
-            padding: 2px 0;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        .trainer-controls label {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .trainer-controls input[type="range"] {
+            width: 120px;
+            accent-color: var(--gold);
+            background: var(--bg);
+        }
+        .trainer-controls input[type="number"] {
+            width: 60px;
+            padding: 4px 8px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-size: 13px;
+        }
+        .trainer-controls input[type="number"]:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .graph-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            padding: 12px;
+            position: relative;
+        }
+        .graph-container svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .graph-point {
+            cursor: pointer;
+            transition: r 0.2s;
+        }
+        .graph-point:hover {
+            r: 6;
+        }
+        .graph-tooltip {
+            position: absolute;
+            background: var(--bg-card);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 4px 10px;
             font-size: 12px;
+            color: var(--text);
+            pointer-events: none;
+            display: none;
+            z-index: 10;
+        }
+        .graph-legend {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .graph-legend .item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .graph-legend .color-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
         }
 
         /* ===== АДАПТИВНОСТЬ ===== */
@@ -581,27 +685,22 @@
             .calc-row {
                 grid-template-columns: 1fr;
             }
-            .hero-actions {
-                flex-direction: column;
-                width: 100%;
-            }
-            .hero-actions .btn-gold,
-            .hero-actions .btn-outline {
-                text-align: center;
-                width: 100%;
-            }
-            .progress-card .progress-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-        @media (max-width: 480px) {
-            .calculator-card {
-                padding: 16px;
-            }
             .calc-result {
                 flex-direction: column;
                 text-align: center;
+            }
+            .trainer-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .graph-container {
+                max-width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+            .calculator-card,
+            .trainer-card {
+                padding: 16px;
             }
         }
     </style>
@@ -645,7 +744,7 @@
                 </button>
                 <button class="sidebar-item" data-tab="trainers">
                     <span class="icon">🎮</span> Тренажёры
-                    <span class="badge">7</span>
+                    <span class="badge">4</span>
                 </button>
                 <button class="sidebar-item" data-tab="labs">
                     <span class="icon">🔬</span> Лаборатории
@@ -682,7 +781,7 @@
                 <div class="hero-stats-inline">
                     <div class="hero-stat"><span class="num">24</span><span class="label">интерактивные модели</span></div>
                     <div class="hero-stat"><span class="num">8</span><span class="label">калькуляторов</span></div>
-                    <div class="hero-stat"><span class="num">7</span><span class="label">тренажёров</span></div>
+                    <div class="hero-stat"><span class="num">4</span><span class="label">тренажёра с графиками</span></div>
                     <div class="hero-stat"><span class="num">100%</span><span class="label">бесплатно</span></div>
                 </div>
                 <div class="hero-actions">
@@ -719,15 +818,13 @@
             <!-- Калькуляторы -->
             <div id="tabCalculators" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:16px;">🧮 Калькуляторы строителя</h3>
-                <div id="calculatorsContainer">
-                    <!-- Калькуляторы будут добавлены через JS -->
-                </div>
+                <div id="calculatorsContainer"></div>
             </div>
 
             <!-- Тренажёры -->
             <div id="tabTrainers" class="tab-content">
-                <h3 style="color:#fff;margin-bottom:16px;">🎮 Тренажёры</h3>
-                <div class="models-grid" id="trainersGrid"></div>
+                <h3 style="color:#fff;margin-bottom:16px;">🎮 Тренажёры с графиками</h3>
+                <div id="trainersContainer"></div>
             </div>
 
             <!-- Лаборатории -->
@@ -785,23 +882,16 @@
             { id: 4, tab: 'geogebra', icon: '🧊', title: 'Пирамида в 3D', desc: 'Вращайте пирамиду, изучайте её элементы.', tags: ['3D', 'Пирамида'] },
             { id: 5, tab: 'geogebra', icon: '📈', title: 'Тригонометрический круг', desc: 'Интерактивный круг для изучения тригонометрических функций.', tags: ['Тригонометрия'] },
             { id: 6, tab: 'geogebra', icon: '📐', title: 'Теорема Пифагора', desc: 'Визуальное доказательство теоремы Пифагора.', tags: ['Теорема', 'Геометрия'] },
-            { id: 7, tab: 'trainers', icon: '📈', title: 'График y = x²', desc: 'Изучите свойства параболы в интерактивном режиме.', tags: ['Графики', 'Функции'] },
-            { id: 8, tab: 'trainers', icon: '📈', title: 'График sin(x)', desc: 'Изучите синусоиду в интерактивном режиме.', tags: ['Графики', 'Тригонометрия'] },
-            { id: 9, tab: 'trainers', icon: '📈', title: 'График 2ˣ', desc: 'Изучите показательную функцию в интерактивном режиме.', tags: ['Графики', 'Показательная'] },
-            { id: 10, tab: 'trainers', icon: '📈', title: 'График log₂x', desc: 'Изучите логарифмическую функцию в интерактивном режиме.', tags: ['Графики', 'Логарифмы'] },
-            { id: 11, tab: 'trainers', icon: '🧩', title: 'Уравнения с параметром', desc: 'Решайте уравнения с параметром и проверяйте ответы.', tags: ['Уравнения', 'Параметры'] },
-            { id: 12, tab: 'trainers', icon: '🧩', title: 'Системы уравнений', desc: 'Решайте системы уравнений в интерактивном режиме.', tags: ['Уравнения', 'Системы'] },
-            { id: 13, tab: 'trainers', icon: '🧩', title: 'Неравенства', desc: 'Решайте неравенства в интерактивном режиме.', tags: ['Неравенства'] },
-            { id: 14, tab: 'labs', icon: '🔬', title: 'Свойства корней', desc: 'Интерактивная лаборатория по изучению свойств корней.', tags: ['Корни', 'Алгебра'] },
-            { id: 15, tab: 'labs', icon: '🔬', title: 'Свойства логарифмов', desc: 'Интерактивная лаборатория по изучению свойств логарифмов.', tags: ['Логарифмы', 'Алгебра'] },
-            { id: 16, tab: 'labs', icon: '🔬', title: 'Тригонометрические тождества', desc: 'Интерактивная лаборатория по изучению тригонометрических тождеств.', tags: ['Тригонометрия'] },
-            { id: 17, tab: 'labs', icon: '🔬', title: 'Производная функции', desc: 'Интерактивная лаборатория по изучению производной.', tags: ['Производная', 'Анализ'] },
-            { id: 18, tab: 'map', icon: '🗺️', title: 'Карта строительной площадки', desc: 'Интерактивная карта с математическими задачами.', tags: ['Карта', 'Строительство'] },
-            { id: 19, tab: 'achievements', icon: '🏅', title: 'Геометр', desc: 'Изучите все геометрические модели.', tags: ['Достижение'] },
-            { id: 20, tab: 'achievements', icon: '🏅', title: 'Строитель', desc: 'Используйте все строительные калькуляторы.', tags: ['Достижение'] },
-            { id: 21, tab: 'achievements', icon: '🏅', title: 'Мастер функций', desc: 'Изучите все графические тренажёры.', tags: ['Достижение'] },
-            { id: 22, tab: 'achievements', icon: '🏅', title: 'Эксперт по логарифмам', desc: 'Изучите все лаборатории по логарифмам.', tags: ['Достижение'] },
-            { id: 23, tab: 'achievements', icon: '🏅', title: 'Без ошибок', desc: 'Пройдите все тесты без ошибок.', tags: ['Достижение'] },
+            { id: 7, tab: 'labs', icon: '🔬', title: 'Свойства корней', desc: 'Интерактивная лаборатория по изучению свойств корней.', tags: ['Корни', 'Алгебра'] },
+            { id: 8, tab: 'labs', icon: '🔬', title: 'Свойства логарифмов', desc: 'Интерактивная лаборатория по изучению свойств логарифмов.', tags: ['Логарифмы', 'Алгебра'] },
+            { id: 9, tab: 'labs', icon: '🔬', title: 'Тригонометрические тождества', desc: 'Интерактивная лаборатория по изучению тригонометрических тождеств.', tags: ['Тригонометрия'] },
+            { id: 10, tab: 'labs', icon: '🔬', title: 'Производная функции', desc: 'Интерактивная лаборатория по изучению производной.', tags: ['Производная', 'Анализ'] },
+            { id: 11, tab: 'map', icon: '🗺️', title: 'Карта строительной площадки', desc: 'Интерактивная карта с математическими задачами.', tags: ['Карта', 'Строительство'] },
+            { id: 12, tab: 'achievements', icon: '🏅', title: 'Геометр', desc: 'Изучите все геометрические модели.', tags: ['Достижение'] },
+            { id: 13, tab: 'achievements', icon: '🏅', title: 'Строитель', desc: 'Используйте все строительные калькуляторы.', tags: ['Достижение'] },
+            { id: 14, tab: 'achievements', icon: '🏅', title: 'Мастер функций', desc: 'Изучите все графические тренажёры.', tags: ['Достижение'] },
+            { id: 15, tab: 'achievements', icon: '🏅', title: 'Эксперт по логарифмам', desc: 'Изучите все лаборатории по логарифмам.', tags: ['Достижение'] },
+            { id: 16, tab: 'achievements', icon: '🏅', title: 'Без ошибок', desc: 'Пройдите все тесты без ошибок.', tags: ['Достижение'] },
         ];
 
         // ==========================================
@@ -913,6 +1003,64 @@
         }];
 
         // ==========================================
+        // ТРЕНАЖЁРЫ (SVG-ГРАФИКИ)
+        // ==========================================
+        const trainers = [{
+            id: 'trainer1',
+            title: '📈 График y = x²',
+            desc: 'Изучите свойства параболы. Меняйте коэффициент a и смещение.',
+            fn: (x, a, b, c) => a * x * x + b * x + c,
+            params: [
+                { name: 'a', label: 'a', min: -3, max: 3, step: 0.1, default: 1 },
+                { name: 'b', label: 'b', min: -3, max: 3, step: 0.1, default: 0 },
+                { name: 'c', label: 'c', min: -5, max: 5, step: 0.1, default: 0 }
+            ],
+            xMin: -5,
+            xMax: 5,
+            color: '#D4A017'
+        }, {
+            id: 'trainer2',
+            title: '📈 График sin(x)',
+            desc: 'Изучите синусоиду. Меняйте амплитуду, частоту и фазу.',
+            fn: (x, A, f, p) => A * Math.sin(f * x + p),
+            params: [
+                { name: 'A', label: 'A (амплитуда)', min: 0.5, max: 3, step: 0.1, default: 1 },
+                { name: 'f', label: 'f (частота)', min: 0.5, max: 3, step: 0.1, default: 1 },
+                { name: 'p', label: 'φ (фаза)', min: 0, max: 6.28, step: 0.1, default: 0 }
+            ],
+            xMin: -6.28,
+            xMax: 6.28,
+            color: '#4ade80'
+        }, {
+            id: 'trainer3',
+            title: '📈 График 2ˣ',
+            desc: 'Изучите показательную функцию. Меняйте основание и смещение.',
+            fn: (x, base, shift) => Math.pow(base, x) + shift,
+            params: [
+                { name: 'base', label: 'Основание', min: 1.1, max: 5, step: 0.1, default: 2 },
+                { name: 'shift', label: 'Смещение', min: -5, max: 5, step: 0.1, default: 0 }
+            ],
+            xMin: -4,
+            xMax: 4,
+            color: '#60a5fa'
+        }, {
+            id: 'trainer4',
+            title: '📈 График log₂(x)',
+            desc: 'Изучите логарифмическую функцию. Меняйте основание и смещение.',
+            fn: (x, base, shift) => {
+                if (x <= 0) return null;
+                return Math.log(x) / Math.log(base) + shift;
+            },
+            params: [
+                { name: 'base', label: 'Основание', min: 1.1, max: 5, step: 0.1, default: 2 },
+                { name: 'shift', label: 'Смещение', min: -5, max: 5, step: 0.1, default: 0 }
+            ],
+            xMin: 0.1,
+            xMax: 10,
+            color: '#f472b6'
+        }];
+
+        // ==========================================
         // СОСТОЯНИЕ
         // ==========================================
         let favorites = JSON.parse(localStorage.getItem('interaktiv_favorites')) || [];
@@ -956,7 +1104,7 @@
             const container = document.getElementById('calculatorsContainer');
             if (!container) return;
             container.innerHTML = calculators.map(calc => `
-                <div class="calculator-card" style="margin-bottom:20px;" id="calc-${calc.id}">
+                <div class="calculator-card" id="calc-${calc.id}">
                     <h4>${calc.title}</h4>
                     <p class="calc-desc">${calc.desc}</p>
                     <div class="calc-row">
@@ -980,28 +1128,22 @@
                     <div class="calc-history" id="${calc.id}_history"></div>
                 </div>
             `).join('');
-
-            // Инициализация калькуляторов
             calculators.forEach(calc => updateCalc(calc.id));
         }
 
         function updateCalc(calcId) {
             const calc = calculators.find(c => c.id === calcId);
             if (!calc) return;
-
             const values = {};
             calc.fields.forEach(f => {
                 const el = document.getElementById(`${calcId}_${f.name}`);
                 values[f.name] = f.type === 'select' ? el.value : parseFloat(el.value) || 0;
             });
-
             let result = calc.formula(values);
             const resultEl = document.getElementById(`${calcId}_result`);
             if (resultEl) {
                 resultEl.innerHTML = `${result} <span class="unit">${calc.unit}</span>`;
             }
-
-            // Сохраняем историю
             const history = JSON.parse(localStorage.getItem(calc.historyKey)) || [];
             if (history.length > 0) {
                 const historyEl = document.getElementById(`${calcId}_history`);
@@ -1009,7 +1151,7 @@
                     const last = history[history.length - 1];
                     historyEl.innerHTML = `
                         <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">📋 Последний расчёт:</div>
-                        <div class="history-item">
+                        <div style="display:flex;justify-content:space-between;font-size:12px;">
                             <span>${last.date}</span>
                             <span style="color:var(--gold);font-weight:600;">${last.result}</span>
                         </div>
@@ -1018,13 +1160,211 @@
             }
         }
 
-        function saveHistory(calcId, result) {
-            const calc = calculators.find(c => c.id === calcId);
-            if (!calc) return;
-            const history = JSON.parse(localStorage.getItem(calc.historyKey)) || [];
-            history.push({ date: new Date().toLocaleString(), result: result });
-            if (history.length > 10) history.shift();
-            localStorage.setItem(calc.historyKey, JSON.stringify(history));
+        // ==========================================
+        // РЕНДЕР ТРЕНАЖЁРОВ (SVG-ГРАФИКИ)
+        // ==========================================
+        function renderTrainers() {
+            const container = document.getElementById('trainersContainer');
+            if (!container) return;
+            container.innerHTML = trainers.map(t => `
+                <div class="trainer-card" id="trainer-${t.id}">
+                    <h4>${t.title}</h4>
+                    <p class="trainer-desc">${t.desc}</p>
+                    <div class="trainer-controls">
+                        ${t.params.map(p => `
+                            <label>
+                                ${p.label}:
+                                <input type="range" min="${p.min}" max="${p.max}" step="${p.step}" value="${p.default}"
+                                    oninput="updateTrainer('${t.id}', '${p.name}', this.value)">
+                                <input type="number" id="${t.id}_${p.name}" value="${p.default}" step="${p.step}"
+                                    onchange="updateTrainerNum('${t.id}', '${p.name}', this.value)">
+                            </label>
+                        `).join('')}
+                        <button class="btn-sm" onclick="resetTrainer('${t.id}')" style="background:rgba(255,255,255,0.05);color:var(--text-muted);padding:4px 12px;border-radius:6px;border:1px solid var(--border);cursor:pointer;">↺ Сбросить</button>
+                    </div>
+                    <div class="graph-container" id="graph-${t.id}">
+                        <svg viewBox="0 0 600 400" id="svg-${t.id}"></svg>
+                        <div class="graph-tooltip" id="tooltip-${t.id}"></div>
+                    </div>
+                    <div class="graph-legend" id="legend-${t.id}">
+                        <div class="item">
+                            <span class="color-dot" style="background:${t.color};"></span>
+                            <span>${t.title.replace('📈 ', '')}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            trainers.forEach(t => {
+                updateTrainer(t.id);
+                // Инициализация значений
+                t.params.forEach(p => {
+                    document.getElementById(`${t.id}_${p.name}`).value = p.default;
+                });
+            });
+        }
+
+        function updateTrainer(trainerId, paramName, value) {
+            if (paramName) {
+                document.getElementById(`${trainerId}_${paramName}`).value = value;
+            }
+            drawGraph(trainerId);
+        }
+
+        function updateTrainerNum(trainerId, paramName, value) {
+            const val = parseFloat(value);
+            if (!isNaN(val)) {
+                const range = document.querySelector(`#trainer-${trainerId} input[type="range"][oninput*="${paramName}"]`);
+                if (range) range.value = val;
+                drawGraph(trainerId);
+            }
+        }
+
+        function resetTrainer(trainerId) {
+            const trainer = trainers.find(t => t.id === trainerId);
+            if (!trainer) return;
+            trainer.params.forEach(p => {
+                document.getElementById(`${trainerId}_${p.name}`).value = p.default;
+                const range = document.querySelector(`#trainer-${trainerId} input[type="range"][oninput*="${p.name}"]`);
+                if (range) range.value = p.default;
+            });
+            drawGraph(trainerId);
+        }
+
+        function drawGraph(trainerId) {
+            const trainer = trainers.find(t => t.id === trainerId);
+            if (!trainer) return;
+
+            const svg = document.getElementById(`svg-${trainerId}`);
+            if (!svg) return;
+
+            const width = 600,
+                height = 400;
+            const padding = { top: 20, right: 20, bottom: 30, left: 40 };
+            const graphW = width - padding.left - padding.right;
+            const graphH = height - padding.top - padding.bottom;
+
+            // Получаем значения параметров
+            const params = {};
+            trainer.params.forEach(p => {
+                const el = document.getElementById(`${trainerId}_${p.name}`);
+                params[p.name] = parseFloat(el ? el.value : p.default) || p.default;
+            });
+
+            // Вычисляем точки
+            const points = [];
+            const steps = 100;
+            for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+                const x = trainer.xMin + t * (trainer.xMax - trainer.xMin);
+                let y = trainer.fn(x, ...Object.values(params));
+                if (y !== null && !isNaN(y) && isFinite(y)) {
+                    points.push({ x, y });
+                }
+            }
+
+            // Находим границы Y
+            let yMin = Infinity,
+                yMax = -Infinity;
+            points.forEach(p => {
+                if (p.y < yMin) yMin = p.y;
+                if (p.y > yMax) yMax = p.y;
+            });
+            const yRange = yMax - yMin || 1;
+            const yPadding = yRange * 0.15;
+            yMin -= yPadding;
+            yMax += yPadding;
+
+            // Функции преобразования координат
+            const toSVG = (x, y) => ({
+                x: padding.left + ((x - trainer.xMin) / (trainer.xMax - trainer.xMin)) * graphW,
+                y: padding.top + graphH - ((y - yMin) / (yMax - yMin)) * graphH
+            });
+
+            // Строим путь
+            let pathD = '';
+            const svgPoints = [];
+            points.forEach(p => {
+                const sp = toSVG(p.x, p.y);
+                svgPoints.push(sp);
+                if (pathD === '') {
+                    pathD = `M ${sp.x} ${sp.y}`;
+                } else {
+                    pathD += ` L ${sp.x} ${sp.y}`;
+                }
+            });
+
+            // Создаём SVG содержимое
+            let html = '';
+
+            // Сетка
+            html += `
+                <g stroke="#30363d" stroke-width="0.5">
+                    ${[...Array(10)].map((_, i) => {
+                        const y = yMin + (i / 10) * (yMax - yMin);
+                        const sp = toSVG(0, y);
+                        return `<line x1="${padding.left}" y1="${sp.y}" x2="${width - padding.right}" y2="${sp.y}" />`;
+                    }).join('')}
+                    ${[...Array(10)].map((_, i) => {
+                        const x = trainer.xMin + (i / 10) * (trainer.xMax - trainer.xMin);
+                        const sp = toSVG(x, 0);
+                        return `<line x1="${sp.x}" y1="${padding.top}" x2="${sp.x}" y2="${height - padding.bottom}" />`;
+                    }).join('')}
+                </g>
+            `;
+
+            // Оси
+            html += `
+                <g stroke="#8b949e" stroke-width="1.5">
+                    ${trainer.xMin * trainer.xMax <= 0 ? `<line x1="${toSVG(0, 0).x}" y1="${padding.top}" x2="${toSVG(0, 0).x}" y2="${height - padding.bottom}" />` : ''}
+                    ${yMin * yMax <= 0 ? `<line x1="${padding.left}" y1="${toSVG(0, 0).y}" x2="${width - padding.right}" y2="${toSVG(0, 0).y}" />` : ''}
+                </g>
+            `;
+
+            // Подписи осей
+            html += `
+                <g fill="#8b949e" font-size="11" font-family="Roboto, sans-serif">
+                    <text x="${padding.left - 4}" y="${padding.top - 6}" text-anchor="end" dominant-baseline="bottom">${yMax.toFixed(1)}</text>
+                    <text x="${padding.left - 4}" y="${height - padding.bottom + 6}" text-anchor="end" dominant-baseline="top">${yMin.toFixed(1)}</text>
+                    <text x="${width - padding.right}" y="${height - 4}" text-anchor="end" font-size="12">x</text>
+                    <text x="${padding.left - 4}" y="${padding.top - 6}" text-anchor="end" font-size="12">y</text>
+                    ${trainer.xMin * trainer.xMax <= 0 ? `<text x="${toSVG(0, 0).x - 4}" y="${toSVG(0, 0).y + 16}" text-anchor="end" dominant-baseline="top">0</text>` : ''}
+                </g>
+            `;
+
+            // График
+            html += `
+                <path d="${pathD}" fill="none" stroke="${trainer.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            `;
+
+            // Точки с анимацией
+            let pointCircles = '';
+            svgPoints.forEach((sp, index) => {
+                if (index % 3 === 0) {
+                    pointCircles += `
+                        <circle cx="${sp.x}" cy="${sp.y}" r="3" fill="${trainer.color}" opacity="0.6"
+                            onmouseenter="showTooltip('${trainerId}', '${points[index].x.toFixed(2)}', '${points[index].y.toFixed(2)}', ${sp.x}, ${sp.y})"
+                            onmouseleave="hideTooltip('${trainerId}')" />
+                    `;
+                }
+            });
+            html += `<g class="graph-points">${pointCircles}</g>`;
+
+            svg.innerHTML = html;
+        }
+
+        function showTooltip(trainerId, x, y, svgX, svgY) {
+            const tooltip = document.getElementById(`tooltip-${trainerId}`);
+            if (!tooltip) return;
+            tooltip.style.display = 'block';
+            tooltip.style.left = (svgX - 30) + 'px';
+            tooltip.style.top = (svgY - 40) + 'px';
+            tooltip.innerHTML = `x = ${x}<br>y = ${y}`;
+        }
+
+        function hideTooltip(trainerId) {
+            const tooltip = document.getElementById(`tooltip-${trainerId}`);
+            if (!tooltip) return;
+            tooltip.style.display = 'none';
         }
 
         // ==========================================
@@ -1041,10 +1381,11 @@
 
             if (tabId === 'calculators') {
                 renderCalculators();
+            } else if (tabId === 'trainers') {
+                renderTrainers();
             } else {
                 const gridMap = {
                     geogebra: 'geogebraGrid',
-                    trainers: 'trainersGrid',
                     labs: 'labsGrid',
                     map: 'mapGrid',
                     achievements: 'achievementsGrid'
@@ -1159,13 +1500,13 @@
             this.classList.toggle('active');
             if (teacherMode) {
                 this.style.color = 'var(--gold)';
-                document.querySelectorAll('.calculator-card').forEach(el => {
+                document.querySelectorAll('.calculator-card, .trainer-card').forEach(el => {
                     el.style.borderColor = 'var(--gold)';
                 });
                 alert('👨‍🏫 Режим преподавателя включён.\n\n🔍 Будут отображаться формулы и методические комментарии.');
             } else {
                 this.style.color = '';
-                document.querySelectorAll('.calculator-card').forEach(el => {
+                document.querySelectorAll('.calculator-card, .trainer-card').forEach(el => {
                     el.style.borderColor = '';
                 });
                 alert('👨‍🏫 Режим преподавателя выключен.');
@@ -1189,7 +1530,6 @@
         function renderCurrentTab() {
             const tabMap = {
                 geogebra: 'geogebraGrid',
-                trainers: 'trainersGrid',
                 labs: 'labsGrid',
                 map: 'mapGrid',
                 achievements: 'achievementsGrid'
@@ -1204,17 +1544,20 @@
         // ИНИЦИАЛИЗАЦИЯ
         // ==========================================
         renderCards('geogebra', 'geogebraGrid');
-        renderCards('trainers', 'trainersGrid');
         renderCards('labs', 'labsGrid');
         renderCards('map', 'mapGrid');
         renderCards('achievements', 'achievementsGrid');
         updateProgress();
         updateFavCount();
+
+        // Рендерим калькуляторы только если они активны
         renderCalculators();
+        renderTrainers();
 
         console.log('🚀 Интерактивный раздел загружен!');
         console.log('📊 Моделей:', models.length);
         console.log('🧮 Калькуляторов:', calculators.length);
+        console.log('📈 Тренажёров:', trainers.length);
         console.log('⭐ Избранное:', favorites.length);
         console.log('📈 Прогресс:', progress.completed.length, '/', models.length);
     </script>
