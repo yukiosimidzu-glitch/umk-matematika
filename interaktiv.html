@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== БАЗОВЫЕ СТИЛИ (те же, что и ранее) ===== */
         :root {
             --bg: #0d1117;
             --bg-card: #161b22;
@@ -33,7 +32,6 @@
         h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* ===== NAVBAR ===== */
         .navbar-custom {
             background-color: var(--bg-card);
             border-bottom: 1px solid var(--border);
@@ -54,13 +52,11 @@
         .navbar-custom .nav-link:hover,
         .navbar-custom .nav-link.active { color: var(--gold); }
 
-        /* ===== LAYOUT ===== */
         .app-layout {
             display: flex;
             min-height: calc(100vh - 56px);
         }
 
-        /* ===== SIDEBAR ===== */
         .sidebar {
             width: var(--sidebar-width);
             background: var(--bg-card);
@@ -134,7 +130,6 @@
             color: var(--gold);
         }
 
-        /* ===== MAIN ===== */
         .main-content {
             flex: 1;
             padding: 16px 24px 40px 24px;
@@ -142,7 +137,6 @@
             min-width: 0;
         }
 
-        /* ===== HERO ===== */
         .hero-mini {
             background: radial-gradient(ellipse at 70% 30%, #1a2332 0%, var(--bg) 70%);
             border-radius: 12px;
@@ -253,7 +247,6 @@
             background: rgba(212,160,23,0.2);
         }
 
-        /* ===== ПОИСК ===== */
         .search-wrapper { margin-bottom: 16px; }
         #searchModels {
             width: 100%;
@@ -274,7 +267,6 @@
             border-color: var(--gold);
         }
 
-        /* ===== ПРОГРЕСС ===== */
         .progress-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -319,7 +311,6 @@
             margin: 0;
         }
 
-        /* ===== СТАТИСТИКА ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -344,7 +335,6 @@
             color: var(--text-muted);
         }
 
-        /* ===== ВКЛАДКИ ===== */
         .tab-content {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -357,7 +347,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== КАРТОЧКИ ===== */
         .models-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -432,7 +421,6 @@
             border: 1px solid var(--border);
         }
 
-        /* ===== КАЛЬКУЛЯТОРЫ ===== */
         .calculator-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -547,7 +535,6 @@
         .teacher-mode .trainer-card,
         .teacher-mode .test-card { border-color: var(--gold); }
 
-        /* ===== ТРЕНАЖЁРЫ ===== */
         .trainer-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -618,7 +605,6 @@
             color: var(--gold);
         }
 
-        /* ===== ТЕСТЫ ===== */
         .test-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -706,7 +692,6 @@
         }
         .teacher-mode .test-teacher-answers { display: block; }
 
-        /* ===== ДОСТИЖЕНИЯ ===== */
         .achievement-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -769,7 +754,6 @@
             transition: width 0.5s;
         }
 
-        /* ===== МОДАЛЬНОЕ ОКНО ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -857,7 +841,6 @@
             gap: 10px;
         }
 
-        /* ===== СТИЛИ JSXGRAPH (улучшенные) ===== */
         .jxgbox {
             background: #0a0e14 !important;
             border-radius: 10px;
@@ -907,7 +890,6 @@
             filter: drop-shadow(0 0 16px rgba(212,160,23,0.3));
         }
 
-        /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 992px) {
             .sidebar { width: 200px; padding: 12px 0; }
             .main-content { padding: 14px 18px 30px 18px; }
@@ -982,7 +964,6 @@
 </head>
 <body>
 
-    <!-- ===== NAVBAR ===== -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
             <a class="brand" href="index.html">УМК «Математика»</a>
@@ -1002,10 +983,8 @@
         </div>
     </nav>
 
-    <!-- ===== APP LAYOUT ===== -->
     <div class="app-layout">
 
-        <!-- ===== SIDEBAR ===== -->
         <aside class="sidebar">
             <div class="sidebar-section">
                 <div class="section-label">Разделы</div>
@@ -1023,10 +1002,8 @@
             </div>
         </aside>
 
-        <!-- ===== MAIN CONTENT ===== -->
         <main class="main-content">
 
-            <!-- ===== HERO ===== -->
             <div class="hero-mini">
                 <h1>🧊 Интерактивный <span class="gold">раздел</span></h1>
                 <p class="subtitle">Интерактивные модели, калькуляторы, тренажёры, тесты и лаборатории</p>
@@ -1042,12 +1019,10 @@
                 </div>
             </div>
 
-            <!-- ===== ПОИСК ===== -->
             <div class="search-wrapper">
                 <input type="text" id="searchModels" placeholder="🔍 Поиск моделей, калькуляторов, тренажёров и тестов...">
             </div>
 
-            <!-- ===== СТАТИСТИКА ===== -->
             <div class="stats-grid">
                 <div class="stat-card"><div class="num" id="statModels">0</div><div class="label">пройдено</div></div>
                 <div class="stat-card"><div class="num" id="statAchievements">0</div><div class="label">достижений</div></div>
@@ -1055,7 +1030,6 @@
                 <div class="stat-card"><div class="num" id="statTests">0</div><div class="label">тестов пройдено</div></div>
             </div>
 
-            <!-- ===== ПРОГРЕСС ===== -->
             <div class="progress-card">
                 <div class="progress-header">
                     <h3>📊 Ваш прогресс</h3>
@@ -1067,45 +1041,36 @@
                 <p class="progress-note">Изучайте модели и выполняйте задания</p>
             </div>
 
-            <!-- ===== ВКЛАДКИ ===== -->
-
-            <!-- Модели -->
             <div id="tabModels" class="tab-content active">
                 <h3 style="color:#fff;margin-bottom:12px;">📐 Интерактивные модели</h3>
                 <div class="models-grid" id="modelsGrid"></div>
             </div>
 
-            <!-- Калькуляторы -->
             <div id="tabCalculators" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:12px;">🧮 Калькуляторы строителя</h3>
                 <div id="calculatorsContainer"></div>
             </div>
 
-            <!-- Тренажёры -->
             <div id="tabTrainers" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:12px;">🎯 Тренажёры</h3>
                 <div id="trainersContainer"></div>
             </div>
 
-            <!-- Тесты -->
             <div id="tabTests" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:12px;">📝 Мини-тесты</h3>
                 <div id="testsContainer"></div>
             </div>
 
-            <!-- Лаборатории -->
             <div id="tabLabs" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:12px;">🔬 Лаборатории</h3>
                 <div class="models-grid" id="labsGrid"></div>
             </div>
 
-            <!-- Достижения -->
             <div id="tabAchievements" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:12px;">🏆 Достижения</h3>
                 <div id="achievementsContainer"></div>
             </div>
 
-            <!-- Избранное -->
             <div id="tabFavorites" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:12px;">⭐ Избранное</h3>
                 <div id="favoritesGrid" class="models-grid"></div>
@@ -1114,7 +1079,6 @@
         </main>
     </div>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1129,7 +1093,6 @@
         </div>
     </div>
 
-    <!-- ===== ФУТЕР ===== -->
     <footer style="background: var(--bg-card); border-top: 1px solid var(--border); padding: 14px 0; text-align: center; font-size: 12px; color: var(--text-muted);">
         <div class="container">
             © 2026 Станулевич Андрей Викторович, Гродно, Беларусь · <a href="index.html" style="color:var(--gold);text-decoration:none;">На главную</a>
@@ -1398,7 +1361,6 @@
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
 
-            // Определяем тип модели: Three.js или JSXGraph
             const threeTypes = ['three_parallelepiped', 'three_pyramid', 'three_cube_section'];
             const isThree = threeTypes.includes(model.type);
 
@@ -1432,7 +1394,6 @@
         function closeModal() {
             const overlay = document.getElementById('modalOverlay');
             const body = document.getElementById('modalBody');
-            // Очистка Three.js
             const threeContainer = body.querySelector('.three-container');
             if (threeContainer) {
                 const renderer = threeContainer._renderer;
@@ -1441,7 +1402,6 @@
                     threeContainer.innerHTML = '';
                 }
             }
-            // Очистка JSXGraph
             const jsxContainer = body.querySelector('#jsx-container');
             if (jsxContainer) {
                 const board = window._currentBoard;
@@ -1491,7 +1451,6 @@
             controls.autoRotateSpeed = 1.2;
             controls.target.set(0, 0, 0);
 
-            // Освещение
             const ambientLight = new THREE.AmbientLight(0x404060, 0.5);
             scene.add(ambientLight);
 
@@ -1522,7 +1481,6 @@
             const goldWire = new THREE.LineBasicMaterial({ color: goldColor, transparent: true, opacity: 0.6 });
 
             if (type === 'three_parallelepiped') {
-                // Размеры
                 const L = 3.0, W = 1.8, H = 2.2;
                 const geo = new THREE.BoxGeometry(L, H, W);
                 const mat = goldMat.clone();
@@ -1532,12 +1490,10 @@
                 mesh.receiveShadow = true;
                 scene.add(mesh);
 
-                // Каркас
                 const edges = new THREE.EdgesGeometry(geo);
                 const wire = new THREE.LineSegments(edges, goldWire);
                 mesh.add(wire);
 
-                // Подписи (спрайты)
                 function makeLabel(text, pos, color = '#D4A017', fontSize = 28) {
                     const canvas = document.createElement('canvas');
                     canvas.width = 512;
@@ -1644,7 +1600,6 @@
                 const wireframe = new THREE.LineSegments(edges, wire);
                 cube.add(wireframe);
 
-                // Сечение — плоскость
                 const planeGeo = new THREE.PlaneGeometry(size * 1.6, size * 1.6);
                 const planeMat = new THREE.MeshStandardMaterial({
                     color: 0xD4A017,
@@ -1662,7 +1617,6 @@
                 plane.rotation.z = 0.4;
                 scene.add(plane);
 
-                // Контур сечения
                 const pts = [
                     new THREE.Vector3(-1.2, -1.2, 0.2),
                     new THREE.Vector3(1.2, -1.0, -0.2),
@@ -1709,7 +1663,6 @@
                 scene.add(makeLabel('Золотая плоскость', { x: 0, y: -2.2, z: 0 }, '#D4A017', 26));
             }
 
-            // Анимация
             function animate() {
                 requestAnimationFrame(animate);
                 controls.update();
@@ -1717,7 +1670,6 @@
             }
             animate();
 
-            // Resize
             const resize = () => {
                 const w = container.clientWidth || 600;
                 const h = container.clientHeight || 450;
@@ -1735,7 +1687,7 @@
         }
 
         // ==========================================
-        // JSXGRAPH МОДЕЛИ (2D — улучшенные)
+        // JSXGRAPH МОДЕЛИ (2D)
         // ==========================================
         function initJSXModel(type, containerId) {
             const board = JXG.JSXGraph.initBoard(containerId, {
@@ -1885,20 +1837,453 @@
                 return;
             }
 
-            // Fallback
             board.create('text', [-5, 5, 'Модель загружена'], {fontSize:16, color:muted});
         }
 
         // ==========================================
-        // ОСТАЛЬНОЙ КОД (калькуляторы, тренажёры, тесты, достижения, прогресс, поиск, вкладки)
+        // КАЛЬКУЛЯТОРЫ
         // ==========================================
-        // (Весь остальной код — без изменений, он уже работал корректно.
-        // Я скопирую его из предыдущей версии, чтобы не переписывать заново.)
-        // Для краткости я опускаю здесь дублирование, но в финальном файле он будет.
-        // Ниже я приведу полный код в виде одного файла, который вы можете скачать.
-        // В целях экономии места в этом сообщении я представлю его как ссылку на скачивание или частично.
+        function renderCalculators() {
+            const container = document.getElementById('calculatorsContainer');
+            if (!container) return;
+            container.innerHTML = calculators.map(calc => {
+                const history = JSON.parse(localStorage.getItem(calc.historyKey)) || [];
+                const lastResult = history.length>0 ? history[history.length-1] : null;
+                return `
+                    <div class="calculator-card" id="calc-${calc.id}">
+                        <span class="teacher-badge">👨‍🏫</span>
+                        <h4>${calc.title}</h4>
+                        <p class="calc-desc">${calc.desc}</p>
+                        <div class="calc-row">
+                            ${calc.fields.map(f => `
+                                <label>
+                                    <span>${f.label}</span>
+                                    ${f.type==='select' ? `
+                                        <select id="${calc.id}_${f.name}" onchange="calculate('${calc.id}')">
+                                            ${f.options.map(o => `<option value="${o}" ${o===f.default?'selected':''}>${o}</option>`).join('')}
+                                        </select>
+                                    ` : `
+                                        <input type="number" id="${calc.id}_${f.name}" value="${f.default}" step="${f.step}" oninput="calculate('${calc.id}')">
+                                    `}
+                                </label>
+                            `).join('')}
+                        </div>
+                        <button class="btn-gold" onclick="calculate('${calc.id}')" style="padding:6px 16px;font-size:13px;">Рассчитать</button>
+                        <div class="calc-result" id="${calc.id}_result">
+                            <span class="label">Результат:</span>
+                            <span class="value">— <span class="unit">${calc.unit}</span></span>
+                        </div>
+                        <div class="calc-history" id="${calc.id}_history">
+                            ${lastResult ? `
+                                <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">📋 Последний расчёт:</div>
+                                <div style="display:flex;justify-content:space-between;font-size:12px;">
+                                    <span>${lastResult.date}</span>
+                                    <span style="color:var(--gold);font-weight:600;">${lastResult.result}</span>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="calc-teacher-note">${calc.teacherNote || '📐 Формула применена'}</div>
+                    </div>
+                `;
+            }).join('');
+        }
 
-        // ВАЖНО: Я пришлю полный код отдельным сообщением, чтобы не перегружать это.
+        function calculate(calcId) {
+            const calc = calculators.find(c => c.id === calcId);
+            if (!calc) return;
+            const values = {};
+            calc.fields.forEach(f => {
+                const el = document.getElementById(`${calcId}_${f.name}`);
+                values[f.name] = f.type==='select' ? el.value : parseFloat(el.value) || 0;
+            });
+            const result = calc.formula(values);
+            const resultEl = document.getElementById(`${calcId}_result`);
+            if (resultEl) {
+                resultEl.classList.add('show');
+                resultEl.querySelector('.value').innerHTML = `${result} <span class="unit">${calc.unit}</span>`;
+            }
+            const history = JSON.parse(localStorage.getItem(calc.historyKey)) || [];
+            history.push({date: new Date().toLocaleString(), result: result});
+            if (history.length > 10) history.shift();
+            localStorage.setItem(calc.historyKey, JSON.stringify(history));
+            const historyEl = document.getElementById(`${calcId}_history`);
+            if (historyEl && history.length>0) {
+                const last = history[history.length-1];
+                historyEl.innerHTML = `
+                    <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">📋 Последний расчёт:</div>
+                    <div style="display:flex;justify-content:space-between;font-size:12px;">
+                        <span>${last.date}</span>
+                        <span style="color:var(--gold);font-weight:600;">${last.result}</span>
+                    </div>
+                `;
+            }
+        }
+
+        // ==========================================
+        // ТРЕНАЖЁРЫ
+        // ==========================================
+        function renderTrainers() {
+            const container = document.getElementById('trainersContainer');
+            if (!container) return;
+            container.innerHTML = trainers.map(t => `
+                <div class="trainer-card" id="trainer-${t.id}">
+                    <span class="teacher-badge">👨‍🏫</span>
+                    <h4>${t.title}</h4>
+                    <p class="trainer-desc">${t.desc}</p>
+                    <div class="trainer-controls">
+                        ${t.fields.map(f => `
+                            <label>
+                                ${f.label} <input type="number" id="${t.id}_${f.name}" value="${f.default}" step="${f.step}" style="width:60px;">
+                            </label>
+                        `).join('')}
+                        <button class="btn-gold" onclick="solveTrainer('${t.id}')" style="padding:4px 14px;font-size:13px;">Решить</button>
+                    </div>
+                    <div class="trainer-result" id="${t.id}_result">
+                        <span class="label">Ответ:</span>
+                        <span class="value" id="${t.id}_answer">—</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function solveTrainer(id) {
+            const t = trainers.find(t => t.id === id);
+            if (!t) return;
+            const values = {};
+            t.fields.forEach(f => {
+                const el = document.getElementById(`${id}_${f.name}`);
+                values[f.name] = parseFloat(el.value) || 0;
+            });
+            const result = t.solve(values);
+            const resEl = document.getElementById(`${id}_result`);
+            const ansEl = document.getElementById(`${id}_answer`);
+            if (resEl && ansEl) {
+                resEl.classList.add('show');
+                ansEl.textContent = result;
+            }
+        }
+
+        // ==========================================
+        // ТЕСТЫ
+        // ==========================================
+        function renderTests() {
+            const container = document.getElementById('testsContainer');
+            if (!container) return;
+            container.innerHTML = tests.map(test => {
+                const result = testResults[test.id];
+                const passed = result && result.score === 100;
+                return `
+                    <div class="test-card" id="test-${test.id}">
+                        <span class="teacher-badge">👨‍🏫</span>
+                        <h4>${test.title}</h4>
+                        <p class="test-desc">${test.desc}</p>
+                        ${result ? `<div style="margin-bottom:10px;font-size:13px;color:var(--text-muted);">Результат: <span style="color:${passed?'#4ade80':'#ff6b6b'};font-weight:600;">${result.score}%</span> ${passed?' ✅':''}</div>` : ''}
+                        <div id="test-${test.id}-questions">
+                            ${test.questions.map((q,qi) => `
+                                <div class="test-question" data-q="${test.id}-${qi}">
+                                    <div class="q-text">${qi+1}. ${q.q}</div>
+                                    <div class="q-options">
+                                        ${q.options.map((opt,oi) => `
+                                            <label onclick="selectAnswer('${test.id}',${qi},${oi})">
+                                                <input type="radio" name="${test.id}-${qi}" value="${oi}" ${selectedAnswers[test.id] && selectedAnswers[test.id][qi] === oi ? 'checked' : ''}>
+                                                ${opt}
+                                            </label>
+                                        `).join('')}
+                                    </div>
+                                    <div class="q-feedback" style="margin-top:4px;font-size:12px;"></div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <button class="btn-gold" onclick="checkTest('${test.id}')" style="margin-top:10px;padding:6px 20px;font-size:13px;">Проверить</button>
+                        ${result ? `<button class="btn-outline" onclick="resetTest('${test.id}')" style="margin-top:10px;padding:4px 16px;font-size:12px;border-width:1px;">↺ Заново</button>` : ''}
+                        <div class="test-result" id="test-${test.id}-result"></div>
+                        <div class="test-teacher-answers">${test.teacherNote || 'Правильные ответы отмечены в режиме преподавателя'}</div>
+                    </div>
+                `;
+            }).join('');
+            restoreSelectedAnswers();
+        }
+
+        function selectAnswer(testId, questionIdx, answerIdx) {
+            if (!selectedAnswers[testId]) selectedAnswers[testId] = {};
+            selectedAnswers[testId][questionIdx] = answerIdx;
+        }
+
+        function restoreSelectedAnswers() {
+            for (const testId in selectedAnswers) {
+                for (const qi in selectedAnswers[testId]) {
+                    const radio = document.querySelector(`input[name="${testId}-${qi}"][value="${selectedAnswers[testId][qi]}"]`);
+                    if (radio) radio.checked = true;
+                }
+            }
+        }
+
+        function checkTest(testId) {
+            const test = tests.find(t => t.id === testId);
+            if (!test) return;
+            const answers = selectedAnswers[testId] || {};
+            let correct = 0;
+            test.questions.forEach((q, qi) => {
+                const container = document.querySelector(`#test-${test.id}-questions`);
+                const qDiv = container ? container.querySelector(`[data-q="${test.id}-${qi}"]`) : null;
+                const feedback = qDiv ? qDiv.querySelector('.q-feedback') : null;
+                if (answers[qi] !== undefined) {
+                    const isCorrect = answers[qi] === q.correct;
+                    if (isCorrect) correct++;
+                    if (feedback) {
+                        feedback.innerHTML = isCorrect ?
+                            '<span style="color:#4ade80;">✅ Верно</span>' :
+                            `<span style="color:#ff6b6b;">❌ Правильный ответ: ${q.options[q.correct]}</span>`;
+                    }
+                    if (qDiv) {
+                        qDiv.querySelectorAll('.q-options label').forEach((label, idx) => {
+                            if (idx === q.correct) label.style.color = '#4ade80';
+                            else if (idx === answers[qi] && idx !== q.correct) label.style.color = '#ff6b6b';
+                            else label.style.color = '';
+                        });
+                    }
+                } else {
+                    if (feedback) feedback.innerHTML = '<span style="color:#ff6b6b;">❌ Ответ не выбран</span>';
+                }
+            });
+            const score = Math.round((correct / test.questions.length) * 100);
+            testResults[test.id] = { score, correct, total: test.questions.length };
+            localStorage.setItem('interaktiv_test_results', JSON.stringify(testResults));
+            const resultEl = document.getElementById(`test-${test.id}-result`);
+            if (resultEl) {
+                resultEl.className = `test-result show ${score === 100 ? 'passed' : 'failed'}`;
+                resultEl.innerHTML = score === 100 ? '🎉 Отлично! 100%' : `📚 Результат: ${score}%`;
+            }
+            checkAchievements();
+            updateStats();
+        }
+
+        function resetTest(testId) {
+            delete testResults[testId];
+            localStorage.setItem('interaktiv_test_results', JSON.stringify(testResults));
+            selectedAnswers[testId] = {};
+            renderTests();
+            updateProgress();
+            checkAchievements();
+        }
+
+        // ==========================================
+        // ДОСТИЖЕНИЯ
+        // ==========================================
+        function renderAchievements() {
+            const container = document.getElementById('achievementsContainer');
+            if (!container) return;
+            container.innerHTML = achievementsList.map(ach => {
+                const unlocked = ach.check();
+                const prog = ach.progress();
+                const pct = prog.total > 0 ? Math.round((prog.current / prog.total) * 100) : 0;
+                return `
+                    <div class="achievement-card" style="${unlocked ? 'border-color:rgba(212,160,23,0.3);' : ''}">
+                        <div class="ach-icon">${unlocked ? ach.icon : '🔒'}</div>
+                        <div class="ach-info">
+                            <h4>${ach.title} ${unlocked ? ' ✅' : ''}</h4>
+                            <p>${ach.desc}</p>
+                            <div style="margin-top:2px;font-size:11px;color:var(--text-muted);">
+                                ${unlocked ? '🏆 Получено!' : `Прогресс: ${prog.current}/${prog.total}`}
+                            </div>
+                            ${!unlocked ? `<div class="ach-progress-bar"><div class="fill" style="width:${pct}%;"></div></div>` : ''}
+                        </div>
+                        <div class="ach-status ${unlocked ? 'unlocked' : 'locked'}">${unlocked ? '✅' : `${pct}%`}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function checkAchievements() {
+            renderAchievements();
+            updateStats();
+        }
+
+        // ==========================================
+        // ПРОГРЕСС И СТАТИСТИКА
+        // ==========================================
+        function markCompleted(id) {
+            if (!progress.completed.includes(id)) {
+                progress.completed.push(id);
+                localStorage.setItem('interaktiv_progress', JSON.stringify(progress));
+                updateProgress();
+                renderModels();
+                renderLabs();
+                renderFavorites();
+                checkAchievements();
+            }
+        }
+
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(f => f !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('interaktiv_favorites', JSON.stringify(favorites));
+            updateFavCount();
+            renderModels();
+            renderLabs();
+            renderFavorites();
+            updateStats();
+        }
+
+        function updateProgress() {
+            const total = allModels.length + trainers.length + tests.length;
+            const completedModels = progress.completed.filter(id => modelIds.includes(id)).length;
+            const completedTrainers = trainers.filter((t, i) => progress.completed.includes(`trainer_${t.id}`)).length;
+            const completedTests = tests.filter(t => testResults[t.id] && testResults[t.id].score === 100).length;
+            const completed = completedModels + completedTrainers + completedTests;
+            const pct = Math.round((completed / total) * 100);
+            document.getElementById('mainProgress').style.width = pct + '%';
+            document.getElementById('progressText').textContent = `Пройдено ${completed} из ${total}`;
+            updateStats();
+        }
+
+        function updateStats() {
+            const completedModels = progress.completed.filter(id => modelIds.includes(id)).length;
+            document.getElementById('statModels').textContent = completedModels;
+            document.getElementById('statFavorites').textContent = favorites.length;
+            const unlocked = achievementsList.filter(a => a.check()).length;
+            document.getElementById('statAchievements').textContent = unlocked;
+            const passed = tests.filter(t => testResults[t.id] && testResults[t.id].score === 100).length;
+            document.getElementById('statTests').textContent = passed;
+        }
+
+        function updateFavCount() {
+            document.getElementById('favCount').textContent = favorites.length;
+        }
+
+        // ==========================================
+        // СЛУЧАЙНОЕ ЗАДАНИЕ
+        // ==========================================
+        function randomCard() {
+            const cards = document.querySelectorAll('.model-card');
+            if (!cards.length) return;
+            const random = cards[Math.floor(Math.random() * cards.length)];
+            random.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            random.style.borderColor = 'var(--gold)';
+            random.style.boxShadow = '0 0 20px rgba(212,160,23,0.2)';
+            setTimeout(() => {
+                random.style.borderColor = '';
+                random.style.boxShadow = '';
+            }, 2000);
+            const id = random.dataset.id;
+            if (id) openModel(id);
+        }
+
+        // ==========================================
+        // ПОИСК
+        // ==========================================
+        document.getElementById('searchModels').addEventListener('input', function() {
+            searchQuery = this.value.toLowerCase().trim();
+            applySearch();
+        });
+
+        function applySearch() {
+            const activeTab = document.querySelector('.tab-content.active');
+            if (!activeTab) return;
+            const cards = activeTab.querySelectorAll('.model-card, .calculator-card, .trainer-card, .test-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(searchQuery) ? '' : 'none';
+            });
+        }
+
+        // ==========================================
+        // ВКЛАДКИ
+        // ==========================================
+        function switchTab(tabId) {
+            currentTab = tabId;
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            const targetMap = {
+                models: 'tabModels',
+                calculators: 'tabCalculators',
+                trainers: 'tabTrainers',
+                tests: 'tabTests',
+                labs: 'tabLabs',
+                achievements: 'tabAchievements',
+                favorites: 'tabFavorites'
+            };
+            const target = document.getElementById(targetMap[tabId]);
+            if (target) target.classList.add('active');
+            document.querySelectorAll('.sidebar-item[data-tab]').forEach(el => {
+                el.classList.toggle('active', el.dataset.tab === tabId);
+            });
+            if (tabId === 'calculators') renderCalculators();
+            else if (tabId === 'trainers') renderTrainers();
+            else if (tabId === 'tests') renderTests();
+            else if (tabId === 'achievements') renderAchievements();
+            else if (tabId === 'favorites') renderFavorites();
+            else if (tabId === 'labs') renderLabs();
+            document.getElementById('searchModels').value = '';
+            searchQuery = '';
+            applySearch();
+        }
+
+        document.querySelectorAll('.sidebar-item[data-tab]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                switchTab(this.dataset.tab);
+            });
+        });
+
+        document.getElementById('favoritesTab').addEventListener('click', function() {
+            switchTab('favorites');
+            document.querySelectorAll('.sidebar-item[data-tab]').forEach(el => el.classList.remove('active'));
+            this.classList.add('active');
+            renderFavorites();
+        });
+
+        // ==========================================
+        // РЕЖИМ ПРЕПОДАВАТЕЛЯ
+        // ==========================================
+        document.getElementById('teacherModeToggle').addEventListener('click', function() {
+            const mode = !teacherMode;
+            teacherMode = mode;
+            localStorage.setItem('interaktiv_teacher_mode', JSON.stringify(mode));
+            this.classList.toggle('active');
+            this.style.color = mode ? 'var(--gold)' : '';
+            document.body.classList.toggle('teacher-mode', mode);
+            alert(mode ? '👨‍🏫 Режим преподавателя включён. Отображаются формулы и пояснения.' : '👨‍🏫 Режим преподавателя выключен.');
+        });
+
+        if (teacherMode) {
+            document.getElementById('teacherModeToggle').style.color = 'var(--gold)';
+            document.getElementById('teacherModeToggle').classList.add('active');
+            document.body.classList.add('teacher-mode');
+        }
+
+        // ==========================================
+        // КНОПКА НАВЕРХ
+        // ==========================================
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            backToTop.classList.toggle('show', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ==========================================
+        // ИНИЦИАЛИЗАЦИЯ
+        // ==========================================
+        renderModels();
+        renderLabs();
+        renderCalculators();
+        renderTrainers();
+        renderTests();
+        renderAchievements();
+        updateProgress();
+        updateFavCount();
+        updateStats();
+
+        console.log('🚀 Интерактивный раздел загружен (гибридная версия с Three.js и улучшенным JSXGraph)');
+        console.log('📐 Моделей:', modelsData.length);
+        console.log('🧮 Калькуляторов:', calculators.length);
+        console.log('🎯 Тренажёров:', trainers.length);
+        console.log('📝 Тестов:', tests.length);
+        console.log('🔬 Лабораторий:', labsData.length);
+        console.log('🏆 Достижений:', achievementsList.length);
     </script>
 </body>
 </html>
