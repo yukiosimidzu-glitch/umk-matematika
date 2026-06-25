@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== БАЗОВЫЕ СТИЛИ ===== */
+        /* ===== БАЗОВЫЕ СТИЛИ (те же, что и ранее, дополнены для новых разделов) ===== */
         :root {
             --bg: #0d1117;
             --bg-card: #161b22;
@@ -357,7 +357,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== КАРТОЧКИ ===== */
+        /* ===== КАРТОЧКИ МОДЕЛЕЙ ===== */
         .models-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -430,6 +430,350 @@
             border-radius: 10px;
             color: var(--text-muted);
             border: 1px solid var(--border);
+        }
+
+        /* ===== КАЛЬКУЛЯТОРЫ ===== */
+        .calculator-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 22px;
+            transition: all 0.3s;
+            margin-bottom: 16px;
+        }
+        .calculator-card:hover { border-color: var(--gold); }
+        .calculator-card h4 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+        .calculator-card .calc-desc {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .calc-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            margin-bottom: 12px;
+        }
+        .calc-row label {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .calc-row label span {
+            font-weight: 500;
+            color: var(--text);
+        }
+        .calc-row input, .calc-row select {
+            padding: 6px 10px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 13px;
+            width: 100%;
+            transition: border 0.3s;
+        }
+        .calc-row input:focus, .calc-row select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .calc-result {
+            background: rgba(212,160,23,0.05);
+            border: 1px solid rgba(212,160,23,0.12);
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-top: 10px;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .calc-result.show { display: flex; }
+        .calc-result .label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .calc-result .value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+        }
+        .calc-result .value .unit {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .calc-history {
+            margin-top: 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 8px;
+        }
+        .calc-teacher-note {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: rgba(212,160,23,0.05);
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text-muted);
+            display: none;
+        }
+        .teacher-mode .calc-teacher-note { display: block; }
+        .teacher-badge {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            font-size: 10px;
+            background: var(--gold);
+            color: var(--bg);
+            padding: 1px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .teacher-mode .teacher-badge { display: block; }
+        .teacher-mode .calculator-card,
+        .teacher-mode .trainer-card,
+        .teacher-mode .test-card { border-color: var(--gold); }
+        .calculator-card { position: relative; }
+
+        /* ===== ТРЕНАЖЁРЫ ===== */
+        .trainer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 22px;
+            transition: all 0.3s;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .trainer-card:hover { border-color: var(--gold); }
+        .trainer-card h4 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+        .trainer-card .trainer-desc {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .trainer-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+        .trainer-controls label {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .trainer-controls input[type="range"] {
+            width: 100px;
+            accent-color: var(--gold);
+            background: var(--bg);
+            height: 4px;
+            border-radius: 2px;
+        }
+        .trainer-controls input[type="number"] {
+            width: 50px;
+            padding: 3px 6px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-size: 12px;
+        }
+        .trainer-controls input[type="number"]:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .trainer-result {
+            background: rgba(212,160,23,0.05);
+            border: 1px solid rgba(212,160,23,0.12);
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-top: 10px;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .trainer-result.show { display: flex; }
+        .trainer-result .label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .trainer-result .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* ===== ТЕСТЫ ===== */
+        .test-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .test-card h4 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+        .test-card .test-desc {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .test-question {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+        }
+        .test-question .q-text {
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .test-question .q-options {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .test-question .q-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 13px;
+            cursor: pointer;
+            padding: 3px 6px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .test-question .q-options label:hover {
+            background: rgba(255,255,255,0.03);
+        }
+        .test-question .q-options input[type="radio"] {
+            accent-color: var(--gold);
+            width: 14px;
+            height: 14px;
+            cursor: pointer;
+        }
+        .test-result {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+        }
+        .test-result.show { display: block; }
+        .test-result.passed {
+            background: rgba(74,222,128,0.1);
+            border: 1px solid rgba(74,222,128,0.3);
+            color: #4ade80;
+        }
+        .test-result.failed {
+            background: rgba(255,107,107,0.1);
+            border: 1px solid rgba(255,107,107,0.3);
+            color: #ff6b6b;
+        }
+        .test-teacher-answers {
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: rgba(212,160,23,0.05);
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text-muted);
+            display: none;
+        }
+        .teacher-mode .test-teacher-answers { display: block; }
+
+        /* ===== ДОСТИЖЕНИЯ ===== */
+        .achievement-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+        }
+        .achievement-card:hover { border-color: var(--gold); }
+        .achievement-card .ach-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        .achievement-card .ach-info {
+            flex: 1;
+        }
+        .achievement-card .ach-info h4 {
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 1px;
+        }
+        .achievement-card .ach-info p {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin: 0;
+        }
+        .achievement-card .ach-status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 12px;
+            border-radius: 16px;
+            flex-shrink: 0;
+        }
+        .achievement-card .ach-status.locked {
+            background: rgba(255,255,255,0.04);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        .achievement-card .ach-status.unlocked {
+            background: rgba(212,160,23,0.15);
+            color: var(--gold);
+            border: 1px solid rgba(212,160,23,0.3);
+        }
+        .ach-progress-bar {
+            margin-top: 3px;
+            width: 100%;
+            max-width: 150px;
+            height: 3px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .ach-progress-bar .fill {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: width 0.5s;
         }
 
         /* ===== МОДАЛЬНОЕ ОКНО ===== */
@@ -546,6 +890,7 @@
             .hero-mini { padding: 18px 20px; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .models-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+            .calc-row { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
             .app-layout { flex-direction: column; }
@@ -640,9 +985,9 @@
         <aside class="sidebar">
             <div class="sidebar-section">
                 <div class="section-label">Разделы</div>
-                <button class="sidebar-item active" data-tab="models"><span class="icon">📐</span> Модели <span class="badge">6</span></button>
+                <button class="sidebar-item active" data-tab="models"><span class="icon">📐</span> Модели <span class="badge">9</span></button>
                 <button class="sidebar-item" data-tab="calculators"><span class="icon">🧮</span> Калькуляторы <span class="badge">8</span></button>
-                <button class="sidebar-item" data-tab="trainers"><span class="icon">📈</span> Тренажёры <span class="badge">4</span></button>
+                <button class="sidebar-item" data-tab="trainers"><span class="icon">🎯</span> Тренажёры <span class="badge">4</span></button>
                 <button class="sidebar-item" data-tab="tests"><span class="icon">📝</span> Тесты <span class="badge">3</span></button>
                 <button class="sidebar-item" data-tab="labs"><span class="icon">🔬</span> Лаборатории <span class="badge">5</span></button>
                 <button class="sidebar-item" data-tab="achievements"><span class="icon">🏆</span> Достижения <span class="badge">5</span></button>
@@ -660,15 +1005,15 @@
             <!-- ===== HERO ===== -->
             <div class="hero-mini">
                 <h1>🧊 Интерактивный <span class="gold">раздел</span></h1>
-                <p class="subtitle">Интерактивные модели на JSXGraph — геометрия, алгебра, строительство</p>
+                <p class="subtitle">Интерактивные модели, калькуляторы, тренажёры, тесты и лаборатории</p>
                 <div class="hero-stats-inline">
-                    <div class="hero-stat"><span class="num">6</span><span class="label">моделей</span></div>
+                    <div class="hero-stat"><span class="num">9</span><span class="label">моделей</span></div>
                     <div class="hero-stat"><span class="num">8</span><span class="label">калькуляторов</span></div>
                     <div class="hero-stat"><span class="num">4</span><span class="label">тренажёра</span></div>
                     <div class="hero-stat"><span class="num">100%</span><span class="label">бесплатно</span></div>
                 </div>
                 <div class="hero-actions">
-                    <button class="btn-gold" onclick="document.getElementById('searchModels').focus()">🔍 Найти модель</button>
+                    <button class="btn-gold" onclick="document.getElementById('searchModels').focus()">🔍 Найти</button>
                     <button class="btn-outline" onclick="randomCard()">🎲 Случайное задание</button>
                 </div>
             </div>
@@ -690,7 +1035,7 @@
             <div class="progress-card">
                 <div class="progress-header">
                     <h3>📊 Ваш прогресс</h3>
-                    <span id="progressText">Пройдено 0 из 11</span>
+                    <span id="progressText">Пройдено 0 из 17</span>
                 </div>
                 <div class="progress-track">
                     <div class="fill" id="mainProgress" style="width:0%;"></div>
@@ -706,34 +1051,22 @@
                 <div class="models-grid" id="modelsGrid"></div>
             </div>
 
-            <!-- Калькуляторы (заглушка) -->
+            <!-- Калькуляторы -->
             <div id="tabCalculators" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:12px;">🧮 Калькуляторы строителя</h3>
-                <div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
-                    <span style="font-size:48px;display:block;margin-bottom:12px;">🧮</span>
-                    <h3 style="color:#fff;font-size:20px;margin-bottom:6px;">Калькуляторы появятся позже</h3>
-                    <p>8 строительных калькуляторов с историей расчётов</p>
-                </div>
+                <div id="calculatorsContainer"></div>
             </div>
 
-            <!-- Тренажёры (заглушка) -->
+            <!-- Тренажёры -->
             <div id="tabTrainers" class="tab-content">
-                <h3 style="color:#fff;margin-bottom:12px;">📈 Тренажёры с графиками</h3>
-                <div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
-                    <span style="font-size:48px;display:block;margin-bottom:12px;">📊</span>
-                    <h3 style="color:#fff;font-size:20px;margin-bottom:6px;">Тренажёры появятся позже</h3>
-                    <p>4 тренажёра с графиками на Canvas</p>
-                </div>
+                <h3 style="color:#fff;margin-bottom:12px;">🎯 Тренажёры</h3>
+                <div id="trainersContainer"></div>
             </div>
 
-            <!-- Тесты (заглушка) -->
+            <!-- Тесты -->
             <div id="tabTests" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:12px;">📝 Мини-тесты</h3>
-                <div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
-                    <span style="font-size:48px;display:block;margin-bottom:12px;">📝</span>
-                    <h3 style="color:#fff;font-size:20px;margin-bottom:6px;">Тесты появятся позже</h3>
-                    <p>3 теста с мгновенной проверкой</p>
-                </div>
+                <div id="testsContainer"></div>
             </div>
 
             <!-- Лаборатории -->
@@ -742,14 +1075,10 @@
                 <div class="models-grid" id="labsGrid"></div>
             </div>
 
-            <!-- Достижения (заглушка) -->
+            <!-- Достижения -->
             <div id="tabAchievements" class="tab-content">
                 <h3 style="color:#fff;margin-bottom:12px;">🏆 Достижения</h3>
-                <div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
-                    <span style="font-size:48px;display:block;margin-bottom:12px;">🏆</span>
-                    <h3 style="color:#fff;font-size:20px;margin-bottom:6px;">Достижения появятся позже</h3>
-                    <p>5 достижений с прогрессом</p>
-                </div>
+                <div id="achievementsContainer"></div>
             </div>
 
             <!-- Избранное -->
@@ -806,43 +1135,57 @@
         }
 
         // ==========================================
-        // ДАННЫЕ МОДЕЛЕЙ
+        // ДАННЫЕ
         // ==========================================
+
+        // Модели (9 шт.)
         const modelsData = [
-            { id: 'm1', title: 'Параллелепипед', desc: 'Меняйте длину, ширину, высоту — объём меняется.', tags: ['3D', 'Геометрия'],
-                type: 'parallelepiped' },
-            { id: 'm2', title: 'Пирамида', desc: 'Меняйте сторону основания и высоту — объём меняется.', tags: ['3D',
+            { id: 'm1', title: 'Параллелепипед', desc: 'Изменяйте длину, ширину, высоту — объём меняется.', tags: ['3D',
+                    'Геометрия'
+                ], type: 'parallelepiped' },
+            { id: 'm2', title: 'Пирамида', desc: 'Изменяйте сторону основания и высоту — объём меняется.', tags: ['3D',
                     'Пирамида'
                 ], type: 'pyramid' },
             { id: 'm3', title: 'График y = ax² + bx + c', desc: 'Исследуйте влияние коэффициентов на параболу.', tags: [
-                    'Графики', 'Функции'
+                    'Алгебра', 'Графики'
                 ], type: 'param_graph' },
             { id: 'm4', title: 'Тригонометрический круг', desc: 'Вращайте точку — sin, cos, tg меняются.', tags: [
                     'Тригонометрия'
                 ], type: 'trig_circle' },
             { id: 'm5', title: 'Теорема Пифагора', desc: 'Меняйте катеты — гипотенуза и площади обновляются.', tags: [
-                    'Теорема', 'Геометрия'
+                    'Геометрия', 'Теорема'
                 ], type: 'pythagoras' },
             { id: 'm6', title: 'Сечение куба', desc: 'Изменяйте угол наклона плоскости — сечение меняется.', tags: [
-                    'Сечения', 'Стереометрия'
-                ], type: 'cube_section' }
-        ];
-
-        const labsData = [
-            { id: 'l1', title: 'Касательная к графику', desc: 'Двигайте точку по графику — касательная следует.', tags: [
-                    'Производная'
+                    'Стереометрия', 'Сечения'
+                ], type: 'cube_section' },
+            { id: 'm7', title: 'Квадратичная функция', desc: 'Изучение коэффициентов a, b и c квадратичной функции.',
+                tags: ['Алгебра', 'Графики'], type: 'quadratic' },
+            { id: 'm8', title: 'Касательная к графику', desc: 'Исследование производной через касательную.', tags: [
+                    'Алгебра', 'Производная'
                 ], type: 'tangent' },
-            { id: 'l2', title: 'Свойства логарифмов', desc: 'Изучайте основные свойства логарифмов.', tags: ['Логарифмы'],
-                type: 'log_properties' },
-            { id: 'l3', title: 'Тригонометрические тождества', desc: 'Изучайте основные тригонометрические тождества.',
-                tags: ['Тригонометрия'], type: 'trig_identities' },
-            { id: 'l4', title: 'Свойства корней', desc: 'Изучайте свойства корней n-й степени.', tags: ['Корни', 'Алгебра'],
-                type: 'roots' },
-            { id: 'l5', title: 'Первообразная', desc: 'Изучайте основные формулы первообразных.', tags: ['Интегралы',
-                    'Анализ'
-                ], type: 'antiderivative' }
+            { id: 'm9', title: 'Определённый интеграл', desc: 'Визуализация площади под кривой.', tags: ['Алгебра',
+                    'Интегралы'
+                ], type: 'integral' }
         ];
 
+        // Лаборатории (5 шт.)
+        const labsData = [
+            { id: 'l1', title: 'Свойства логарифмов', desc: 'Изучайте основные свойства логарифмов.', tags: ['Алгебра',
+                    'Логарифмы'
+                ], type: 'log_properties' },
+            { id: 'l2', title: 'Тригонометрические тождества', desc: 'Изучайте основные тригонометрические тождества.',
+                tags: ['Тригонометрия'], type: 'trig_identities' },
+            { id: 'l3', title: 'Свойства корней', desc: 'Изучайте свойства корней n-й степени.', tags: ['Алгебра',
+                    'Корни'
+                ], type: 'roots' },
+            { id: 'l4', title: 'Первообразная', desc: 'Изучайте основные формулы первообразных.', tags: ['Алгебра',
+                    'Интегралы'
+                ], type: 'antiderivative' },
+            { id: 'l5', title: 'Касательная (лаборатория)', desc: 'Исследование производной на примере касательной.',
+                tags: ['Алгебра', 'Производная'], type: 'tangent_lab' }
+        ];
+
+        // Все модели для прогресса
         const allModels = [...modelsData, ...labsData];
         const modelIds = allModels.map(m => m.id);
 
@@ -852,6 +1195,8 @@
         let favorites = JSON.parse(localStorage.getItem('interaktiv_favorites')) || [];
         let progress = JSON.parse(localStorage.getItem('interaktiv_progress')) || { completed: [] };
         let teacherMode = JSON.parse(localStorage.getItem('interaktiv_teacher_mode')) || false;
+        let testResults = JSON.parse(localStorage.getItem('interaktiv_test_results')) || {};
+        let selectedAnswers = {};
 
         // ==========================================
         // ИКОНКИ
@@ -863,11 +1208,14 @@
             trig_circle: '⭕',
             pythagoras: '△',
             cube_section: '✂️',
-            tangent: '📐',
+            quadratic: '📊',
+            tangent: '📏',
+            integral: '∫',
             log_properties: 'log',
             trig_identities: 'sin',
             roots: '√',
-            antiderivative: '∫'
+            antiderivative: '∫',
+            tangent_lab: '📏'
         };
 
         // ==========================================
@@ -932,7 +1280,7 @@
             const container = document.createElement('div');
             container.id = 'jsx-container';
             container.style.width = '100%';
-            container.style.height = '440px';
+            container.style.height = '550px';
             body.appendChild(container);
 
             overlay.classList.add('active');
@@ -950,7 +1298,6 @@
             const body = document.getElementById('modalBody');
             const container = body.querySelector('#jsx-container');
             if (container) {
-                // Освобождаем доску, если она была создана
                 const board = window._currentBoard;
                 if (board) {
                     JXG.JSXGraph.freeBoard(board);
@@ -967,7 +1314,7 @@
         });
 
         // ==========================================
-        // ИНИЦИАЛИЗАЦИЯ МОДЕЛЕЙ
+        // ИНИЦИАЛИЗАЦИЯ МОДЕЛЕЙ (JSXGraph)
         // ==========================================
         function initJSXModel(type, containerId) {
             const board = JXG.JSXGraph.initBoard(containerId, {
@@ -991,586 +1338,557 @@
 
             board.update();
 
-            // ============================
-            // 1. ПАРАЛЛЕЛЕПИПЕД
-            // ============================
+            // ---------- 1. ПАРАЛЛЕЛЕПИПЕД ----------
             if (type === 'parallelepiped') {
-                // Слайдеры
-                const sL = board.create('slider', [
-                    [-6, 6],
-                    [-3, 6],
-                    [1, 3, 5]
-                ], { name: 'Длина', strokeColor: '#ff6b6b', label: { fontSize: 13 } });
-                const sW = board.create('slider', [
-                    [-6, 5],
-                    [-3, 5],
-                    [1, 2, 4]
-                ], { name: 'Ширина', strokeColor: blue, label: { fontSize: 13 } });
-                const sH = board.create('slider', [
-                    [-6, 4],
-                    [-3, 4],
-                    [1, 2, 4]
-                ], { name: 'Высота', strokeColor: green, label: { fontSize: 13 } });
+                const sL = board.create('slider', [[-6,6],[-3,6],[1,3,5]], {name:'Длина', strokeColor:'#ff6b6b', label:{fontSize:13}});
+                const sW = board.create('slider', [[-6,5],[-3,5],[1,2,4]], {name:'Ширина', strokeColor:blue, label:{fontSize:13}});
+                const sH = board.create('slider', [[-6,4],[-3,4],[1,2,4]], {name:'Высота', strokeColor:green, label:{fontSize:13}});
 
-                // Функция перестроения фигуры
                 function updateBox() {
-                    // Удаляем старые полигоны (если есть)
-                    board.removeObject(board.objectsList.filter(o => o.elType === 'polygon' || o.elType === 'segment'));
-
-                    const L = sL.Value();
-                    const W = sW.Value();
-                    const H = sH.Value();
-
-                    // Вершины параллелепипеда (изометрия)
+                    board.removeObject(board.objectsList.filter(o => o.elType === 'polygon' || o.elType === 'segment' || (o.elType === 'text' && o.id.startsWith('dim_'))));
+                    const L = sL.Value(), W = sW.Value(), H = sH.Value();
                     const pts = [
-                        [-L / 2, -W / 2],
-                        [L / 2, -W / 2],
-                        [L / 2 + 0.5, 0],
-                        [-L / 2 + 0.5, 0],
-                        [-L / 2, -W / 2 + H],
-                        [L / 2, -W / 2 + H],
-                        [L / 2 + 0.5, H],
-                        [-L / 2 + 0.5, H]
+                        [-L/2, -W/2], [L/2, -W/2], [L/2+0.5, 0], [-L/2+0.5, 0],
+                        [-L/2, -W/2+H], [L/2, -W/2+H], [L/2+0.5, H], [-L/2+0.5, H]
                     ];
-                    // Создаем точки
                     const p = pts.map(c => board.create('point', c, { visible: false }));
-
-                    // Грани
-                    board.create('polygon', [p[0], p[1], p[2], p[3]], {
-                        fillColor: gold,
-                        fillOpacity: 0.15,
-                        strokeColor: gold,
-                        strokeWidth: 2
-                    });
-                    board.create('polygon', [p[4], p[5], p[6], p[7]], {
-                        fillColor: gold,
-                        fillOpacity: 0.15,
-                        strokeColor: gold,
-                        strokeWidth: 2
-                    });
-                    board.create('polygon', [p[0], p[1], p[5], p[4]], {
-                        fillColor: gold,
-                        fillOpacity: 0.08,
-                        strokeColor: gold,
-                        strokeWidth: 2
-                    });
-                    board.create('polygon', [p[0], p[3], p[7], p[4]], {
-                        fillColor: gold,
-                        fillOpacity: 0.08,
-                        strokeColor: gold,
-                        strokeWidth: 2
-                    });
-                    board.create('polygon', [p[1], p[2], p[6], p[5]], {
-                        fillColor: gold,
-                        fillOpacity: 0.08,
-                        strokeColor: gold,
-                        strokeWidth: 2
-                    });
-                    board.create('polygon', [p[2], p[3], p[7], p[6]], {
-                        fillColor: gold,
-                        fillOpacity: 0.08,
-                        strokeColor: gold,
-                        strokeWidth: 2
-                    });
-
-                    // Подписи размеров (удаляем старые тексты)
-                    board.removeObject(board.objectsList.filter(o => o.elType === 'text' && o.id.startsWith('dim_')));
-
-                    board.create('text', [0, -W / 2 - 0.8, `Длина = ${L.toFixed(1)}`], {
-                        id: 'dim_L',
-                        fontSize: 14,
-                        color: '#ff6b6b'
-                    });
-                    board.create('text', [L / 2 + 1.0, 0, `Ширина = ${W.toFixed(1)}`], {
-                        id: 'dim_W',
-                        fontSize: 14,
-                        color: blue
-                    });
-                    board.create('text', [0, H + 0.6, `Высота = ${H.toFixed(1)}`], {
-                        id: 'dim_H',
-                        fontSize: 14,
-                        color: green
-                    });
-                    board.create('text', [0, -W / 2 - 1.5, `V = ${(L*W*H).toFixed(2)}`], {
-                        id: 'dim_V',
-                        fontSize: 16,
-                        color: gold,
-                        weight: 'bold'
-                    });
+                    board.create('polygon', [p[0],p[1],p[2],p[3]], {fillColor:gold, fillOpacity:0.15, strokeColor:gold, strokeWidth:2});
+                    board.create('polygon', [p[4],p[5],p[6],p[7]], {fillColor:gold, fillOpacity:0.15, strokeColor:gold, strokeWidth:2});
+                    board.create('polygon', [p[0],p[1],p[5],p[4]], {fillColor:gold, fillOpacity:0.08, strokeColor:gold, strokeWidth:2});
+                    board.create('polygon', [p[0],p[3],p[7],p[4]], {fillColor:gold, fillOpacity:0.08, strokeColor:gold, strokeWidth:2});
+                    board.create('polygon', [p[1],p[2],p[6],p[5]], {fillColor:gold, fillOpacity:0.08, strokeColor:gold, strokeWidth:2});
+                    board.create('polygon', [p[2],p[3],p[7],p[6]], {fillColor:gold, fillOpacity:0.08, strokeColor:gold, strokeWidth:2});
+                    board.create('text', [0, -W/2-0.8, `Длина = ${L.toFixed(1)}`], {id:'dim_L', fontSize:14, color:'#ff6b6b'});
+                    board.create('text', [L/2+1.0, 0, `Ширина = ${W.toFixed(1)}`], {id:'dim_W', fontSize:14, color:blue});
+                    board.create('text', [0, H+0.6, `Высота = ${H.toFixed(1)}`], {id:'dim_H', fontSize:14, color:green});
+                    board.create('text', [0, -W/2-1.5, `V = ${(L*W*H).toFixed(2)}`], {id:'dim_V', fontSize:16, color:gold, weight:'bold'});
                     board.update();
                 }
-
-                // Обновляем при изменении слайдеров
-                sL.on('drag', updateBox);
-                sW.on('drag', updateBox);
-                sH.on('drag', updateBox);
-
-                // Первый запуск
+                sL.on('drag', updateBox); sW.on('drag', updateBox); sH.on('drag', updateBox);
                 updateBox();
-
-                // Заголовок
-                board.create('text', [-6, 6.5, 'Параллелепипед'], { fontSize: 18, color: textColor, weight: 'bold' });
+                board.create('text', [-6, 6.5, 'Параллелепипед'], {fontSize:18, color:textColor, weight:'bold'});
                 return;
             }
 
-            // ============================
-            // 2. ПИРАМИДА
-            // ============================
+            // ---------- 2. ПИРАМИДА ----------
             if (type === 'pyramid') {
-                const sBase = board.create('slider', [
-                    [-6, 6],
-                    [-3, 6],
-                    [2, 4, 6]
-                ], { name: 'Сторона основания', strokeColor: '#8b949e', label: { fontSize: 13 } });
-                const sHeight = board.create('slider', [
-                    [-6, 5],
-                    [-3, 5],
-                    [1, 3, 5]
-                ], { name: 'Высота', strokeColor: gold, label: { fontSize: 13 } });
+                const sBase = board.create('slider', [[-6,6],[-3,6],[2,4,6]], {name:'Сторона основания', strokeColor:'#8b949e', label:{fontSize:13}});
+                const sHeight = board.create('slider', [[-6,5],[-3,5],[1,3,5]], {name:'Высота', strokeColor:gold, label:{fontSize:13}});
 
                 function updatePyramid() {
-                    board.removeObject(board.objectsList.filter(o => o.elType === 'polygon' || o.elType === 'segment' ||
-                        (o.elType === 'text' && o.id.startsWith('pyr_'))));
-
-                    const a = sBase.Value();
-                    const h = sHeight.Value();
-                    const pts = [
-                        [-a / 2, -a / 2],
-                        [a / 2, -a / 2],
-                        [a / 2, a / 2],
-                        [-a / 2, a / 2],
-                        [0, h]
-                    ];
+                    board.removeObject(board.objectsList.filter(o => o.elType === 'polygon' || o.elType === 'segment' || (o.elType === 'text' && o.id.startsWith('pyr_'))));
+                    const a = sBase.Value(), h = sHeight.Value();
+                    const pts = [[-a/2, -a/2], [a/2, -a/2], [a/2, a/2], [-a/2, a/2], [0, h]];
                     const p = pts.map(c => board.create('point', c, { visible: false }));
-                    board.create('polygon', [p[0], p[1], p[2], p[3]], {
-                        fillColor: gold,
-                        fillOpacity: 0.1,
-                        strokeColor: '#636e72',
-                        strokeWidth: 2
-                    });
-                    board.create('segment', [p[0], p[4]], { strokeColor: gold, strokeWidth: 2 });
-                    board.create('segment', [p[1], p[4]], { strokeColor: gold, strokeWidth: 2 });
-                    board.create('segment', [p[2], p[4]], { strokeColor: gold, strokeWidth: 2 });
-                    board.create('segment', [p[3], p[4]], { strokeColor: gold, strokeWidth: 2 });
-
-                    const S = a * a;
-                    const V = (S * h) / 3;
-                    board.create('text', [0, -a / 2 - 1.0, `S = ${S.toFixed(1)}`], {
-                        id: 'pyr_S',
-                        fontSize: 14,
-                        color: muted
-                    });
-                    board.create('text', [0, -a / 2 - 1.8, `h = ${h.toFixed(1)}`], {
-                        id: 'pyr_h',
-                        fontSize: 14,
-                        color: muted
-                    });
-                    board.create('text', [0, -a / 2 - 2.6, `V = (1/3)·S·h = ${V.toFixed(2)}`], {
-                        id: 'pyr_V',
-                        fontSize: 16,
-                        color: gold,
-                        weight: 'bold'
-                    });
+                    board.create('polygon', [p[0],p[1],p[2],p[3]], {fillColor:gold, fillOpacity:0.1, strokeColor:'#636e72', strokeWidth:2});
+                    board.create('segment', [p[0],p[4]], {strokeColor:gold, strokeWidth:2});
+                    board.create('segment', [p[1],p[4]], {strokeColor:gold, strokeWidth:2});
+                    board.create('segment', [p[2],p[4]], {strokeColor:gold, strokeWidth:2});
+                    board.create('segment', [p[3],p[4]], {strokeColor:gold, strokeWidth:2});
+                    const S = a*a, V = (S*h)/3;
+                    board.create('text', [0, -a/2-1.0, `S = ${S.toFixed(1)}`], {id:'pyr_S', fontSize:14, color:muted});
+                    board.create('text', [0, -a/2-1.8, `h = ${h.toFixed(1)}`], {id:'pyr_h', fontSize:14, color:muted});
+                    board.create('text', [0, -a/2-2.6, `V = (1/3)·S·h = ${V.toFixed(2)}`], {id:'pyr_V', fontSize:16, color:gold, weight:'bold'});
                     board.update();
                 }
-
-                sBase.on('drag', updatePyramid);
-                sHeight.on('drag', updatePyramid);
+                sBase.on('drag', updatePyramid); sHeight.on('drag', updatePyramid);
                 updatePyramid();
-
-                board.create('text', [-6, 6.5, 'Пирамида'], { fontSize: 18, color: textColor, weight: 'bold' });
+                board.create('text', [-6, 6.5, 'Пирамида'], {fontSize:18, color:textColor, weight:'bold'});
                 return;
             }
 
-            // ============================
-            // 3. ГРАФИК С ПАРАМЕТРОМ
-            // ============================
+            // ---------- 3. ГРАФИК С ПАРАМЕТРОМ (a,b,c) ----------
             if (type === 'param_graph') {
-                const aSl = board.create('slider', [
-                    [-6, 5.5],
-                    [-2, 5.5],
-                    [-3, 1, 3]
-                ], { name: 'a', strokeColor: gold, label: { fontSize: 14 } });
-                const bSl = board.create('slider', [
-                    [-6, 4.5],
-                    [-2, 4.5],
-                    [-5, 0, 5]
-                ], { name: 'b', strokeColor: gold, label: { fontSize: 14 } });
-                const cSl = board.create('slider', [
-                    [-6, 3.5],
-                    [-2, 3.5],
-                    [-5, 0, 5]
-                ], { name: 'c', strokeColor: gold, label: { fontSize: 14 } });
-
-                const f = board.create('functiongraph', [
-                    function(x) {
-                        return aSl.Value() * x * x + bSl.Value() * x + cSl.Value();
-                    },
-                    -6, 6
-                ], { strokeColor: gold, strokeWidth: 3 });
-
-                // Отображение параметров
-                board.create('text', [-6, 6.5, 'y = ax² + bx + c'], { fontSize: 18, color: textColor, weight: 'bold' });
-                board.create('text', [-6, 5.8, function() {
-                    return `a = ${aSl.Value().toFixed(2)}, b = ${bSl.Value().toFixed(2)}, c = ${cSl.Value().toFixed(2)}`;
-                }], { fontSize: 14, color: gold });
-
-                // Вершина
-                board.create('point', [
-                    function() { return -bSl.Value() / (2 * aSl.Value()); },
-                    function() {
-                        const x = -bSl.Value() / (2 * aSl.Value());
-                        return aSl.Value() * x * x + bSl.Value() * x + cSl.Value();
-                    }
-                ], { name: 'Вершина', color: '#ff6b6b', size: 4 });
-
-                // Корни (если есть)
-                board.create('point', [
-                    function() {
-                        const D = bSl.Value() * bSl.Value() - 4 * aSl.Value() * cSl.Value();
-                        if (D < 0) return NaN;
-                        return (-bSl.Value() - Math.sqrt(D)) / (2 * aSl.Value());
-                    },
-                    0
-                ], { name: 'x₁', color: green, size: 4 });
-                board.create('point', [
-                    function() {
-                        const D = bSl.Value() * bSl.Value() - 4 * aSl.Value() * cSl.Value();
-                        if (D < 0) return NaN;
-                        return (-bSl.Value() + Math.sqrt(D)) / (2 * aSl.Value());
-                    },
-                    0
-                ], { name: 'x₂', color: green, size: 4 });
-
-                // Дискриминант
-                board.create('text', [-6, 2.8, function() {
-                    const D = bSl.Value() ** 2 - 4 * aSl.Value() * cSl.Value();
-                    return `D = ${D.toFixed(2)}`;
-                }], { fontSize: 14, color: muted });
-
+                const aSl = board.create('slider', [[-6,5.5],[-2,5.5],[-3,1,3]], {name:'a', strokeColor:gold, label:{fontSize:14}});
+                const bSl = board.create('slider', [[-6,4.5],[-2,4.5],[-5,0,5]], {name:'b', strokeColor:gold, label:{fontSize:14}});
+                const cSl = board.create('slider', [[-6,3.5],[-2,3.5],[-5,0,5]], {name:'c', strokeColor:gold, label:{fontSize:14}});
+                const f = board.create('functiongraph', [function(x){return aSl.Value()*x*x + bSl.Value()*x + cSl.Value();}, -6,6], {strokeColor:gold, strokeWidth:3});
+                board.create('text', [-6, 6.5, 'y = ax² + bx + c'], {fontSize:18, color:textColor, weight:'bold'});
+                board.create('text', [-6, 5.8, function(){return `a = ${aSl.Value().toFixed(2)}, b = ${bSl.Value().toFixed(2)}, c = ${cSl.Value().toFixed(2)}`;}], {fontSize:14, color:gold});
+                board.create('point', [function(){return -bSl.Value()/(2*aSl.Value());}, function(){const x=-bSl.Value()/(2*aSl.Value()); return aSl.Value()*x*x+bSl.Value()*x+cSl.Value();}], {name:'Вершина', color:'#ff6b6b', size:4});
+                board.create('point', [function(){const D=bSl.Value()**2-4*aSl.Value()*cSl.Value(); if(D<0) return NaN; return (-bSl.Value()-Math.sqrt(D))/(2*aSl.Value());}, 0], {name:'x₁', color:green, size:4});
+                board.create('point', [function(){const D=bSl.Value()**2-4*aSl.Value()*cSl.Value(); if(D<0) return NaN; return (-bSl.Value()+Math.sqrt(D))/(2*aSl.Value());}, 0], {name:'x₂', color:green, size:4});
+                board.create('text', [-6, 2.8, function(){const D=bSl.Value()**2-4*aSl.Value()*cSl.Value(); return `D = ${D.toFixed(2)}`;}], {fontSize:14, color:muted});
                 return;
             }
 
-            // ============================
-            // 4. ТРИГОНОМЕТРИЧЕСКИЙ КРУГ
-            // ============================
+            // ---------- 4. ТРИГОНОМЕТРИЧЕСКИЙ КРУГ ----------
             if (type === 'trig_circle') {
-                board.create('circle', [
-                    [0, 0], 5
-                ], { strokeColor: '#636e72', strokeWidth: 1.5 });
-                board.create('line', [
-                    [0, 0],
-                    [1, 0]
-                ], { strokeColor: '#636e72', strokeWidth: 1 });
-                board.create('line', [
-                    [0, 0],
-                    [0, 1]
-                ], { strokeColor: '#636e72', strokeWidth: 1 });
-
-                const glider = board.create('glider', [1, 0], board.defaultAxes.x, {
-                    name: 'α',
-                    color: gold,
-                    size: 5
-                });
-                const point = board.create('point', [
-                    function() { return 5 * Math.cos(glider.X()); },
-                    function() { return 5 * Math.sin(glider.X()); }
-                ], { color: gold, size: 5 });
-
-                board.create('segment', [
-                    [0, 0], point
-                ], { strokeColor: gold, strokeWidth: 2 });
-
-                board.create('text', [-6, 6.5, 'Тригонометрический круг'], { fontSize: 18, color: textColor,
-                    weight: 'bold' });
-                board.create('text', [-6, 5.8, function() {
-                    return `sin(α) = ${Math.sin(glider.X()).toFixed(2)}`;
-                }], { fontSize: 15, color: green });
-                board.create('text', [-6, 5.1, function() {
-                    return `cos(α) = ${Math.cos(glider.X()).toFixed(2)}`;
-                }], { fontSize: 15, color: blue });
-                board.create('text', [-6, 4.4, function() {
-                    return `tg(α) = ${(Math.tan(glider.X())).toFixed(2)}`;
-                }], { fontSize: 15, color: gold });
-                board.create('text', [-6, 3.7, function() {
-                    return `α = ${(glider.X() * 180 / Math.PI).toFixed(1)}°`;
-                }], { fontSize: 14, color: muted });
+                board.create('circle', [[0,0],5], {strokeColor:'#636e72', strokeWidth:1.5});
+                board.create('line', [[0,0],[1,0]], {strokeColor:'#636e72', strokeWidth:1});
+                board.create('line', [[0,0],[0,1]], {strokeColor:'#636e72', strokeWidth:1});
+                const glider = board.create('glider', [1,0], board.defaultAxes.x, {name:'α', color:gold, size:5});
+                const point = board.create('point', [function(){return 5*Math.cos(glider.X());}, function(){return 5*Math.sin(glider.X());}], {color:gold, size:5});
+                board.create('segment', [[0,0], point], {strokeColor:gold, strokeWidth:2});
+                board.create('text', [-6, 6.5, 'Тригонометрический круг'], {fontSize:18, color:textColor, weight:'bold'});
+                board.create('text', [-6, 5.8, function(){return `sin(α) = ${Math.sin(glider.X()).toFixed(2)}`;}], {fontSize:15, color:green});
+                board.create('text', [-6, 5.1, function(){return `cos(α) = ${Math.cos(glider.X()).toFixed(2)}`;}], {fontSize:15, color:blue});
+                board.create('text', [-6, 4.4, function(){return `tg(α) = ${(Math.tan(glider.X())).toFixed(2)}`;}], {fontSize:15, color:gold});
+                board.create('text', [-6, 3.7, function(){return `α = ${(glider.X()*180/Math.PI).toFixed(1)}°`;}], {fontSize:14, color:muted});
                 return;
             }
 
-            // ============================
-            // 5. ТЕОРЕМА ПИФАГОРА
-            // ============================
+            // ---------- 5. ТЕОРЕМА ПИФАГОРА ----------
             if (type === 'pythagoras') {
-                const aSl = board.create('slider', [
-                    [-6, 5.5],
-                    [-2, 5.5],
-                    [1, 3, 5]
-                ], { name: 'a (катет)', strokeColor: green, label: { fontSize: 14 } });
-                const bSl = board.create('slider', [
-                    [-6, 4.5],
-                    [-2, 4.5],
-                    [1, 4, 5]
-                ], { name: 'b (катет)', strokeColor: blue, label: { fontSize: 14 } });
-
-                const pA = board.create('point', [0, 0], { visible: false });
-                const pB = board.create('point', [
-                    function() { return aSl.Value(); },
-                    0
-                ], { visible: false });
-                const pC = board.create('point', [
-                    0,
-                    function() { return bSl.Value(); }
-                ], { visible: false });
-
-                board.create('segment', [pA, pB], { strokeColor: green, strokeWidth: 3 });
-                board.create('segment', [pA, pC], { strokeColor: blue, strokeWidth: 3 });
-                board.create('segment', [pB, pC], { strokeColor: gold, strokeWidth: 3 });
-
-                board.create('text', [
-                    function() { return aSl.Value() / 2; },
-                    -0.5,
-                    function() { return `a = ${aSl.Value().toFixed(1)}`; }
-                ], { fontSize: 14, color: green });
-
-                board.create('text', [
-                    -0.6,
-                    function() { return bSl.Value() / 2; },
-                    function() { return `b = ${bSl.Value().toFixed(1)}`; }
-                ], { fontSize: 14, color: blue });
-
-                board.create('text', [
-                    function() { return aSl.Value() / 2 + 0.3; },
-                    function() { return bSl.Value() / 2 + 0.3; },
-                    function() {
-                        const c = Math.sqrt(aSl.Value() ** 2 + bSl.Value() ** 2);
-                        return `c = ${c.toFixed(2)}`;
-                    }
-                ], { fontSize: 15, color: gold, weight: 'bold' });
-
-                // Квадраты на сторонах (площади)
-                board.create('text', [
-                    function() { return aSl.Value() / 2; },
-                    function() { return -0.8 - aSl.Value() / 2; },
-                    function() { return `a² = ${(aSl.Value()**2).toFixed(1)}`; }
-                ], { fontSize: 13, color: green });
-                board.create('text', [
-                    function() { return -0.8 - bSl.Value() / 2; },
-                    function() { return bSl.Value() / 2; },
-                    function() { return `b² = ${(bSl.Value()**2).toFixed(1)}`; }
-                ], { fontSize: 13, color: blue });
-
-                board.create('text', [-6, 6.5, 'Теорема Пифагора'], { fontSize: 18, color: textColor, weight: 'bold' });
-                board.create('text', [-6, 5.8, function() {
-                    const c = Math.sqrt(aSl.Value() ** 2 + bSl.Value() ** 2);
-                    return `${aSl.Value().toFixed(1)}² + ${bSl.Value().toFixed(1)}² = ${c.toFixed(2)}²`;
-                }], { fontSize: 16, color: gold });
-
-                board.create('angle', [pB, pA, pC], { radius: 0.4, strokeColor: '#8b949e' });
+                const aSl = board.create('slider', [[-6,5.5],[-2,5.5],[1,3,5]], {name:'a (катет)', strokeColor:green, label:{fontSize:14}});
+                const bSl = board.create('slider', [[-6,4.5],[-2,4.5],[1,4,5]], {name:'b (катет)', strokeColor:blue, label:{fontSize:14}});
+                const pA = board.create('point', [0,0], {visible:false});
+                const pB = board.create('point', [function(){return aSl.Value();}, 0], {visible:false});
+                const pC = board.create('point', [0, function(){return bSl.Value();}], {visible:false});
+                board.create('segment', [pA,pB], {strokeColor:green, strokeWidth:3});
+                board.create('segment', [pA,pC], {strokeColor:blue, strokeWidth:3});
+                board.create('segment', [pB,pC], {strokeColor:gold, strokeWidth:3});
+                board.create('text', [function(){return aSl.Value()/2;}, -0.5, function(){return `a = ${aSl.Value().toFixed(1)}`;}], {fontSize:14, color:green});
+                board.create('text', [-0.6, function(){return bSl.Value()/2;}, function(){return `b = ${bSl.Value().toFixed(1)}`;}], {fontSize:14, color:blue});
+                board.create('text', [function(){return aSl.Value()/2+0.3;}, function(){return bSl.Value()/2+0.3;}, function(){const c=Math.sqrt(aSl.Value()**2+bSl.Value()**2); return `c = ${c.toFixed(2)}`;}], {fontSize:15, color:gold, weight:'bold'});
+                board.create('text', [function(){return aSl.Value()/2;}, function(){return -0.8-aSl.Value()/2;}, function(){return `a² = ${(aSl.Value()**2).toFixed(1)}`;}], {fontSize:13, color:green});
+                board.create('text', [function(){return -0.8-bSl.Value()/2;}, function(){return bSl.Value()/2;}, function(){return `b² = ${(bSl.Value()**2).toFixed(1)}`;}], {fontSize:13, color:blue});
+                board.create('text', [-6, 6.5, 'Теорема Пифагора'], {fontSize:18, color:textColor, weight:'bold'});
+                board.create('text', [-6, 5.8, function(){const c=Math.sqrt(aSl.Value()**2+bSl.Value()**2); return `${aSl.Value().toFixed(1)}² + ${bSl.Value().toFixed(1)}² = ${c.toFixed(2)}²`;}], {fontSize:16, color:gold});
+                board.create('angle', [pB,pA,pC], {radius:0.4, strokeColor:'#8b949e'});
                 return;
             }
 
-            // ============================
-            // 6. СЕЧЕНИЕ КУБА
-            // ============================
+            // ---------- 6. СЕЧЕНИЕ КУБА ----------
             if (type === 'cube_section') {
-                const angleSl = board.create('slider', [
-                    [-6, 6],
-                    [-2, 6],
-                    [0.2, 0.8, 1.5]
-                ], { name: 'Угол наклона', strokeColor: gold, label: { fontSize: 13 } });
-                const shiftSl = board.create('slider', [
-                    [-6, 5],
-                    [-2, 5],
-                    [-1, 0, 1]
-                ], { name: 'Смещение', strokeColor: gold, label: { fontSize: 13 } });
+                const angleSl = board.create('slider', [[-6,6],[-2,6],[0.2,0.8,1.5]], {name:'Угол наклона', strokeColor:gold, label:{fontSize:13}});
+                const shiftSl = board.create('slider', [[-6,5],[-2,5],[-1,0,1]], {name:'Смещение', strokeColor:gold, label:{fontSize:13}});
 
                 function updateSection() {
-                    board.removeObject(board.objectsList.filter(o => o.elType === 'polygon' || o.elType === 'segment' ||
-                        (o.elType === 'text' && o.id.startsWith('sec_'))));
-
-                    const size = 3;
-                    const angle = angleSl.Value();
-                    const shift = shiftSl.Value();
-                    // Вершины куба (изометрия)
+                    board.removeObject(board.objectsList.filter(o => o.elType === 'polygon' || o.elType === 'segment' || (o.elType === 'text' && o.id.startsWith('sec_'))));
+                    const size=3, angle=angleSl.Value(), shift=shiftSl.Value();
                     const pts = [
-                        [-size / 2, -size / 2],
-                        [size / 2, -size / 2],
-                        [size / 2 + 0.5, 0],
-                        [-size / 2 + 0.5, 0],
-                        [-size / 2, -size / 2 + size],
-                        [size / 2, -size / 2 + size],
-                        [size / 2 + 0.5, size],
-                        [-size / 2 + 0.5, size]
+                        [-size/2, -size/2], [size/2, -size/2], [size/2+0.5,0], [-size/2+0.5,0],
+                        [-size/2, -size/2+size], [size/2, -size/2+size], [size/2+0.5,size], [-size/2+0.5,size]
                     ];
                     const p = pts.map(c => board.create('point', c, { visible: false }));
-
-                    // Рёбра куба
-                    board.create('polygon', [p[0], p[1], p[2], p[3]], {
-                        fillColor: '#2d3436',
-                        fillOpacity: 0.2,
-                        strokeColor: '#636e72',
-                        strokeWidth: 1.5
-                    });
-                    board.create('polygon', [p[4], p[5], p[6], p[7]], {
-                        fillColor: '#2d3436',
-                        fillOpacity: 0.2,
-                        strokeColor: '#636e72',
-                        strokeWidth: 1.5
-                    });
-                    board.create('polygon', [p[0], p[1], p[5], p[4]], {
-                        fillColor: '#2d3436',
-                        fillOpacity: 0.1,
-                        strokeColor: '#636e72',
-                        strokeWidth: 1.5
-                    });
-                    board.create('polygon', [p[0], p[3], p[7], p[4]], {
-                        fillColor: '#2d3436',
-                        fillOpacity: 0.1,
-                        strokeColor: '#636e72',
-                        strokeWidth: 1.5
-                    });
-                    board.create('polygon', [p[1], p[2], p[6], p[5]], {
-                        fillColor: '#2d3436',
-                        fillOpacity: 0.1,
-                        strokeColor: '#636e72',
-                        strokeWidth: 1.5
-                    });
-                    board.create('polygon', [p[2], p[3], p[7], p[6]], {
-                        fillColor: '#2d3436',
-                        fillOpacity: 0.1,
-                        strokeColor: '#636e72',
-                        strokeWidth: 1.5
-                    });
-
-                    // Сечение — плоскость, пересекающая куб
-                    const y0 = shift;
-                    const x0 = -0.5;
+                    board.create('polygon', [p[0],p[1],p[2],p[3]], {fillColor:'#2d3436', fillOpacity:0.2, strokeColor:'#636e72', strokeWidth:1.5});
+                    board.create('polygon', [p[4],p[5],p[6],p[7]], {fillColor:'#2d3436', fillOpacity:0.2, strokeColor:'#636e72', strokeWidth:1.5});
+                    board.create('polygon', [p[0],p[1],p[5],p[4]], {fillColor:'#2d3436', fillOpacity:0.1, strokeColor:'#636e72', strokeWidth:1.5});
+                    board.create('polygon', [p[0],p[3],p[7],p[4]], {fillColor:'#2d3436', fillOpacity:0.1, strokeColor:'#636e72', strokeWidth:1.5});
+                    board.create('polygon', [p[1],p[2],p[6],p[5]], {fillColor:'#2d3436', fillOpacity:0.1, strokeColor:'#636e72', strokeWidth:1.5});
+                    board.create('polygon', [p[2],p[3],p[7],p[6]], {fillColor:'#2d3436', fillOpacity:0.1, strokeColor:'#636e72', strokeWidth:1.5});
+                    const y0 = shift, x0=-0.5;
                     const ptsSection = [
-                        [-size / 2, y0 - 0.5 * size * Math.tan(angle)],
-                        [size / 2, y0 + 0.5 * size * Math.tan(angle)],
-                        [size / 2 + 0.5, y0 + 0.5 * size * Math.tan(angle) + 0.5],
-                        [-size / 2 + 0.5, y0 - 0.5 * size * Math.tan(angle) + 0.5]
+                        [-size/2, y0 - 0.5*size*Math.tan(angle)],
+                        [size/2, y0 + 0.5*size*Math.tan(angle)],
+                        [size/2+0.5, y0 + 0.5*size*Math.tan(angle)+0.5],
+                        [-size/2+0.5, y0 - 0.5*size*Math.tan(angle)+0.5]
                     ];
                     const pSec = ptsSection.map(c => board.create('point', c, { visible: false }));
-                    board.create('polygon', pSec, {
-                        fillColor: gold,
-                        fillOpacity: 0.35,
-                        strokeColor: gold,
-                        strokeWidth: 2.5
-                    });
-
-                    board.create('text', [-6, 6.5, 'Куб с сечением'], { fontSize: 18, color: textColor, weight: 'bold' });
-                    board.create('text', [-6, 5.8, 'Золотая плоскость'], { fontSize: 16, color: gold });
+                    board.create('polygon', pSec, {fillColor:gold, fillOpacity:0.35, strokeColor:gold, strokeWidth:2.5});
+                    board.create('text', [-6, 6.5, 'Куб с сечением'], {fontSize:18, color:textColor, weight:'bold'});
+                    board.create('text', [-6, 5.8, 'Золотая плоскость'], {fontSize:16, color:gold});
                     board.update();
                 }
-
-                angleSl.on('drag', updateSection);
-                shiftSl.on('drag', updateSection);
+                angleSl.on('drag', updateSection); shiftSl.on('drag', updateSection);
                 updateSection();
                 return;
             }
 
-            // ============================
-            // 7. КАСАТЕЛЬНАЯ
-            // ============================
-            if (type === 'tangent') {
-                const func = board.create('functiongraph', [
-                    function(x) { return 0.15 * x * x * x - 0.4 * x * x + x + 1; },
-                    -5, 5
-                ], { strokeColor: '#636e72', strokeWidth: 2 });
+            // ---------- 7. КВАДРАТИЧНАЯ ФУНКЦИЯ ----------
+            if (type === 'quadratic') {
+                const aSl = board.create('slider', [[-6,5.5],[-2,5.5],[-3,1,3]], {name:'a', strokeColor:gold, label:{fontSize:14}});
+                const bSl = board.create('slider', [[-6,4.5],[-2,4.5],[-5,0,5]], {name:'b', strokeColor:gold, label:{fontSize:14}});
+                const cSl = board.create('slider', [[-6,3.5],[-2,3.5],[-5,0,5]], {name:'c', strokeColor:gold, label:{fontSize:14}});
+                const f = board.create('functiongraph', [function(x){return aSl.Value()*x*x + bSl.Value()*x + cSl.Value();}, -6,6], {strokeColor:gold, strokeWidth:3});
+                board.create('text', [-6, 6.5, 'Квадратичная функция'], {fontSize:18, color:textColor, weight:'bold'});
+                board.create('text', [-6, 5.8, function(){return `y = ${aSl.Value().toFixed(2)}x² + ${bSl.Value().toFixed(2)}x + ${cSl.Value().toFixed(2)}`;}], {fontSize:15, color:gold});
+                return;
+            }
 
-                const glider = board.create('glider', [1, 1, func], {
-                    name: 'P',
-                    color: gold,
-                    size: 5
-                });
-
-                board.create('tangent', [glider], {
-                    strokeColor: gold,
-                    strokeWidth: 3,
-                    dash: 0
-                });
-
-                board.create('text', [-6, 6.5, 'Касательная к графику'], { fontSize: 18, color: textColor,
-                    weight: 'bold' });
-                board.create('text', [-6, 5.8, 'Двигайте точку P по графику'], { fontSize: 14, color: muted });
-                board.create('text', [-6, 5.1, function() {
-                    const f = function(x) { return 0.15 * x * x * x - 0.4 * x * x + x + 1; };
-                    const df = function(x) { return 0.45 * x * x - 0.8 * x + 1; };
-                    const x0 = glider.X();
-                    const y0 = f(x0);
-                    const k = df(x0);
+            // ---------- 8. КАСАТЕЛЬНАЯ ----------
+            if (type === 'tangent' || type === 'tangent_lab') {
+                const graph = board.create('functiongraph', [function(x){return 0.15*x*x*x - 0.4*x*x + x + 1;}, -5,5], {strokeColor:'#636e72', strokeWidth:2});
+                const glider = board.create('glider', [1,1,graph], {name:'P', color:gold, size:5});
+                board.create('tangent', [glider], {strokeColor:gold, strokeWidth:3, dash:0});
+                board.create('text', [-6, 6.5, 'Касательная к графику'], {fontSize:18, color:textColor, weight:'bold'});
+                board.create('text', [-6, 5.8, 'Двигайте точку P по графику'], {fontSize:14, color:muted});
+                board.create('text', [-6, 5.1, function(){
+                    const f = function(x){return 0.15*x*x*x - 0.4*x*x + x + 1;};
+                    const df = function(x){return 0.45*x*x - 0.8*x + 1;};
+                    const x0 = glider.X(), y0 = f(x0), k = df(x0);
                     return `f'(${x0.toFixed(2)}) = ${k.toFixed(3)},  y = ${k.toFixed(2)}(x - ${x0.toFixed(2)}) + ${y0.toFixed(2)}`;
-                }], { fontSize: 14, color: gold });
+                }], {fontSize:14, color:gold});
                 return;
             }
 
-            // ============================
-            // 8. СВОЙСТВА ЛОГАРИФМОВ
-            // ============================
+            // ---------- 9. ОПРЕДЕЛЁННЫЙ ИНТЕГРАЛ ----------
+            if (type === 'integral') {
+                const f = function(x){return 0.2*x*x + 1;};
+                board.create('functiongraph', [f, -5,5], {strokeColor:gold, strokeWidth:3});
+                const aSl = board.create('slider', [[-6,5],[-3,5],[-4,-2,2]], {name:'a (нижний)', strokeColor:blue, label:{fontSize:13}});
+                const bSl = board.create('slider', [[-6,4],[-3,4],[-2,2,5]], {name:'b (верхний)', strokeColor:green, label:{fontSize:13}});
+                board.create('integral', [aSl, bSl, function(x){return f(x);}], {fillColor:gold, fillOpacity:0.3});
+                board.create('text', [-6, 6.5, 'Определённый интеграл'], {fontSize:18, color:textColor, weight:'bold'});
+                board.create('text', [-6, 5.8, function(){const a=aSl.Value(), b=bSl.Value(); const area = (0.2/3)*(b*b*b - a*a*a) + (b - a); return `S = ∫ₐᵇ f(x) dx = ${area.toFixed(3)}`;}], {fontSize:15, color:gold});
+                return;
+            }
+
+            // ---------- ЛАБОРАТОРИИ (логарифмы, тождества, корни, первообразная) ----------
             if (type === 'log_properties') {
-                board.create('text', [-6, 6.5, 'Свойства логарифмов'], { fontSize: 18, color: textColor, weight: 'bold' });
-                board.create('text', [-6, 5.5, 'logₐ(x·y) = logₐx + logₐy'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 4.7, 'logₐ(x/y) = logₐx - logₐy'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 3.9, 'logₐ(xⁿ) = n·logₐx'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 3.1, 'logₐa = 1, logₐ1 = 0'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 2.3, 'a^(logₐx) = x'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 1.5, 'logₐ(b) = logₓ(b) / logₓ(a)'], { fontSize: 16, color: gold });
+                board.create('text', [-6, 6.5, 'Свойства логарифмов'], {fontSize:18, color:textColor, weight:'bold'});
+                board.create('text', [-6, 5.5, 'logₐ(x·y) = logₐx + logₐy'], {fontSize:16, color:gold});
+                board.create('text', [-6, 4.7, 'logₐ(x/y) = logₐx - logₐy'], {fontSize:16, color:gold});
+                board.create('text', [-6, 3.9, 'logₐ(xⁿ) = n·logₐx'], {fontSize:16, color:gold});
+                board.create('text', [-6, 3.1, 'logₐa = 1, logₐ1 = 0'], {fontSize:16, color:gold});
+                board.create('text', [-6, 2.3, 'a^(logₐx) = x'], {fontSize:16, color:gold});
                 return;
             }
 
-            // ============================
-            // 9. ТРИГОНОМЕТРИЧЕСКИЕ ТОЖДЕСТВА
-            // ============================
             if (type === 'trig_identities') {
-                board.create('text', [-6, 6.5, 'Тригонометрические тождества'], { fontSize: 18, color: textColor,
-                    weight: 'bold' });
-                board.create('text', [-6, 5.5, 'sin²α + cos²α = 1'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 4.7, 'sin(α±β) = sinα·cosβ ± cosα·sinβ'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 3.9, 'cos(α±β) = cosα·cosβ ∓ sinα·sinβ'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 3.1, 'sin(2α) = 2sinα·cosα'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 2.3, 'cos(2α) = cos²α − sin²α'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 1.5, 'tg(α) = sinα/cosα'], { fontSize: 16, color: gold });
+                board.create('text', [-6, 6.5, 'Тригонометрические тождества'], {fontSize:18, color:textColor, weight:'bold'});
+                board.create('text', [-6, 5.5, 'sin²α + cos²α = 1'], {fontSize:16, color:gold});
+                board.create('text', [-6, 4.7, 'sin(α±β) = sinα·cosβ ± cosα·sinβ'], {fontSize:16, color:gold});
+                board.create('text', [-6, 3.9, 'cos(α±β) = cosα·cosβ ∓ sinα·sinβ'], {fontSize:16, color:gold});
+                board.create('text', [-6, 3.1, 'sin(2α) = 2sinα·cosα'], {fontSize:16, color:gold});
+                board.create('text', [-6, 2.3, 'cos(2α) = cos²α − sin²α'], {fontSize:16, color:gold});
                 return;
             }
 
-            // ============================
-            // 10. СВОЙСТВА КОРНЕЙ
-            // ============================
             if (type === 'roots') {
-                board.create('text', [-6, 6.5, 'Свойства корней n-й степени'], { fontSize: 18, color: textColor,
-                    weight: 'bold' });
-                board.create('text', [-6, 5.5, 'ⁿ√(a·b) = ⁿ√a · ⁿ√b'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 4.7, 'ⁿ√(a/b) = ⁿ√a / ⁿ√b'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 3.9, '(ⁿ√a)ⁿ = a'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 3.1, 'ⁿ√(aᵐ) = a^(m/n)'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 2.3, 'ᵐ√(ⁿ√a) = ⁿᵐ√a'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 1.5, 'Если n нечётное, ⁿ√a существует для любого a'], { fontSize: 16, color: gold });
+                board.create('text', [-6, 6.5, 'Свойства корней n-й степени'], {fontSize:18, color:textColor, weight:'bold'});
+                board.create('text', [-6, 5.5, 'ⁿ√(a·b) = ⁿ√a · ⁿ√b'], {fontSize:16, color:gold});
+                board.create('text', [-6, 4.7, 'ⁿ√(a/b) = ⁿ√a / ⁿ√b'], {fontSize:16, color:gold});
+                board.create('text', [-6, 3.9, '(ⁿ√a)ⁿ = a'], {fontSize:16, color:gold});
+                board.create('text', [-6, 3.1, 'ⁿ√(aᵐ) = a^(m/n)'], {fontSize:16, color:gold});
+                board.create('text', [-6, 2.3, 'ᵐ√(ⁿ√a) = ⁿᵐ√a'], {fontSize:16, color:gold});
                 return;
             }
 
-            // ============================
-            // 11. ПЕРВООБРАЗНАЯ
-            // ============================
             if (type === 'antiderivative') {
-                board.create('text', [-6, 6.5, 'Первообразная функции'], { fontSize: 18, color: textColor,
-                    weight: 'bold' });
-                board.create('text', [-6, 5.5, 'F(x) = ∫f(x)dx'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 4.7, 'f(x) = x² → F(x) = x³/3 + C'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 3.9, 'f(x) = sin(x) → F(x) = -cos(x) + C'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 3.1, 'f(x) = eˣ → F(x) = eˣ + C'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 2.3, 'f(x) = 1/x → F(x) = ln|x| + C'], { fontSize: 16, color: gold });
-                board.create('text', [-6, 1.5, 'f(x) = 1/√(1-x²) → F(x) = arcsin(x) + C'], { fontSize: 16, color: gold });
+                board.create('text', [-6, 6.5, 'Первообразная'], {fontSize:18, color:textColor, weight:'bold'});
+                board.create('text', [-6, 5.5, 'F(x) = ∫f(x)dx'], {fontSize:16, color:gold});
+                board.create('text', [-6, 4.7, 'f(x) = x² → F(x) = x³/3 + C'], {fontSize:16, color:gold});
+                board.create('text', [-6, 3.9, 'f(x) = sin(x) → F(x) = -cos(x) + C'], {fontSize:16, color:gold});
+                board.create('text', [-6, 3.1, 'f(x) = eˣ → F(x) = eˣ + C'], {fontSize:16, color:gold});
+                board.create('text', [-6, 2.3, 'f(x) = 1/x → F(x) = ln|x| + C'], {fontSize:16, color:gold});
                 return;
             }
 
             // Fallback
-            board.create('text', [-5, 5, 'Модель в разработке'], { fontSize: 16, color: muted });
+            board.create('text', [-5, 5, 'Модель в разработке'], {fontSize:16, color:muted});
         }
 
         // ==========================================
-        // ПРОГРЕСС И ИЗБРАННОЕ
+        // КАЛЬКУЛЯТОРЫ
+        // ==========================================
+        const calculators = [
+            { id:'c1', title:'🏗️ Объём бетона', desc:'Расчёт объёма бетона для фундамента, стен и перекрытий.',
+                fields:[{name:'length',label:'Длина (м)',default:10,step:0.5},{name:'width',label:'Ширина (м)',default:6,step:0.5},{name:'height',label:'Высота (м)',default:0.5,step:0.1}],
+                formula:(v)=>v.length*v.width*v.height, unit:'м³', historyKey:'calc_beton' },
+            { id:'c2', title:'🧱 Количество кирпича', desc:'Расчёт количества кирпича для кладки стен.',
+                fields:[{name:'length',label:'Длина стены (м)',default:10,step:0.5},{name:'height',label:'Высота стены (м)',default:3,step:0.1},{name:'thickness',label:'Толщина кладки (м)',default:0.38,step:0.01}],
+                formula:(v)=>Math.ceil(v.length*v.height*v.thickness*400), unit:'шт', historyKey:'calc_brick' },
+            { id:'c3', title:'🔲 Расход плитки', desc:'Расчёт количества плитки для пола и стен.',
+                fields:[{name:'length',label:'Длина (м)',default:5,step:0.5},{name:'width',label:'Ширина (м)',default:4,step:0.5},{name:'tileSize',label:'Размер плитки (м²)',type:'select',options:['0.09','0.16','0.25','0.36'],default:'0.16'}],
+                formula:(v)=>Math.ceil((v.length*v.width)/parseFloat(v.tileSize)*1.05), unit:'шт (с запасом 5%)', historyKey:'calc_tile' },
+            { id:'c4', title:'📐 Уклон кровли', desc:'Расчёт угла наклона кровли.',
+                fields:[{name:'height',label:'Высота конька (м)',default:3,step:0.1},{name:'span',label:'Ширина пролёта (м)',default:6,step:0.5}],
+                formula:(v)=>{const angle=Math.atan(v.height/(v.span/2))*180/Math.PI; return angle.toFixed(1);}, unit:'градусов', historyKey:'calc_roof' },
+            { id:'c5', title:'🎨 Расход краски', desc:'Расчёт количества краски для стен и фасадов.',
+                fields:[{name:'length',label:'Длина стены (м)',default:10,step:0.5},{name:'height',label:'Высота стены (м)',default:3,step:0.1},{name:'coverage',label:'Расход (м²/л)',default:8,step:0.5}],
+                formula:(v)=>(v.length*v.height/v.coverage).toFixed(1), unit:'л', historyKey:'calc_paint' },
+            { id:'c6', title:'🪜 Расчёт лестницы', desc:'Расчёт параметров лестничного марша.',
+                fields:[{name:'height',label:'Высота подъёма (м)',default:3,step:0.1},{name:'tread',label:'Ширина проступи (м)',default:0.3,step:0.01},{name:'riser',label:'Высота подступенка (м)',default:0.15,step:0.01}],
+                formula:(v)=>{const steps=Math.round(v.height/v.riser); const length=steps*v.tread; return `Ступеней: ${steps}, длина марша: ${length.toFixed(2)} м`;}, unit:'', historyKey:'calc_stairs' },
+            { id:'c7', title:'🔩 Расчёт арматуры', desc:'Расчёт арматуры для фундамента.',
+                fields:[{name:'length',label:'Длина (м)',default:10,step:0.5},{name:'width',label:'Ширина (м)',default:6,step:0.5},{name:'rods',label:'Прутков на 1 м²',default:8,step:1}],
+                formula:(v)=>Math.ceil(v.length*v.width*v.rods/10), unit:'прутков (10 м)', historyKey:'calc_rebar' },
+            { id:'c8', title:'📊 Площадь фасада', desc:'Расчёт площади фасада.',
+                fields:[{name:'length',label:'Длина фасада (м)',default:20,step:0.5},{name:'height',label:'Высота фасада (м)',default:8,step:0.1},{name:'windows',label:'Площадь окон (м²)',default:5,step:0.5}],
+                formula:(v)=>(v.length*v.height-v.windows).toFixed(1), unit:'м²', historyKey:'calc_facade' }
+        ];
+
+        function renderCalculators() {
+            const container = document.getElementById('calculatorsContainer');
+            if (!container) return;
+            container.innerHTML = calculators.map(calc => {
+                const history = JSON.parse(localStorage.getItem(calc.historyKey)) || [];
+                const lastResult = history.length>0 ? history[history.length-1] : null;
+                return `
+                    <div class="calculator-card">
+                        <span class="teacher-badge">👨‍🏫</span>
+                        <h4>${calc.title}</h4>
+                        <p class="calc-desc">${calc.desc}</p>
+                        <div class="calc-row">
+                            ${calc.fields.map(f => `
+                                <label>
+                                    <span>${f.label}</span>
+                                    ${f.type==='select' ? `
+                                        <select id="${calc.id}_${f.name}" onchange="calculate('${calc.id}')">
+                                            ${f.options.map(o => `<option value="${o}" ${o===f.default?'selected':''}>${o}</option>`).join('')}
+                                        </select>
+                                    ` : `
+                                        <input type="number" id="${calc.id}_${f.name}" value="${f.default}" step="${f.step}" oninput="calculate('${calc.id}')">
+                                    `}
+                                </label>
+                            `).join('')}
+                        </div>
+                        <button class="btn-gold" onclick="calculate('${calc.id}')" style="padding:6px 16px;font-size:13px;">Рассчитать</button>
+                        <div class="calc-result" id="${calc.id}_result">
+                            <span class="label">Результат:</span>
+                            <span class="value">— <span class="unit">${calc.unit}</span></span>
+                        </div>
+                        ${lastResult ? `
+                            <div class="calc-history">
+                                📋 Последний расчёт: <span style="color:var(--gold);font-weight:500;">${lastResult.result}</span>
+                                <span style="opacity:0.5;font-size:10px;display:block;">${lastResult.date}</span>
+                            </div>
+                        ` : ''}
+                        <div class="calc-teacher-note">${calc.teacherNote || '📐 Формула применена'}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function calculate(calcId) {
+            const calc = calculators.find(c => c.id === calcId);
+            if (!calc) return;
+            const values = {};
+            calc.fields.forEach(f => {
+                const el = document.getElementById(`${calcId}_${f.name}`);
+                values[f.name] = f.type==='select' ? el.value : parseFloat(el.value) || 0;
+            });
+            const result = calc.formula(values);
+            const resultEl = document.getElementById(`${calcId}_result`);
+            if (resultEl) {
+                resultEl.classList.add('show');
+                resultEl.querySelector('.value').innerHTML = `${result} <span class="unit">${calc.unit}</span>`;
+            }
+            const history = JSON.parse(localStorage.getItem(calc.historyKey)) || [];
+            history.push({date: new Date().toLocaleString(), result: result});
+            if (history.length > 10) history.shift();
+            localStorage.setItem(calc.historyKey, JSON.stringify(history));
+            renderCalculators(); // перерисовываем для обновления истории
+        }
+
+        // ==========================================
+        // ТРЕНАЖЁРЫ
+        // ==========================================
+        const trainers = [
+            { id:'t1', title:'Решение квадратного уравнения', desc:'Найдите корни уравнения ax²+bx+c=0.',
+                fields:[{name:'a',label:'a',default:1,step:0.1},{name:'b',label:'b',default:-3,step:0.1},{name:'c',label:'c',default:2,step:0.1}],
+                solve:(v)=>{ const D=v.b*v.b-4*v.a*v.c; if(D<0) return 'Нет действительных корней'; const x1=(-v.b-Math.sqrt(D))/(2*v.a); const x2=(-v.b+Math.sqrt(D))/(2*v.a); return `x₁ = ${x1.toFixed(2)}, x₂ = ${x2.toFixed(2)}`; } },
+            { id:'t2', title:'Упрощение выражения', desc:'Упростите выражение (a+b)².',
+                fields:[{name:'a',label:'a',default:2,step:0.1},{name:'b',label:'b',default:3,step:0.1}],
+                solve:(v)=>{ const result = v.a*v.a + 2*v.a*v.b + v.b*v.b; return `${result.toFixed(2)}`; } },
+            { id:'t3', title:'Вычисление sin/cos', desc:'Вычислите sin и cos угла α.',
+                fields:[{name:'alpha',label:'α (градусы)',default:30,step:1}],
+                solve:(v)=>{ const rad = v.alpha * Math.PI/180; return `sin = ${Math.sin(rad).toFixed(4)}, cos = ${Math.cos(rad).toFixed(4)}`; } },
+            { id:'t4', title:'Объём цилиндра', desc:'Вычислите объём цилиндра по радиусу и высоте.',
+                fields:[{name:'r',label:'Радиус (м)',default:1,step:0.1},{name:'h',label:'Высота (м)',default:2,step:0.1}],
+                solve:(v)=>{ const V = Math.PI * v.r * v.r * v.h; return `V = ${V.toFixed(3)} м³`; } }
+        ];
+
+        function renderTrainers() {
+            const container = document.getElementById('trainersContainer');
+            if (!container) return;
+            container.innerHTML = trainers.map(t => `
+                <div class="trainer-card">
+                    <span class="teacher-badge">👨‍🏫</span>
+                    <h4>${t.title}</h4>
+                    <p class="trainer-desc">${t.desc}</p>
+                    <div class="trainer-controls">
+                        ${t.fields.map(f => `
+                            <label>
+                                ${f.label} <input type="number" id="${t.id}_${f.name}" value="${f.default}" step="${f.step}" style="width:60px;">
+                            </label>
+                        `).join('')}
+                        <button class="btn-gold" onclick="solveTrainer('${t.id}')" style="padding:4px 14px;font-size:13px;">Решить</button>
+                    </div>
+                    <div class="trainer-result" id="${t.id}_result">
+                        <span class="label">Ответ:</span>
+                        <span class="value" id="${t.id}_answer">—</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function solveTrainer(id) {
+            const t = trainers.find(t => t.id === id);
+            if (!t) return;
+            const values = {};
+            t.fields.forEach(f => {
+                const el = document.getElementById(`${id}_${f.name}`);
+                values[f.name] = parseFloat(el.value) || 0;
+            });
+            const result = t.solve(values);
+            const resEl = document.getElementById(`${id}_result`);
+            const ansEl = document.getElementById(`${id}_answer`);
+            if (resEl && ansEl) {
+                resEl.classList.add('show');
+                ansEl.textContent = result;
+            }
+        }
+
+        // ==========================================
+        // ТЕСТЫ
+        // ==========================================
+        const tests = [
+            { id:'test1', title:'Тест по алгебре', desc:'Проверьте знания по алгебре.',
+                questions:[
+                    {q:'Чему равно (a+b)²?', options:['a²+b²','a²+2ab+b²','a²-2ab+b²','2ab'], correct:1},
+                    {q:'Корни уравнения x²-5x+6=0:', options:['2 и 3','1 и 6','-2 и -3','3 и -2'], correct:0},
+                    {q:'Чему равно значение выражения 2³?', options:['6','8','9','4'], correct:1}
+                ] },
+            { id:'test2', title:'Тест по геометрии', desc:'Проверьте знания по геометрии.',
+                questions:[
+                    {q:'Сумма углов треугольника равна:', options:['90°','180°','270°','360°'], correct:1},
+                    {q:'Площадь прямоугольника со сторонами 4 и 5:', options:['20','10','9','15'], correct:0},
+                    {q:'Чему равна длина окружности радиуса 1?', options:['π','2π','π/2','4π'], correct:1}
+                ] },
+            { id:'test3', title:'Тест по тригонометрии', desc:'Проверьте знания тригонометрии.',
+                questions:[
+                    {q:'sin(0°)=', options:['0','1','-1','0.5'], correct:0},
+                    {q:'cos(0°)=', options:['0','1','-1','0.5'], correct:1},
+                    {q:'tg(45°)=', options:['0','1','-1','∞'], correct:1}
+                ] }
+        ];
+
+        function renderTests() {
+            const container = document.getElementById('testsContainer');
+            if (!container) return;
+            container.innerHTML = tests.map(test => {
+                const result = testResults[test.id];
+                const passed = result && result.score === 100;
+                return `
+                    <div class="test-card" id="test-${test.id}">
+                        <span class="teacher-badge">👨‍🏫</span>
+                        <h4>${test.title}</h4>
+                        <p class="test-desc">${test.desc}</p>
+                        ${result ? `<div style="margin-bottom:10px;font-size:13px;color:var(--text-muted);">Результат: <span style="color:${passed?'#4ade80':'#ff6b6b'};font-weight:600;">${result.score}%</span> ${passed?' ✅':''}</div>` : ''}
+                        <div id="test-${test.id}-questions">
+                            ${test.questions.map((q,qi) => `
+                                <div class="test-question" data-q="${test.id}-${qi}">
+                                    <div class="q-text">${qi+1}. ${q.q}</div>
+                                    <div class="q-options">
+                                        ${q.options.map((opt,oi) => `
+                                            <label onclick="selectAnswer('${test.id}',${qi},${oi})">
+                                                <input type="radio" name="${test.id}-${qi}" value="${oi}">
+                                                ${opt}
+                                            </label>
+                                        `).join('')}
+                                    </div>
+                                    <div class="q-feedback" style="margin-top:4px;font-size:12px;"></div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <button class="btn-gold" onclick="checkTest('${test.id}')" style="margin-top:10px;padding:6px 20px;font-size:13px;">Проверить</button>
+                        ${result ? `<button class="btn-outline" onclick="resetTest('${test.id}')" style="margin-top:10px;padding:4px 16px;font-size:12px;border-width:1px;">↺ Заново</button>` : ''}
+                        <div class="test-result" id="test-${test.id}-result"></div>
+                        <div class="test-teacher-answers">${test.teacherNote || 'Правильные ответы отмечены в режиме преподавателя'}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectAnswer(testId, questionIdx, answerIdx) {
+            if (!selectedAnswers[testId]) selectedAnswers[testId] = {};
+            selectedAnswers[testId][questionIdx] = answerIdx;
+        }
+
+        function checkTest(testId) {
+            const test = tests.find(t => t.id === testId);
+            if (!test) return;
+            const answers = selectedAnswers[testId] || {};
+            let correct = 0;
+            test.questions.forEach((q, qi) => {
+                const container = document.querySelector(`#test-${testId}-questions`);
+                const qDiv = container ? container.querySelector(`[data-q="${testId}-${qi}"]`) : null;
+                const feedback = qDiv ? qDiv.querySelector('.q-feedback') : null;
+                if (answers[qi] !== undefined) {
+                    const isCorrect = answers[qi] === q.correct;
+                    if (isCorrect) correct++;
+                    if (feedback) {
+                        feedback.innerHTML = isCorrect ?
+                            '<span style="color:#4ade80;">✅ Верно</span>' :
+                            `<span style="color:#ff6b6b;">❌ Правильный ответ: ${q.options[q.correct]}</span>`;
+                    }
+                    if (qDiv) {
+                        qDiv.querySelectorAll('.q-options label').forEach((label, idx) => {
+                            if (idx === q.correct) label.style.color = '#4ade80';
+                            else if (idx === answers[qi] && idx !== q.correct) label.style.color = '#ff6b6b';
+                            else label.style.color = '';
+                        });
+                    }
+                } else {
+                    if (feedback) feedback.innerHTML = '<span style="color:#ff6b6b;">❌ Ответ не выбран</span>';
+                }
+            });
+            const score = Math.round((correct / test.questions.length) * 100);
+            testResults[testId] = { score, correct, total: test.questions.length };
+            localStorage.setItem('interaktiv_test_results', JSON.stringify(testResults));
+            const resultEl = document.getElementById(`test-${testId}-result`);
+            if (resultEl) {
+                resultEl.className = `test-result show ${score === 100 ? 'passed' : 'failed'}`;
+                resultEl.innerHTML = score === 100 ? '🎉 Отлично! 100%' : `📚 Результат: ${score}%`;
+            }
+            updateProgress();
+            renderTests();
+            checkAchievements();
+        }
+
+        function resetTest(testId) {
+            delete testResults[testId];
+            localStorage.setItem('interaktiv_test_results', JSON.stringify(testResults));
+            selectedAnswers[testId] = {};
+            renderTests();
+            updateProgress();
+        }
+
+        // ==========================================
+        // ДОСТИЖЕНИЯ
+        // ==========================================
+        const achievementsList = [
+            { id:'ach1', icon:'🏅', title:'Геометр', desc:'Откройте все геометрические модели.',
+                check:()=>{ const geo = modelsData.filter(m => m.tags.includes('Геометрия') || m.tags.includes('Стереометрия')); return geo.every(m => progress.completed.includes(m.id)); },
+                progress:()=>{ const geo = modelsData.filter(m => m.tags.includes('Геометрия') || m.tags.includes('Стереометрия')); const done = geo.filter(m => progress.completed.includes(m.id)).length; return {current: done, total: geo.length}; } },
+            { id:'ach2', icon:'🏅', title:'Строитель', desc:'Используйте все калькуляторы.',
+                check:()=>{ return calculators.every(c => { const h = JSON.parse(localStorage.getItem(c.historyKey)) || []; return h.length > 0; }); },
+                progress:()=>{ let used=0; calculators.forEach(c => { const h=JSON.parse(localStorage.getItem(c.historyKey)) || []; if(h.length>0) used++; }); return {current: used, total: calculators.length}; } },
+            { id:'ach3', icon:'🏅', title:'Исследователь', desc:'Откройте все лаборатории.',
+                check:()=>{ return labsData.every(m => progress.completed.includes(m.id)); },
+                progress:()=>{ const done = labsData.filter(m => progress.completed.includes(m.id)).length; return {current: done, total: labsData.length}; } },
+            { id:'ach4', icon:'🏅', title:'Отличник', desc:'Пройдите все тесты на 100%.',
+                check:()=>{ return tests.every(t => testResults[t.id] && testResults[t.id].score === 100); },
+                progress:()=>{ let done=0; tests.forEach(t => { if(testResults[t.id] && testResults[t.id].score === 100) done++; }); return {current: done, total: tests.length}; } },
+            { id:'ach5', icon:'🏅', title:'Эксперт', desc:'Достигните 100% прогресса.',
+                check:()=>{ const total = allModels.length; const completed = progress.completed.filter(id => modelIds.includes(id)).length; return completed === total; },
+                progress:()=>{ const total = allModels.length; const completed = progress.completed.filter(id => modelIds.includes(id)).length; return {current: completed, total: total}; } }
+        ];
+
+        function renderAchievements() {
+            const container = document.getElementById('achievementsContainer');
+            if (!container) return;
+            container.innerHTML = achievementsList.map(ach => {
+                const unlocked = ach.check();
+                const prog = ach.progress();
+                const pct = prog.total > 0 ? Math.round((prog.current / prog.total) * 100) : 0;
+                return `
+                    <div class="achievement-card" style="${unlocked ? 'border-color:rgba(212,160,23,0.3);' : ''}">
+                        <div class="ach-icon">${unlocked ? ach.icon : '🔒'}</div>
+                        <div class="ach-info">
+                            <h4>${ach.title} ${unlocked ? ' ✅' : ''}</h4>
+                            <p>${ach.desc}</p>
+                            <div style="margin-top:2px;font-size:11px;color:var(--text-muted);">
+                                ${unlocked ? '🏆 Получено!' : `Прогресс: ${prog.current}/${prog.total}`}
+                            </div>
+                            ${!unlocked ? `<div class="ach-progress-bar"><div class="fill" style="width:${pct}%;"></div></div>` : ''}
+                        </div>
+                        <div class="ach-status ${unlocked ? 'unlocked' : 'locked'}">${unlocked ? '✅' : `${pct}%`}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function checkAchievements() {
+            renderAchievements();
+            updateStats();
+        }
+
+        // ==========================================
+        // ПРОГРЕСС И СТАТИСТИКА
         // ==========================================
         function markCompleted(id) {
             if (!progress.completed.includes(id)) {
@@ -1580,6 +1898,7 @@
                 renderModels();
                 renderLabs();
                 renderFavorites();
+                checkAchievements();
             }
         }
 
@@ -1610,6 +1929,10 @@
             const completed = progress.completed.filter(id => modelIds.includes(id)).length;
             document.getElementById('statModels').textContent = completed;
             document.getElementById('statFavorites').textContent = favorites.length;
+            const unlocked = achievementsList.filter(a => a.check()).length;
+            document.getElementById('statAchievements').textContent = unlocked;
+            const passed = tests.filter(t => testResults[t.id] && testResults[t.id].score === 100).length;
+            document.getElementById('statTests').textContent = passed;
         }
 
         function updateFavCount() {
@@ -1639,9 +1962,9 @@
         // ==========================================
         document.getElementById('searchModels').addEventListener('input', function() {
             const value = this.value.toLowerCase().trim();
-            document.querySelectorAll('.model-card').forEach(card => {
+            document.querySelectorAll('.model-card, .calculator-card, .trainer-card, .test-card').forEach(card => {
                 const text = card.innerText.toLowerCase();
-                card.style.display = text.includes(value) ? 'flex' : 'none';
+                card.style.display = text.includes(value) ? '' : 'none';
             });
         });
 
@@ -1650,7 +1973,6 @@
         // ==========================================
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-
             const targetMap = {
                 models: 'tabModels',
                 calculators: 'tabCalculators',
@@ -1662,13 +1984,15 @@
             };
             const target = document.getElementById(targetMap[tabId]);
             if (target) target.classList.add('active');
-
             document.querySelectorAll('.sidebar-item[data-tab]').forEach(el => {
                 el.classList.toggle('active', el.dataset.tab === tabId);
             });
-
-            if (tabId === 'favorites') renderFavorites();
-            if (tabId === 'labs') renderLabs();
+            if (tabId === 'calculators') renderCalculators();
+            else if (tabId === 'trainers') renderTrainers();
+            else if (tabId === 'tests') renderTests();
+            else if (tabId === 'achievements') renderAchievements();
+            else if (tabId === 'favorites') renderFavorites();
+            else if (tabId === 'labs') renderLabs();
         }
 
         document.querySelectorAll('.sidebar-item[data-tab]').forEach(btn => {
@@ -1693,15 +2017,14 @@
             localStorage.setItem('interaktiv_teacher_mode', JSON.stringify(mode));
             this.classList.toggle('active');
             this.style.color = mode ? 'var(--gold)' : '';
-            alert(mode ?
-                '👨‍🏫 Режим преподавателя включён. Отображаются формулы и пояснения.' :
-                '👨‍🏫 Режим преподавателя выключен.'
-            );
+            document.body.classList.toggle('teacher-mode', mode);
+            alert(mode ? '👨‍🏫 Режим преподавателя включён. Отображаются формулы и пояснения.' : '👨‍🏫 Режим преподавателя выключен.');
         });
 
         if (teacherMode) {
             document.getElementById('teacherModeToggle').style.color = 'var(--gold)';
             document.getElementById('teacherModeToggle').classList.add('active');
+            document.body.classList.add('teacher-mode');
         }
 
         // ==========================================
@@ -1720,15 +2043,21 @@
         // ==========================================
         renderModels();
         renderLabs();
+        renderCalculators();
+        renderTrainers();
+        renderTests();
+        renderAchievements();
         updateProgress();
         updateFavCount();
         updateStats();
 
-        console.log('🚀 Интерактивный раздел загружен! (финальная версия с улучшениями)');
+        console.log('🚀 Интерактивный раздел загружен (финальная версия с тренажёрами, калькуляторами и тестами)');
         console.log('📐 Моделей:', modelsData.length);
+        console.log('🧮 Калькуляторов:', calculators.length);
+        console.log('🎯 Тренажёров:', trainers.length);
+        console.log('📝 Тестов:', tests.length);
         console.log('🔬 Лабораторий:', labsData.length);
-        console.log('⭐ Избранное:', favorites.length);
-        console.log('📈 Прогресс:', progress.completed.length, '/', allModels.length);
+        console.log('🏆 Достижений:', achievementsList.length);
     </script>
 </body>
 </html>
